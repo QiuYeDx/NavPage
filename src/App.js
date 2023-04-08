@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {HashRouter, Routes, Route} from 'react-router-dom';
 import Home from './views/Home';
 import NavBar from './components/NavBar/NavBar'
 import PageA from "./views/PageA/PageA";
@@ -12,7 +12,7 @@ import { Wrapper } from "./Styled.twin";
 function App() {
   return (
       <Wrapper>
-          <BrowserRouter>
+          <HashRouter>
               <NavBar/>
               <Routes>
                   <Route path="/" element={<Home/>}/>
@@ -21,7 +21,7 @@ function App() {
                   <Route path="/about" element={<About/>}/>
                   <Route path="*" element={<Error/>}/>
               </Routes>
-          </BrowserRouter>
+          </HashRouter>
       </Wrapper>
   );
 }
