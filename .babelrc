@@ -1,0 +1,7 @@
+{
+  "presets": ["@babel/preset-react"],
+  "plugins": [
+    "macros",
+    "babel-plugin-styled-components"
+  ]
+}
