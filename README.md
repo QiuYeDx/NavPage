@@ -1,6 +1,6 @@
-# twin starter
+# 秋夜导航站
 
-A React Starter with twin(for tailwindcss), styled-components, basic home and react-router-dom.
+一个基于React、Webpack、react-router-dom、tailwindcss和twin.macro的导航网站。（练手项目）
 
 ## References
 
