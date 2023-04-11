@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 export const NavWrapper = styled.div`
   ${tw`truncate`}
   height: 60px;
-  //background-color: antiquewhite;
+  background-color: #fff;
   color: #444444;
   display: flex;
   flex-direction: row;
@@ -13,9 +13,12 @@ export const NavWrapper = styled.div`
   font-size: 18px;
   line-height: 60px;
   text-align: center;
-
+  
+  position: relative;
   z-index: 1000;
-  box-shadow: 0 0 30px 1px rgba(0, 0, 0, 5%);
+  
+  transition: box-shadow .3s ease;
+  ${({hasShadow}) => hasShadow ? 'box-shadow: 0 0 30px 1px rgba(0, 0, 0, 5%)' : ''};
 `
 
 export const NavList = styled.div`
@@ -127,3 +130,16 @@ export const MoreWrapper = styled(LogoWrapper)`
   }
 `
 
+export const MoreList = styled.div`
+  position: absolute;
+  z-index: 999;
+  height: 150px;
+  width: 100%;
+  top: ${({isShown}) => isShown? '60px' : '-150px'};
+  transition: all .3s ease;
+  box-shadow: 0 0 30px 1px rgba(0, 0, 0, 15%);
+  background-color: rgba(255, 255, 255, .7);
+  backdrop-filter: blur(12px);
+  
+  ${tw`rounded-bl-3xl rounded-br-3xl`};
+`
