@@ -3,10 +3,49 @@ import {
     NavWrapper, LogoWrapper, NavItem, NavList, MoreWrapper,
     Logo, LogoText
 } from './Styled.twin'
+import 'twin.macro'
 import { useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 export default function NavBar(){
     const navigate = useNavigate();
+    const notify = () => toast.error(
+        (t) => (
+            <span tw={"align-bottom animate-fade_in.8"}>
+                <b>No More !</b>
+                {/*<button onClick={() => toast.dismiss(t.id)} tw={"pl-1 pr-1 ml-2 border-2 border-blue-200 text-blue-400 text-sm rounded-lg align-bottom"}>*/}
+                {/*    /!*<FontAwesomeIcon icon={solid("xmark")}  />*!/*/}
+                {/*    Get it*/}
+                {/*</button>*/}
+            </span>
+        ),
+        {
+        // id: 'no_more',
+        duration: 3000,
+        position: 'top-center',
+
+        // Styling
+        style: {},
+        className: '',
+
+        // Custom Icon
+        // icon: '👏',
+        // icon: <FontAwesomeIcon icon={solid("circle-xmark")} />,
+
+        // Change colors of success/error/loading icon
+        iconTheme: {
+            primary: '#ed5563',
+            secondary: '#fff',
+        },
+
+        // Aria
+        ariaProps: {
+            role: 'status',
+            'aria-live': 'polite',
+        },
+    });
     return (
         <NavWrapper>
             <LogoWrapper onClick={() => {navigate("/")}}>
@@ -29,7 +68,8 @@ export default function NavBar(){
                     关于
                 </NavItem>
             </NavList>
-            <MoreWrapper>
+            <Toaster/>
+            <MoreWrapper onClick={notify}>
 
             </MoreWrapper>
         </NavWrapper>
