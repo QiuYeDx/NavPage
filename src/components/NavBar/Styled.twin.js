@@ -51,7 +51,7 @@ export const NavItem = styled(NavLink).attrs(props => ({
   }
 
   @media(max-width: 415px){
-    ${({screen}) => screen === "mobile" ? "display: none;" : "" }
+    ${({notMobile}) => notMobile ? "display: none;" : "" }
   }
   
   //&:not(:nth-child(1))::before{
@@ -133,13 +133,63 @@ export const MoreWrapper = styled(LogoWrapper)`
 export const MoreList = styled.div`
   position: absolute;
   z-index: 999;
-  height: 150px;
+  //height: 150px;
   width: 100%;
   top: ${({isShown}) => isShown? '60px' : '-150px'};
   transition: all .3s ease;
   box-shadow: 0 0 30px 1px rgba(0, 0, 0, 15%);
   background-color: rgba(255, 255, 255, .7);
   backdrop-filter: blur(12px);
+  overflow: hidden;
   
   ${tw`rounded-bl-3xl rounded-br-3xl`};
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //text-align: center;
+`
+
+export const MoreListItem = styled(NavLink).attrs(props => ({
+    style: ({ isActive }) => ({
+        color: isActive ? "rgba(78, 128, 238, 0.7)" : "" ,
+    }),
+}))`
+  padding-left: 20%;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  margin: 0;
+  flex-grow: 0;
+  flex-shrink: 1;
+
+  cursor: pointer;
+  position: relative;
+
+  transition: all 0.25s ease;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.2);
+    //opacity: 0.4;
+    background-color: rgba(255, 255, 255, .5);
+  }
+
+  &:not(:last-child)::after {
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    content: "";
+    height: 100%;
+    //width: 60%;
+    //max-width: 480px;
+    margin: auto;
+    border-bottom: 1px solid rgba(78, 128, 238, .3);
+  }
+
+  @media (min-width: 415px) {
+    ${({onlyMobile}) => onlyMobile ? "display: none;" : ""}
+    height: 60px;
+    line-height: 60px;
+  }
 `

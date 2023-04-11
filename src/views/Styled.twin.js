@@ -38,6 +38,9 @@ export const WrapperMain = styled.div`
   display: flex;
   //flex-direction: row;
   flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  
   ${tw`text-blue-500`}
   ${({ hasBorder }) => hasBorder && tw`border-purple-500`}
 `

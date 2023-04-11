@@ -8,7 +8,7 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
-        // publicPath: '/NavPage/'
+        // publicPath: '/NavPage/' // 部署到GitHub Pages时用
     },
     module: {
         rules: [
@@ -39,7 +39,7 @@ module.exports = {
                     {
                         loader: 'url-loader', // file-loader
                         options: {
-                            limit: 8192, // 图片大小限制，超过此大小将被打包成文件
+                            limit: 10, // 图片大小限制，超过此大小将被打包成文件
                             name: '[name].[ext]', // 重命名输出的文件名
                             outputPath: 'images/', // 输出路径
                         },

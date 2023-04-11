@@ -9,21 +9,21 @@ export default function Home(){
     return (
         <Wrapper>
             <WrapperTop>
-                Top
+
             </WrapperTop>
             <WrapperMiddle>
                 <WrapperLeft>
-                    Left
+
                 </WrapperLeft>
                 <WrapperMain>
-                    Main
+                    Home Page
                 </WrapperMain>
                 <WrapperRight>
-                    Right
+
                 </WrapperRight>
             </WrapperMiddle>
             <WrapperBottom>
-                Bottom
+
             </WrapperBottom>
         </Wrapper>
     );

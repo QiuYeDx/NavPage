@@ -1,13 +1,14 @@
 import React, {useRef, useState} from 'react';
 import {
     NavWrapper, LogoWrapper, NavItem, NavList, MoreWrapper,
-    Logo, LogoText, MoreList
+    Logo, LogoText, MoreList, MoreListItem
 } from './Styled.twin'
 import 'twin.macro'
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 export default function NavBar(){
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function NavBar(){
     const notify = () => toast.error(
         (t) => (
             <span tw={"align-bottom animate-fade_in.8"}>
-                <b>No More !</b>
+                <b>Not yet completed !</b>
                 {/*<button onClick={() => toast.dismiss(t.id)} tw={"pl-1 pr-1 ml-2 border-2 border-blue-200 text-blue-400 text-sm rounded-lg align-bottom"}>*/}
                 {/*    /!*<FontAwesomeIcon icon={solid("xmark")}  />*!/*/}
                 {/*    Get it*/}
@@ -25,10 +26,14 @@ export default function NavBar(){
         {
         // id: 'no_more',
         duration: 3000,
-        position: 'top-center',
+        position: 'bottom-right',
+        // position: 'top-center',
 
         // Styling
-        style: {},
+        style: {
+            // position: 'relative',
+            // top: '60px'
+        },
         className: '',
 
         // Custom Icon
@@ -62,17 +67,17 @@ export default function NavBar(){
                         秋夜导航站
                     </LogoText>
                 </LogoWrapper>
-                <NavList>
-                    <NavItem to="/">
+                <NavList onClick={() => setIsMoreListShown(false)}>
+                    <NavItem to="/" onClick={notify}>
                         主页
                     </NavItem>
-                    <NavItem to="/tools">
+                    <NavItem to="/tools" onClick={notify}>
                         工具
                     </NavItem>
-                    <NavItem to="/resources" >
+                    <NavItem to="/resources" onClick={notify}>
                         资源
                     </NavItem>
-                    <NavItem to="/about" screen={"mobile"}>
+                    <NavItem to="/about" notMobile={true}>
                         关于
                     </NavItem>
                 </NavList>
@@ -81,8 +86,15 @@ export default function NavBar(){
 
                 </MoreWrapper>
             </NavWrapper>
-            <MoreList isShown={isMoreListShown}>
-
+            <MoreList isShown={isMoreListShown} onClick={() => setIsMoreListShown(!isMoreListShown)}>
+                <MoreListItem to="/about" onlyMobile={true}>
+                    <FontAwesomeIcon icon={solid("info")} tw={"pl-1 pr-3.5"}/>
+                    About
+                </MoreListItem>
+                <MoreListItem to="https://github.com/QiuYeDx/NavPage" target="_blank">
+                    <FontAwesomeIcon icon={faGithub} tw={"pr-2"}/>
+                    Star on Github
+                </MoreListItem>
             </MoreList>
         </div>
     );
