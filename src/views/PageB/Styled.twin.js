@@ -13,6 +13,9 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+
+  background-image: url(images/mora.png);
+  background-size: cover;
   ${({hasBorder}) => hasBorder && tw`border border-purple-500`}
 `
 
@@ -20,7 +23,10 @@ export const WrapperTop = styled.div`
   color: black;
   height: 80px;
   //background-color: pink;
-  ${({ hasBorder }) => hasBorder && tw`border border-blue-500`}
+  ${({ hasBorder }) => hasBorder && tw`border border-blue-500`};
+  @media(max-width:767px) {
+    height: 20px;
+  }
 `
 
 export const WrapperMiddle = styled.div`

@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import {
     NavWrapper, LogoWrapper, NavItem, NavList, MoreWrapper,
-    Logo, LogoText, MoreList, MoreListItem
+    Logo, LogoText, MoreList, MoreListItem, BlankWrapper
 } from './Styled.twin'
 import 'twin.macro'
 import { useNavigate } from 'react-router-dom';
@@ -53,15 +53,17 @@ export default function NavBar(){
         },
     });
 
-    const showMoreList = () => {
-
-    };
     return (
         <div>
+            <BlankWrapper/>
             <Toaster/>
             {/*<NavWrapper hasShadow={!isMoreListShown}>*/}
             <NavWrapper hasShadow={true}>
-                <LogoWrapper onClick={() => {navigate("/")}}>
+                <LogoWrapper onClick={() => {
+                    setIsMoreListShown(false);
+                    notify();
+                    navigate("/");
+                }} >
                     <Logo/>
                     <LogoText>
                         秋夜导航站
@@ -88,7 +90,7 @@ export default function NavBar(){
             </NavWrapper>
             <MoreList isShown={isMoreListShown} onClick={() => setIsMoreListShown(!isMoreListShown)}>
                 <MoreListItem to="/about" onlyMobile={true}>
-                    <FontAwesomeIcon icon={solid("info")} tw={"pl-1 pr-3.5"}/>
+                    <FontAwesomeIcon icon={solid("circle-info")} tw={"pr-2"}/>
                     About
                 </MoreListItem>
                 <MoreListItem to="https://github.com/QiuYeDx/NavPage" target="_blank">

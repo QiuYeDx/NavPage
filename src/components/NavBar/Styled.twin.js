@@ -14,11 +14,21 @@ export const NavWrapper = styled.div`
   line-height: 60px;
   text-align: center;
   
-  position: relative;
+  position: fixed;
+  top: 0;
+  width: 100%;
   z-index: 1000;
   
   transition: box-shadow .3s ease;
   ${({hasShadow}) => hasShadow ? 'box-shadow: 0 0 30px 1px rgba(0, 0, 0, 5%)' : ''};
+`
+
+export const BlankWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  flex-shrink: 0;
+  height: 60px;
 `
 
 export const NavList = styled.div`
@@ -131,12 +141,12 @@ export const MoreWrapper = styled(LogoWrapper)`
 `
 
 export const MoreList = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: 999;
   //height: 150px;
   width: 100%;
   top: ${({isShown}) => isShown? '60px' : '-150px'};
-  transition: all .3s ease;
+  transition: all .4s cubic-bezier(.32,.63,.45,1.01);
   box-shadow: 0 0 30px 1px rgba(0, 0, 0, 15%);
   background-color: rgba(255, 255, 255, .7);
   backdrop-filter: blur(12px);
@@ -155,6 +165,7 @@ export const MoreListItem = styled(NavLink).attrs(props => ({
         color: isActive ? "rgba(78, 128, 238, 0.7)" : "" ,
     }),
 }))`
+  ${tw`tracking-widest`};
   padding-left: 20%;
   width: 100%;
   height: 50px;

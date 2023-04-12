@@ -1,6 +1,7 @@
 import tw, { styled } from 'twin.macro'
 import {AvatarWrapper} from "@/components/Avatar/Styled.twin";
 import {BaseButton} from "@/components/Button/Styled.twin";
+import {CardWrapper} from "@/components/MainCard/Styled.twin";
 
 export const Wrapper = styled.div`
   color: black;
@@ -29,7 +30,7 @@ export const WrapperTop = styled.div`
   //background-color: pink;
   ${({ hasBorder }) => hasBorder && tw`border border-blue-500`};
   @media(max-width:767px) {
-    height: 40px;
+    height: 20px;
   }
 `
 
@@ -45,7 +46,6 @@ export const WrapperMiddle = styled.div`
 export const WrapperMain = styled.div`
   color: black;
   //background-color: blue;
-  //
   display: flex;
   flex-direction: column;
   flex-grow: 5;
@@ -106,3 +106,28 @@ export const BaseButtonA = styled(BaseButton)`
   
 `
 
+export const AppleCard = styled(CardWrapper)`
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  position: relative;
+`
+
+export const BackgroundWrapper = styled.div`
+  position: absolute;
+  //top: 0;
+  //bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  //transition: all .1s ease;
+  transform: matrix(1, 0, 0, 1, 0, ${({_Y}) => _Y || '-6'});
+`
+
+export const ContentWrapper = styled.div`
+  position: relative;
+  //transition: all .5s ease;
+`

@@ -14,6 +14,9 @@ export const Wrapper = styled.div`
   //margin: auto;
   
   z-index: -1;
+
+  background-image: url(images/mora.png);
+  background-size: cover;
 `
 
 export const ErrorWrapper = styled.div`
