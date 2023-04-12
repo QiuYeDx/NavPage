@@ -8,7 +8,7 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
-        // publicPath: '/NavPage/' // 部署到GitHub Pages时用
+        publicPath: '/NavPage/' // 部署到GitHub Pages时用
     },
     module: {
         rules: [

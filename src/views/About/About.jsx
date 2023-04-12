@@ -16,11 +16,13 @@ export default function About(){
     let [matrix_y, setMatrix_y] = useState(0);
     let apple_card_ref = useRef(null);
     let updateMatrix = () => {
-        let elementToTop = apple_card_ref.current.getBoundingClientRect().top  // element的顶边到视口顶部的距离
-        let a = -0.1754386;
-        let b = 27.3684211;
-        let ans = elementToTop * a + b - 6;
-        setMatrix_y(ans > 80 ? 80 : ans );
+        if(apple_card_ref.current){
+            let elementToTop = apple_card_ref.current.getBoundingClientRect().top  // element的顶边到视口顶部的距离
+            let a = -0.1754386;
+            let b = 27.3684211;
+            let ans = elementToTop * a + b - 6;
+            setMatrix_y(ans > 80 ? 80 : ans );
+        }
     }
 
     // function throttle(func, wait){
@@ -84,7 +86,7 @@ export default function About(){
     useEffect(() => {
         // window.addEventListener("scroll", throttle(updateMatrix, 50), true);
         window.addEventListener("scroll", updateMatrix, true);
-        console.log("effect.");
+        // console.log("effect.");
         return (() => {
             window.removeEventListener("scroll", updateMatrix);
         });
@@ -106,7 +108,7 @@ export default function About(){
                         <BackgroundWrapper _Y={matrix_y} tw={"text-blue-400 group-hover:text-blue-300 duration-500 ease-out"}>
                             <FontAwesomeIcon icon={solid("bookmark")} tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}/>
                         </BackgroundWrapper>
-                        <ContentWrapper tw={"tracking-widest text-8xl text-white group-hover:text-gray-700 group-active:text-gray-500 group-hover:scale-110 font-bold duration-500 ease-out"}>
+                        <ContentWrapper tw={"tracking-widest text-8xl text-white group-hover:scale-110 font-bold duration-500 ease-out"}>
                             收藏
                         </ContentWrapper>
                     </AppleCard>
