@@ -61,7 +61,7 @@ export default function NavBar(){
             <NavWrapper hasShadow={true}>
                 <LogoWrapper onClick={() => {
                     setIsMoreListShown(false);
-                    notify();
+                    // notify();
                     navigate("/");
                 }} >
                     <Logo/>
@@ -70,13 +70,13 @@ export default function NavBar(){
                     </LogoText>
                 </LogoWrapper>
                 <NavList onClick={() => setIsMoreListShown(false)}>
-                    <NavItem to="/" onClick={notify}>
+                    <NavItem to="/">
                         主页
                     </NavItem>
-                    <NavItem to="/tools" onClick={notify}>
+                    <NavItem to="/tools">
                         工具
                     </NavItem>
-                    <NavItem to="/resources" onClick={notify}>
+                    <NavItem to="/resources">
                         资源
                     </NavItem>
                     <NavItem to="/about" notMobile={true}>

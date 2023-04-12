@@ -10,11 +10,13 @@ import {
 import { H1, P } from "@/styles/TextStyles";
 import MainCard from "@/components/MainCard/MainCard"
 import toast, { Toaster } from 'react-hot-toast';
+import { useClipboard } from 'use-clipboard-copy';
 
 
 export default function About(){
     let [matrix_y, setMatrix_y] = useState(0);
     let apple_card_ref = useRef(null);
+    const clipboard = useClipboard();
     let updateMatrix = () => {
         if(apple_card_ref.current){
             let elementToTop = apple_card_ref.current.getBoundingClientRect().top  // element的顶边到视口顶部的距离
@@ -37,19 +39,19 @@ export default function About(){
     //     }
     // }
 
-    function addBookmark(title, url) {
-        try {
-            window.external.addFavorite(url, title);
-        }
-        catch (e) {
-            try {
-                window.sidebar.addPanel(title, url, "");
-            }
-            catch (e) {
-                notify_error("收藏失败, 请使用Ctrl+D进行添加");
-            }
-        }
-    }
+    // function addBookmark(title, url) {
+    //     try {
+    //         window.external.addFavorite(url, title);
+    //     }
+    //     catch (e) {
+    //         try {
+    //             window.sidebar.addPanel(title, url, "");
+    //         }
+    //         catch (e) {
+    //             notify_error("收藏失败, 请使用Ctrl+D进行添加");
+    //         }
+    //     }
+    // }
 
     const notify_error = (str) => toast.error(
         (t) => (
@@ -83,6 +85,38 @@ export default function About(){
             },
         });
 
+    const notify_success = (str) => toast.success(
+        (t) => (
+            <span tw={"align-bottom animate-fade_in.8"}>
+                <b>{str}</b>
+            </span>
+        ),
+        {
+            id: 'bookmark_success',
+            duration: 3000,
+            position: 'bottom-right',
+            // position: 'top-center',
+
+            // Styling
+            style: {
+                // position: 'relative',
+                // top: '60px'
+            },
+            className: '',
+
+            // Change colors of success/error/loading icon
+            iconTheme: {
+                primary: 'rgb(52, 211, 153)',
+                secondary: '#fff',
+            },
+
+            // Aria
+            ariaProps: {
+                role: 'status',
+                'aria-live': 'polite',
+            },
+        });
+
     useEffect(() => {
         // window.addEventListener("scroll", throttle(updateMatrix, 50), true);
         window.addEventListener("scroll", updateMatrix, true);
@@ -103,13 +137,15 @@ export default function About(){
                 </WrapperLeft>
                 <WrapperMain>
                     <AppleCard ref={apple_card_ref} className={"group"} _tw={tw`relative bg-blue-200 hover:bg-blue-400 active:bg-blue-200 md:col-span-2 col-span-5 md:block m-4 duration-500 ease-out cursor-pointer select-none`} h={"360px"} onClick={() => {
-                        addBookmark("秋夜导航站", "https://qiuyedx.github.io/NavPage");
+                        // addBookmark("秋夜导航站", "https://qiuyedx.github.io/NavPage");
+                        clipboard.copy("https://qiuyedx.github.io/NavPage");
+                        notify_success("网站地址已拷贝到剪贴板");
                     }}>
-                        <BackgroundWrapper _Y={matrix_y} tw={"text-blue-400 group-hover:text-blue-300 duration-500 ease-out"}>
-                            <FontAwesomeIcon icon={solid("bookmark")} tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}/>
+                        <BackgroundWrapper _Y={matrix_y} tw={"text-blue-400 group-hover:text-blue-300 "}>
+                            <FontAwesomeIcon icon={regular("copy")} tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}/>
                         </BackgroundWrapper>
                         <ContentWrapper tw={"tracking-widest text-8xl text-white group-hover:scale-110 font-bold duration-500 ease-out"}>
-                            收藏
+                            分享
                         </ContentWrapper>
                     </AppleCard>
 
@@ -166,19 +202,19 @@ export default function About(){
                         </div>
                     </MainCard>
 
-                    <MainCard _tw={tw`bg-white md:col-span-3 col-span-5 m-4`} h={"360px"} >
+                    <MainCard _tw={tw`hidden md:block bg-white md:col-span-3 col-span-5 m-4`} h={"360px"} >
 
                     </MainCard>
 
-                    <MainCard _tw={tw`bg-white md:col-span-2 col-span-5 m-4`} h={"360px"}>
+                    <MainCard _tw={tw`hidden md:block bg-white md:col-span-2 col-span-5 m-4`} h={"360px"}>
 
                     </MainCard>
 
-                    <MainCard _tw={tw`bg-white md:col-span-2 col-span-5 m-4`} h={"360px"}>
+                    <MainCard _tw={tw`hidden md:block bg-white md:col-span-2 col-span-5 m-4`} h={"360px"}>
 
                     </MainCard>
 
-                    <MainCard _tw={tw`bg-white md:col-span-3 col-span-5 m-4`} h={"360px"}>
+                    <MainCard _tw={tw`hidden md:block bg-white md:col-span-3 col-span-5 m-4`} h={"360px"}>
 
                     </MainCard>
                 </WrapperMain>

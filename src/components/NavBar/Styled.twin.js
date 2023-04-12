@@ -43,7 +43,7 @@ export const NavItem = styled(NavLink).attrs(props => ({
     style: ({ isActive }) => ({
         color: isActive ? "rgb(78, 128, 238)" : "" ,
         backgroundColor: isActive ? "rgba(230, 242, 253, 0.7)" : "",
-        borderBottom: isActive ? "2px solid rgb(78, 128, 238)" : "none",
+        // borderBottom: isActive ? "2px solid rgb(78, 128, 238)" : "none",
     }),
 }))`
   //background-color: #61dafb;
@@ -54,7 +54,7 @@ export const NavItem = styled(NavLink).attrs(props => ({
   position: relative;
 
   padding: 0 4px;
-  transition: all 0.25s ease;
+  transition: all 0.35s ease;
 
   &:hover{
     color: rgba(0, 0, 0, 0.2);
@@ -64,15 +64,22 @@ export const NavItem = styled(NavLink).attrs(props => ({
     ${({notMobile}) => notMobile ? "display: none;" : "" }
   }
   
-  //&:not(:nth-child(1))::before{
-  //  position: absolute;
-  //  left: 0;
-  //  top: 6px;
-  //  height: 48px;
-  //  line-height: 48px;
-  //  content: '';
-  //  border-left: 1px solid rgba(78, 128, 238, 30%);
-  //}
+  &::before{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 0;
+    transition: all 0.35s ease;
+    width: ${props => props.style.isActive ? '100%' : '0'};
+    content: '';
+    border-bottom: 2px solid rgba(112, 163, 243, 1);
+  }
+  
+  &.active::before{
+    width: 100%;
+  }
 `
 
 export const LogoWrapper = styled.div`
