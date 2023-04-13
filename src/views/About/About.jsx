@@ -37,6 +37,7 @@ export default function About() {
                     cursor-pointer select-none`}
                         _tw_content={tw`tracking-widest text-8xl text-white font-bold \
                     group-hover:scale-110 duration-500 ease-out`}
+                        _tw_background={tw`text-blue-400 group-hover:text-blue-300`}
                         icon={<FontAwesomeIcon
                             icon={regular("copy")}
                             tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}

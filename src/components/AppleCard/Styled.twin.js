@@ -23,6 +23,7 @@ export const BackgroundWrapper = styled.div`
   margin: auto;
   transition: all .5s ease-out, transform 0s;
   transform: matrix(1, 0, 0, 1, 0, ${({_Y}) => _Y || '0'});
+  ${({_tw}) => _tw};
 `
 
 export const ContentWrapper = styled.div`
