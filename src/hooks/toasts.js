@@ -1,14 +1,14 @@
 import React from 'react';
 import toast from 'react-hot-toast';
 
-export const notify_error = (str) => toast.error(
+export const notify_error = (str, id) => toast.error(
     (t) => (
         <span tw={"align-bottom animate-fade_in.8"}>
             <b>{str}</b>
         </span>
     ),
     {
-        id: 'bookmark_error',
+        id: id || 'bookmark_error',
         duration: 3000,
         position: 'bottom-right',
         // position: 'top-center',
@@ -33,14 +33,14 @@ export const notify_error = (str) => toast.error(
         },
     });
 
-export const notify_success = (str) => toast.success(
+export const notify_success = (str, id) => toast.success(
     (t) => (
         <span tw={"align-bottom animate-fade_in.8"}>
             <b>{str}</b>
         </span>
     ),
     {
-        id: 'bookmark_success',
+        id: id || 'bookmark_success',
         duration: 3000,
         position: 'bottom-right',
         // position: 'top-center',

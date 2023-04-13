@@ -13,6 +13,7 @@ import AppleCard from "@/components/AppleCard/AppleCard"
 import {Toaster} from 'react-hot-toast';
 import {notify_success} from "@/hooks/toasts";
 import {useClipboard} from 'use-clipboard-copy';
+import { faApple, faGithub, faTwitter, faWordpress } from '@fortawesome/free-brands-svg-icons'
 
 
 export default function About() {
@@ -29,6 +30,7 @@ export default function About() {
                 </WrapperLeft>
                 <WrapperMain>
                     <AppleCard
+                        k={0.5}
                         _tw={tw`md:col-span-2 col-span-5 m-4 \
                     bg-blue-200 hover:bg-blue-400 active:bg-blue-200 \ 
                     duration-500 ease-out \ 
@@ -41,7 +43,7 @@ export default function About() {
                         />}
                         onClick={() => {
                             clipboard.copy("https://qiuyedx.github.io/NavPage");
-                            notify_success("网站地址已拷贝到剪贴板");
+                            notify_success("秋夜导航站地址已拷贝到剪贴板", "copy_1");
                         }}
                     >
                         分享
@@ -105,44 +107,66 @@ export default function About() {
                     </MainCard>
 
                     <AppleCard
+                        k={0.5}
                         _tw={tw`md:col-span-3 col-span-5 m-4 \
+                    bg-blue-200 hover:bg-blue-400 active:bg-blue-200 \ 
+                    duration-500 ease-out \
+                    cursor-pointer select-none`}
+                        _tw_content={tw`tracking-wide text-8xl text-white font-bold \
+                    group-hover:scale-110 duration-500 ease-out`}
+                        icon={<FontAwesomeIcon
+                            icon={faTwitter}
+                            tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
+                        />}
+                        onClick={() => {
+                            clipboard.copy("https://twitter.com/QiuYeDx");
+                            notify_success("我的twitter地址已拷贝到剪贴板", "copy_2");
+                        }}
+                    >
+                        twitter
+                    </AppleCard>
+
+                    <AppleCard
+                        k={0.5}
+                        _tw={tw`md:col-span-2 col-span-5 m-4 \
+                    bg-blue-200 hover:bg-blue-400 active:bg-blue-200 \ 
+                    duration-500 ease-out \
+                    cursor-pointer select-none`}
+                        _tw_content={tw`tracking-wider text-8xl text-white font-bold \
+                    group-hover:scale-110 duration-500 ease-out`}
+                        icon={<FontAwesomeIcon
+                            icon={faGithub}
+                            tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
+                        />}
+                        onClick={() => {
+                            clipboard.copy("https://github.com/QiuYeDx");
+                            notify_success("我的Github地址已拷贝到剪贴板", "copy_3");
+                        }}
+                    >
+                        Github
+                    </AppleCard>
+
+                    <AppleCard
+                        k={0.5}
+                        _tw={tw`md:col-span-2 col-span-5 m-4 \
                     bg-blue-200 hover:bg-blue-400 active:bg-blue-200 \ 
                     duration-500 ease-out \
                     cursor-pointer select-none`}
                         _tw_content={tw`tracking-widest text-8xl text-white font-bold \
                     group-hover:scale-110 duration-500 ease-out`}
                         icon={<FontAwesomeIcon
-                            icon={regular("copy")}
+                            icon={faApple}
                             tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
                         />}
                         onClick={() => {
-                            clipboard.copy("https://qiuyedx.github.io/NavPage");
-                            notify_success("网站地址已拷贝到剪贴板");
+                            clipboard.copy("https://apple.com");
+                            notify_success("Apple官网地址已拷贝到剪贴板", "copy_4");
                         }}
                     >
                         Apple
                     </AppleCard>
-
-                    <MainCard _tw={tw`hidden md:block bg-white md:col-span-2 col-span-5 m-4`} h={"360px"}>
-
-                    </MainCard>
-
-                    <MainCard _tw={tw`hidden md:block bg-white md:col-span-2 col-span-5 m-4`} h={"360px"}>
-
-                    </MainCard>
-
-                    <MainCard _tw={tw`hidden md:block bg-white md:col-span-3 col-span-5 m-4`} h={"360px"}>
-
-                    </MainCard>
-                    <MainCard _tw={tw`hidden md:block bg-white md:col-span-3 col-span-5 m-4`} h={"360px"}>
-
-                    </MainCard>
-
-                    <MainCard _tw={tw`hidden md:block bg-white md:col-span-2 col-span-5 m-4`} h={"360px"}>
-
-                    </MainCard>
-
                     <AppleCard
+                        k={0.5}
                         _tw={tw`md:col-span-3 col-span-5 m-4 \
                     bg-blue-200 hover:bg-blue-400 active:bg-blue-200 \ 
                     duration-500 ease-out \
@@ -150,15 +174,15 @@ export default function About() {
                         _tw_content={tw`tracking-widest text-8xl text-white font-bold \
                     group-hover:scale-110 duration-500 ease-out`}
                         icon={<FontAwesomeIcon
-                            icon={regular("copy")}
+                            icon={faWordpress}
                             tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
                         />}
                         onClick={() => {
-                            clipboard.copy("https://qiuyedx.github.io/NavPage");
-                            notify_success("网站地址已拷贝到剪贴板");
+                            clipboard.copy("https://qiuyedx.com");
+                            notify_success("我的Blog地址已拷贝到剪贴板", "copy_5");
                         }}
                     >
-                        Apple
+                        Blog
                     </AppleCard>
                 </WrapperMain>
                 <WrapperRight>
