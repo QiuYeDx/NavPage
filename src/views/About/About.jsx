@@ -5,11 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid, regular } from "@fortawesome/fontawesome-svg-core/import.macro";
 import {
     WrapperBottom, WrapperLeft, WrapperMain, WrapperMiddle,
-    WrapperRight, WrapperTop, Wrapper, SubAvatar, AppleCard, BackgroundWrapper, ContentWrapper
+    WrapperRight, WrapperTop, Wrapper, SubAvatar
 } from "@/views/About/Styled.twin";
 import { H1, P } from "@/styles/TextStyles";
 import MainCard from "@/components/MainCard/MainCard"
+import AppleCard from "@/components/AppleCard/AppleCard"
 import toast, { Toaster } from 'react-hot-toast';
+import { notify_success } from "@/hooks/toasts";
 import { useClipboard } from 'use-clipboard-copy';
 
 
@@ -26,96 +28,6 @@ export default function About(){
             setMatrix_y(ans > 80 ? 80 : ans );
         }
     }
-
-    // function throttle(func, wait){
-    //     let timer = null;
-    //     return function(){
-    //         let args = arguments;
-    //         if(timer !== null) return;
-    //         timer = setTimeout(()=>{
-    //             func.apply(this, args);
-    //             timer = null;
-    //         }, wait);
-    //     }
-    // }
-
-    // function addBookmark(title, url) {
-    //     try {
-    //         window.external.addFavorite(url, title);
-    //     }
-    //     catch (e) {
-    //         try {
-    //             window.sidebar.addPanel(title, url, "");
-    //         }
-    //         catch (e) {
-    //             notify_error("收藏失败, 请使用Ctrl+D进行添加");
-    //         }
-    //     }
-    // }
-
-    const notify_error = (str) => toast.error(
-        (t) => (
-            <span tw={"align-bottom animate-fade_in.8"}>
-                <b>{str}</b>
-            </span>
-        ),
-        {
-            id: 'bookmark_error',
-            duration: 3000,
-            position: 'bottom-right',
-            // position: 'top-center',
-
-            // Styling
-            style: {
-                // position: 'relative',
-                // top: '60px'
-            },
-            className: '',
-
-            // Change colors of success/error/loading icon
-            iconTheme: {
-                primary: '#ed5563',
-                secondary: '#fff',
-            },
-
-            // Aria
-            ariaProps: {
-                role: 'status',
-                'aria-live': 'polite',
-            },
-        });
-
-    const notify_success = (str) => toast.success(
-        (t) => (
-            <span tw={"align-bottom animate-fade_in.8"}>
-                <b>{str}</b>
-            </span>
-        ),
-        {
-            id: 'bookmark_success',
-            duration: 3000,
-            position: 'bottom-right',
-            // position: 'top-center',
-
-            // Styling
-            style: {
-                // position: 'relative',
-                // top: '60px'
-            },
-            className: '',
-
-            // Change colors of success/error/loading icon
-            iconTheme: {
-                primary: 'rgb(52, 211, 153)',
-                secondary: '#fff',
-            },
-
-            // Aria
-            ariaProps: {
-                role: 'status',
-                'aria-live': 'polite',
-            },
-        });
 
     useEffect(() => {
         // window.addEventListener("scroll", throttle(updateMatrix, 50), true);
@@ -136,17 +48,23 @@ export default function About(){
 
                 </WrapperLeft>
                 <WrapperMain>
-                    <AppleCard ref={apple_card_ref} className={"group"} _tw={tw`relative bg-blue-200 hover:bg-blue-400 active:bg-blue-200 md:col-span-2 col-span-5 md:block m-4 duration-500 ease-out cursor-pointer select-none`} h={"360px"} onClick={() => {
-                        // addBookmark("秋夜导航站", "https://qiuyedx.github.io/NavPage");
-                        clipboard.copy("https://qiuyedx.github.io/NavPage");
-                        notify_success("网站地址已拷贝到剪贴板");
-                    }}>
-                        <BackgroundWrapper _Y={matrix_y} tw={"text-blue-400 group-hover:text-blue-300 "}>
-                            <FontAwesomeIcon icon={regular("copy")} tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}/>
-                        </BackgroundWrapper>
-                        <ContentWrapper tw={"tracking-widest text-8xl text-white group-hover:scale-110 font-bold duration-500 ease-out"}>
-                            分享
-                        </ContentWrapper>
+                    <AppleCard
+                        _tw={tw`md:col-span-2 col-span-5 m-4 \
+                    bg-blue-200 hover:bg-blue-400 active:bg-blue-200 \ 
+                    duration-500 ease-out \ 
+                    cursor-pointer select-none`}
+                        _tw_content={tw`tracking-widest text-8xl text-white font-bold \
+                    group-hover:scale-110 duration-500 ease-out`}
+                        icon={<FontAwesomeIcon
+                            icon={regular("copy")}
+                            tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
+                        />}
+                        onClick={() => {
+                            clipboard.copy("https://qiuyedx.github.io/NavPage");
+                            notify_success("网站地址已拷贝到剪贴板");
+                        }}
+                    >
+                        分享
                     </AppleCard>
 
                     <MainCard _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50`} h={"80px"}>
@@ -202,9 +120,24 @@ export default function About(){
                         </div>
                     </MainCard>
 
-                    <MainCard _tw={tw`hidden md:block bg-white md:col-span-3 col-span-5 m-4`} h={"360px"} >
-
-                    </MainCard>
+                    <AppleCard
+                        _tw={tw`md:col-span-3 col-span-5 m-4 \
+                    bg-blue-200 hover:bg-blue-400 active:bg-blue-200 \ 
+                    duration-500 ease-out \
+                    cursor-pointer select-none`}
+                        _tw_content={tw`tracking-widest text-8xl text-white font-bold \
+                    group-hover:scale-110 duration-500 ease-out`}
+                        icon={<FontAwesomeIcon
+                            icon={regular("copy")}
+                            tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
+                        />}
+                        onClick={() => {
+                            clipboard.copy("https://qiuyedx.github.io/NavPage");
+                            notify_success("网站地址已拷贝到剪贴板");
+                        }}
+                    >
+                        Apple
+                    </AppleCard>
 
                     <MainCard _tw={tw`hidden md:block bg-white md:col-span-2 col-span-5 m-4`} h={"360px"}>
 
@@ -215,6 +148,13 @@ export default function About(){
                     </MainCard>
 
                     <MainCard _tw={tw`hidden md:block bg-white md:col-span-3 col-span-5 m-4`} h={"360px"}>
+
+                    </MainCard>
+                    <MainCard _tw={tw`hidden md:block bg-white md:col-span-3 col-span-5 m-4`} h={"360px"}>
+
+                    </MainCard>
+
+                    <MainCard _tw={tw`hidden md:block bg-white md:col-span-2 col-span-5 m-4`} h={"360px"}>
 
                     </MainCard>
                 </WrapperMain>
