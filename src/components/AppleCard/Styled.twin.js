@@ -11,6 +11,7 @@ export const AppleCardWrapper = styled(CardWrapper)`
   justify-content: center;
   
   position: relative;
+  overflow: hidden;
 `
 
 export const BackgroundWrapper = styled.div`
@@ -21,7 +22,7 @@ export const BackgroundWrapper = styled.div`
   right: 0;
   margin: auto;
   transition: all .5s ease-out, transform 0s;
-  transform: matrix(1, 0, 0, 1, 0, ${({_Y}) => _Y || '-6'});
+  transform: matrix(1, 0, 0, 1, 0, ${({_Y}) => _Y || '0'});
 `
 
 export const ContentWrapper = styled.div`

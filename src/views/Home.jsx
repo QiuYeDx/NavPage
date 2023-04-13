@@ -7,6 +7,9 @@ import {
 import MainCard from "@/components/MainCard/MainCard";
 import 'twin.macro';
 import tw from "twin.macro";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
+import {P} from "@/styles/TextStyles";
 
 export default function Home(){
     return (
@@ -41,7 +44,9 @@ export default function Home(){
                 </WrapperRight>
             </WrapperMiddle>
             <WrapperBottom>
-
+                <P color={"rgba(0,0,0,0.7)"}>Made with&nbsp;
+                    <FontAwesomeIcon icon={solid("heart")} color={"red"} flip/>
+                    &nbsp;by QiuYeDx</P>
             </WrapperBottom>
         </Wrapper>
     );
