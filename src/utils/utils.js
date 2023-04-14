@@ -9,10 +9,9 @@ export const getOffsetTop = (element) => {
 
 export const getScrollTop = () => {
     let scrollTop = 0;
-    if (window){
+    if (window) {
         scrollTop = window.scrollY;
-    }
-    else if(document.documentElement && document.documentElement.scrollTop) {
+    } else if (document.documentElement && document.documentElement.scrollTop) {
         scrollTop = document.documentElement.scrollTop;
     } else if (document.body) {
         scrollTop = document.body.scrollTop;
@@ -34,3 +33,4 @@ export const getScrollHeight = () => {
     return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
 }
 
+export const randomNum = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;

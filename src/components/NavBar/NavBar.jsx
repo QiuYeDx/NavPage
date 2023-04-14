@@ -5,53 +5,15 @@ import {
 } from './Styled.twin'
 import 'twin.macro'
 import { useNavigate } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { notify_error } from "@/hooks/toasts";
 
 export default function NavBar(){
     const navigate = useNavigate();
     const [isMoreListShown, setIsMoreListShown] = useState(false);
-    const notify = () => toast.error(
-        (t) => (
-            <span tw={"align-bottom animate-fade_in.8"}>
-                <b>Not yet completed !</b>
-                {/*<button onClick={() => toast.dismiss(t.id)} tw={"pl-1 pr-1 ml-2 border-2 border-blue-200 text-blue-400 text-sm rounded-lg align-bottom"}>*/}
-                {/*    /!*<FontAwesomeIcon icon={solid("xmark")}  />*!/*/}
-                {/*    Get it*/}
-                {/*</button>*/}
-            </span>
-        ),
-        {
-        // id: 'no_more',
-        duration: 3000,
-        position: 'bottom-right',
-        // position: 'top-center',
-
-        // Styling
-        style: {
-            // position: 'relative',
-            // top: '60px'
-        },
-        className: '',
-
-        // Custom Icon
-        // icon: '👏',
-        // icon: <FontAwesomeIcon icon={solid("circle-xmark")} />,
-
-        // Change colors of success/error/loading icon
-        iconTheme: {
-            primary: '#ed5563',
-            secondary: '#fff',
-        },
-
-        // Aria
-        ariaProps: {
-            role: 'status',
-            'aria-live': 'polite',
-        },
-    });
 
     return (
         <div>
@@ -61,7 +23,7 @@ export default function NavBar(){
             <NavWrapper hasShadow={true}>
                 <LogoWrapper onClick={() => {
                     setIsMoreListShown(false);
-                    // notify();
+                    notify_error("Not yet completed !", "not_completed");
                     navigate("/");
                 }} >
                     <Logo/>
@@ -69,7 +31,10 @@ export default function NavBar(){
                         秋夜导航站
                     </LogoText>
                 </LogoWrapper>
-                <NavList onClick={() => setIsMoreListShown(false)}>
+                <NavList onClick={() => {
+                    setIsMoreListShown(false);
+                    notify_error("Not yet completed !", "not_completed");
+                }}>
                     <NavItem to="/">
                         主页
                     </NavItem>
@@ -83,7 +48,6 @@ export default function NavBar(){
                         关于
                     </NavItem>
                 </NavList>
-                {/*<MoreWrapper onClick={notify}>*/}
                 <MoreWrapper onClick={() => setIsMoreListShown(!isMoreListShown)}>
 
                 </MoreWrapper>

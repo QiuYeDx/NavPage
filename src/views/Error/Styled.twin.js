@@ -6,21 +6,21 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-  //position: absolute;
-  //top: 80px;
-  //bottom: 0;
-  //left: 0;
-  //right: 0;
-  //margin: auto;
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
   
-  z-index: -1;
+  z-index: 100;
 
   background-image: url(images/mora.png);
   background-size: cover;
 `
 
 export const ErrorWrapper = styled.div`
-  ${tw`p-10 shadow-xl rounded-3xl bg-red-400`}
+  ${tw`p-10 shadow-xl rounded-3xl bg-red-400 animate-fade_in_up.8`}
   //position: relative;
   //top: -60px;
   display: flex;
@@ -28,6 +28,6 @@ export const ErrorWrapper = styled.div`
   text-align: center;
   
   @media(max-width: 460px){
-    ${tw`p-4 shadow-xl rounded-3xl bg-red-400`}
+    ${tw`p-4 shadow-xl rounded-3xl bg-red-400 tracking-tighter`}
   }
 `

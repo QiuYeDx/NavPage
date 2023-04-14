@@ -1,13 +1,14 @@
 import tw, { styled } from 'twin.macro'
 import {AvatarWrapper} from "@/components/Avatar/Styled.twin";
 import {BaseButton} from "@/components/Button/Styled.twin";
+import {WIDTH_MIDDLE, WIDTH_MOBILE} from "@/styles/GlobalConfig";
 
 export const Wrapper = styled.div`
   color: black;
   //background-color: rgb(249, 249, 249);
 
   //position: absolute;
-  //top: 80px;
+  //top: 60px;
   //bottom: 0;
   //left: 0;
   //right: 0;
@@ -28,7 +29,7 @@ export const WrapperTop = styled.div`
   height: 80px;
   //background-color: pink;
   ${({ hasBorder }) => hasBorder && tw`border border-blue-500`};
-  @media(max-width:767px) {
+  @media(max-width: ${WIDTH_MOBILE}px) {
     height: 20px;
   }
 `
@@ -49,12 +50,17 @@ export const WrapperMain = styled.div`
   flex-direction: column;
   flex-grow: 5;
   z-index: 1;
-  ${tw`text-gray-700 max-w-screen-lg`}
+  ${tw`text-gray-700 max-w-screen-xl`}
   ${({ hasBorder }) => hasBorder && tw`border-purple-500`};
+  ${tw`grid grid-cols-5 justify-center text-center`};
 
-  //@media(min-width: 767px){
-  ${tw`grid grid-cols-5 justify-center text-center`}
-      //}
+  transition: all 0.5s ease;
+  @media(max-width: ${WIDTH_MIDDLE}px){
+    flex-grow: 12;
+  }
+  @media(max-width: ${WIDTH_MOBILE}px){
+    flex-grow: 20; // 控制移动端宽度
+  }
 `
 
 export const WrapperBottom = styled.div`
@@ -74,20 +80,20 @@ export const WrapperLeft = styled.div`
   //background-color: #61dafb;
   ${({ hasBorder }) => hasBorder && tw`border-purple-500`};
 
-  @media(max-width:767px) {
+  @media(max-width: ${WIDTH_MOBILE}px) {
     flex-grow: 1;
   }
 `
 
 export const WrapperRight = styled.div`
   flex-grow: 2;
-  
+
   //width: 15%;
   color: black;
   //background-color: #fbc561;
   ${({hasBorder}) => hasBorder && tw`border-purple-500`};
 
-  @media(max-width:767px) {
+  @media(max-width: ${WIDTH_MOBILE}px) {
     flex-grow: 1;
   }
 `
@@ -96,12 +102,11 @@ export const SubAvatar = styled(AvatarWrapper)`
   position: absolute;
   flex-shrink: 0;
   top: -50px;
-  @media(max-width:767px) {
+  @media(max-width: ${WIDTH_MOBILE}px) {
     top: -40px;
   }
 `
 
 export const BaseButtonA = styled(BaseButton)`
-  
-`
 
+`

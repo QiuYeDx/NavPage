@@ -1,4 +1,4 @@
-export const throttle = (func, wait) => {
+export function throttle(func, wait){
     let timer = null;
     return function(){
         let args = arguments;
@@ -8,4 +8,4 @@ export const throttle = (func, wait) => {
             timer = null;
         }, wait);
     }
-};
+}

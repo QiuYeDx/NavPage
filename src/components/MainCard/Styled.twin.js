@@ -4,6 +4,7 @@ export const CardWrapper = styled.div`
   ${tw`shadow-xl rounded-3xl hover:shadow-2xl animate-fade_in_up.8`}; 
   height: ${({h}) => h || "200px"};
   width: ${({w}) => w || ""};
+  
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Wrapper } from "./Styled.twin";
-import {WrapperBottom, WrapperLeft, WrapperMain, WrapperMiddle, WrapperRight, WrapperTop} from "@/views/Styled.twin";
+import {WrapperBottom, WrapperLeft, WrapperMain, WrapperMiddle, WrapperRight, WrapperTop} from "@/views/PageB/Styled.twin";
 import MainCard from "@/components/MainCard/MainCard";
 import tw from "twin.macro";
 import 'twin.macro';
