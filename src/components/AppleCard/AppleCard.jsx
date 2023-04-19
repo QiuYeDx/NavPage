@@ -13,6 +13,7 @@ import {MButton} from "@/components/Button/Styled.twin";
 import { useNavigate } from 'react-router-dom';
 import {styles} from './themes';
 import {randomNum} from "@/utils/utils";
+import PropTypes from 'prop-types';
 // import {throttle} from '@/utils/throttle';
 
 /**
@@ -49,7 +50,7 @@ import {randomNum} from "@/utils/utils";
  * icon={<FontAwesomeIcon icon={regular("copy")} tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}/>}
  * ```
  *
- * @param props {theme, h: string, icon: JSX.Element, topTextA, topTextB, subTextA, hasMask: boolean, hasSubBar: boolean, k: number, logo_url, tw_card , tw_background, tw_content, tw_subbar, tw_topTextA, tw_topTextB, tw_subButton, tw_subTextA, _sub_h3, _sub_h4}
+ * @param props {theme, h: string, icon: JSX.Element, topTextA, topTextB, subTextA, hasMask: boolean, hasSubBar: boolean, k: number, logo_url, tw_card , tw_background, tw_content, tw_subbar, tw_topTextA, tw_topTextB, tw_subButton, tw_subTextA, _sub_h3, _sub_h4, onClick}
  * @returns {JSX.Element}
  * @constructor
  */
@@ -97,7 +98,6 @@ export default function AppleCard(props) {
     // const style = ((props.theme && styles[props.theme]) ? styles[props.theme] : styles['default']);
     useEffect(() => {
         setStyle((props.theme && styles[props.theme]) ? styles[props.theme] : styles['default']);
-        console.log(props.theme, styles[props.theme]);
         updateMatrix();
         window.addEventListener("scroll", updateMatrix, true);
         // window.addEventListener("scroll", throttle(updateMatrix, 8), true);
@@ -187,3 +187,28 @@ export default function AppleCard(props) {
         </AppleCardWrapper>
     );
 }
+
+AppleCard.propTypes = {
+    h: PropTypes.string,
+    k: PropTypes.number,
+    theme: PropTypes.oneOf(['white', 'black', 'green', 'purple']),
+    logo_url: PropTypes.string,
+    goto: PropTypes.string,
+    icon: PropTypes.element,
+    topTextA: PropTypes.string,
+    topTextB: PropTypes.string,
+    subTextA: PropTypes.string,
+    hasMask: PropTypes.bool,
+    hasSubBar: PropTypes.bool,
+    _sub_h3: PropTypes.string,
+    _sub_h4: PropTypes.string,
+    onClick: PropTypes.func,
+    tw_card: PropTypes.object,
+    tw_background: PropTypes.object,
+    tw_content: PropTypes.object,
+    tw_subbar: PropTypes.object,
+    tw_topTextA: PropTypes.object,
+    tw_topTextB: PropTypes.object,
+    tw_subTextA: PropTypes.object,
+    tw_subButton: PropTypes.object,
+};

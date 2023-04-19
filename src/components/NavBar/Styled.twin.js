@@ -57,7 +57,7 @@ export const NavItem = styled(NavLink).attrs(props => ({
   transition: all 0.35s ease;
 
   &:hover{
-    color: rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.3);
   }
 
   @media(max-width: 415px){
@@ -80,7 +80,7 @@ export const NavItem = styled(NavLink).attrs(props => ({
   &.active::before{
     width: 100%;
   }
-  ${tw`md:tracking-widest font-semibold`};
+  ${tw`md:tracking-widest font-medium`};
 `
 
 export const LogoWrapper = styled.div`
@@ -174,7 +174,7 @@ export const MoreListItem = styled(NavLink).attrs(props => ({
         color: isActive ? "rgba(78, 128, 238, 0.7)" : "" ,
     }),
 }))`
-  ${tw`tracking-widest font-semibold`};
+  ${tw`tracking-widest font-medium`};
   padding-left: 20%;
   width: 100%;
   height: 50px;
@@ -190,7 +190,7 @@ export const MoreListItem = styled(NavLink).attrs(props => ({
   transition: all 0.25s ease;
 
   &:hover {
-    color: rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.3);
     //opacity: 0.4;
     background-color: rgba(255, 255, 255, .5);
   }

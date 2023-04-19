@@ -76,7 +76,9 @@ export const Logo = styled.div`
   //box-shadow: 0 0 4px rgba(0, 0, 0, 15%);
   //background-image: url(images/QiuYeDx.png);
   background-image: url(${props => props.url || "images/QiuYeDx.png"});
-  background-size: cover;
+  //background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
 `
 
 export const TopTextA = styled.div`

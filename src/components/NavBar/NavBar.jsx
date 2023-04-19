@@ -36,15 +36,14 @@ export default function NavBar(){
                     tw={"cursor-pointer select-none"}
                     onClick={() => {
                         setIsMoreListShown(false);
-                        notify_error("Not yet completed !", "not_completed");
                 }}>
-                    <NavItem to="/">
+                    <NavItem to="/" onClick={() => {notify_error("Not yet completed !", "not_completed");}}>
                         主页
                     </NavItem>
-                    <NavItem to="/tools">
+                    <NavItem to="/tools" onClick={() => {notify_error("Not yet completed !", "not_completed");}}>
                         工具
                     </NavItem>
-                    <NavItem to="/resources">
+                    <NavItem to="/resources" onClick={() => {notify_error("Not yet completed !", "not_completed");}}>
                         资源
                     </NavItem>
                     <NavItem to="/about" notMobile={true}>

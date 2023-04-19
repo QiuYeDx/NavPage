@@ -71,6 +71,7 @@ export default function About() {
                         tw_subbar={tw``}
                         _sub_h3={'QiuYeDx'}
                         _sub_h4={'秋夜殿下的推特空间'}
+                        logo_url={'images/twitter.png'}
                         icon={<FontAwesomeIcon
                             icon={faTwitter}
                             tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
@@ -88,7 +89,7 @@ export default function About() {
                         k={0.5}
                         topTextA={"代码"}
                         topTextB={"我的代码仓库"}
-                        subTextA={"使我全神贯注"}
+                        subTextA={"灵感碰撞"}
                         hasMask
                         tw_card={tw`md:col-span-2`}
                         tw_content={tw`tracking-wide`}
@@ -131,6 +132,7 @@ export default function About() {
 
                     <AppleCard
                         hasSubBar
+                        theme={'purple'}
                         goto={"https://qiuyedx.com"}
                         k={0.5}
                         topTextA={"博客"}
