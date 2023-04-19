@@ -36,7 +36,7 @@ import {randomNum} from "@/utils/utils";
  *
  * + theme ∈ [default, black, white, green, yellow, red, pink, purple]
  *
- * + logo_url示例: `logo_url={"/NavPage/images/QiuYeDx.png"}` 注意要手动添加`/NavPage/`服务器部署路径（待优化）
+ * + logo_url示例: `logo_url={"images/QiuYeDx.png"}` css里需要怎么写这里就怎么写（待优化）
  *
  * + icon示例:
  *

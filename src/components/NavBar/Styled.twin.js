@@ -80,6 +80,7 @@ export const NavItem = styled(NavLink).attrs(props => ({
   &.active::before{
     width: 100%;
   }
+  ${tw`md:tracking-widest font-semibold`};
 `
 
 export const LogoWrapper = styled.div`
@@ -127,20 +128,20 @@ export const MoreWrapper = styled(LogoWrapper)`
 
   padding: 0 0 0 0;
   transition: all 0.25s ease;
-  &:hover{
-    color: rgba(0, 0, 0, 0.2);
-  }
+  //&:hover{
+  //  color: rgba(0, 0, 0, 0.2);
+  //}
 
-  &::before{
-    line-height: 8px;
-    font-size: 26px;
-    content: '—';
-  }
-  &::after{
-    line-height: 8px;
-    font-size: 26px;
-    content: '—';
-   }
+  //&::before{
+  //  line-height: 8px;
+  //  font-size: 26px;
+  //  content: '—';
+  //}
+  //&::after{
+  //  line-height: 8px;
+  //  font-size: 26px;
+  //  content: '—';
+  // }
   
   @media(min-width: 1200px){
     margin-left: 140px;
@@ -153,9 +154,10 @@ export const MoreList = styled.div`
   //height: 150px;
   width: 100%;
   top: ${({isShown}) => isShown? '60px' : '-150px'};
-  transition: all .4s cubic-bezier(.32,.63,.45,1.01);
+  //transition: all .4s cubic-bezier(.32,.63,.45,1.01);
+  transition: all .4s cubic-bezier(.25,.69,.35,1.01);
   box-shadow: 0 0 30px 1px rgba(0, 0, 0, 15%);
-  background-color: rgba(255, 255, 255, .7);
+  background-color: rgba(255, 255, 255, .9);
   backdrop-filter: blur(12px);
   overflow: hidden;
   
@@ -172,7 +174,7 @@ export const MoreListItem = styled(NavLink).attrs(props => ({
         color: isActive ? "rgba(78, 128, 238, 0.7)" : "" ,
     }),
 }))`
-  ${tw`tracking-widest`};
+  ${tw`tracking-widest font-semibold`};
   padding-left: 20%;
   width: 100%;
   height: 50px;
@@ -210,4 +212,22 @@ export const MoreListItem = styled(NavLink).attrs(props => ({
     height: 60px;
     line-height: 60px;
   }
+`
+
+export const MoreListMask = styled.div.attrs(props => ({
+    style: {
+        // display: props.isShow ? 'block' : 'none',
+        zIndex: props.isShow? '999' : '-100',
+        backgroundColor: props.isShow ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0)',
+    }
+}))`
+  position: fixed;
+  top: 0;
+  height: 200%;
+  left: 0;
+  right: 0;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: all 0.5s ease;
+  z-index: 999;
 `

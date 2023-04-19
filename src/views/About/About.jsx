@@ -81,7 +81,7 @@ export default function About() {
                         k={0.5}
                         hasMask
                         tw_card={tw`md:col-span-2`}
-                        tw_content={tw`tracking-wider`}
+                        tw_content={tw`tracking-wide`}
                         tw_background={tw``}
                         tw_subbar={tw``}
                         icon={<FontAwesomeIcon
@@ -142,8 +142,8 @@ export default function About() {
                     <AppleCard
                         k={0.5}
                         tw_card={tw`md:col-span-3`}
-                        tw_content={tw``}
-                        tw_background={tw`tracking-wide`}
+                        tw_content={tw`tracking-tight md:tracking-wider`}
+                        tw_background={tw``}
                         tw_subbar={tw``}
                         icon={<FontAwesomeIcon
                             icon={faGoogle}

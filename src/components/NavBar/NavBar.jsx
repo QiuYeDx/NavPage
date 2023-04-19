@@ -1,7 +1,7 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {
     NavWrapper, LogoWrapper, NavItem, NavList, MoreWrapper,
-    Logo, LogoText, MoreList, MoreListItem, BlankWrapper
+    Logo, LogoText, MoreList, MoreListItem, BlankWrapper, MoreListMask
 } from './Styled.twin'
 import 'twin.macro'
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +17,7 @@ export default function NavBar(){
 
     return (
         <div>
+            <MoreListMask isShow={isMoreListShown} onClick={() => setIsMoreListShown(!isMoreListShown)}/>
             <BlankWrapper/>
             <Toaster/>
             {/*<NavWrapper hasShadow={!isMoreListShown}>*/}
@@ -27,13 +28,15 @@ export default function NavBar(){
                     navigate("/");
                 }} >
                     <Logo/>
-                    <LogoText>
+                    <LogoText tw={"cursor-pointer select-none"}>
                         秋夜导航站
                     </LogoText>
                 </LogoWrapper>
-                <NavList onClick={() => {
-                    setIsMoreListShown(false);
-                    notify_error("Not yet completed !", "not_completed");
+                <NavList
+                    tw={"cursor-pointer select-none"}
+                    onClick={() => {
+                        setIsMoreListShown(false);
+                        notify_error("Not yet completed !", "not_completed");
                 }}>
                     <NavItem to="/">
                         主页
@@ -48,8 +51,15 @@ export default function NavBar(){
                         关于
                     </NavItem>
                 </NavList>
-                <MoreWrapper onClick={() => setIsMoreListShown(!isMoreListShown)}>
-
+                <MoreWrapper
+                    tw={"md:hover:text-gray-300 active:text-gray-700 cursor-pointer select-none"}
+                    onClick={() => setIsMoreListShown(!isMoreListShown)}
+                >
+                    {isMoreListShown ?
+                        <FontAwesomeIcon icon={solid("bars")} flip size={'lg'} />
+                        :
+                        <FontAwesomeIcon icon={solid("bars")} size={'lg'} />
+                    }
                 </MoreWrapper>
             </NavWrapper>
             <MoreList isShown={isMoreListShown} onClick={() => setIsMoreListShown(!isMoreListShown)}>
