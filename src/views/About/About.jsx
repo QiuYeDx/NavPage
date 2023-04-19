@@ -31,6 +31,7 @@ export default function About() {
                 </WrapperLeft>
                 <WrapperMain>
                     <AppleCard
+                        h={"360px"}
                         k={0.5}
                         tw_card={tw`md:col-span-2`}
                         tw_content={tw``}
@@ -60,10 +61,16 @@ export default function About() {
 
                     <AppleCard
                         k={0.5}
+                        hasSubBar
+                        goto={'https://twitter.com/QiuYeDx'}
+                        topTextA={"社交"}
+                        topTextB={"我的推特空间"}
                         tw_card={tw`md:col-span-3`}
                         tw_content={tw`tracking-wide`}
                         tw_background={tw``}
                         tw_subbar={tw``}
+                        _sub_h3={'QiuYeDx'}
+                        _sub_h4={'秋夜殿下的推特空间'}
                         icon={<FontAwesomeIcon
                             icon={faTwitter}
                             tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
@@ -79,6 +86,9 @@ export default function About() {
                     <AppleCard
                         theme={'black'}
                         k={0.5}
+                        topTextA={"代码"}
+                        topTextB={"我的代码仓库"}
+                        subTextA={"使我全神贯注"}
                         hasMask
                         tw_card={tw`md:col-span-2`}
                         tw_content={tw`tracking-wide`}
@@ -100,6 +110,9 @@ export default function About() {
                         theme={'white'}
                         hasMask
                         k={0.5}
+                        topTextA={"灵感"}
+                        topTextB={"我的设计灵感"}
+                        subTextA={"取之不尽"}
                         tw_card={tw`md:col-span-2`}
                         tw_content={tw`tracking-wider`}
                         tw_background={tw``}
@@ -117,10 +130,11 @@ export default function About() {
                     </AppleCard>
 
                     <AppleCard
-                        h={"360px"}
                         hasSubBar
                         goto={"https://qiuyedx.com"}
                         k={0.5}
+                        topTextA={"博客"}
+                        topTextB={"我的创作空间"}
                         tw_card={tw`md:col-span-3`}
                         tw_content={tw`tracking-widest`}
                         tw_background={tw``}
@@ -140,25 +154,37 @@ export default function About() {
                     </AppleCard>
 
                     <AppleCard
+                        theme={'green'}
                         k={0.5}
+                        hasSubBar
+                        goto={"https://share.qiuyedx.com"}
+                        topTextA={"网盘"}
+                        topTextB={"我的网络存储"}
                         tw_card={tw`md:col-span-3`}
-                        tw_content={tw`tracking-tight md:tracking-wider`}
+                        tw_content={tw`tracking-tight md:tracking-wider text-7xl font-black`}
                         tw_background={tw``}
                         tw_subbar={tw``}
-                        icon={<FontAwesomeIcon
-                            icon={faGoogle}
-                            tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
-                        />}
+                        _sub_h3={'次元空间'}
+                        _sub_h4={'秋夜殿下的网络存储'}
+                        logo_url={'images/Alist_M.jpeg'}
+                        icon={
+                            <FontAwesomeIcon
+                                icon={solid("server")}
+                                tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
+                            />}
                         onClick={() => {
-                            clipboard.copy("https://google.com");
-                            notify_success("Google地址已拷贝到剪贴板", "copy_6");
+                            clipboard.copy("https://share.qiuyedx.com");
+                            notify_success("次元空间地址已拷贝到剪贴板", "copy_6");
                         }}
                     >
-                        Google
+                        次元空间
                     </AppleCard>
 
                     <AppleCard
                         k={0.5}
+                        topTextA={"通讯"}
+                        topTextB={"我的企鹅账号"}
+                        subTextA={"欢迎扩列"}
                         tw_card={tw`md:col-span-2`}
                         tw_content={tw`tracking-widest`}
                         tw_background={tw``}

@@ -20,7 +20,7 @@ export const AnimationWrapper = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  bottom: ${({hasSubBar}) => hasSubBar ? '68px' : '0'};
+  bottom: ${({hasSubBar}) => hasSubBar ? '34px' : '0'};
   margin: auto;
   
   display: flex;
@@ -72,9 +72,42 @@ export const Logo = styled.div`
   width: 46px;
   height: 46px;
   //background-color: white;
-  border-radius: 8px;
+  border-radius: 13px;
   //box-shadow: 0 0 4px rgba(0, 0, 0, 15%);
   //background-image: url(images/QiuYeDx.png);
   background-image: url(${props => props.url || "images/QiuYeDx.png"});
   background-size: cover;
+`
+
+export const TopTextA = styled.div`
+  position: absolute;
+  opacity: 0.75;
+  top: 12px;
+  left: 16px;
+  z-index: 110;
+  ${({hasMask}) => hasMask ? "mix-blend-mode: difference" : ""};
+  ${({_tw}) => _tw};
+  ${({_tw_user}) => _tw_user};
+`
+
+export const TopTextB = styled.div`
+  position: absolute;
+  opacity: 1;
+  top: 36px;
+  left: 16px;
+  z-index: 110;
+  ${({hasMask}) => hasMask ? "mix-blend-mode: difference" : ""};
+  ${({_tw}) => _tw};
+  ${({_tw_user}) => _tw_user};
+`
+
+export const SubTextA = styled.div`
+  position: absolute;
+  opacity: 0.75;
+  bottom: ${({hasSubBar}) => hasSubBar ? '80px' : '16px'};
+  left: 16px;
+  z-index: 110;
+  ${({hasMask}) => hasMask ? "mix-blend-mode: difference" : ""};
+  ${({_tw}) => _tw};
+  ${({_tw_user}) => _tw_user};
 `

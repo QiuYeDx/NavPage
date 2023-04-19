@@ -11,9 +11,10 @@ export const BaseButton = styled.div`
 export const MButton = styled.div`
   ${tw`rounded-2xl bg-blue-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider \
   ring-blue-200 ring-0 hover:ring-4 hover:scale-105 active:bg-blue-600 active:ring-blue-400 duration-100 ease-out
-  `}; 
+  `};
+  ${({_tw}) => _tw }
   height: ${({h}) => h || "32px"};
   line-height: ${({h}) => h || "32px"};
   width: ${({w}) => w || "86px"};
-  ${({_tw}) => _tw }
+  ${({_tw_user}) => _tw_user};
 `

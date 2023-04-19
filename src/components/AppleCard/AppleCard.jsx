@@ -1,8 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import 'twin.macro'
 import tw from "twin.macro";
-import {AnimationWrapper, AppleCardWrapper, BackgroundWrapper,
-    ContentWrapper, SubBar, Logo} from "./Styled.twin";
+import {
+    AnimationWrapper, AppleCardWrapper, BackgroundWrapper,
+    ContentWrapper, SubBar, Logo, TopTextA, TopTextB, SubTextA
+} from "./Styled.twin";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {regular} from "@fortawesome/fontawesome-svg-core/import.macro";
 import {getOffsetTop, getScrollTop, getClientHeight} from '@/utils/utils';
@@ -23,6 +25,9 @@ import {randomNum} from "@/utils/utils";
  * - theme属性用于设置卡片的主题，支持多种颜色；
  * - logo_url属性用于设置Logo的URL；
  * - icon属性用于设置卡片内的图标；
+ * - topTextA属性用于设置卡片左上角第一行小字标题；
+ * - topTextB属性用于设置卡片左上角第二行大字标题；
+ * - subTextA属性用于设置卡片左下角小字描述；
  * - hasMask属性用于设置是否显示蒙版；
  * - hasSubBar属性用于设置是否显示底部栏；
  * - _sub_h3属性用于设置底部栏的H3标题；
@@ -44,7 +49,7 @@ import {randomNum} from "@/utils/utils";
  * icon={<FontAwesomeIcon icon={regular("copy")} tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}/>}
  * ```
  *
- * @param props {theme, h: string, icon: JSX.Element, hasMask: boolean, hasSubBar: boolean, k: number, logo_url, tw_card , tw_background, tw_content, tw_subbar, _sub_h3, _sub_h4}
+ * @param props {theme, h: string, icon: JSX.Element, topTextA, topTextB, subTextA, hasMask: boolean, hasSubBar: boolean, k: number, logo_url, tw_card , tw_background, tw_content, tw_subbar, tw_topTextA, tw_topTextB, tw_subButton, tw_subTextA, _sub_h3, _sub_h4}
  * @returns {JSX.Element}
  * @constructor
  */
@@ -104,10 +109,32 @@ export default function AppleCard(props) {
     return (
         <AppleCardWrapper
             className={'group' + ' group' + randomClassName}
-            h={props.h || "360px"}
+            h={props.h || "400px"}
             _tw={style.styleAppleCard}
             _tw_user={props.tw_card || tw` `}
         >
+            <TopTextA
+                hasMask={props.hasMask}
+                _tw={style.styleTopTextA}
+                _tw_user={props.tw_topTextA || tw` `}
+            >
+                {props.topTextA || ''}
+            </TopTextA>
+            <TopTextB
+                hasMask={props.hasMask}
+                _tw={style.styleTopTextB}
+                _tw_user={props.tw_topTextB || tw` `}
+            >
+                {props.topTextB || ''}
+            </TopTextB>
+            <SubTextA
+                hasSubBar={props.hasSubBar}
+                hasMask={props.hasMask}
+                _tw={style.styleSubTextA}
+                _tw_user={props.tw_subTextA || tw` `}
+            >
+                {props.subTextA || ''}
+            </SubTextA>
             <AnimationWrapper
                 ref={card_wrapper_ref}
                 hasSubBar={props.hasSubBar}
@@ -148,7 +175,10 @@ export default function AppleCard(props) {
                         <H4 tw={"tracking-widest"}>{props._sub_h4 || ''}</H4>
                     </div>
                     <div tw={"flex-grow"}> </div>
-                    <MButton onClick={() => {
+                    <MButton
+                        _tw={style.styleSubButton}
+                        _tw_user={props.tw_subButton || tw` `}
+                        onClick={() => {
                         // eslint-disable-next-line no-script-url
                         window.location = props.goto || 'javascript:;';
                     }}>打开</MButton>
