@@ -89,7 +89,7 @@ export default function About() {
                             notify_success("我的twitter地址已拷贝到剪贴板", "copy_2");
                         }}
                     >
-                        twitter
+                        Twitter
                     </AppleCard>
 
                     <AppleCard
