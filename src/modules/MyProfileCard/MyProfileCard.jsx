@@ -5,9 +5,12 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import MainCard from "@/components/MainCard/MainCard";
 
-export default function MyProfileCard(){
+export default function MyProfileCard(props){
+    const tw_onlyMobile = tw`bg-white md:col-span-3 col-span-5 m-4 relative  md:hidden`;
+    const tw_notMobile = tw`bg-white md:col-span-3 col-span-5 m-4 relative hidden md:flex`;
+    const tw_defaults = tw`bg-white md:col-span-3 col-span-5 m-4 relative`;
     return (
-        <MainCard _tw={tw`bg-white md:col-span-3 col-span-5 m-4 relative`} h={"360px"}>
+        <MainCard _tw={props.onlyMobile ? tw_onlyMobile : (props.notMobile ? tw_notMobile : tw_defaults)} h={"360px"}>
             <br/>
             <SubAvatar img={"images/QiuYeDx.png"} hasBorder h={"100px"} w={"100px"}/>
             <br/>

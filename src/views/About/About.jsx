@@ -30,13 +30,21 @@ export default function About() {
 
                 </WrapperLeft>
                 <WrapperMain>
+                    <MainCard
+                        _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50 block md:hidden`}
+                        h={"80px"}>
+                        <div tw={"text-2xl text-white font-bold font-sans mt-4"}>
+                            关 于
+                        </div>
+                    </MainCard>
+
+                    <MyProfileCard onlyMobile/>
+
                     <AppleCard
+                        theme={'gradient_blue'}
                         h={"360px"}
                         k={0.5}
                         tw_card={tw`md:col-span-2`}
-                        tw_content={tw``}
-                        tw_background={tw``}
-                        tw_subbar={tw``}
                         icon={<FontAwesomeIcon
                             icon={regular("copy")}
                             tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
@@ -50,14 +58,14 @@ export default function About() {
                     </AppleCard>
 
                     <MainCard
-                        _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50`}
+                        _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50 hidden md:block`}
                         h={"80px"}>
                         <div tw={"text-2xl text-white font-bold font-sans mt-4"}>
                             关 于
                         </div>
                     </MainCard>
 
-                    <MyProfileCard/>
+                    <MyProfileCard notMobile/>
 
                     <AppleCard
                         k={0.5}

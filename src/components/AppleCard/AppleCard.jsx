@@ -40,7 +40,7 @@ import PropTypes from 'prop-types';
  *
  * + k ∈ (0, 1) 负责控制背景视察效果的幅度（运动范围）
  *
- * + theme ∈ [default, black, white, green, yellow, red, pink, purple]
+ * + theme ∈ [default, black, white, green, yellow, red, pink, purple, gradient_blue]
  *
  * + logo_url示例: `logo_url={"images/QiuYeDx.png"}` css里需要怎么写这里就怎么写（待优化）
  *
@@ -55,7 +55,7 @@ import PropTypes from 'prop-types';
  * @constructor
  */
 export default function AppleCard(props) {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     let [matrix_y, setMatrix_y] = useState(0);
     let card_wrapper_ref = useRef(null);
     let background_wrapper_ref = useRef(null);
