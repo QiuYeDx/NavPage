@@ -74,7 +74,7 @@ export default function About() {
                         topTextA={"社交"}
                         topTextB={"我的推特空间"}
                         tw_card={tw`md:col-span-3`}
-                        tw_content={tw`tracking-wide`}
+                        tw_content={tw`tracking-wide text-7xl md:text-8xl`}
                         tw_background={tw``}
                         tw_subbar={tw``}
                         _sub_h3={'QiuYeDx'}
