@@ -146,13 +146,14 @@ export default function AppleCard(props) {
                     _tw={style.styleBackground}
                     _tw_user={props.tw_background || tw` `}
                     _hover={'.group' + randomClassName + style.hoverBackground}
+                    _active={'.group' + randomClassName + style.activeBackground}
                 >
                     {
                         props.icon
                         ||
                         <FontAwesomeIcon
                             icon={regular("copy")}
-                            tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
+                            tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />
                     }
                 </BackgroundWrapper>
@@ -160,6 +161,8 @@ export default function AppleCard(props) {
                     hasMask={props.hasMask}
                     _tw={style.styleContent}
                     _tw_user={props.tw_content || tw` `}
+                    _hover={'.group' + randomClassName + style.hoverContent}
+                    _active={'.group' + randomClassName + style.activeContent}
                 >
                     {props.children}
                 </ContentWrapper>

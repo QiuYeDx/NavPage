@@ -43,7 +43,7 @@ export default function PageB(){
             </WrapperMiddle>
             <WrapperBottom>
                 <P color={"rgba(0,0,0,0.7)"}>Made with&nbsp;
-                    <FontAwesomeIcon icon={solid("heart")} color={"red"} flip/>
+                    <FontAwesomeIcon icon={solid("heart")} color={"red"}/>
                     &nbsp;by QiuYeDx</P>
             </WrapperBottom>
         </Wrapper>

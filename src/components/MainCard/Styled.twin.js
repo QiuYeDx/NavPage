@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 export const CardWrapper = styled.div`
-  ${tw`shadow-xl rounded-3xl hover:shadow-2xl animate-fade_in_up.8`}; 
+  ${tw`shadow-xl rounded-3xl active:shadow-2xl md:hover:shadow-2xl animate-fade_in_up.8`}; 
   height: ${({h}) => h || "200px"};
   width: ${({w}) => w || ""};
   

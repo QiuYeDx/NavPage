@@ -44,6 +44,7 @@ export const BackgroundWrapper = styled.div.attrs(props => ({
   transition: all .5s ease-out, transform 0s;
   ${props => props.tw};
   ${({_hover}) => _hover};
+  ${({_active}) => _active};
   ${({_tw_user}) => _tw_user};
 `
 
@@ -51,6 +52,8 @@ export const ContentWrapper = styled.div`
   position: relative;
   ${({hasMask}) => hasMask ? "mix-blend-mode: difference" : ""};
   ${({_tw}) => _tw};
+  ${({_hover}) => _hover};
+  ${({_active}) => _active};
   ${({_tw_user}) => _tw_user};
 `
 

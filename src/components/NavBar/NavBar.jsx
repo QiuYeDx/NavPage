@@ -37,16 +37,27 @@ export default function NavBar(){
                     onClick={() => {
                         setIsMoreListShown(false);
                 }}>
-                    <NavItem to="/" onClick={() => {notify_error("Not yet completed !", "not_completed");}}>
+                    <NavItem to="/" onClick={() => {
+                        notify_error("Not yet completed !", "not_completed");
+                        window.scroll(0, 0);
+                    }}>
                         主页
                     </NavItem>
-                    <NavItem to="/tools" onClick={() => {notify_error("Not yet completed !", "not_completed");}}>
+                    <NavItem to="/tools" onClick={() => {
+                        notify_error("Not yet completed !", "not_completed");
+                        window.scroll(0, 0);
+                    }}>
                         工具
                     </NavItem>
-                    <NavItem to="/resources" onClick={() => {notify_error("Not yet completed !", "not_completed");}}>
+                    <NavItem to="/resources" onClick={() => {
+                        notify_error("Not yet completed !", "not_completed");
+                        window.scroll(0, 0);
+                    }}>
                         资源
                     </NavItem>
-                    <NavItem to="/about" notMobile={true}>
+                    <NavItem to="/about" notMobile={true} onClick={() => {
+                        window.scroll(0, 0);
+                    }}>
                         关于
                     </NavItem>
                 </NavList>
@@ -62,7 +73,9 @@ export default function NavBar(){
                 </MoreWrapper>
             </NavWrapper>
             <MoreList isShown={isMoreListShown} onClick={() => setIsMoreListShown(!isMoreListShown)}>
-                <MoreListItem to="/about" onlyMobile={true}>
+                <MoreListItem to="/about" onlyMobile={true} onClick={() => {
+                    window.scroll(0, 0);
+                }}>
                     <FontAwesomeIcon icon={solid("circle-info")} tw={"pr-2"}/>
                     About
                 </MoreListItem>

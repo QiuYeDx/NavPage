@@ -45,16 +45,16 @@ export default function About() {
                         h={"360px"}
                         k={0.5}
                         tw_card={tw`md:col-span-2`}
-                        icon={<FontAwesomeIcon
-                            icon={regular("copy")}
-                            tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
+                        tw_content={tw`tracking-wide`}
+                        icon={<FontAwesomeIcon icon={solid("share-nodes")}
+                            tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />}
                         onClick={() => {
                             clipboard.copy("https://qiuyedx.github.io/NavPage");
                             notify_success("秋夜导航站地址已拷贝到剪贴板", "copy_1");
                         }}
                     >
-                        分享
+                        Share
                     </AppleCard>
 
                     <MainCard
@@ -82,7 +82,7 @@ export default function About() {
                         logo_url={'images/twitter.png'}
                         icon={<FontAwesomeIcon
                             icon={faTwitter}
-                            tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
+                            tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />}
                         onClick={() => {
                             clipboard.copy("https://twitter.com/QiuYeDx");
@@ -105,7 +105,7 @@ export default function About() {
                         tw_subbar={tw``}
                         icon={<FontAwesomeIcon
                             icon={faGithub}
-                            tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
+                            tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />}
                         onClick={() => {
                             clipboard.copy("https://github.com/QiuYeDx");
@@ -128,7 +128,7 @@ export default function About() {
                         tw_subbar={tw``}
                         icon={<FontAwesomeIcon
                             icon={faApple}
-                            tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
+                            tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />}
                         onClick={() => {
                             clipboard.copy("https://apple.com");
@@ -153,7 +153,7 @@ export default function About() {
                         _sub_h4={'秋夜殿下的博客'}
                         icon={<FontAwesomeIcon
                             icon={faWordpress}
-                            tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
+                            tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />}
                         onClick={() => {
                             clipboard.copy("https://qiuyedx.com");
@@ -180,7 +180,7 @@ export default function About() {
                         icon={
                             <FontAwesomeIcon
                                 icon={solid("server")}
-                                tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
+                                tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                             />}
                         onClick={() => {
                             clipboard.copy("https://share.qiuyedx.com");
@@ -201,7 +201,7 @@ export default function About() {
                         tw_subbar={tw``}
                         icon={<FontAwesomeIcon
                             icon={faQq}
-                            tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}
+                            tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />}
                         onClick={() => {
                             clipboard.copy("532024989");
@@ -217,7 +217,7 @@ export default function About() {
             </WrapperMiddle>
             <WrapperBottom>
                 <P color={"rgba(0,0,0,0.7)"}>Made with&nbsp;
-                    <FontAwesomeIcon icon={solid("heart")} color={"red"} flip/>
+                    <FontAwesomeIcon icon={solid("heart")} color={"red"}/>
                     &nbsp;by QiuYeDx</P>
             </WrapperBottom>
         </Wrapper>
