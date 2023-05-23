@@ -9,7 +9,7 @@ export const notify_error = (str, id) => toast.error(
     ),
     {
         id: id || 'bookmark_error',
-        duration: 3000,
+        duration: 4000,
         position: 'bottom-right',
         // position: 'top-center',
 
@@ -41,7 +41,7 @@ export const notify_success = (str, id) => toast.success(
     ),
     {
         id: id || 'bookmark_success',
-        duration: 3000,
+        duration: 4000,
         position: 'bottom-right',
         // position: 'top-center',
 

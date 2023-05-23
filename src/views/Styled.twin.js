@@ -52,7 +52,7 @@ export const WrapperMain = styled.div`
   z-index: 1;
   ${tw`text-gray-700 max-w-screen-xl`}
   ${({ hasBorder }) => hasBorder && tw`border-purple-500`};
-  ${tw`grid grid-cols-5 justify-center text-center`};
+  ${tw`grid grid-cols-4 justify-center text-center`};
 
   transition: all 0.5s ease;
   @media(max-width: ${WIDTH_MIDDLE}px){

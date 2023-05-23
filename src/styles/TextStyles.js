@@ -23,7 +23,7 @@ export const H4 = styled.div`
 `
 
 export const P = styled.div`
-  ${tw`text-gray-900 font-sans text-base align-baseline `}
+  ${tw`text-gray-900 font-mono text-base align-baseline `}
   ${({hasBorder}) => hasBorder && tw`border border-purple-500`}
   ${({hasShadow}) => hasShadow && "text-shadow: 1px 1px 2px rgba(0, 0, 0, 15%);"}
   

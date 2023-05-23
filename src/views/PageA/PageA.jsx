@@ -1,6 +1,7 @@
 import React from 'react';
 import { Wrapper } from "./Styled.twin";
-import {WrapperBottom, WrapperLeft, WrapperMain, WrapperMiddle, WrapperRight, WrapperTop} from "@/views/PageA/Styled.twin";
+import {WrapperLeft, WrapperMain, WrapperMiddle, WrapperRight, WrapperTop} from "@/views/PageA/Styled.twin";
+import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
 import "twin.macro";
 import tw from "twin.macro";
 import MainCard from "@/components/MainCard/MainCard";
@@ -14,8 +15,6 @@ import AppleCard from "@/components/AppleCard/AppleCard";
 import {useClipboard} from "use-clipboard-copy";
 
 export default function PageA(){
-    const clipboard = useClipboard();
-
     const componentCount = 9;
     const components = [];
     for (let i = 0; i < componentCount; i++) {
@@ -81,7 +80,7 @@ export default function PageA(){
                             tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />}
                         onClick={() => {
-                            notify_success("跳转到「在线生成QR码」", "A_4");
+                            notify_success("跳转到「二维码生成器」", "A_4");
                         }}
                     >
 
@@ -92,11 +91,7 @@ export default function PageA(){
 
                 </WrapperRight>
             </WrapperMiddle>
-            <WrapperBottom>
-                <P color={"rgba(0,0,0,0.7)"}>Made with&nbsp;
-                    <FontAwesomeIcon icon={solid("heart")} color={"red"}/>
-                    &nbsp;by QiuYeDx</P>
-            </WrapperBottom>
+            <WrapperBottom/>
         </Wrapper>
     );
 }

@@ -4,9 +4,10 @@ import tw from 'twin.macro'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid, regular} from "@fortawesome/fontawesome-svg-core/import.macro";
 import {
-    WrapperBottom, WrapperLeft, WrapperMain, WrapperMiddle,
+    WrapperLeft, WrapperMain, WrapperMiddle,
     WrapperRight, WrapperTop, Wrapper, SubAvatar
 } from "@/views/About/Styled.twin";
+import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
 import {P} from "@/styles/TextStyles";
 import MainCard from "@/components/MainCard/MainCard"
 import AppleCard from "@/components/AppleCard/AppleCard"
@@ -51,7 +52,7 @@ export default function About() {
                         />}
                         onClick={() => {
                             clipboard.copy("https://qiuyedx.github.io/NavPage");
-                            notify_success("秋夜导航站地址已拷贝到剪贴板", "copy_1");
+                            notify_success("秋夜导航站地址Copied !", "copy_1");
                         }}
                     >
                         Share
@@ -86,7 +87,7 @@ export default function About() {
                         />}
                         onClick={() => {
                             clipboard.copy("https://twitter.com/QiuYeDx");
-                            notify_success("我的twitter地址已拷贝到剪贴板", "copy_2");
+                            notify_success("我的twitter地址Copied !", "copy_2");
                         }}
                     >
                         Twitter
@@ -109,7 +110,7 @@ export default function About() {
                         />}
                         onClick={() => {
                             clipboard.copy("https://github.com/QiuYeDx");
-                            notify_success("我的Github地址已拷贝到剪贴板", "copy_3");
+                            notify_success("我的Github地址Copied !", "copy_3");
                         }}
                     >
                         Github
@@ -132,7 +133,7 @@ export default function About() {
                         />}
                         onClick={() => {
                             clipboard.copy("https://apple.com");
-                            notify_success("Apple官网地址已拷贝到剪贴板", "copy_4");
+                            notify_success("Apple官网地址Copied !", "copy_4");
                         }}
                     >
                         Apple
@@ -157,7 +158,7 @@ export default function About() {
                         />}
                         onClick={() => {
                             clipboard.copy("https://qiuyedx.com");
-                            notify_success("我的Blog地址已拷贝到剪贴板", "copy_5");
+                            notify_success("我的Blog地址Copied !", "copy_5");
                         }}
                     >
                         Blog
@@ -184,7 +185,7 @@ export default function About() {
                             />}
                         onClick={() => {
                             clipboard.copy("https://share.qiuyedx.com");
-                            notify_success("次元空间地址已拷贝到剪贴板", "copy_6");
+                            notify_success("次元空间地址Copied !", "copy_6");
                         }}
                     >
                         次元空间
@@ -205,7 +206,7 @@ export default function About() {
                         />}
                         onClick={() => {
                             clipboard.copy("532024989");
-                            notify_success("我的QQ号码已拷贝到剪贴板", "copy_7");
+                            notify_success("我的QQ号码Copied !", "copy_7");
                         }}
                     >
                         QQ
@@ -215,11 +216,7 @@ export default function About() {
 
                 </WrapperRight>
             </WrapperMiddle>
-            <WrapperBottom>
-                <P color={"rgba(0,0,0,0.7)"}>Made with&nbsp;
-                    <FontAwesomeIcon icon={solid("heart")} color={"red"}/>
-                    &nbsp;by QiuYeDx</P>
-            </WrapperBottom>
+            <WrapperBottom/>
         </Wrapper>
     );
 }

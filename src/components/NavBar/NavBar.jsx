@@ -24,7 +24,7 @@ export default function NavBar(){
             <NavWrapper hasShadow={true}>
                 <LogoWrapper onClick={() => {
                     setIsMoreListShown(false);
-                    notify_error("Not yet completed !", "not_completed");
+                    notify_error("暂未完工", "not_completed1");
                     navigate("/");
                 }} >
                     <Logo/>
@@ -38,19 +38,19 @@ export default function NavBar(){
                         setIsMoreListShown(false);
                 }}>
                     <NavItem to="/" onClick={() => {
-                        notify_error("Not yet completed !", "not_completed");
+                        notify_error("暂未完工", "not_completed2");
                         window.scroll(0, 0);
                     }}>
                         主页
                     </NavItem>
                     <NavItem to="/tools" onClick={() => {
-                        notify_error("Not yet completed !", "not_completed");
+                        notify_error("暂未完工", "not_completed3");
                         window.scroll(0, 0);
                     }}>
                         工具
                     </NavItem>
                     <NavItem to="/resources" onClick={() => {
-                        notify_error("Not yet completed !", "not_completed");
+                        notify_error("暂未完工", "not_completed4");
                         window.scroll(0, 0);
                     }}>
                         资源
