@@ -4,7 +4,7 @@ import {
     Logo, LogoText, MoreList, MoreListItem, BlankWrapper, MoreListMask
 } from './Styled.twin'
 import 'twin.macro'
-import { useNavigate } from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
@@ -13,6 +13,7 @@ import { notify_error } from "@/hooks/toasts";
 
 export default function NavBar(){
     const navigate = useNavigate();
+    const location = useLocation();
     const [isMoreListShown, setIsMoreListShown] = useState(false);
 
     return (
@@ -39,24 +40,48 @@ export default function NavBar(){
                 }}>
                     <NavItem to="/" onClick={() => {
                         notify_error("暂未完工", "not_completed2");
-                        window.scroll(0, 0);
+                        if(location.pathname === '/')
+                            window.scrollTo({
+                                top: 0,
+                                behavior: "smooth",
+                            });
+                        else
+                            window.scroll(0, 0);
                     }}>
                         主页
                     </NavItem>
                     <NavItem to="/tools" onClick={() => {
                         notify_error("暂未完工", "not_completed3");
-                        window.scroll(0, 0);
+                        if(location.pathname === '/tools')
+                            window.scrollTo({
+                                top: 0,
+                                behavior: "smooth",
+                            });
+                        else
+                            window.scroll(0, 0);
                     }}>
                         工具
                     </NavItem>
                     <NavItem to="/resources" onClick={() => {
                         notify_error("暂未完工", "not_completed4");
-                        window.scroll(0, 0);
+                        if(location.pathname === '/resources')
+                            window.scrollTo({
+                                top: 0,
+                                behavior: "smooth",
+                            });
+                        else
+                            window.scroll(0, 0);
                     }}>
                         资源
                     </NavItem>
                     <NavItem to="/about" notMobile={true} onClick={() => {
-                        window.scroll(0, 0);
+                        if(location.pathname === '/about')
+                            window.scrollTo({
+                                top: 0,
+                                behavior: "smooth",
+                            });
+                        else
+                            window.scroll(0, 0);
                     }}>
                         关于
                     </NavItem>
@@ -74,7 +99,13 @@ export default function NavBar(){
             </NavWrapper>
             <MoreList isShown={isMoreListShown} onClick={() => setIsMoreListShown(!isMoreListShown)}>
                 <MoreListItem to="/about" onlyMobile={true} onClick={() => {
-                    window.scroll(0, 0);
+                    if(location.pathname === '/about')
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth",
+                        });
+                    else
+                        window.scroll(0, 0);
                 }}>
                     <FontAwesomeIcon icon={solid("circle-info")} tw={"pr-2"}/>
                     About

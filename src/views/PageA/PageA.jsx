@@ -19,6 +19,7 @@ export default function PageA(){
     const components = [];
     for (let i = 0; i < componentCount; i++) {
         components.push(<AppleCard
+            key={i}
             theme={'white'}
             hasMask
             k={0.5}

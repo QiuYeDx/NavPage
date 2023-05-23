@@ -20,6 +20,7 @@ export default function Home(){
     const components = [];
     for (let i = 0; i < componentCount; i++) {
         components.push(<AppleCard
+            key={i}
             theme={'gradient_blue'}
             h={"360px"}
             k={0.5}

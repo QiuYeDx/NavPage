@@ -25,6 +25,7 @@ import PropTypes from 'prop-types';
  * - k属性用于控制背景视差效果的幅度（运动范围）；
  * - theme属性用于设置卡片的主题，支持多种颜色；
  * - logo_url属性用于设置Logo的URL；
+ * - goto属性用于设置按钮跳转的URL；
  * - icon属性用于设置卡片内的图标；
  * - topTextA属性用于设置卡片左上角第一行小字标题；
  * - topTextB属性用于设置卡片左上角第二行大字标题；
@@ -50,7 +51,7 @@ import PropTypes from 'prop-types';
  * icon={<FontAwesomeIcon icon={regular("copy")} tw={"w-48 h-48 scale-110 group-hover:scale-90 duration-500 ease-out"}/>}
  * ```
  *
- * @param props {theme, h: string, icon: JSX.Element, topTextA, topTextB, subTextA, hasMask: boolean, hasSubBar: boolean, k: number, logo_url, tw_card , tw_background, tw_content, tw_subbar, tw_topTextA, tw_topTextB, tw_subButton, tw_subTextA, _sub_h3, _sub_h4, onClick}
+ * @param props {theme, h: string, icon: JSX.Element, topTextA, topTextB, subTextA, hasMask: boolean, hasSubBar: boolean, k: number, logo_url: string, goto: string, tw_card, tw_background, tw_content, tw_subbar, tw_topTextA, tw_topTextB, tw_subButton, tw_subTextA, _sub_h3, _sub_h4, onClick}
  * @returns {JSX.Element}
  * @constructor
  */
@@ -194,7 +195,7 @@ export default function AppleCard(props) {
 AppleCard.propTypes = {
     h: PropTypes.string,
     k: PropTypes.number,
-    theme: PropTypes.oneOf(['white', 'black', 'green', 'purple']),
+    theme: PropTypes.oneOf(['white', 'black', 'green', 'purple', 'gradient_blue']),
     logo_url: PropTypes.string,
     goto: PropTypes.string,
     icon: PropTypes.element,
