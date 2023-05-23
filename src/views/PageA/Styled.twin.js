@@ -14,6 +14,8 @@ export const Wrapper = styled.div`
   //right: 0;
   //margin: auto;
 
+  min-height: calc(100vh - 60px);
+  
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -48,6 +50,7 @@ export const WrapperMain = styled.div`
   //background-color: blue;
   display: flex;
   flex-direction: column;
+  //min-width: 340px;
   flex-grow: 5;
   z-index: 1;
   ${tw`text-gray-700 max-w-screen-xl`}
@@ -59,17 +62,8 @@ export const WrapperMain = styled.div`
     flex-grow: 12;
   }
   @media(max-width: ${WIDTH_MOBILE}px){
-    flex-grow: 20; // 控制移动端宽度
+    flex-grow: 18; // 控制移动端宽度
   }
-`
-
-export const WrapperBottom = styled.div`
-  //height: 80px;
-  //background-color: #bfc;
-  ${tw`p-4 font-sans`}
-  ${({ hasBorder }) => hasBorder && tw`border-purple-500`}
-
-  text-align: center;
 `
 
 export const WrapperLeft = styled.div`

@@ -26,7 +26,15 @@ export default function NavBar(){
                 <LogoWrapper onClick={() => {
                     setIsMoreListShown(false);
                     notify_error("暂未完工", "not_completed1");
-                    navigate("/");
+                    if(location.pathname === '/')
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth",
+                        });
+                    else{
+                        navigate("/");
+                        window.scroll(0, 0);
+                    }
                 }} >
                     <Logo/>
                     <LogoText tw={"cursor-pointer select-none"}>

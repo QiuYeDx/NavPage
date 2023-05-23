@@ -32,7 +32,7 @@ export default function About() {
                 </WrapperLeft>
                 <WrapperMain>
                     <MainCard
-                        _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50 block md:hidden`}
+                        _tw={tw`bg-blue-400 col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50 block md:hidden`}
                         h={"80px"}>
                         <div tw={"text-2xl text-white font-bold font-sans mt-4"}>
                             关 于

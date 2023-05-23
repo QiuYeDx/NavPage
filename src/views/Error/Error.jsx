@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { H1, P } from "@/styles/TextStyles"
 
-export default function PageA(){
+export default function Error(){
 
     return (
         <Wrapper>
