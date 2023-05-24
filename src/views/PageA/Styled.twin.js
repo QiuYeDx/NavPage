@@ -68,7 +68,7 @@ export const WrapperMain = styled.div`
 
 export const WrapperLeft = styled.div`
   flex-grow: 2;
-
+  min-width: 10px;
   //width: 15%;
   color: black;
   //background-color: #61dafb;
@@ -81,7 +81,7 @@ export const WrapperLeft = styled.div`
 
 export const WrapperRight = styled.div`
   flex-grow: 2;
-
+  min-width: 10px;
   //width: 15%;
   color: black;
   //background-color: #fbc561;

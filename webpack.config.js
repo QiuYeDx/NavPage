@@ -41,7 +41,7 @@ module.exports = {
                     {
                         loader: 'url-loader', // file-loader
                         options: {
-                            limit: 10, // 图片大小限制，超过此大小将被打包成文件
+                            limit: 1, // 图片大小限制，超过此大小将被打包成文件
                             name: '[name].[ext]', // 重命名输出的文件名
                             outputPath: 'images/', // 输出路径
                         },

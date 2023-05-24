@@ -1,27 +1,47 @@
 import tw, { styled } from 'twin.macro'
+import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
+import {CardWrapper} from "@/components/MainCard/Styled.twin";
 
 export const Wrapper = styled.div`
-  grid-column: span 4 / span 4;
+  margin: 0 auto 0 auto;
+  max-width: 1000px;
+  //grid-column: span 4 / span 4;
   
   display: flex;
   flex-direction: column;
   
   padding: 0 5px 0 5px;
-  
-`
-
-export const BackButton = styled.div`
-  margin: 0 auto 0 auto;
-  height: 50px;
-  max-width: 500px;
-  line-height: 50px;
-  transition: all 0.2s ease;
-  font-size: 20px;
-  ${tw`shadow-lg rounded-full active:shadow-md md:active:shadow-md md:hover:shadow-xl animate-fade_in_up.4 \
-  bg-white font-sans font-semibold text-gray-700 md:hover:text-gray-400 active:text-gray-400 md:active:text-gray-500 text-center align-middle select-none cursor-pointer`};
-  
+    
 `
 
 export const ButtonWrapper = styled.div`
-  margin-bottom: 15px;
+`
+
+export const HeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+export const ContentWrapper = styled(CardWrapper)`
+  margin: 20px 0 0 0;
+  padding: 20px 12px;
+  
+  background-color: white;
+  
+  text-align: center;
+  
+  gap: 10px;
+`
+
+export const LineWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  
+  min-width: 50%;
+  // 设定了min-width后 需要这样 以使flex项目在交叉轴方向居中
+  &>*{
+    margin-left: auto;
+    margin-right: auto;
+  }
 `

@@ -1,7 +1,22 @@
 import tw, { styled } from 'twin.macro'
+import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
 
 export const H1 = styled.div`
   ${tw`text-gray-900 font-sans text-5xl align-baseline font-bold`}
+  ${({hasShadow}) => hasShadow && "text-shadow: 1px 1px 4px rgba(0, 0, 0, 15%);"}
+  
+  color: ${({color}) => color || ""};
+  
+`
+
+export const H2 = styled.div`
+  font-size: 48px;
+  line-height: 50px;
+  @media(max-width: ${WIDTH_MOBILE}px){
+    font-size: 40px;
+    line-height: 50px;
+  }
+  ${tw`text-gray-900 font-sans align-middle font-bold animate-fade_in_up.4`}
   ${({hasShadow}) => hasShadow && "text-shadow: 1px 1px 4px rgba(0, 0, 0, 15%);"}
   
   color: ${({color}) => color || ""};
@@ -31,3 +46,16 @@ export const P = styled.div`
   
 `
 
+export const InLineTitle = styled.div`
+  font-size: 34px;
+  line-height: 36px;
+  @media(max-width: ${WIDTH_MOBILE}px){
+    font-size: 28px;
+    line-height: 36px;
+  }
+  ${tw`text-gray-700 font-sans align-middle font-bold animate-fade_in_up.4`}
+  ${({hasShadow}) => hasShadow && "text-shadow: 1px 1px 4px rgba(0, 0, 0, 15%);"}
+  
+  color: ${({color}) => color || ""};
+  
+`
