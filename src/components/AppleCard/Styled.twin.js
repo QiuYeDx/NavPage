@@ -41,7 +41,7 @@ export const BackgroundWrapper = styled.div.attrs(props => ({
   left: 0;
   right: 0;
   margin: auto;
-  transition: all .5s ease-out, transform 0s;
+  transition: all .35s ease, transform 0s;
   ${props => props.tw};
   ${({_hover}) => _hover};
   ${({_active}) => _active};

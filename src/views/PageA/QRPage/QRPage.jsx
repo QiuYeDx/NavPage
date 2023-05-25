@@ -91,7 +91,7 @@ export default function QRPage() {
 
                     <LineWrapper>
                         <TextInputLine
-                            placeholder={'输入纯文本、URL etc.'} maxLength={256} value={text}
+                            placeholder={'输入纯文本、URL etc.'} maxLength={2000} value={text}
                             onChange={handleChange}
                             invalid={invalid}
                         />

@@ -101,7 +101,7 @@ export default function About() {
                         subTextA={"灵感碰撞"}
                         hasMask
                         tw_card={tw`md:col-span-2`}
-                        tw_content={tw`tracking-wide`}
+                        tw_content={tw`tracking-widest md:tracking-wider text-7xl md:text-8xl`}
                         tw_background={tw``}
                         tw_subbar={tw``}
                         icon={<FontAwesomeIcon

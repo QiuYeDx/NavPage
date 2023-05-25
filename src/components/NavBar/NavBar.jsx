@@ -59,7 +59,7 @@ export default function NavBar(){
                         主页
                     </NavItem>
                     <NavItem to="/tools" onClick={() => {
-                        notify_error("暂未完工", "not_completed3");
+                        // notify_error("暂未完工", "not_completed3");
                         if(location.pathname === '/tools')
                             window.scrollTo({
                                 top: 0,

@@ -34,3 +34,8 @@ export const getScrollHeight = () => {
 }
 
 export const randomNum = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+export const isURL = (str) => {
+    const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+    return urlRegex.test(str);
+};

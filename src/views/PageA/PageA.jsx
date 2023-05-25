@@ -7,19 +7,21 @@ import tw from "twin.macro";
 import MainCard from "@/components/MainCard/MainCard";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
+import {faBilibili} from '@fortawesome/free-brands-svg-icons'
 import {notify_error, notify_success} from "@/hooks/toasts";
 import AppleCard from "@/components/AppleCard/AppleCard";
 import {useClipboard} from "use-clipboard-copy";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import QRPage from './QRPage/QRPage';
 import Error from "@/views/Error/Error";
+import BilibiliPage from "@/views/PageA/BilibiliPage/BilibiliPage";
 
 export default function PageA(){
     const navigate = useNavigate();
     const location = useLocation();
     const params = useParams();
 
-    const componentCount = 9;
+    const componentCount = 1;
     const components = [];
     for (let i = 0; i < componentCount; i++) {
         components.push(<AppleCard
@@ -51,6 +53,25 @@ export default function PageA(){
                 </div>
             </MainCard>
             <AppleCard
+                theme={'pink'}
+                k={0.5}
+                topTextA={"在线工具"}
+                topTextB={"bilibili视频解析"}
+                subTextA={"封面 | 视频 下载"}
+                tw_card={tw`col-span-4`}
+                tw_content={tw`tracking-wide`}
+                tw_background={tw``}
+                tw_subbar={tw``}
+                icon={<FontAwesomeIcon icon={faBilibili}
+                                       tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
+                />}
+                onClick={() => {
+                    navigate("/tools/bilibili");
+                    window.scroll(0, 0);
+                }}
+            >
+            </AppleCard>
+            <AppleCard
                 theme={'black'}
                 k={0.5}
                 topTextA={"在线工具"}
@@ -76,7 +97,8 @@ export default function PageA(){
 
     const ToolView = (toolId) => {
         const toolIds = {
-            'QRPage': <QRPage/>
+            'QRPage': <QRPage/>,
+            'bilibili': <BilibiliPage/>
         }
         if(!toolIds[toolId])
             notify_error("未找到该工具！", "error_notFindToolPage");

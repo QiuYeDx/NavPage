@@ -176,6 +176,40 @@ export const styles = {
                 `,
         styleSubTextA: tw`text-white text-base font-sans font-bold text-left`,
     },
+    pink: {
+        styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
+                bg-pink-400 active:bg-pink-200 md:hover:bg-pink-300 md:active:bg-pink-200 \    // 适配移动端触摸逻辑
+                duration-500 ease-out \ 
+                cursor-pointer select-none`,
+        styleBackground: tw`text-pink-200`,
+        styleContent: tw`tracking-widest text-8xl text-white font-bold \
+                    duration-500 ease-out`,
+
+        // Text适配移动端触摸逻辑
+        hoverContent: `:hover &{ \
+        @media(min-width: ${WIDTH_MOBILE}px){scale: 1.1;}   \
+        }`,
+        activeContent: `:active &{ \
+        scale: 1.1;
+        @media(min-width: ${WIDTH_MOBILE}px){scale: 1.05;}   \
+        }`,
+
+        // SVG适配移动端触摸逻辑
+        hoverBackground: `:hover &{ \
+        @media(min-width: ${WIDTH_MOBILE}px){color: rgba(244, 114, 182, 1);}   \
+        }`,
+        activeBackground: `:active &{ \
+        color: rgba(249, 168, 212, 1);  \
+        }`,
+
+        styleSubBar: tw`text-gray-700 text-xl font-sans bg-white`,
+        styleTopTextA: tw`text-white text-base font-sans font-bold text-left`,
+        styleTopTextB: tw`text-white text-2xl font-sans font-bold text-left`,
+        styleSubButton: tw`rounded-2xl bg-pink-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider \
+                ring-pink-200 ring-0 hover:ring-4 hover:scale-105 active:bg-pink-600 active:ring-pink-400 duration-100 ease-out
+                `,
+        styleSubTextA: tw`text-white text-base font-sans font-bold text-left`,
+    },
     gradient_blue:{
         styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
                 bg-gradient-to-r to-sky-400 from-blue-500 \

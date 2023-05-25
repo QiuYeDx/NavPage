@@ -1,0 +1,33 @@
+{
+  "code": 1,
+  "msg": "数据返回成功！",
+  "data": {
+    "title": "樊雪音-国战♡peace！あなたは可愛の犬ちゃnです♡~",
+    "desc": "使劲蒸！\n梵雪音 ci-en限",
+    "cover": "http://i2.hdslb.com/bfs/archive/f2e898fabbaf111af539e2c26def996d31625f1e.jpg",
+    "list": [
+      {
+        "title": "樊雪音-♡peace！あなたは可愛の犬です♡~",
+        "duration": 11029,
+        "durationFormat": "03:03:49",
+        "width": 1920,
+        "height": 1080,
+        "accept": [
+          "720P 高清"
+        ],
+        "url": "https://cn-sccd-ct-01-22.bilivideo.com/upgcxcode/02/64/1127736402/1127736402-1-208.mp4?e=ig8euxZM2rNcNbRg7WdVhwdlhWNBhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1685033628&gen=playurlv2&os=bcache&oi=837344524&trid=00002302bbb893cc4b8eb45a62cf4b799343T&mid=77359217&platform=html5&upsig=48ec9f6dab3d2a0613627970549aed34&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform&cdnid=62622&bvc=vod&nettype=0&bw=125183&orderid=0,1&buvid=&build=0&mobi_app=&logo=80000000"
+      },
+      {
+        "title": "防处男",
+        "duration": 10,
+        "durationFormat": "00:00:10",
+        "width": 1080,
+        "height": 1080,
+        "accept": [
+          "720P 高清"
+        ],
+        "url": "https://cn-ahwh-ct-01-06.bilivideo.com/upgcxcode/71/63/1129956371/1129956371-1-208.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1685033628&gen=playurlv2&os=bcache&oi=837344524&trid=0000d4a0512d7fb546f9bc1c8ce3a57825ebT&mid=77359217&platform=html5&upsig=24738ed633862fb621af444f804d915c&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform&cdnid=63406&bvc=vod&nettype=0&bw=92406&orderid=0,1&buvid=&build=0&mobi_app=&logo=80000000"
+      }
+    ]
+  }
+}

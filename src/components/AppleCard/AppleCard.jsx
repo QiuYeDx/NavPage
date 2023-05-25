@@ -41,7 +41,7 @@ import PropTypes from 'prop-types';
  *
  * + k ∈ (0, 1) 负责控制背景视察效果的幅度（运动范围）
  *
- * + theme ∈ [default, black, white, green, yellow, red, pink, purple, gradient_blue]
+ * + theme ∈ [default, black, white, green, yellow, red, pink, purple, pink, gradient_blue]
  *
  * + logo_url示例: `logo_url={"images/QiuYeDx.png"}` css里需要怎么写这里就怎么写（待优化）
  *
@@ -95,10 +95,10 @@ export default function AppleCard(props) {
             }
         }
     }
-    const [style, setStyle] = useState(styles['default']);
-    // const style = ((props.theme && styles[props.theme]) ? styles[props.theme] : styles['default']);
+    // const [style, setStyle] = useState(styles['default']);
+    const style = ((props.theme && styles[props.theme]) ? styles[props.theme] : styles['default']);
     useEffect(() => {
-        setStyle((props.theme && styles[props.theme]) ? styles[props.theme] : styles['default']);
+        // setStyle((props.theme && styles[props.theme]) ? styles[props.theme] : styles['default']);
         updateMatrix();
         window.addEventListener("scroll", updateMatrix, true);
         // window.addEventListener("scroll", throttle(updateMatrix, 8), true);
@@ -195,7 +195,7 @@ export default function AppleCard(props) {
 AppleCard.propTypes = {
     h: PropTypes.string,
     k: PropTypes.number,
-    theme: PropTypes.oneOf(['white', 'black', 'green', 'purple', 'gradient_blue']),
+    theme: PropTypes.oneOf(['white', 'black', 'green', 'purple', 'pink', 'gradient_blue']),
     logo_url: PropTypes.string,
     goto: PropTypes.string,
     icon: PropTypes.element,

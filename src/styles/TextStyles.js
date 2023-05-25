@@ -47,13 +47,13 @@ export const P = styled.div`
 `
 
 export const InLineTitle = styled.div`
-  font-size: 34px;
-  line-height: 36px;
+  font-size: ${(props) => props.fontSize ? props.fontSize + 'px' : '34px'};
+  line-height: ${(props) => props.lineHeight ? props.lineHeight + 'px' : '36px'};
   @media(max-width: ${WIDTH_MOBILE}px){
-    font-size: 28px;
-    line-height: 36px;
+    font-size: ${(props) => props.fontSize ? props.fontSize - 6 + 'px' : '28px'};
+    line-height: ${(props) => props.lineHeight ? props.lineHeight + 'px' : '36px'};
   }
-  ${tw`text-gray-700 font-sans align-middle font-bold animate-fade_in_up.4`}
+  ${tw`text-gray-700 font-sans align-middle font-bold animate-fade_in_up.4 select-none duration-100`}
   ${({hasShadow}) => hasShadow && "text-shadow: 1px 1px 4px rgba(0, 0, 0, 15%);"}
   
   color: ${({color}) => color || ""};
