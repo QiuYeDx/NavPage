@@ -66,6 +66,7 @@ export default function PageA(){
                 />}
                 onClick={() => {
                     navigate("/tools/QRPage");
+                    window.scroll(0, 0);
                 }}
             >
             </AppleCard>

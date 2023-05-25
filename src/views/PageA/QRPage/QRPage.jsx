@@ -75,7 +75,10 @@ export default function QRPage() {
             <Wrapper>
                 <HeaderWrapper>
                     <ButtonWrapper>
-                        <BackButton onClick={() => navigate(-1)}>
+                        <BackButton onClick={() => {
+                            navigate('/tools');
+                            window.scroll(0, 0);
+                        }}>
                             <FontAwesomeIcon icon={solid("arrow-left")} tw={'md:pr-4 align-middle relative -top-px'}/>
                         </BackButton>
                     </ButtonWrapper>
