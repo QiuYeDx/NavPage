@@ -76,7 +76,10 @@ export default function BilibiliPage() {
             .catch(error => {
                 setList(null);
                 notify_error('解析失败，请检查URL或重试 !', 'resolving_error');
-                console.error('Error resolving video URL:', error);
+                setFinished(false);
+                setInvalid(true);
+                setData(null);
+                // console.error('Error resolving video URL:', error);
             })
             .finally(() => {
                 setLoading(false);
@@ -193,8 +196,8 @@ export default function BilibiliPage() {
                             <FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>
                         </InLineTitle>
                     </LineWrapper>
-                    <LineWrapper>
-                        <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-xl'} onClick={() => {
+                    <LineWrapper tw={'mt-4'}>
+                        <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-xl md:mr-6'} onClick={() => {
                             clipboard.copy(data ? data.cover : '');
                             notify_success('封面URL Copied !', 'cover_url_copy');
                         }}>
@@ -205,7 +208,7 @@ export default function BilibiliPage() {
                                     <>拷贝封面URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
                             }
                         </MButton>
-                        <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-xl'} onClick={handleDownloadPic}>
+                        <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-xl md:ml-6'} onClick={handleDownloadPic}>
                             {
                                 !finished ?
                                     <>暂无解析<FontAwesomeIcon icon={solid("image")} flip tw={'ml-1'}/></>
