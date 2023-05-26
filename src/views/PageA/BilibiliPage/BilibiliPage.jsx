@@ -21,6 +21,7 @@ import {useClipboard} from "use-clipboard-copy";
 import {isURL} from "@/utils/utils";
 
 export default function BilibiliPage() {
+    const default_cover = 'images/image-blue-300.png';
     const clipboard = useClipboard();
     const navigate = useNavigate();
     const a_ref = useRef(null);
@@ -31,6 +32,7 @@ export default function BilibiliPage() {
     const [loading, setLoading] = useState(false);
     const [finished, setFinished] = useState(false);
     const [invalid, setInvalid] = useState(false);
+    const [cover, setCover] = useState(default_cover);
     const handleChange = (event) => {
         setText(event.target.value);
         setInvalid(false);
@@ -64,10 +66,14 @@ export default function BilibiliPage() {
 
         axios.get(url, {params})
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 setData(response.data.data);
                 setList(response.data.data.list);
                 setFinished(true);
+                fetch(response.data.data.cover)
+                    .then((res) => res.blob()
+                        .then((blob) => setCover(URL.createObjectURL(blob))
+                ));
                 notify_success('解析成功 !', 'resolving_success');
                 setTimeout(() => {
                     scroll_ref.current.scrollIntoView({ behavior: 'smooth' });
@@ -78,6 +84,7 @@ export default function BilibiliPage() {
                 notify_error('解析失败，请检查URL或重试 !', 'resolving_error');
                 setFinished(false);
                 setInvalid(true);
+                setCover(default_cover);
                 setData(null);
                 // console.error('Error resolving video URL:', error);
             })
@@ -149,6 +156,9 @@ export default function BilibiliPage() {
                     <Gap/>
                     <LineWrapper>
                         <InLineTitle>3.获取结果</InLineTitle>
+                    </LineWrapper>
+                    <LineWrapper>
+                        <PictureDisplay height={150} width={256} src={cover}/>
                     </LineWrapper>
                     <LineWrapper>
                         <InLineTitle fontSize={28} lineHeight={40} tw={'text-gray-600 font-light -mr-2 -ml-2'}>
