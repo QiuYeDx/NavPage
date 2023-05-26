@@ -44,6 +44,39 @@ export default function BilibiliPage() {
         a.href = data.cover;
         a.click();
     };
+
+    async function fetchData(url, params) {
+        try {
+            const response = await axios.get(url, {params});
+            setData(response.data.data);
+            setList(response.data.data.list);
+            setFinished(true);
+
+            const coverResponse = await axios.get(response.data.data.cover, {
+                responseType: 'blob',
+            });
+            const blob = coverResponse.data;
+            setCover(URL.createObjectURL(blob));
+
+            notify_success('解析成功 !', 'resolving_success');
+
+            setTimeout(() => {
+                scroll_ref.current.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        } catch (error) {
+            setList(null);
+            notify_error('解析失败，请检查URL或重试 !', 'resolving_error');
+            setFinished(false);
+            setInvalid(true);
+            setCover(default_cover);
+            setData(null);
+            // console.error('Error resolving video URL:', error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+
     const handleSubmit = (event) => {
         if(!text){
             setInvalid(true);
@@ -64,33 +97,8 @@ export default function BilibiliPage() {
             app_secret: 'bWF3clZ2RENRMmx3aG95dVVaU1NKQT09',
         };
 
-        axios.get(url, {params})
-            .then(response => {
-                // console.log(response.data);
-                setData(response.data.data);
-                setList(response.data.data.list);
-                setFinished(true);
-                fetch(response.data.data.cover)
-                    .then((res) => res.blob()
-                        .then((blob) => setCover(URL.createObjectURL(blob))
-                ));
-                notify_success('解析成功 !', 'resolving_success');
-                setTimeout(() => {
-                    scroll_ref.current.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
-            })
-            .catch(error => {
-                setList(null);
-                notify_error('解析失败，请检查URL或重试 !', 'resolving_error');
-                setFinished(false);
-                setInvalid(true);
-                setCover(default_cover);
-                setData(null);
-                // console.error('Error resolving video URL:', error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+        fetchData(url, params).then(r => console.log(r)).catch(e => console.log(e));
+
     };
 
     const showAllAns = () => {
