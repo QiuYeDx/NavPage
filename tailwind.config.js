@@ -9,6 +9,9 @@ module.exports = {
             'card': '260px'
         },
         extend: {
+            lineHeight: {
+                '12': '3rem',
+            },
             colors: {
                 electric: '#db00ff',
                 ribbon: '#0047ff',

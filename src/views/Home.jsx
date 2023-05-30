@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-    Wrapper, WrapperMiddle , WrapperLeft,
+    WrapperMiddle , WrapperLeft,
     WrapperRight, WrapperTop,
     WrapperMain
 } from './Styled.twin';
+import {Wrapper} from "@/modules/Wrapper/Wrapper";
 import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
 import MainCard from "@/components/MainCard/MainCard";
 import 'twin.macro';

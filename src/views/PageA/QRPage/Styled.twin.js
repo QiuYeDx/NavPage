@@ -37,10 +37,10 @@ export const ContentWrapper = styled(CardWrapper)`
 export const LineWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   gap: 18px;
-  
-  min-width: 50%;
+  flex-grow: 1;
+  min-width: 60%;
   // 设定了min-width后 需要这样 以使flex项目在交叉轴方向居中
   &>*{
     margin-left: auto;

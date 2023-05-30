@@ -16,7 +16,7 @@ export default function WrapperBottom() {
             <P color={"rgba(0,0,0,0.5)"}>Made with&nbsp;
                 <FontAwesomeIcon icon={solid("heart")} color={"red"}/>
                 &nbsp;by <a href={'https://qiuyedx.com/me'}
-                            tw={'text-blue-500 font-bold underline decoration-wavy decoration-pink-500'}>QiuYeDx</a></P>
+                            tw={'text-blue-500 font-bold'}>QiuYeDx</a></P>
         </WrapperBottomStyle>
     );
 }

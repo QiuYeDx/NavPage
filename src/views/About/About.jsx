@@ -5,7 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid, regular} from "@fortawesome/fontawesome-svg-core/import.macro";
 import {
     WrapperLeft, WrapperMain, WrapperMiddle,
-    WrapperRight, WrapperTop, Wrapper, SubAvatar
+    WrapperRight, WrapperTop, SubAvatar
 } from "@/views/About/Styled.twin";
 import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
 import {P} from "@/styles/TextStyles";
@@ -16,6 +16,7 @@ import {notify_success} from "@/hooks/toasts";
 import {useClipboard} from 'use-clipboard-copy';
 import { faApple, faGithub, faTwitter, faWordpress, faGoogle, faQq } from '@fortawesome/free-brands-svg-icons'
 import MyProfileCard from "@/modules/MyProfileCard/MyProfileCard";
+import {Wrapper} from "@/modules/Wrapper/Wrapper";
 
 
 export default function About() {

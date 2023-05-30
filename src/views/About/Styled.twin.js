@@ -3,27 +3,6 @@ import {AvatarWrapper} from "@/components/Avatar/Styled.twin";
 import {BaseButton} from "@/components/Button/Styled.twin";
 import {WIDTH_MIDDLE, WIDTH_MOBILE} from "@/styles/GlobalConfig";
 
-export const Wrapper = styled.div`
-  color: black;
-  //background-color: rgb(249, 249, 249);
-
-  //position: absolute;
-  //top: 60px;
-  //bottom: 0;
-  //left: 0;
-  //right: 0;
-  //margin: auto;
-
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  
-  z-index: 1;
-  background-image: url(images/mora.png);
-  background-size: cover;
-  ${({hasBorder}) => hasBorder && tw`border border-purple-500`}
-`
-
 export const WrapperTop = styled.div`
   color: black;
   height: 80px;

@@ -15,8 +15,8 @@ export const Wrapper = styled.div`
   
   z-index: 100;
 
-  background-image: url(images/mora.png);
   background-size: cover;
+  background: linear-gradient(-45deg, #ebf3fe, #f2eeff, #fbf6f7, #ebf3fe);
 `
 
 export const ErrorWrapper = styled.div`

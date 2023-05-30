@@ -1,6 +1,6 @@
 import React from 'react';
-import { Wrapper } from "./Styled.twin";
 import {WrapperLeft, WrapperMain, WrapperMiddle, WrapperRight, WrapperTop} from "@/views/PageA/Styled.twin";
+import {Wrapper} from "@/modules/Wrapper/Wrapper";
 import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
 import "twin.macro";
 import tw from "twin.macro";
