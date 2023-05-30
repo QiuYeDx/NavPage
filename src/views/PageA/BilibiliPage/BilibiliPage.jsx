@@ -18,7 +18,6 @@ import {BackButton, MButton} from "@/components/Button/Styled.twin";
 import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
 import axios from 'axios';
 import {useClipboard} from "use-clipboard-copy";
-import {isURL} from "@/utils/utils";
 import { Tooltip } from 'react-tooltip';
 import MyContext from './MyContext';
 import Pagination from "./Pagination";
@@ -81,15 +80,6 @@ export default function BilibiliPage() {
 
 
     const handleSubmit = (event) => {
-        // if(!text){
-        //     setInvalid(true);
-        //     notify_error('请输入有效的URL', 'input_error');
-        //     return;
-        // }else if(!isURL(text)){
-        //     setInvalid(true);
-        //     notify_error('请输入有效的URL', 'input_error_2');
-        //     return;
-        // }
         let valid_url = null;
         if(!text){
             setInvalid(true);
@@ -113,8 +103,6 @@ export default function BilibiliPage() {
             app_id: 'jyninllnnkfkllpv',
             app_secret: 'bWF3clZ2RENRMmx3aG95dVVaU1NKQT09',
         };
-
-        // fetchData(url, params).then(r => console.log(r)).catch(e => console.log(e));
         fetchData(url, params).then(r => r).catch(e => e);
 
     };

@@ -36,11 +36,6 @@ const Pagination = ({data}) => {
         return data.slice(startIndex, endIndex);
     };
 
-    // 处理页码点击事件
-    const handlePageClick = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
-
     // 生成页码列表
     const renderPageNumbers = () => {
         const pageNumbers = [];
