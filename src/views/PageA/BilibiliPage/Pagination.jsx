@@ -44,7 +44,7 @@ const Pagination = ({data}) => {
     // 生成页码列表
     const renderPageNumbers = () => {
         const pageNumbers = [];
-        if (totalPages < 3) {
+        if (totalPages <= 3) {
             for (let i = 1; i <= totalPages; i++) {
                 pageNumbers.push(
                     <PageButton key={i} active={currentPage === i}
