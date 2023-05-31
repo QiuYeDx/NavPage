@@ -14,9 +14,10 @@ import AppleCard from "@/components/AppleCard/AppleCard"
 import {Toaster} from 'react-hot-toast';
 import {notify_success} from "@/hooks/toasts";
 import {useClipboard} from 'use-clipboard-copy';
-import { faApple, faGithub, faTwitter, faWordpress, faGoogle, faQq } from '@fortawesome/free-brands-svg-icons'
+import {faApple, faGithub, faTwitter, faWordpress, faGoogle, faQq} from '@fortawesome/free-brands-svg-icons'
 import MyProfileCard from "@/modules/MyProfileCard/MyProfileCard";
 import {Wrapper} from "@/modules/Wrapper/Wrapper";
+import FadeInOnViewport from "@/components/FadeInOnViewport/FadeInOnViewport";
 
 
 export default function About() {
@@ -49,7 +50,7 @@ export default function About() {
                         tw_card={tw`md:col-span-2`}
                         tw_content={tw`tracking-wide`}
                         icon={<FontAwesomeIcon icon={solid("share-nodes")}
-                            tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
+                                               tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />}
                         onClick={() => {
                             clipboard.copy("https://qiuyedx.github.io/NavPage");
@@ -68,7 +69,6 @@ export default function About() {
                     </MainCard>
 
                     <MyProfileCard notMobile/>
-
                     <AppleCard
                         k={0.5}
                         hasSubBar
@@ -212,6 +212,7 @@ export default function About() {
                     >
                         QQ
                     </AppleCard>
+
                 </WrapperMain>
                 <WrapperRight>
 

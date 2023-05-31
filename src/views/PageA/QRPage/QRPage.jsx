@@ -20,7 +20,8 @@ import axios from 'axios';
 
 export default function QRPage() {
     const navigate = useNavigate();
-    const a_ref = useRef();
+    const a_ref = useRef(null);
+    const button_ref = useRef(null);
     const [text, setText] = useState('');
     const [data, setData] = useState('images/qrcode-solid-md.png');
     const [loading, setLoading] = useState(false);
@@ -38,6 +39,14 @@ export default function QRPage() {
         a.download = "qrcode.png";
         a.click();
     };
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            button_ref.current.click();
+            button_ref.current.focus();
+        }
+    }
+
     const handleSubmit = (event) => {
         if(!text){
             setInvalid(true);
@@ -86,23 +95,20 @@ export default function QRPage() {
                 </HeaderWrapper>
                 <ContentWrapper>
                     <LineWrapper>
-                        <InLineTitle tw={'after:content-[\'*\'] after:ml-0.5 after:text-red-500'}>1.输入内容</InLineTitle>
+                        <InLineTitle tw={'after:content-[\'*\'] after:ml-0.5 after:text-red-500 mb-2'}>输入内容</InLineTitle>
                     </LineWrapper>
 
                     <LineWrapper>
                         <TextInputLine
                             placeholder={'输入纯文本、URL etc.'} maxLength={2000} value={text}
                             onChange={handleChange}
+                            onKeyPress={handleKeyPress}
                             invalid={invalid}
                         />
                     </LineWrapper>
-                    <Gap/>
-                    <LineWrapper>
-                        <InLineTitle>2.点击生成</InLineTitle>
-                    </LineWrapper>
 
-                    <LineWrapper>
-                        <MButton disabled={loading} h={'36px'} w={'140px'} tw={'rounded-xl'} onClick={handleSubmit}>
+                    <LineWrapper tw={'mt-2'}>
+                        <MButton disabled={loading} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleSubmit} ref={button_ref}>
                             {
                                 loading ?
                                     <>获取中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
@@ -113,13 +119,13 @@ export default function QRPage() {
                     </LineWrapper>
                     <Gap/>
                     <LineWrapper>
-                        <InLineTitle>3.获取结果</InLineTitle>
+                        <InLineTitle tw={'mb-2'}>获取结果</InLineTitle>
                     </LineWrapper>
                     <LineWrapper>
                         <PictureDisplay src={data}/>
                     </LineWrapper>
-                    <LineWrapper>
-                        <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-xl'} onClick={handleDownload}>
+                    <LineWrapper tw={'mt-2'}>
+                        <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleDownload}>
                             {
                                 !finished ?
                                     <>暂无QR码<FontAwesomeIcon icon={solid("xmark")} shake tw={'ml-1'}/></>

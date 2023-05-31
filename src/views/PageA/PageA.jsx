@@ -16,7 +16,7 @@ import QRPage from './QRPage/QRPage';
 import Error from "@/views/Error/Error";
 import BilibiliPage from "@/views/PageA/BilibiliPage/BilibiliPage";
 
-export default function PageA(){
+export default function PageA() {
     const navigate = useNavigate();
     const location = useLocation();
     const params = useParams();
@@ -24,30 +24,33 @@ export default function PageA(){
     const componentCount = 1;
     const components = [];
     for (let i = 0; i < componentCount; i++) {
-        components.push(<AppleCard
-            key={i}
-            theme={'white'}
-            hasMask
-            k={0.5}
-            topTextA={"在线工具"}
-            topTextB={"预设调色板"}
-            subTextA={"常用色彩"}
-            tw_card={tw`md:col-span-2`}
-            tw_content={tw`tracking-wider`}
-            tw_background={tw``}
-            tw_subbar={tw``}
-            icon={<FontAwesomeIcon icon={solid("palette")}
-                                   tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
-            />}
-            onClick={() => {
-                notify_error("暂未完工", "A_5");
-            }}
-        />);
+        components.push(
+            <AppleCard
+                key={i}
+                theme={'white'}
+                hasMask
+                k={0.5}
+                topTextA={"在线工具"}
+                topTextB={"预设调色板"}
+                subTextA={"常用色彩"}
+                tw_card={tw`md:col-span-2`}
+                tw_content={tw`tracking-wider`}
+                tw_background={tw``}
+                tw_subbar={tw``}
+                icon={<FontAwesomeIcon icon={solid("palette")}
+                                       tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
+                />}
+                onClick={() => {
+                    notify_error("暂未完工", "A_5");
+                }}
+            />
+        );
     }
 
     const Overview = (
         <WrapperMain>
-            <MainCard _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50`} h={"80px"}>
+            <MainCard _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50`}
+                      h={"80px"}>
                 <div tw={"w-full pl-12 pr-12 text-2xl text-white font-bold font-sans mt-4"}>
                     工 具
                 </div>
@@ -100,11 +103,11 @@ export default function PageA(){
             'QRPage': <QRPage/>,
             'bilibili': <BilibiliPage/>
         }
-        if(!toolIds[toolId])
+        if (!toolIds[toolId])
             notify_error("未找到该工具！", "error_notFindToolPage");
         return (
             <WrapperMain>
-                { toolIds[toolId] ? toolIds[toolId] : <Error/>}
+                {toolIds[toolId] ? toolIds[toolId] : <Error/>}
             </WrapperMain>
         );
     };
