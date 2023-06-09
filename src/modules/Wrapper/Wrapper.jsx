@@ -10,8 +10,10 @@ export const Wrapper = styled.div`
   //left: 0;
   //right: 0;
   //margin: auto;
-
-  min-height: calc(100vh - 60px);
+  padding-top: 60px;
+  
+  //min-height: calc(100vh - 60px);
+  min-height: 100vh;
 
   display: flex;
   flex-direction: column;

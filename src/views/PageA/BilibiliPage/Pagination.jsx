@@ -164,7 +164,7 @@ const Pagination = ({data}) => {
                                          }}>
                                     {
                                         !finished ?
-                                            <>暂无解析<FontAwesomeIcon icon={solid("copy")} flip tw={'ml-1'}/></>
+                                            <>暂无解析<FontAwesomeIcon icon={solid("copy")} fade tw={'ml-1'}/></>
                                             :
                                             <>拷贝视频URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
                                     }
@@ -179,7 +179,7 @@ const Pagination = ({data}) => {
                                          }}>
                                     {
                                         !finished ?
-                                            <>暂无解析<FontAwesomeIcon icon={solid("film")} flip tw={'ml-1'}/></>
+                                            <>暂无解析<FontAwesomeIcon icon={solid("film")} fade tw={'ml-1'}/></>
                                             :
                                             <>下载视频<FontAwesomeIcon icon={solid("download")} beat tw={'ml-1'}/></>
                                     }

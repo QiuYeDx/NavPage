@@ -19,7 +19,7 @@ export default function NavBar(){
     return (
         <div>
             <MoreListMask isShow={isMoreListShown} onClick={() => setIsMoreListShown(!isMoreListShown)}/>
-            <BlankWrapper/>
+            {/*<BlankWrapper/>*/}
             <Toaster/>
             {/*<NavWrapper hasShadow={!isMoreListShown}>*/}
             <NavWrapper hasShadow={true}>

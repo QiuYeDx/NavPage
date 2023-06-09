@@ -7,7 +7,7 @@ import tw from "twin.macro";
 import MainCard from "@/components/MainCard/MainCard";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
-import {faBilibili} from '@fortawesome/free-brands-svg-icons'
+import {faBilibili, faTiktok} from '@fortawesome/free-brands-svg-icons'
 import {notify_error, notify_success} from "@/hooks/toasts";
 import AppleCard from "@/components/AppleCard/AppleCard";
 import {useClipboard} from "use-clipboard-copy";
@@ -15,6 +15,7 @@ import {useLocation, useNavigate, useParams} from "react-router-dom";
 import QRPage from './QRPage/QRPage';
 import Error from "@/views/Error/Error";
 import BilibiliPage from "@/views/PageA/BilibiliPage/BilibiliPage";
+import TiktokPage from "@/views/PageA/TiktokPage/TiktokPage";
 
 export default function PageA() {
     const navigate = useNavigate();
@@ -27,13 +28,11 @@ export default function PageA() {
         components.push(
             <AppleCard
                 key={i}
-                theme={'white'}
-                hasMask
                 k={0.5}
                 topTextA={"在线工具"}
                 topTextB={"预设调色板"}
                 subTextA={"常用色彩"}
-                tw_card={tw`md:col-span-2`}
+                tw_card={tw`md:col-span-4`}
                 tw_content={tw`tracking-wider`}
                 tw_background={tw``}
                 tw_subbar={tw``}
@@ -61,7 +60,7 @@ export default function PageA() {
                 topTextA={"在线工具"}
                 topTextB={"bilibili视频解析"}
                 subTextA={"封面 | 视频 下载"}
-                tw_card={tw`col-span-4`}
+                tw_card={tw`md:col-span-4`}
                 tw_content={tw`tracking-wide`}
                 tw_background={tw``}
                 tw_subbar={tw``}
@@ -74,8 +73,30 @@ export default function PageA() {
                 }}
             >
             </AppleCard>
+
             <AppleCard
                 theme={'black'}
+                k={0.5}
+                topTextA={"在线工具"}
+                topTextB={"Tiktok视频解析"}
+                subTextA={"封面 | 视频 下载"}
+                hasMask
+                tw_card={tw`md:col-span-2`}
+                tw_content={tw`tracking-wide`}
+                tw_background={tw``}
+                tw_subbar={tw``}
+                icon={<FontAwesomeIcon icon={faTiktok}
+                                       tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
+                />}
+                onClick={() => {
+                    navigate("/tools/tiktok");
+                    window.scroll(0, 0);
+                }}
+            >
+            </AppleCard>
+
+            <AppleCard
+                theme={'white'}
                 k={0.5}
                 topTextA={"在线工具"}
                 topTextB={"二维码生成器"}
@@ -101,7 +122,8 @@ export default function PageA() {
     const ToolView = (toolId) => {
         const toolIds = {
             'QRPage': <QRPage/>,
-            'bilibili': <BilibiliPage/>
+            'bilibili': <BilibiliPage/>,
+            'tiktok': <TiktokPage/>
         }
         if (!toolIds[toolId])
             notify_error("未找到该工具！", "error_notFindToolPage");

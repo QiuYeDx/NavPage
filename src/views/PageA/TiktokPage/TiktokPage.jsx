@@ -5,10 +5,10 @@ import {
     ContentWrapper,
     Wrapper,
     LineWrapper
-} from "@/views/PageA/BilibiliPage/Styled.twin";
+} from "@/views/PageA/TiktokPage/Styled.twin";
 import {notify_error, notify_success} from "@/hooks/toasts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {duotone, regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
+import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import tw from "twin.macro";
 import {useNavigate} from "react-router-dom";
 import {H2, InLineTitle} from "@/styles/TextStyles";
@@ -19,11 +19,10 @@ import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
 import axios from 'axios';
 import {useClipboard} from "use-clipboard-copy";
 import {Tooltip} from 'react-tooltip';
-import MyContext from './MyContext';
-import Pagination from "./Pagination";
-import {faBilibili} from "@fortawesome/free-brands-svg-icons";
+import FadeInOnViewport from "@/components/FadeInOnViewport/FadeInOnViewport";
+import {faTiktok} from "@fortawesome/free-brands-svg-icons";
 
-export default function BilibiliPage() {
+export default function TiktokPage() {
     const default_cover = 'images/image-blue-300.png';
     const clipboard = useClipboard();
     const navigate = useNavigate();
@@ -31,11 +30,11 @@ export default function BilibiliPage() {
     const scroll_ref = useRef(null);
     const [text, setText] = useState('');
     const [data, setData] = useState(null);
-    const [list, setList] = useState(null);
     const [loading, setLoading] = useState(false);
     const [finished, setFinished] = useState(false);
     const [invalid, setInvalid] = useState(false);
     const [cover, setCover] = useState(default_cover);
+    const [dyCover, setDyCover] = useState(default_cover);
     const handleChange = (event) => {
         setText(event.target.value);
         setInvalid(false);
@@ -48,19 +47,10 @@ export default function BilibiliPage() {
         }
     }
 
-    const handleDownloadPic = (event) => {
-        if (!data)
-            return;
-        let a = a_ref.current;
-        a.href = data.cover;
-        a.click();
-    };
-
     async function fetchData(url, params) {
         try {
             const response = await axios.get(url, {params});
             setData(response.data.data);
-            setList(response.data.data.list);
             setFinished(true);
 
             const coverResponse = await axios.get(response.data.data.cover, {
@@ -69,17 +59,23 @@ export default function BilibiliPage() {
             const blob = coverResponse.data;
             setCover(URL.createObjectURL(blob));
 
+            const dyCoverResponse = await axios.get(response.data.data.coverDynamic, {
+                responseType: 'blob',
+            });
+            const blob_dyCover = dyCoverResponse.data;
+            setDyCover(URL.createObjectURL(blob_dyCover));
+
             notify_success('解析成功 !', 'resolving_success');
 
             setTimeout(() => {
                 scroll_ref.current.scrollIntoView({behavior: 'smooth'});
             }, 100);
         } catch (error) {
-            setList(null);
             notify_error('解析失败，请检查URL或重试 !', 'resolving_error');
             setFinished(false);
             setInvalid(true);
             setCover(default_cover);
+            setDyCover(default_cover);
             setData(null);
             console.error('Error resolving video URL:', error);
         } finally {
@@ -105,7 +101,7 @@ export default function BilibiliPage() {
 
         setLoading(true);
 
-        const url = 'https://www.mxnzp.com/api/bilibili/video';
+        const url = 'https://www.mxnzp.com/api/douyin/video';
         // const url = 'http://127.0.0.1:8000/test_api';
         const params = {
             url: btoa(valid_url[0]),
@@ -134,12 +130,12 @@ export default function BilibiliPage() {
                             <FontAwesomeIcon icon={solid("arrow-left")} tw={'md:pr-4 align-middle relative -top-px'}/>
                         </BackButton>
                     </ButtonWrapper>
-                    <H2>bilibili视频解析</H2>
+                    <H2>Tiktok视频解析</H2>
                 </HeaderWrapper>
                 <ContentWrapper>
                     <LineWrapper>
                         <InLineTitle>
-                            输入<FontAwesomeIcon icon={faBilibili} tw={"text-pink-400 pl-1 pr-1 duration-500 ease-out"}/>稿件链接
+                            输入<FontAwesomeIcon icon={faTiktok} tw={"pl-1 pr-1 duration-500 ease-out"}/>分享口令
                         </InLineTitle>
                     </LineWrapper>
 
@@ -149,12 +145,12 @@ export default function BilibiliPage() {
                             URL
                         </InLineTitle>
                         <TextInputLine
-                            placeholder={'输入bilibili视频URL'} maxLength={2000} value={text}
+                            placeholder={'输入抖音视频URL或分享口令'} maxLength={2000} value={text}
                             onChange={handleChange}
                             onKeyPress={handleKeyPress}
                             invalid={invalid}
                             data-tooltip-id="url_tooltip"
-                            data-tooltip-content="直接粘贴B站分享文本即可^_^"
+                            data-tooltip-content="直接粘贴Tiktok分享口令即可^_^"
                             data-tooltip-variant="info"
                         />
                         <InLineTitle
@@ -185,8 +181,10 @@ export default function BilibiliPage() {
                     <LineWrapper>
                         <InLineTitle tw={'mb-2'}>获取结果</InLineTitle>
                     </LineWrapper>
-                    <LineWrapper>
-                        <PictureDisplay height={150} width={256} src={cover}/>
+                    <LineWrapper tw={'flex-wrap'}>
+                        {/* 150 * 256 => 384 * 216 => 288 * 162*/}
+                        <PictureDisplay height={data ? 288 : 150} width={data ? 162 : 256} src={cover}/>
+                        <PictureDisplay height={data ? 288 : 150} width={data ? 162 : 256} src={dyCover}/>
                     </LineWrapper>
                     <LineWrapper>
                         <InLineTitle fontSize={28} lineHeight={40}
@@ -216,66 +214,85 @@ export default function BilibiliPage() {
                         </InLineTitle>
                         <Tooltip id="title_tooltip" tw={'bg-blue-400 max-w-xs md:max-w-lg'}/>
                     </LineWrapper>
-                    <LineWrapper>
-                        <InLineTitle fontSize={28} lineHeight={40}
-                                     tw={'text-gray-600 font-medium -mr-2 -ml-2 text-right'}>
-                            描述
-                        </InLineTitle>
-                        <TextInputLine
-                            placeholder={'视频描述'} maxLength={2000} value={data ? data.desc : ''}
-                            readOnly
-                            data-tooltip-id="desc_tooltip"
-                            data-tooltip-content={data ? data.desc : '视频描述'}
-                            data-tooltip-variant="info"
-                        />
-                        <InLineTitle
-                            fontSize={28}
-                            lineHeight={40}
-                            tw={'text-gray-600 font-light -mr-2 -ml-2 md:hover:text-blue-500 active:text-blue-500 md:active:text-blue-300 text-left'}
-                            onClick={() => {
-                                if (data) {
-                                    clipboard.copy(data.desc);
-                                    notify_success('视频描述Copied !', 'description_copy');
-                                } else
-                                    notify_error('视频描述Copy失败 !', 'description_copy_error');
-                            }}
-                        >
-                            <FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>
-                        </InLineTitle>
-                        <Tooltip id="desc_tooltip" tw={'bg-blue-400 max-w-xs md:max-w-lg'}/>
-                    </LineWrapper>
                     <LineWrapper tw={'mt-2'}>
                         <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:mr-6'}
                                  onClick={() => {
                                      clipboard.copy(data ? data.cover : '');
-                                     notify_success('封面URL Copied !', 'cover_url_copy');
+                                     notify_success('静态封面URL Copied !', 'cover_url_copy');
                                  }}>
-                            {
-                                !finished ?
-                                    <>暂无解析<FontAwesomeIcon icon={solid("copy")} fade tw={'ml-1'}/></>
-                                    :
-                                    <>拷贝封面URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
-                            }
-                        </MButton>
-                        <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}
-                                 onClick={handleDownloadPic}>
                             {
                                 !finished ?
                                     <>暂无解析<FontAwesomeIcon icon={solid("image")} fade tw={'ml-1'}/></>
                                     :
-                                    <>下载封面<FontAwesomeIcon icon={solid("download")} beat tw={'ml-1'}/></>
+                                    <>静态封面URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
+                            }
+                        </MButton>
+                        <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}
+                                 onClick={() => {
+                                     clipboard.copy(data ? data.coverDynamic : '');
+                                     notify_success('动态封面URL Copied !', 'dyCover_url_copy');
+                                 }}>
+                            {
+                                !finished ?
+                                    <>暂无解析<FontAwesomeIcon icon={solid("image")} fade tw={'ml-1'}/></>
+                                    :
+                                    <>动态封面URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
                             }
                         </MButton>
                         <a tw={'hidden'} ref={a_ref} target="_blank" rel="noopener noreferrer"/>
                     </LineWrapper>
                 </ContentWrapper>
-                <MyContext.Provider value={{finished, a_ref}}>
-                    {list ? <Pagination data={list.map((item, index) => {
-                        item.index = index;
-                        return item;
-                    })}/> : ''}
-                </MyContext.Provider>
-
+                {data ? <FadeInOnViewport>
+                    <ContentWrapper>
+                        <LineWrapper>
+                            <InLineTitle>
+                                视频<span tw={'text-blue-500 pl-1 pr-1'}>详情</span>
+                            </InLineTitle>
+                        </LineWrapper>
+                        <Gap/>
+                        <LineWrapper>
+                            <InLineTitle tw={'text-2xl font-medium'}>
+                                时长 <span tw={'text-blue-500'}>{data && data.durationFormat}</span>
+                            </InLineTitle>
+                        </LineWrapper>
+                        <LineWrapper>
+                            <InLineTitle tw={'text-2xl font-medium'}>
+                                尺寸 <span tw={'text-blue-500'}>{data && data.width}</span>
+                                <FontAwesomeIcon icon={solid("xmark")}/>
+                                <span tw={'text-blue-500'}>{data && data.height}</span>
+                            </InLineTitle>
+                        </LineWrapper>
+                        <LineWrapper tw={'mt-2'}>
+                            <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:mr-6'}
+                                     onClick={() => {
+                                         clipboard.copy(data.url);
+                                         notify_success('视频URL Copied !', 'video_url_copy');
+                                     }}>
+                                {
+                                    !finished ?
+                                        <>暂无解析<FontAwesomeIcon icon={solid("copy")} fade tw={'ml-1'}/></>
+                                        :
+                                        <>拷贝视频URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
+                                }
+                            </MButton>
+                            <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}
+                                     onClick={() => {
+                                         if (!data)
+                                             return;
+                                         let a = a_ref.current;
+                                         a.href = data.url;
+                                         a.click();
+                                     }}>
+                                {
+                                    !finished ?
+                                        <>暂无解析<FontAwesomeIcon icon={solid("film")} fade tw={'ml-1'}/></>
+                                        :
+                                        <>下载视频<FontAwesomeIcon icon={solid("download")} beat tw={'ml-1'}/></>
+                                }
+                            </MButton>
+                        </LineWrapper>
+                    </ContentWrapper>
+                </FadeInOnViewport> : ''}
             </Wrapper>
         </div>
     );
