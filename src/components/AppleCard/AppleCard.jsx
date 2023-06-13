@@ -87,7 +87,7 @@ export default function AppleCard(props) {
             if (scroll_top > offset_top - client_height) {
                 if (scroll_top > offset_top + card_wrapper_height) {
                     ans = range_height_oneSide;
-                    setMatrix_y(ans);
+                    requestAnimationFrame(() => {setMatrix_y(ans);});
                 } else {
                     ans = (scroll_top - (offset_top - client_height))
                         /
@@ -97,10 +97,10 @@ export default function AppleCard(props) {
                         -
                         range_height_oneSide
                     ;
-                    setMatrix_y(ans);
+                    requestAnimationFrame(() => {setMatrix_y(ans);});
                 }
             } else {
-                setMatrix_y(ans);
+                requestAnimationFrame(() => {setMatrix_y(ans);});
             }
         }
     }
