@@ -72,7 +72,7 @@ export default function AppleCard(props) {
 
     let updateMatrix = () => {
         if (card_wrapper_ref.current && background_wrapper_ref) {
-            console.log('updateMatrix()');
+            // console.log('updateMatrix()');
             // let offset_top = getOffsetTop(card_wrapper_ref.current); // element的顶边到文档流顶部的距离
             let scroll_top = getScrollTop();
             // let client_height = getClientHeight();
@@ -106,7 +106,7 @@ export default function AppleCard(props) {
     }
 
     const updateByReSize = () => {
-        console.log('updateByReSize()');
+        // console.log('updateByReSize()');
         setReSize(!reSize);
     }
 
@@ -119,7 +119,7 @@ export default function AppleCard(props) {
         setClient_height(getClientHeight());
         setCard_wrapper_height(card_wrapper_ref.current.clientHeight);
         setBackground_wrapper_height(background_wrapper_ref.current.clientHeight);
-        console.log('重新渲染');
+        // console.log('重新渲染');
         // setStyle((props.theme && styles[props.theme]) ? styles[props.theme] : styles['default']);
         updateMatrix();
         // setTimeout(updateMatrix, 50);

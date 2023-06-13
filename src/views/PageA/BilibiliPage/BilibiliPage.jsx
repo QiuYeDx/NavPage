@@ -188,6 +188,7 @@ export default function BilibiliPage() {
                     <LineWrapper>
                         <PictureDisplay height={150} width={256} src={cover}/>
                     </LineWrapper>
+                    <Gap tw={'invisible'}/>
                     <LineWrapper>
                         <InLineTitle fontSize={28} lineHeight={40}
                                      tw={'text-gray-600 font-medium -mr-2 -ml-2 text-right'}>

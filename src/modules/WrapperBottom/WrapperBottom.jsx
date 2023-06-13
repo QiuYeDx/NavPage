@@ -3,6 +3,7 @@ import {P} from "@/styles/TextStyles";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import tw, {styled} from "twin.macro";
+import {Gap} from "@/components/Gap/Styled.twin";
 
 const WrapperBottomStyle = styled.div`
   ${tw`p-4 font-sans`}

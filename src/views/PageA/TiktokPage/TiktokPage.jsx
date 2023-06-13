@@ -186,6 +186,7 @@ export default function TiktokPage() {
                         <PictureDisplay height={data ? 288 : 150} width={data ? 162 : 256} src={cover}/>
                         <PictureDisplay height={data ? 288 : 150} width={data ? 162 : 256} src={dyCover}/>
                     </LineWrapper>
+                    <Gap tw={'invisible'}/>
                     <LineWrapper>
                         <InLineTitle fontSize={28} lineHeight={40}
                                      tw={'text-gray-600 font-medium -mr-2 -ml-2 text-right'}>
