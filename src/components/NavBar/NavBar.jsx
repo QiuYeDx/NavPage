@@ -37,12 +37,12 @@ export default function NavBar(){
                     }
                 }} >
                     <Logo/>
-                    <LogoText tw={"cursor-pointer select-none"}>
+                    <LogoText tw={"cursor-default md:cursor-pointer select-none"}>
                         秋夜导航站
                     </LogoText>
                 </LogoWrapper>
                 <NavList
-                    tw={"cursor-pointer select-none"}
+                    tw={"cursor-default md:cursor-pointer select-none"}
                     onClick={() => {
                         setIsMoreListShown(false);
                 }}>
@@ -95,7 +95,7 @@ export default function NavBar(){
                     </NavItem>
                 </NavList>
                 <MoreWrapper
-                    tw={"md:hover:text-gray-300 active:text-gray-700 cursor-pointer select-none"}
+                    tw={"md:hover:text-gray-300 active:text-gray-700 cursor-default md:cursor-pointer select-none"}
                     onClick={() => setIsMoreListShown(!isMoreListShown)}
                 >
                     {isMoreListShown ?

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import 'twin.macro'
 import tw from "twin.macro";
 import {
@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import {styles} from './themes';
 import {randomNum} from "@/utils/utils";
 import PropTypes from 'prop-types';
+import {debounce, throttle} from "@/utils/throttle";
 // import {throttle} from '@/utils/throttle';
 
 /**
@@ -57,18 +58,26 @@ import PropTypes from 'prop-types';
  */
 export default function AppleCard(props) {
     // const navigate = useNavigate();
+    let [reSize, setReSize] = useState(false);
     let [matrix_y, setMatrix_y] = useState(0);
     let card_wrapper_ref = useRef(null);
     let background_wrapper_ref = useRef(null);
     let [randomClassName] = useState(randomNum(1, 99999));
+    let [offset_top, setOffset_top] = useState(0);
+    // let [scroll_top, setScroll_top] = useState(0);
+    let [client_height, setClient_height] = useState(0);
+    let [card_wrapper_height, setCard_wrapper_height] = useState(0);
+    let [background_wrapper_height, setBackground_wrapper_height] = useState(0);
+
 
     let updateMatrix = () => {
         if (card_wrapper_ref.current && background_wrapper_ref) {
-            let offset_top = getOffsetTop(card_wrapper_ref.current); // element的顶边到文档流顶部的距离
+            console.log('updateMatrix()');
+            // let offset_top = getOffsetTop(card_wrapper_ref.current); // element的顶边到文档流顶部的距离
             let scroll_top = getScrollTop();
-            let client_height = getClientHeight();
-            let card_wrapper_height = card_wrapper_ref.current.clientHeight;
-            let background_wrapper_height = background_wrapper_ref.current.clientHeight;
+            // let client_height = getClientHeight();
+            // let card_wrapper_height = card_wrapper_ref.current.clientHeight;
+            // let background_wrapper_height = background_wrapper_ref.current.clientHeight;
 
             let k = props.k ? props.k : 0.7;
             let range_height_oneSide = k * (card_wrapper_height - background_wrapper_height) / 2;
@@ -95,17 +104,35 @@ export default function AppleCard(props) {
             }
         }
     }
-    // const [style, setStyle] = useState(styles['default']);
+
+    const updateByReSize = () => {
+        console.log('updateByReSize()');
+        setReSize(!reSize);
+    }
+
+    const updateByReSizeDebounced = debounce(updateByReSize, 100, true);
+
     const style = ((props.theme && styles[props.theme]) ? styles[props.theme] : styles['default']);
     useEffect(() => {
+        setOffset_top(getOffsetTop(card_wrapper_ref.current));
+        // setScroll_top(getScrollTop());
+        setClient_height(getClientHeight());
+        setCard_wrapper_height(card_wrapper_ref.current.clientHeight);
+        setBackground_wrapper_height(background_wrapper_ref.current.clientHeight);
+        console.log('重新渲染');
         // setStyle((props.theme && styles[props.theme]) ? styles[props.theme] : styles['default']);
         updateMatrix();
-        window.addEventListener("scroll", updateMatrix, true);
+        // setTimeout(updateMatrix, 50);
+        window.addEventListener("scroll", updateMatrix);    // 如果第三个参数设置为true reSize后则会导致异常多数量的事件被触发。。。
+        window.addEventListener('resize', updateByReSizeDebounced); // 如果第三个参数设置为true reSize过程可能会很卡。。。
         // window.addEventListener("scroll", throttle(updateMatrix, 8), true);
         return (() => {
             window.removeEventListener("scroll", updateMatrix);
+            window.removeEventListener("resize", updateByReSizeDebounced);
         });
-    }, [props.theme]);
+    }, [offset_top, client_height, reSize]);
+
+
 
     return (
         <AppleCardWrapper
@@ -174,11 +201,11 @@ export default function AppleCard(props) {
                     _tw_user={props.tw_subbar || tw` `}
                 >
                     <Logo url={props.logo_url}/>
-                    <div tw={"pl-4 flex-col items-start text-left h-12"}>
-                        <H3 tw={"tracking-wide"}>{props._sub_h3 || ''}</H3>
-                        <H4 tw={"tracking-widest"}>{props._sub_h4 || ''}</H4>
+                    <div tw={"pl-4 flex-col items-start text-left h-12 flex-grow shrink truncate"}>
+                        <H3 tw={"tracking-wide truncate"}>{props._sub_h3 || ''}</H3>
+                        <H4 tw={"tracking-widest truncate"}>{props._sub_h4 || ''}</H4>
                     </div>
-                    <div tw={"flex-grow"}> </div>
+                    {/*<div tw={"flex-grow"}> </div>*/}
                     <MButton
                         _tw={style.styleSubButton}
                         _tw_user={props.tw_subButton || tw` `}

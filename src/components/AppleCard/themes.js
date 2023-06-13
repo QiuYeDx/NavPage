@@ -6,7 +6,7 @@ export const styles = {
         styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
                 bg-blue-200 active:bg-blue-400 md:hover:bg-blue-400 md:active:bg-blue-200 \ // 背景色适配移动端触摸逻辑
                 duration-500 ease-out \ 
-                cursor-pointer select-none`,
+                cursor-default md:cursor-pointer select-none`,
         styleBackground: tw`text-blue-400`,
         styleContent: tw`tracking-widest text-8xl text-white font-bold \
                     duration-500 ease-out`,
@@ -31,9 +31,7 @@ export const styles = {
         styleSubBar: tw`text-gray-700 text-xl font-sans bg-white`,
         styleTopTextA: tw`text-white text-base font-sans font-bold text-left`,
         styleTopTextB: tw`text-white text-2xl font-sans font-bold text-left`,
-        styleSubButton: tw`rounded-2xl bg-blue-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider \
-                ring-blue-200 ring-0 hover:ring-4 hover:scale-105 active:bg-blue-600 active:ring-blue-400 duration-100 ease-out
-                `,
+        styleSubButton: tw`rounded-2xl bg-blue-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider shrink-0 `,
         styleSubTextA: tw`text-white text-base font-sans font-bold text-left`,
 
 
@@ -42,7 +40,7 @@ export const styles = {
         styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
                 bg-white active:bg-black md:hover:bg-black md:active:bg-gray-600 \ // 适配移动端触摸逻辑
                 duration-500 ease-out \
-                cursor-pointer select-none`,
+                cursor-default md:cursor-pointer select-none`,
         styleBackground: tw`text-black`,
         styleContent: tw`tracking-widest text-8xl text-white font-bold \
                     duration-500 ease-out`,
@@ -69,7 +67,7 @@ export const styles = {
         styleSubBar: tw`text-gray-700 text-xl font-sans bg-white`,
         styleTopTextA: tw`text-white text-base font-sans font-bold text-left text-opacity-60`,
         styleTopTextB: tw`text-white text-2xl font-sans font-bold text-left`,
-        styleSubButton: tw`rounded-2xl bg-blue-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider \
+        styleSubButton: tw`rounded-2xl bg-blue-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider  shrink-0 \
                 ring-blue-200 ring-0 hover:ring-4 hover:scale-105 active:bg-blue-600 active:ring-blue-400 duration-100 ease-out
                 `,
         styleSubTextA: tw`text-white text-base font-sans font-bold text-left text-opacity-60`,
@@ -78,7 +76,7 @@ export const styles = {
         styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
                 bg-black active:bg-white md:hover:bg-white md:active:bg-gray-200 \    // 适配移动端触摸逻辑
                 duration-500 ease-out \
-                cursor-pointer select-none`,
+                cursor-default md:cursor-pointer select-none`,
         styleBackground: tw`text-white`,
         styleContent: tw`tracking-widest text-8xl text-white font-bold \
                     duration-500 ease-out`,
@@ -103,7 +101,7 @@ export const styles = {
         styleSubBar: tw`text-gray-700 text-xl font-sans bg-white`,
         styleTopTextA: tw`text-white text-base font-sans font-bold text-left text-opacity-60`,
         styleTopTextB: tw`text-white text-2xl font-sans font-bold text-left`,
-        styleSubButton: tw`rounded-2xl bg-blue-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider \
+        styleSubButton: tw`rounded-2xl bg-blue-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider  shrink-0 \
                 ring-blue-200 ring-0 hover:ring-4 hover:scale-105 active:bg-blue-600 active:ring-blue-400 duration-100 ease-out
                 `,
         styleSubTextA: tw`text-white text-base font-sans font-bold text-left text-opacity-60`,
@@ -112,7 +110,7 @@ export const styles = {
         styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
                 bg-green-200 active:bg-green-400 md:hover:bg-green-400 md:active:bg-green-300 \   // 适配移动端触摸逻辑
                 duration-500 ease-out \ 
-                cursor-pointer select-none`,
+                cursor-default md:cursor-pointer select-none`,
         styleBackground: tw`text-green-400`,
         styleContent: tw`tracking-widest text-8xl text-white font-bold \
                     duration-500 ease-out`,
@@ -137,7 +135,7 @@ export const styles = {
         styleSubBar: tw`text-gray-700 text-xl font-sans bg-white`,
         styleTopTextA: tw`text-white text-base font-sans font-bold text-left`,
         styleTopTextB: tw`text-white text-2xl font-sans font-bold text-left`,
-        styleSubButton: tw`rounded-2xl bg-green-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider \
+        styleSubButton: tw`rounded-2xl bg-green-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider  shrink-0 \
                 ring-green-200 ring-0 hover:ring-4 hover:scale-105 active:bg-green-600 active:ring-green-400 duration-100 ease-out
                 `,
         styleSubTextA: tw`text-white text-base font-sans font-bold text-left`,
@@ -146,7 +144,7 @@ export const styles = {
         styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
                 bg-purple-200 active:bg-purple-400 md:hover:bg-purple-400 md:active:bg-purple-300 \    // 适配移动端触摸逻辑
                 duration-500 ease-out \ 
-                cursor-pointer select-none`,
+                cursor-default md:cursor-pointer select-none`,
         styleBackground: tw`text-purple-400`,
         styleContent: tw`tracking-widest text-8xl text-white font-bold \
                     duration-500 ease-out`,
@@ -171,7 +169,7 @@ export const styles = {
         styleSubBar: tw`text-gray-700 text-xl font-sans bg-white`,
         styleTopTextA: tw`text-white text-base font-sans font-bold text-left`,
         styleTopTextB: tw`text-white text-2xl font-sans font-bold text-left`,
-        styleSubButton: tw`rounded-2xl bg-purple-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider \
+        styleSubButton: tw`rounded-2xl bg-purple-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider  shrink-0 \
                 ring-purple-200 ring-0 hover:ring-4 hover:scale-105 active:bg-purple-600 active:ring-purple-400 duration-100 ease-out
                 `,
         styleSubTextA: tw`text-white text-base font-sans font-bold text-left`,
@@ -180,7 +178,7 @@ export const styles = {
         styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
                 bg-pink-400 active:bg-pink-200 md:hover:bg-pink-300 md:active:bg-pink-200 \    // 适配移动端触摸逻辑
                 duration-500 ease-out \ 
-                cursor-pointer select-none`,
+                cursor-default md:cursor-pointer select-none`,
         styleBackground: tw`text-pink-200`,
         styleContent: tw`tracking-widest text-8xl text-white font-bold \
                     duration-500 ease-out`,
@@ -205,7 +203,7 @@ export const styles = {
         styleSubBar: tw`text-gray-700 text-xl font-sans bg-white`,
         styleTopTextA: tw`text-white text-base font-sans font-bold text-left`,
         styleTopTextB: tw`text-white text-2xl font-sans font-bold text-left`,
-        styleSubButton: tw`rounded-2xl bg-pink-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider \
+        styleSubButton: tw`rounded-2xl bg-pink-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider  shrink-0 \
                 ring-pink-200 ring-0 hover:ring-4 hover:scale-105 active:bg-pink-600 active:ring-pink-400 duration-100 ease-out
                 `,
         styleSubTextA: tw`text-white text-base font-sans font-bold text-left`,
@@ -217,7 +215,7 @@ export const styles = {
                 before:to-pink-500 before:from-indigo-500 before:opacity-0 md:hover:before:opacity-100 before:duration-500 md:before:ease-out \
                 active:before:opacity-100 md:active:before:opacity-0 \
                 duration-500 ease-out \ 
-                cursor-pointer select-none`,
+                cursor-default md:cursor-pointer select-none`,
         styleBackground: tw`text-blue-300`,
         styleContent: tw`tracking-widest text-8xl text-white font-bold \
                     duration-500 ease-out`,
@@ -242,7 +240,7 @@ export const styles = {
         styleSubBar: tw`text-gray-700 text-xl font-sans bg-white`,
         styleTopTextA: tw`text-white text-base font-sans font-bold text-left`,
         styleTopTextB: tw`text-white text-2xl font-sans font-bold text-left`,
-        styleSubButton: tw`rounded-2xl bg-blue-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider \
+        styleSubButton: tw`rounded-2xl bg-blue-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider  shrink-0 \
                 ring-blue-200 ring-0 hover:ring-4 hover:scale-105 active:bg-blue-600 active:ring-blue-400 duration-100 ease-out
                 `,
         styleSubTextA: tw`text-white text-base font-sans font-bold text-left`,

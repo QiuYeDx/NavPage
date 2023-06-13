@@ -35,7 +35,8 @@ export const BackgroundWrapper = styled.div.attrs(props => ({
         transform: `matrix(1, 0, 0, 1, 0, ${props._Y})`,
     }
 }))`
-  position: absolute;
+  //position: absolute;
+  position: fixed;
   //top: 0;
   //bottom: 0;
   left: 0;
@@ -82,6 +83,7 @@ export const Logo = styled.div`
   //background-size: cover;
   background-size: contain;
   background-repeat: no-repeat;
+  ${tw`shrink-0`}
 `
 
 export const TopTextA = styled.div`

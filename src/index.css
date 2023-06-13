@@ -5,7 +5,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
+
+a:focus,
+input:focus,
+p:focus,
+div:focus{
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

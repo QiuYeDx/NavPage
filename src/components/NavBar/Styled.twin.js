@@ -50,7 +50,7 @@ export const NavItem = styled(NavLink).attrs(props => ({
   max-width: 200px;
   flex-grow: 1;
 
-  cursor: pointer;
+  //cursor: pointer;
   position: relative;
 
   padding: 0 4px;
@@ -80,7 +80,7 @@ export const NavItem = styled(NavLink).attrs(props => ({
   &.active::before{
     width: 100%;
   }
-  ${tw`md:tracking-widest font-medium`};
+  ${tw`md:tracking-widest font-medium cursor-default md:cursor-pointer`};
 `
 
 export const LogoWrapper = styled.div`
@@ -90,12 +90,13 @@ export const LogoWrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  cursor: pointer;
+  //cursor: pointer;
 
   padding: 0 0 0 12px;
   @media(max-width: 415px){
     padding: 0 0 0 4px;
   }
+  ${tw`cursor-default md:cursor-pointer`};
 `
 
 export const Logo = styled.div`
@@ -174,7 +175,7 @@ export const MoreListItem = styled(NavLink).attrs(props => ({
         color: isActive ? "rgba(78, 128, 238, 0.7)" : "" ,
     }),
 }))`
-  ${tw`tracking-widest font-medium`};
+  ${tw`tracking-widest font-medium cursor-default md:cursor-pointer`};
   padding-left: 20%;
   width: 100%;
   height: 50px;
@@ -184,7 +185,7 @@ export const MoreListItem = styled(NavLink).attrs(props => ({
   flex-grow: 0;
   flex-shrink: 1;
 
-  cursor: pointer;
+  //cursor: pointer;
   position: relative;
 
   transition: all 0.25s ease;
