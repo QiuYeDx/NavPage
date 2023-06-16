@@ -218,7 +218,7 @@ export const MoreListItem = styled(NavLink).attrs(props => ({
 export const MoreListMask = styled.div.attrs(props => ({
     style: {
         // display: props.isShow ? 'block' : 'none',
-        zIndex: props.isShow? '999' : '-100',
+        zIndex: props.isShow? '999' : '-1',
         backgroundColor: props.isShow ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0)',
     }
 }))`
