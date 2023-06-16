@@ -4,12 +4,14 @@ import {
     Logo, LogoText, MoreList, MoreListItem, BlankWrapper, MoreListMask
 } from './Styled.twin'
 import 'twin.macro'
+import tw from 'twin.macro';
 import {useLocation, useNavigate} from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { notify_error } from "@/hooks/toasts";
+import MenuButton from "@/components/MenuButton/MenuButton";
 
 export default function NavBar(){
     const navigate = useNavigate();
@@ -95,14 +97,11 @@ export default function NavBar(){
                     </NavItem>
                 </NavList>
                 <MoreWrapper
+                    className={'group'}
                     tw={"md:hover:text-gray-300 active:text-gray-700 cursor-default md:cursor-pointer select-none"}
                     onClick={() => setIsMoreListShown(!isMoreListShown)}
                 >
-                    {isMoreListShown ?
-                        <FontAwesomeIcon icon={solid("bars")} flip size={'lg'} />
-                        :
-                        <FontAwesomeIcon icon={solid("bars")} size={'lg'} />
-                    }
+                    <MenuButton active={isMoreListShown} rounded={true} _tw={tw`scale-110`}/>
                 </MoreWrapper>
             </NavWrapper>
             <MoreList isShown={isMoreListShown} onClick={() => setIsMoreListShown(!isMoreListShown)}>

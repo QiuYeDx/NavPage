@@ -2,7 +2,7 @@ import React from 'react';
 import 'twin.macro'
 import tw from 'twin.macro'
 import {
-    HoverListWrapper, Wrapper
+    HoverListWrapper
 } from './Styled.twin'
 
 

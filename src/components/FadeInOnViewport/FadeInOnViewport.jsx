@@ -5,7 +5,7 @@ import {randomNum} from "@/utils/utils";
 
 export const Wrapper = styled.div`
   display: contents;
-  & *{
+  & > *{
     transition: all 0.6s ease-out;
     ${({fade_in}) => fade_in ? `opacity: 1` : 'opacity: 0'};
   }

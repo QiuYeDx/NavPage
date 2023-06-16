@@ -3,7 +3,9 @@ import {
     CardWrapper
 } from '../MainCard/Styled.twin'
 
-export const AppleCardWrapper = styled(CardWrapper)`
+export const AppleCardWrapper = styled(CardWrapper).attrs(props => ({
+  tw: props._tw
+}))`
   z-index: 100;
   display: flex;
   flex-direction: column;
