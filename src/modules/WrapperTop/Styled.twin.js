@@ -13,8 +13,8 @@ export const WrapperTopStyled = styled.div`
   }
   overflow-y: hidden;
   overflow-x: auto;
-  padding-bottom: 20px;
-  margin-bottom: -20px;
+  padding-bottom: 10px;
+  margin-bottom: -15px;
   padding-left: 15px;
   padding-right: 15px;
   
@@ -74,7 +74,7 @@ export const GapIcon = styled.div`
   position: relative;
   left: 10px;
   z-index: 100;
-  ${tw`text-blue-200 animate-fade_in_right.8`};
+  ${tw`select-none text-blue-200 animate-fade_in_right.8`};
 `;
 
 export const FadeInRight = styled.div`
