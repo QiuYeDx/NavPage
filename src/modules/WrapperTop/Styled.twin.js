@@ -1,5 +1,5 @@
 import tw, {styled} from "twin.macro";
-import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
+import {WIDTH_MIN, WIDTH_MOBILE} from "@/styles/GlobalConfig";
 
 
 export const WrapperTopStyled = styled.div`
@@ -16,9 +16,12 @@ export const WrapperTopStyled = styled.div`
   overflow-x: auto;
   padding-bottom: 30px;
   margin-bottom: -30px;
-  padding-left: 15px;
-  padding-right: 15px;
-  
+  padding-left: 0;
+  transition: padding-left 0.5s ease;
+  @media(max-width: ${WIDTH_MIN}px){
+    padding-left: 15px;
+    transition: padding-left 0.5s ease;
+  }
   display: flex;
   align-items: center;
   //justify-content: center;
