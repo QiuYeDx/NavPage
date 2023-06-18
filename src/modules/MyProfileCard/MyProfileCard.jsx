@@ -6,7 +6,7 @@ import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import MainCard from "@/components/MainCard/MainCard";
 
 export default function MyProfileCard(props){
-    const tw_onlyMobile = tw`bg-white md:col-span-3 col-span-5 m-4 relative  md:hidden`;
+    const tw_onlyMobile = tw`bg-white md:col-span-3 col-span-5 m-4 relative  md:hidden mt-16`;
     const tw_notMobile = tw`bg-white md:col-span-3 col-span-5 m-4 relative hidden md:flex`;
     const tw_defaults = tw`bg-white md:col-span-3 col-span-5 m-4 relative`;
     return (

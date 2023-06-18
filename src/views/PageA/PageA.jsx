@@ -1,6 +1,7 @@
 import React from 'react';
-import {WrapperLeft, WrapperMain, WrapperMiddle, WrapperRight, WrapperTop} from "@/views/PageA/Styled.twin";
+import {WrapperLeft, WrapperMain, WrapperMiddle, WrapperRight} from "@/views/PageA/Styled.twin";
 import {Wrapper} from "@/modules/Wrapper/Wrapper";
+import WrapperTop from "@/modules/WrapperTop/WrapperTop";
 import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
 import "twin.macro";
 import tw from "twin.macro";
@@ -48,12 +49,12 @@ export default function PageA() {
 
     const Overview = (
         <WrapperMain>
-            <MainCard _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50`}
-                      h={"80px"}>
-                <div tw={"w-full pl-12 pr-12 text-2xl text-white font-bold font-sans mt-4"}>
-                    工 具
-                </div>
-            </MainCard>
+            {/*<MainCard _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50`}*/}
+            {/*          h={"80px"}>*/}
+            {/*    <div tw={"w-full pl-12 pr-12 text-2xl text-white font-bold font-sans mt-4"}>*/}
+            {/*        工 具*/}
+            {/*    </div>*/}
+            {/*</MainCard>*/}
             <AppleCard
                 theme={'pink'}
                 k={0.5}

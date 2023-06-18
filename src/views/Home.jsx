@@ -1,10 +1,10 @@
 import React from 'react';
 import {
     WrapperMiddle , WrapperLeft,
-    WrapperRight, WrapperTop,
-    WrapperMain
+    WrapperRight, WrapperMain
 } from './Styled.twin';
 import {Wrapper} from "@/modules/Wrapper/Wrapper";
+import WrapperTop from "@/modules/WrapperTop/WrapperTop";
 import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
 import MainCard from "@/components/MainCard/MainCard";
 import 'twin.macro';
@@ -48,15 +48,15 @@ export default function Home(){
 
                 </WrapperLeft>
                 <WrapperMain>
-                    <MainCard _tw={tw`bg-white md:col-span-5 hidden md:block m-4`} h={"360px"}>
+                    {/*<MainCard _tw={tw`bg-white md:col-span-5 hidden md:block m-4`} h={"360px"}>*/}
 
-                    </MainCard>
+                    {/*</MainCard>*/}
 
-                    <MainCard _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50`} h={"80px"}>
-                        <div tw={"w-full pl-12 pr-12 text-2xl text-white font-bold font-sans mt-4"}>
-                            主 页
-                        </div>
-                    </MainCard>
+                    {/*<MainCard _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50`} h={"80px"}>*/}
+                    {/*    <div tw={"w-full pl-12 pr-12 text-2xl text-white font-bold font-sans mt-4"}>*/}
+                    {/*        主 页*/}
+                    {/*    </div>*/}
+                    {/*</MainCard>*/}
 
                     {/*<MainCard _tw={tw`bg-white md:col-span-3 col-span-5 m-4`} h={"360px"} >*/}
 

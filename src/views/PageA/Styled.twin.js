@@ -4,15 +4,7 @@ import {BaseButton} from "@/components/Button/Styled.twin";
 import {WIDTH_MIDDLE, WIDTH_MOBILE} from "@/styles/GlobalConfig";
 
 
-export const WrapperTop = styled.div`
-  color: black;
-  height: 80px;
-  //background-color: pink;
-  ${({ hasBorder }) => hasBorder && tw`border border-blue-500`};
-  @media(max-width: ${WIDTH_MOBILE}px) {
-    height: 20px;
-  }
-`
+
 
 export const WrapperMiddle = styled.div`
   color: black;

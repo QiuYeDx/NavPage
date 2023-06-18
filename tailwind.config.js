@@ -34,6 +34,10 @@ module.exports = {
                 'fade_in_up.7': 'fade_in_up .7s ease-out forwards',
                 'fade_in_up.8': 'fade_in_up .8s ease-out forwards',
                 'fade_in_up.9': 'fade_in_up .9s ease-out forwards',
+                'fade_in_right.5': 'fade_in_right .5s ease-out forwards',
+                'fade_in_right.8': 'fade_in_right .8s ease-out forwards',
+                'nav_expand.5': 'nav_expand .5s ease forwards',
+                'nav_expand.8': 'nav_expand .8s ease forwards',
             },
             keyframes: {
                 'fade_in': {
@@ -48,6 +52,28 @@ module.exports = {
                     '100%': {
                         opacity: 1,
                         transform: 'translateY(0)'
+                    },
+                },
+                'fade_in_right': {
+                    '0%': {
+                        opacity: 0,
+                        transform: 'translateX(-15px)'
+                    },
+                    '100%': {
+                        opacity: 1,
+                        transform: 'translateX(0)'
+                    },
+                },
+                'nav_expand': {
+                    '0%': {
+                        maxWidth: '50px',
+                        padding: '0',
+                        opacity: 0,
+                    },
+                    '100%': {
+                        maxWidth: '200px',
+                        padding: '0 0 0 70px',
+                        opacity: 1,
                     },
                 }
             }
