@@ -45,8 +45,10 @@ export const isURL = (str) => {
 /**
  *
  * @param url 欲下载资源的URL
- * @param callback 回调函数，入参为下载进度百分比(number)，精确到两位小数。
- * @returns {Promise<unknown>}
+ * @param {function} loading_callback - 下载进度回调函数，参数为下载进度百分比（精确到两位小数）
+ * @param {function} finished_callback - 下载完成回调函数，参数为下载任务ID
+ * @param {number} id - 下载任务ID
+ * @returns {Promise<Blob>} - 包含下载内容的 Blob 对象的 Promise
  */
 export function downloadWithProgress(url, loading_callback, finished_callback, id) {
     return new Promise((resolve, reject) => {
