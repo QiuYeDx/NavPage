@@ -40,7 +40,7 @@ export const NavHome = styled.div`
   
   position: relative;
   z-index: 100;
-  ${tw`rounded-full shadow-lg md:hover:shadow-xl md:hover:scale-110 active:shadow-xl md:active:shadow-lg active:scale-110 md:active:scale-100 duration-200 bg-blue-300 md:hover:bg-blue-400 active:bg-blue-400 md:active:bg-blue-300 text-white`};
+  ${tw`rounded-full shadow-lg md:hover:shadow-xl md:hover:scale-110 active:shadow-xl md:active:shadow-lg active:scale-110 md:active:scale-100 duration-200 bg-blue-300 md:hover:bg-blue-400 active:bg-blue-400 md:active:bg-blue-300 md:cursor-pointer text-white`};
 `;
 
 export const NavItem = styled.div`
@@ -53,7 +53,7 @@ export const NavItem = styled.div`
   position: relative;
   z-index: ${({z_index}) => z_index || '99'};
   text-align: center;
-  ${tw`rounded-full antialiased font-sans text-blue-400 bg-white truncate select-none animate-nav_expand.8 md:hover:text-blue-300 active:text-blue-200 md:active:text-blue-400 duration-200`};
+  ${tw`rounded-full antialiased font-sans text-blue-400 bg-white truncate select-none animate-nav_expand.8 md:hover:text-blue-300 active:text-blue-200 md:active:text-blue-400 md:cursor-pointer duration-200`};
 `;
 
 export const GapIcon = styled.div`

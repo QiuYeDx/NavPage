@@ -4,21 +4,22 @@ import "twin.macro";
 import {NavHome, NavItem, NavWrapper, WrapperTopStyled, GapIcon, FadeInRight} from "@/modules/WrapperTop/Styled.twin";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {randomNum} from "@/utils/utils";
 
 export default function WrapperTop() {
+    const navigate = useNavigate();
     const location = useLocation();
     let [navs, setNavs] = useState(location.pathname.split("/"));
     let [flag, setFlag] = useState(randomNum());
     const nav_hash = {
-        '': '主页',
-        'tools': '工具',
-        'resources': '资源',
-        'about': '关于',
-        'bilibili': 'bilibili视频解析',
-        'tiktok': 'tiktok视频解析',
-        'QRPage': '二维码生成器',
+        '': {to: '/', name: '主页'},
+        'tools': {to: '/tools', name: '工具'},
+        'resources': {to: '/resources', name: '资源'},
+        'about': {to: '/about', name: '关于'},
+        'bilibili': {to: '/tools/bilibili', name: 'bilibili视频解析'},
+        'tiktok': {to: '/tools/tiktok', name: 'tiktok视频解析'},
+        'QRPage': {to: '/tools/QRPage', name: '二维码生成器'},
     };
     useEffect(() => {
         let arr = location.pathname.split("/");
@@ -34,8 +35,8 @@ export default function WrapperTop() {
                 {navs.map((item, index) => {
                     if(nav_hash[item])
                         return <>
-                            <NavItem z_index={99 - index} key={index} className={flag}>
-                                <FadeInRight>{nav_hash[item] || ''}</FadeInRight>
+                            <NavItem z_index={99 - index} key={index} className={flag} onClick={() => navigate(nav_hash[item].to)}>
+                                <FadeInRight>{nav_hash[item].name || ''}</FadeInRight>
                             </NavItem>
                             {index === navs.length - 1 ? '' : <GapIcon>
                                 <FontAwesomeIcon icon={solid("angle-right")} />

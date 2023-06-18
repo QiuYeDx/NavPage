@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
 
   padding: 0 5px 0 5px;
-
+  ${tw`mt-2 md:mt-0`};
 `
 
 export const ButtonWrapper = styled.div`
