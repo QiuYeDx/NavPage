@@ -29,7 +29,7 @@ export default function WrapperTop() {
     return (
         <WrapperTopStyled>
             <NavWrapper>
-                <NavHome>
+                <NavHome onClick={() => navigate("/")}>
                     <FontAwesomeIcon icon={solid("house")} size={'lg'}/>
                 </NavHome>
                 {navs.map((item, index) => {

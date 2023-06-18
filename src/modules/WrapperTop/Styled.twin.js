@@ -4,25 +4,37 @@ import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
 
 export const WrapperTopStyled = styled.div`
   color: black;
-  height: 80px;
+  height: 100px;
+  width: 100%;
   //background-color: pink;
   ${({ hasBorder }) => hasBorder && tw`border border-blue-500`};
   @media(max-width: ${WIDTH_MOBILE}px) {
     min-height: 20px;
   }
-
+  overflow-y: hidden;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  margin-bottom: -20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  
   display: flex;
   align-items: center;
-  justify-content: center;
+  //justify-content: center;
 `
 
 export const NavWrapper = styled.div`
-  margin-top: 10px;
+  margin: 10px auto 0 auto;
+  //margin-top: 10px;
   height: 50px;
-
+  
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: nowrap;
+  
+  //overflow-y: hidden;
+  //overflow-x: auto;
 
   //filter: drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
   //drop-shadow(0 20px 13px rgb(0 0 0 / 0.03))
@@ -53,6 +65,8 @@ export const NavItem = styled.div`
   position: relative;
   z-index: ${({z_index}) => z_index || '99'};
   text-align: center;
+  flex-shrink: 0;
+  flex-grow: 0;
   ${tw`rounded-full antialiased font-sans text-blue-400 bg-white truncate select-none animate-nav_expand.8 md:hover:text-blue-300 active:text-blue-200 md:active:text-blue-400 md:cursor-pointer duration-200`};
 `;
 
