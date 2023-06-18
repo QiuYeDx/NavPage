@@ -38,6 +38,8 @@ module.exports = {
                 'fade_in_right.8': 'fade_in_right .8s ease-out forwards',
                 'nav_expand.5': 'nav_expand .5s ease forwards',
                 'nav_expand.8': 'nav_expand .8s ease forwards',
+                'icon_expand.5': 'icon_expand .5s ease forwards',
+                'icon_expand.8': 'icon_expand .8s ease forwards',
             },
             keyframes: {
                 'fade_in': {
@@ -57,7 +59,7 @@ module.exports = {
                 'fade_in_right': {
                     '0%': {
                         opacity: 0,
-                        transform: 'translateX(-15px)'
+                        transform: 'translateX(-30px)'
                     },
                     '100%': {
                         opacity: 1,
@@ -73,6 +75,18 @@ module.exports = {
                     '100%': {
                         maxWidth: '200px',
                         padding: '0 0 0 70px',
+                        opacity: 1,
+                    },
+                },
+                'icon_expand': {
+                    '0%': {
+                        maxWidth: '0',
+                        transform: 'translateX(-40px)',
+                        opacity: 0,
+                    },
+                    '100%': {
+                        maxWidth: '10px',
+                        transform: 'translateX(0)',
                         opacity: 1,
                     },
                 }

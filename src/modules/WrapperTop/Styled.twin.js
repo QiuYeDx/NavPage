@@ -75,7 +75,7 @@ export const GapIcon = styled.div`
   position: relative;
   left: 10px;
   z-index: 100;
-  ${tw`select-none text-blue-200 animate-fade_in_right.8`};
+  ${tw`select-none text-blue-200 animate-icon_expand.8`};
 `;
 
 export const FadeInRight = styled.div`
