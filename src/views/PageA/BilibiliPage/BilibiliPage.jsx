@@ -52,8 +52,11 @@ export default function BilibiliPage() {
         if (!data)
             return;
         let a = a_ref.current;
-        a.href = data.cover;
+        // a.href = data.cover;
+        a.href = cover;
+        a.download = data.title;
         a.click();
+        notify_success('下载封面成功 !', 'download_pic_success');
     };
 
     async function fetchData(url, params) {

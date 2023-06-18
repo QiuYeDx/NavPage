@@ -1,18 +1,21 @@
-import React, {useContext, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {ContentWrapper, LineWrapper} from "@/views/PageA/BilibiliPage/Styled.twin";
 import {InLineTitle} from "@/styles/TextStyles";
 import {Gap} from "@/components/Gap/Styled.twin";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import {TextInputLine} from "@/components/TextInputLine/Styled.twin";
-import {notify_error, notify_success} from "@/hooks/toasts";
+import {notify_error, notify_loading, notify_success} from "@/hooks/toasts";
 import {BackButton, MButton, PageButton} from "@/components/Button/Styled.twin";
 import MyContext from './MyContext';
-import tw from "twin.macro";
 import {useClipboard} from "use-clipboard-copy";
 import HoverList from "@/components/HoverList/HoverList";
 import {Tooltip} from "react-tooltip";
 import FadeInOnViewport from "@/components/FadeInOnViewport/FadeInOnViewport";
+import {downloadWithProgress} from "@/utils/utils";
+import toast from "react-hot-toast";
+import tw from 'twin.macro';
+import 'twin.macro';
 
 const pageSize = 10; // 每页显示的数据数量
 
@@ -22,6 +25,16 @@ const Pagination = ({data}) => {
     const clipboard = useClipboard();
     const [currentPage, setCurrentPage] = useState(1);
     const [isHidden, setIsHidden] = useState(true);
+    const [downloadState, setDownloadState] = useState(new Map());
+
+    const showDownloadProgress = (progress, id) => {
+        notify_loading(<span>正在下载视频{id}: <span style={{color: 'rgb(96, 165, 250)', width: '66px', display: 'inline-block', 	textAlign: 'right'}}>{progress}%</span></span>, 'downloading_video' + id);
+    };
+
+    const finished_callback = (id) => {
+        toast.dismiss('downloading_video' + id);
+        notify_success('视频' + id +  '下载完毕 !', 'finished_video' + id);
+    }
 
     // 计算总页数
     const totalPages = data ? Math.ceil(data.length / pageSize) : 0;
@@ -100,6 +113,7 @@ const Pagination = ({data}) => {
     };
     if (currentPage > totalPages)
         setCurrentPage(1);
+
     return (
         <div>
             <div id="dataContainer">
@@ -169,19 +183,46 @@ const Pagination = ({data}) => {
                                             <>拷贝视频URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
                                     }
                                 </MButton>
-                                <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}
+                                <MButton disabled={!finished || downloadState.get(index)} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}
                                          onClick={() => {
                                              if (!item)
                                                  return;
                                              let a = a_ref.current;
-                                             a.href = item.url;
-                                             a.click();
+                                             setDownloadState((downloadState) => {
+                                                 let newMap = new Map(downloadState);
+                                                 newMap.set(index, true);
+                                                 return newMap;
+                                             });
+                                             downloadWithProgress(item.url, showDownloadProgress, finished_callback, index + 1).then(blob => {
+                                                 // let title = `P${index + 1} - ${item.title}.mp4`;
+                                                 // let file = new File([blob], title);
+                                                 // if (navigator.canShare && navigator.canShare({ files: [file] })){
+                                                 //     navigator.share({
+                                                 //         files: [file],
+                                                 //         title: title,
+                                                 //         text: title,
+                                                 //     }).then(r => notify_success('视频' + (index + 1) + '分享成功 !', 'share_video_success' + (index + 1)))
+                                                 //         .catch(e => {
+                                                 //             console.log(e);
+                                                 //             notify_error('视频' + (index + 1) + '分享失败 !', 'share_video_error' + (index + 1));
+                                                 //         })
+                                                 // }else{
+                                                     a.href = URL.createObjectURL(blob);
+                                                     a.download = 'P' + (index + 1) + ' - ' + item.title + '.mp4';
+                                                     a.click();
+                                                 // }
+                                                 setDownloadState((downloadState) => {
+                                                     let newMap2 = new Map(downloadState);
+                                                     newMap2.set(index, false);
+                                                     return newMap2;
+                                                 });
+                                             });
                                          }}>
                                     {
                                         !finished ?
                                             <>暂无解析<FontAwesomeIcon icon={solid("film")} fade tw={'ml-1'}/></>
                                             :
-                                            <>下载视频<FontAwesomeIcon icon={solid("download")} beat tw={'ml-1'}/></>
+                                            (downloadState.get(index) ? <>下载中...<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></> : <>下载视频<FontAwesomeIcon icon={solid("download")} beat tw={'ml-1'}/></>)
                                     }
                                 </MButton>
                             </LineWrapper>
