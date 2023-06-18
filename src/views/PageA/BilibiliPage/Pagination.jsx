@@ -12,7 +12,7 @@ import {useClipboard} from "use-clipboard-copy";
 import HoverList from "@/components/HoverList/HoverList";
 import {Tooltip} from "react-tooltip";
 import FadeInOnViewport from "@/components/FadeInOnViewport/FadeInOnViewport";
-import {downloadWithProgress} from "@/utils/utils";
+import {downloadWithProgress, isIOS} from "@/utils/utils";
 import toast from "react-hot-toast";
 import tw from 'twin.macro';
 import 'twin.macro';
@@ -26,6 +26,7 @@ const Pagination = ({data}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [isHidden, setIsHidden] = useState(true);
     const [downloadState, setDownloadState] = useState(new Map());
+    const [iosIsDownloading, setIosIsDownloading] = useState(false);
 
     const showDownloadProgress = (progress, id) => {
         notify_loading(<span>正在下载视频{id}: <span style={{color: 'rgb(96, 165, 250)', width: '66px', display: 'inline-block', 	textAlign: 'right'}}>{progress}%</span></span>, 'downloading_video' + id);
@@ -161,9 +162,9 @@ const Pagination = ({data}) => {
                                     onClick={() => {
                                         if (item) {
                                             clipboard.copy(item.title);
-                                            notify_success('P' + (index + 1) + ' 视频标题Copied !', 'sub_title_' + (index + 1) + '_copy');
+                                            notify_success('P' + (item.index + 1) + ' 视频标题Copied !', 'sub_title_' + (item.index + 1) + '_copy');
                                         } else
-                                            notify_error('P' + (index + 1) + ' 视频标题 Copy失败 !', 'sub_title_' + (index + 1) + '_copy_error');
+                                            notify_error('P' + (item.index + 1) + ' 视频标题 Copy失败 !', 'sub_title_' + (item.index + 1) + '_copy_error');
                                     }}
                                 >
                                     <FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>
@@ -174,7 +175,7 @@ const Pagination = ({data}) => {
                                 <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:mr-6'}
                                          onClick={() => {
                                              clipboard.copy(item.url);
-                                             notify_success('P' + (index + 1) + ' 视频URL Copied !', 'video_url_copy');
+                                             notify_success('P' + (item.index + 1) + ' 视频URL Copied !', 'video_url_copy');
                                          }}>
                                     {
                                         !finished ?
@@ -183,7 +184,7 @@ const Pagination = ({data}) => {
                                             <>拷贝视频URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
                                     }
                                 </MButton>
-                                <MButton disabled={!finished || downloadState.get(index)} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}
+                                <MButton disabled={!finished || downloadState.get(index) || iosIsDownloading} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}
                                          onClick={() => {
                                              if (!item)
                                                  return;
@@ -193,22 +194,24 @@ const Pagination = ({data}) => {
                                                  newMap.set(index, true);
                                                  return newMap;
                                              });
-                                             downloadWithProgress(item.url, showDownloadProgress, finished_callback, index + 1).then(blob => {
-                                                 // let title = `P${index + 1} - ${item.title}.mp4`;
+                                             if(isIOS())
+                                                 setIosIsDownloading((iosIsDownloading) => true);
+                                             downloadWithProgress(item.url, showDownloadProgress, finished_callback, item.index + 1).then(blob => {
+                                                 // let title = `P${item.index + 1} - ${item.title}.mp4`;
                                                  // let file = new File([blob], title);
                                                  // if (navigator.canShare && navigator.canShare({ files: [file] })){
                                                  //     navigator.share({
                                                  //         files: [file],
                                                  //         title: title,
                                                  //         text: title,
-                                                 //     }).then(r => notify_success('视频' + (index + 1) + '分享成功 !', 'share_video_success' + (index + 1)))
+                                                 //     }).then(r => notify_success('视频' + (item.index + 1) + '分享成功 !', 'share_video_success' + (item.index + 1)))
                                                  //         .catch(e => {
                                                  //             console.log(e);
-                                                 //             notify_error('视频' + (index + 1) + '分享失败 !', 'share_video_error' + (index + 1));
+                                                 //             notify_error('视频' + (item.index + 1) + '分享失败 !', 'share_video_error' + (item.index + 1));
                                                  //         })
                                                  // }else{
                                                      a.href = URL.createObjectURL(blob);
-                                                     a.download = 'P' + (index + 1) + ' - ' + item.title + '.mp4';
+                                                     a.download = 'P' + (item.index + 1) + ' - ' + item.title + '.mp4';
                                                      a.click();
                                                  // }
                                                  setDownloadState((downloadState) => {
@@ -216,6 +219,18 @@ const Pagination = ({data}) => {
                                                      newMap2.set(index, false);
                                                      return newMap2;
                                                  });
+                                                 if(isIOS())
+                                                     setIosIsDownloading((iosIsDownloading) => false);
+                                             }).catch(e => {
+                                                 console.log(e);
+                                                 notify_error(`视频${item.index + 1}下载被中断，请重试 !`, 'download_video_error' + (item.index + 1));
+                                                 setDownloadState((downloadState) => {
+                                                     let newMap2 = new Map(downloadState);
+                                                     newMap2.set(index, false);
+                                                     return newMap2;
+                                                 });
+                                                 if(isIOS())
+                                                     setIosIsDownloading((iosIsDownloading) => false);
                                              });
                                          }}>
                                     {

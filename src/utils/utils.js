@@ -88,3 +88,13 @@ export function downloadWithProgress(url, loading_callback, finished_callback, i
             });
     });
 }
+
+export function isIOS() {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    return /iphone|ipad|ipod/.test(userAgent);
+}
+
+export function isAndroid() {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    return /android/.test(userAgent);
+}

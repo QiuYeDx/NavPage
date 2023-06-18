@@ -29,7 +29,7 @@ export default function PageB(){
                                    tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
             />}
             onClick={() => {
-                clipboard.copy("https://qiuyedx.github.io/NavPage");
+                clipboard.copy("https://nav.qiuyedx.com");
                 notify_success("秋夜导航站地址Copied !", "copy_1");
             }}
         >

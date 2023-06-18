@@ -301,23 +301,9 @@ export default function TiktokPage() {
                                              return newMap;
                                          });
                                          downloadWithProgress(data.url, showDownloadProgress, finished_callback, 1).then(blob => {
-                                             // let title = `P${index + 1} - ${item.title}.mp4`;
-                                             // let file = new File([blob], title);
-                                             // if (navigator.canShare && navigator.canShare({ files: [file] })){
-                                             //     navigator.share({
-                                             //         files: [file],
-                                             //         title: title,
-                                             //         text: title,
-                                             //     }).then(r => notify_success('视频' + (index + 1) + '分享成功 !', 'share_video_success' + (index + 1)))
-                                             //         .catch(e => {
-                                             //             console.log(e);
-                                             //             notify_error('视频' + (index + 1) + '分享失败 !', 'share_video_error' + (index + 1));
-                                             //         })
-                                             // }else{
                                              a.href = URL.createObjectURL(blob);
                                              a.download = data.title + '.mp4';
                                              a.click();
-                                             // }
                                              setDownloadState((downloadState) => {
                                                  let newMap2 = new Map(downloadState);
                                                  newMap2.set(1, false);

@@ -3,8 +3,9 @@ import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
 
 
 export const WrapperTopStyled = styled.div`
+  box-sizing: content-box;
   color: black;
-  height: 100px;
+  height: 80px;
   width: 100%;
   //background-color: pink;
   ${({ hasBorder }) => hasBorder && tw`border border-blue-500`};
@@ -13,8 +14,8 @@ export const WrapperTopStyled = styled.div`
   }
   overflow-y: hidden;
   overflow-x: auto;
-  padding-bottom: 10px;
-  margin-bottom: -15px;
+  padding-bottom: 30px;
+  margin-bottom: -30px;
   padding-left: 15px;
   padding-right: 15px;
   
@@ -39,7 +40,7 @@ export const NavWrapper = styled.div`
   //filter: drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
   //drop-shadow(0 20px 13px rgb(0 0 0 / 0.03))
 
-  ${tw`rounded-full shadow-lg md:hover:shadow-xl duration-300 bg-white`};
+  ${tw`rounded-full shadow-lg md:hover:shadow-xl active:shadow-xl md:active:shadow-md duration-300 bg-white`};
 `;
 
 export const NavHome = styled.div`
