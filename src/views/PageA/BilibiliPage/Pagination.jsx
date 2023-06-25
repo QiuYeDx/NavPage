@@ -21,12 +21,12 @@ const pageSize = 10; // 每页显示的数据数量
 
 const Pagination = ({data}) => {
     const scroll_ref = useRef();
-    const {finished, a_ref} = useContext(MyContext);
+    const {finished, a_ref, downloadState, setDownloadState, iosIsDownloading, setIosIsDownloading} = useContext(MyContext);
     const clipboard = useClipboard();
     const [currentPage, setCurrentPage] = useState(1);
     const [isHidden, setIsHidden] = useState(true);
-    const [downloadState, setDownloadState] = useState(new Map());
-    const [iosIsDownloading, setIosIsDownloading] = useState(false);
+    // const [downloadState, setDownloadState] = useState(new Map());
+    // const [iosIsDownloading, setIosIsDownloading] = useState(false);
 
     const showDownloadProgress = (progress, id) => {
         notify_loading(<span>正在下载视频{id}: <span style={{color: 'rgb(96, 165, 250)', width: '66px', display: 'inline-block', 	textAlign: 'right'}}>{progress}%</span></span>, 'downloading_video' + id);
@@ -184,14 +184,14 @@ const Pagination = ({data}) => {
                                             <>拷贝视频URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
                                     }
                                 </MButton>
-                                <MButton disabled={!finished || downloadState.get(index) || iosIsDownloading} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}
+                                <MButton disabled={!finished || downloadState.get(item.index) || iosIsDownloading} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}
                                          onClick={() => {
                                              if (!item)
                                                  return;
                                              let a = a_ref.current;
                                              setDownloadState((downloadState) => {
                                                  let newMap = new Map(downloadState);
-                                                 newMap.set(index, true);
+                                                 newMap.set(item.index, true);
                                                  return newMap;
                                              });
                                              if(isIOS())
@@ -214,9 +214,15 @@ const Pagination = ({data}) => {
                                                      a.download = 'P' + (item.index + 1) + ' - ' + item.title + '.mp4';
                                                      a.click();
                                                  // }
+                                                 let old_state = JSON.parse(decodeURIComponent(sessionStorage.getItem('bilibili_states')));
+                                                 let download_state = new Map(old_state.downloadStateArray);
+                                                 download_state.set(item.index, false);
+                                                 old_state.downloadStateArray = Array.from(download_state);
+                                                 sessionStorage.setItem('bilibili_states', encodeURIComponent(JSON.stringify(old_state)));
+
                                                  setDownloadState((downloadState) => {
                                                      let newMap2 = new Map(downloadState);
-                                                     newMap2.set(index, false);
+                                                     newMap2.set(item.index, false);
                                                      return newMap2;
                                                  });
                                                  if(isIOS())
@@ -224,9 +230,15 @@ const Pagination = ({data}) => {
                                              }).catch(e => {
                                                  console.log(e);
                                                  notify_error(`视频${item.index + 1}下载被中断，请重试 !`, 'download_video_error' + (item.index + 1));
+                                                 let old_state = JSON.parse(decodeURIComponent(sessionStorage.getItem('bilibili_states')));
+                                                 let download_state = new Map(old_state.downloadStateArray);
+                                                 download_state.set(item.index, false);
+                                                 old_state.downloadStateArray = Array.from(download_state);
+                                                 sessionStorage.setItem('bilibili_states', encodeURIComponent(JSON.stringify(old_state)));
+
                                                  setDownloadState((downloadState) => {
                                                      let newMap2 = new Map(downloadState);
-                                                     newMap2.set(index, false);
+                                                     newMap2.set(item.index, false);
                                                      return newMap2;
                                                  });
                                                  if(isIOS())
@@ -237,7 +249,7 @@ const Pagination = ({data}) => {
                                         !finished ?
                                             <>暂无解析<FontAwesomeIcon icon={solid("film")} fade tw={'ml-1'}/></>
                                             :
-                                            (downloadState.get(index) ? <>下载中...<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></> : <>下载视频<FontAwesomeIcon icon={solid("download")} beat tw={'ml-1'}/></>)
+                                            (downloadState.get(item.index) ? <>下载中...<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></> : <>下载视频<FontAwesomeIcon icon={solid("download")} beat tw={'ml-1'}/></>)
                                     }
                                 </MButton>
                             </LineWrapper>

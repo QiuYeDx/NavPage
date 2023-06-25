@@ -10,7 +10,7 @@ import {notify_error, notify_success} from "@/hooks/toasts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {duotone, regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import tw from "twin.macro";
-import {useNavigate} from "react-router-dom";
+import {useBeforeUnload, useNavigate} from "react-router-dom";
 import {H2, InLineTitle} from "@/styles/TextStyles";
 import {TextInputLine} from "@/components/TextInputLine/Styled.twin";
 import {Gap} from "@/components/Gap/Styled.twin";
@@ -22,6 +22,8 @@ import {Tooltip} from 'react-tooltip';
 import MyContext from './MyContext';
 import Pagination from "./Pagination";
 import {faBilibili} from "@fortawesome/free-brands-svg-icons";
+import {app_config} from "@/styles/GlobalConfig";
+import {blobToDataUrl} from "@/utils/utils";
 
 export default function BilibiliPage() {
     const default_cover = 'images/image-blue-300.png';
@@ -36,6 +38,8 @@ export default function BilibiliPage() {
     const [finished, setFinished] = useState(false);
     const [invalid, setInvalid] = useState(false);
     const [cover, setCover] = useState(default_cover);
+    const [downloadState, setDownloadState] = useState(new Map());
+    const [iosIsDownloading, setIosIsDownloading] = useState(false);
     const handleChange = (event) => {
         setText(event.target.value);
         setInvalid(false);
@@ -70,7 +74,9 @@ export default function BilibiliPage() {
                 responseType: 'blob',
             });
             const blob = coverResponse.data;
-            setCover(URL.createObjectURL(blob));
+            blobToDataUrl(blob).then((url) => {
+                setCover(url);
+            });
 
             notify_success('解析成功 !', 'resolving_success');
 
@@ -112,19 +118,81 @@ export default function BilibiliPage() {
         // const url = 'http://127.0.0.1:8000/test_api';
         const params = {
             url: btoa(valid_url[0]),
-            app_id: 'jyninllnnkfkllpv',
-            app_secret: 'bWF3clZ2RENRMmx3aG95dVVaU1NKQT09',
+            app_id: app_config.app_id,
+            app_secret: app_config.app_secret,
         };
         fetchData(url, params).then(r => r).catch(e => e);
 
     };
 
-    const showAllAns = () => {
-
-    }
+    useBeforeUnload(() => {
+        // 离开页面前保存状态
+        if(data === null)
+            return;
+        let downloadStateArray = Array.from(downloadState);
+        sessionStorage.setItem('bilibili_states', (JSON.stringify({
+            text,
+            data,
+            list,
+            loading,
+            finished,
+            invalid,
+            cover,
+            downloadStateArray,
+            iosIsDownloading
+        })));
+    });
 
     useEffect(() => {
-    });
+        // return () => {
+            // 保存状态
+            if(data === null)
+                return;
+            let downloadStateArray = Array.from(downloadState);
+            sessionStorage.setItem('bilibili_states', (JSON.stringify({
+                text,
+                data,
+                list,
+                loading,
+                finished,
+                invalid,
+                cover,
+                downloadStateArray,
+                iosIsDownloading
+            })));
+        // };
+    }, [text, data, list, loading, finished, invalid, cover, downloadState]);
+
+    useEffect(() => {
+        if(sessionStorage.getItem('bilibili_states')){
+            const last_states = JSON.parse((sessionStorage.getItem('bilibili_states')));
+            setText(last_states.text ? last_states.text : '');
+            setData(last_states.data ? last_states.data : null);
+            setList(last_states.list ? last_states.list : null);
+            setLoading(last_states.loading);
+            setFinished(last_states.finished);
+            setInvalid(last_states.invalid);
+            setCover(last_states.cover);
+            setDownloadState(new Map(last_states.downloadStateArray));
+            setIosIsDownloading(last_states.iosIsDownloading);
+        }
+        // 在组件挂载时启动定时器
+        const timer = setInterval(() => {
+            // 定时器任务逻辑
+            // let obj = sessionStorage.getItem('tiktok_states');
+            // if(obj && JSON.stringify(Array.from(downloadState)) !== JSON.stringify(JSON.parse(decodeURIComponent(obj)).downloadStateArray)){
+            //     console.log('update download state');
+            if(sessionStorage.getItem('bilibili_states'))
+                setDownloadState(new Map(JSON.parse(decodeURIComponent(sessionStorage.getItem('bilibili_states'))).downloadStateArray));
+            // }
+
+        }, 1000);
+
+        // 在组件卸载时清除定时器
+        return () => {
+            clearInterval(timer);
+        };
+    }, []); // 依赖项为空数组，表示仅在组件挂载和卸载时执行一次
     return (
         <div tw={'col-span-4'}>
             <Wrapper>
@@ -261,7 +329,7 @@ export default function BilibiliPage() {
                                     <>拷贝封面URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
                             }
                         </MButton>
-                        <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}
+                        <MButton disabled={!finished || iosIsDownloading} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}
                                  onClick={handleDownloadPic}>
                             {
                                 !finished ?
@@ -273,7 +341,7 @@ export default function BilibiliPage() {
                         <a tw={'hidden'} ref={a_ref} target="_blank" rel="noopener noreferrer"/>
                     </LineWrapper>
                 </ContentWrapper>
-                <MyContext.Provider value={{finished, a_ref}}>
+                <MyContext.Provider value={{finished, a_ref, downloadState, setDownloadState, iosIsDownloading, setIosIsDownloading}}>
                     {list ? <Pagination data={list.map((item, index) => {
                         item.index = index;
                         return item;

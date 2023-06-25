@@ -6,17 +6,18 @@ import {
     Wrapper,
     LineWrapper
 } from "@/views/PageA/QRPage/Styled.twin";
-import {notify_success} from "@/hooks/toasts";
+import {notify_error, notify_success} from "@/hooks/toasts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import tw from "twin.macro";
-import {useNavigate} from "react-router-dom";
+import {useBeforeUnload, useNavigate} from "react-router-dom";
 import {H2, InLineTitle} from "@/styles/TextStyles";
 import {TextInputLine} from "@/components/TextInputLine/Styled.twin";
 import {Gap} from "@/components/Gap/Styled.twin";
 import {BackButton, MButton} from "@/components/Button/Styled.twin";
 import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
 import axios from 'axios';
+import {app_config} from "@/styles/GlobalConfig";
 
 export default function QRPage() {
     const navigate = useNavigate();
@@ -50,6 +51,7 @@ export default function QRPage() {
     const handleSubmit = (event) => {
         if(!text){
             setInvalid(true);
+            notify_error('请输入内容 !', 'qrcode_input_error');
             return;
         }
 
@@ -60,25 +62,68 @@ export default function QRPage() {
             content: text,
             size: 500,
             type: 1,
-            app_id: 'jyninllnnkfkllpv',
-            app_secret: 'bWF3clZ2RENRMmx3aG95dVVaU1NKQT09',
+            app_id: app_config.app_id,
+            app_secret: app_config.app_secret,
         };
 
         axios.get(url, {params})
             .then(response => {
                 const qrCodeBase64 = response.data.data.qrCodeBase64;
+                console.log(qrCodeBase64);
+                console.log(typeof qrCodeBase64);
                 setData(qrCodeBase64);
+                notify_success('QR码获取成功 !', 'qrcode_get_success');
             })
             .catch(error => {
                 console.error('Error generating QR code:', error);
+                notify_error('QR码获取失败，请重试 !', 'qrcode_get_error')
             })
             .finally(() => {
                 setLoading(false);
                 setFinished(true);
             });
     };
-    useEffect(() => {
+
+    useBeforeUnload(() => {
+        // 离开页面前保存状态
+        if(!finished)
+            return;
+        sessionStorage.setItem('qrcode_states', (JSON.stringify({
+            text,
+            data,
+            loading,
+            finished,
+            invalid,
+        })));
     });
+
+    useEffect(() => {
+        // return () => { // 总是每次更新状态后保存上一个状态的值，而不是保存最新的状态
+        // 保存状态
+        if(!finished)
+            return;
+        let str_data = data.toString();
+        sessionStorage.setItem('qrcode_states', (JSON.stringify({
+            text,
+            data,
+            loading,
+            finished,
+            invalid,
+        })));
+        // };
+    }, [text, data, loading, finished, invalid]);
+
+    useEffect(() => {
+        if(sessionStorage.getItem('qrcode_states')){
+            const last_states = JSON.parse((sessionStorage.getItem('qrcode_states')));
+            setText(last_states.text ? last_states.text : '');
+            setData(last_states.data ? last_states.data : 'images/qrcode-solid-md.png');
+            setLoading(last_states.loading);
+            setFinished(last_states.finished);
+            setInvalid(last_states.invalid);
+        }
+    }, []); // 依赖项为空数组，表示仅在组件挂载和卸载时执行一次
+
     return (
         <div tw={'col-span-4'}>
             <Wrapper>

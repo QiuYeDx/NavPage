@@ -10,7 +10,7 @@ import {notify_error, notify_loading, notify_success} from "@/hooks/toasts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import tw from "twin.macro";
-import {useNavigate} from "react-router-dom";
+import {useBeforeUnload, useNavigate} from "react-router-dom";
 import {H2, InLineTitle} from "@/styles/TextStyles";
 import {TextInputLine} from "@/components/TextInputLine/Styled.twin";
 import {Gap} from "@/components/Gap/Styled.twin";
@@ -21,8 +21,9 @@ import {useClipboard} from "use-clipboard-copy";
 import {Tooltip} from 'react-tooltip';
 import FadeInOnViewport from "@/components/FadeInOnViewport/FadeInOnViewport";
 import {faTiktok} from "@fortawesome/free-brands-svg-icons";
-import {downloadWithProgress} from "@/utils/utils";
+import {blobToDataUrl, downloadWithProgress} from "@/utils/utils";
 import toast from "react-hot-toast";
+import {app_config} from "@/styles/GlobalConfig";
 
 export default function TiktokPage() {
     const default_cover = 'images/image-blue-300.png';
@@ -70,13 +71,17 @@ export default function TiktokPage() {
                 responseType: 'blob',
             });
             const blob = coverResponse.data;
-            setCover(URL.createObjectURL(blob));
+            blobToDataUrl(blob).then((url) => {
+                setCover(url);
+            });
 
             const dyCoverResponse = await axios.get(response.data.data.coverDynamic, {
                 responseType: 'blob',
             });
             const blob_dyCover = dyCoverResponse.data;
-            setDyCover(URL.createObjectURL(blob_dyCover));
+            blobToDataUrl(blob_dyCover).then((url) => {
+                setDyCover(url);
+            });
 
             notify_success('解析成功 !', 'resolving_success');
 
@@ -95,7 +100,6 @@ export default function TiktokPage() {
             setLoading(false);
         }
     }
-
 
     const handleSubmit = (event) => {
         let valid_url = null;
@@ -118,19 +122,79 @@ export default function TiktokPage() {
         // const url = 'http://127.0.0.1:8000/test_api';
         const params = {
             url: btoa(valid_url[0]),
-            app_id: 'jyninllnnkfkllpv',
-            app_secret: 'bWF3clZ2RENRMmx3aG95dVVaU1NKQT09',
+            app_id: app_config.app_id,
+            app_secret: app_config.app_secret,
         };
         fetchData(url, params).then(r => r).catch(e => e);
 
     };
 
-    const showAllAns = () => {
-
-    }
+    useBeforeUnload(() => {
+        // 离开页面前保存状态
+        if(data === null)
+            return;
+        let downloadStateArray = Array.from(downloadState);
+        sessionStorage.setItem('tiktok_states', (JSON.stringify({
+            text,
+            data,
+            loading,
+            finished,
+            invalid,
+            cover,
+            dyCover,
+            downloadStateArray
+        })));
+    });
 
     useEffect(() => {
-    });
+        // return () => { // 总是每次更新状态后保存上一个状态的值，而不是保存最新的状态
+            // 保存状态
+            if(data === null)
+                return;
+            let downloadStateArray = Array.from(downloadState);
+            sessionStorage.setItem('tiktok_states', (JSON.stringify({
+                text,
+                data,
+                loading,
+                finished,
+                invalid,
+                cover,
+                dyCover,
+                downloadStateArray
+            })));
+        // };
+    }, [text, data, loading, finished, invalid, cover, dyCover, downloadState]);
+
+    useEffect(() => {
+        if(sessionStorage.getItem('tiktok_states')){
+            const last_states = JSON.parse((sessionStorage.getItem('tiktok_states')));
+            setText(last_states.text ? last_states.text : '');
+            setData(last_states.data ? last_states.data : null);
+            setLoading(last_states.loading);
+            setFinished(last_states.finished);
+            setInvalid(last_states.invalid);
+            setCover(last_states.cover);
+            setDyCover(last_states.dyCover);
+            setDownloadState(new Map(last_states.downloadStateArray));
+        }
+        // 在组件挂载时启动定时器
+        const timer = setInterval(() => {
+            // 定时器任务逻辑
+            // let obj = sessionStorage.getItem('tiktok_states');
+            // if(obj && JSON.stringify(Array.from(downloadState)) !== JSON.stringify(JSON.parse(decodeURIComponent(obj)).downloadStateArray)){
+            //     console.log('update download state');
+            if(sessionStorage.getItem('tiktok_states'))
+                setDownloadState(new Map(JSON.parse(decodeURIComponent(sessionStorage.getItem('tiktok_states'))).downloadStateArray));
+            // }
+
+        }, 1000);
+
+        // 在组件卸载时清除定时器
+        return () => {
+            clearInterval(timer);
+        };
+    }, []); // 依赖项为空数组，表示仅在组件挂载和卸载时执行一次
+
     return (
         <div tw={'col-span-4'}>
             <Wrapper>
@@ -304,9 +368,18 @@ export default function TiktokPage() {
                                              a.href = URL.createObjectURL(blob);
                                              a.download = data.title + '.mp4';
                                              a.click();
+                                             console.log('下载完成');
+                                             let old_state = JSON.parse(decodeURIComponent(sessionStorage.getItem('tiktok_states')));
+                                             let download_state = new Map(old_state.downloadStateArray);
+                                             download_state.set(1, false);
+                                             old_state.downloadStateArray = Array.from(download_state);
+                                             sessionStorage.setItem('tiktok_states', encodeURIComponent(JSON.stringify(old_state)));
+
                                              setDownloadState((downloadState) => {
+                                                 console.log('修改前', downloadState);
                                                  let newMap2 = new Map(downloadState);
                                                  newMap2.set(1, false);
+                                                 console.log('修改后', newMap2);
                                                  return newMap2;
                                              });
                                          });

@@ -13,7 +13,7 @@ export const MButton = styled.button`
   ${tw`rounded-2xl bg-blue-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider \
   ring-blue-200 ring-0 hover:ring-4 hover:scale-105 active:bg-blue-600 active:ring-blue-400 duration-100 ease-out \
   disabled:bg-gray-400 disabled:hover:ring-0 disabled:hover:scale-100 disabled:cursor-not-allowed\
-  select-none cursor-pointer`};
+  select-none md:cursor-pointer`};
   ${({_tw}) => _tw }
   height: ${({h}) => h || "32px"};
   line-height: ${({h}) => h || "32px"};
@@ -32,7 +32,7 @@ export const BackButton = styled.div`
   transition: all 0.2s ease;
   font-size: 20px;
   ${tw`shadow-lg rounded-full active:shadow-md md:active:shadow-md md:hover:shadow-xl animate-fade_in_up.4 \
-  bg-white font-sans font-semibold text-gray-700 md:hover:text-gray-400 active:text-gray-400 md:active:text-gray-500 text-center align-middle select-none cursor-pointer \
+  bg-white font-sans font-semibold text-gray-700 md:hover:text-gray-400 active:text-gray-400 md:active:text-gray-500 text-center align-middle select-none md:cursor-pointer \
   md:w-48`};
 
   @media(min-width: ${WIDTH_MOBILE}px){
@@ -53,7 +53,7 @@ export const PageButton = styled.div`
   z-index: 10;
   position: relative;
   ${tw`shadow-lg rounded-full active:shadow-md md:active:shadow-md md:hover:shadow-xl animate-fade_in_up.4 \
-  bg-white font-sans font-semibold text-gray-700 md:hover:text-gray-400 active:text-gray-400 md:active:text-gray-500 text-center align-middle select-none cursor-pointer`};
+  bg-white font-sans font-semibold text-gray-700 md:hover:text-gray-400 active:text-gray-400 md:active:text-gray-500 text-center align-middle select-none md:cursor-pointer`};
   
   ${({active}) => active ? tw`bg-blue-400 text-white ring-blue-200 ring-4 md:hover:bg-blue-300 md:hover:text-white active:text-blue-300 active:bg-blue-500 active:ring-blue-400` : ''};
 `

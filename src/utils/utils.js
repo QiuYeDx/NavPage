@@ -97,3 +97,14 @@ export function isAndroid() {
     const userAgent = window.navigator.userAgent.toLowerCase();
     return /android/.test(userAgent);
 }
+
+export function blobToDataUrl(blob) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            resolve(reader.result);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+    });
+}
