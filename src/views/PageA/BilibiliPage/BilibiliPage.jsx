@@ -285,7 +285,7 @@ export default function BilibiliPage() {
                             data-tooltip-content={data ? data.desc : '视频描述'}
                             data-tooltip-variant="info">
                             <TextInputLine
-                                placeholder={'视频描述'} maxLength={2000} value={data ? data.desc : ''}
+                                placeholder={' '} maxLength={2000} value={data ? data.desc : ''}
                                 readOnly
                                 className={'peer'}
                                 id={'input_desc_main'}
