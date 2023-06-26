@@ -217,7 +217,7 @@ export default function BilibiliPage() {
                     <LineWrapper>
                         <TextInputLineWrapper
                             data-tooltip-id="url_tooltip"
-                            data-tooltip-content="直接粘贴B站分享文本即可^_^"
+                            data-tooltip-content="直接粘贴B站分享文本即可"
                             data-tooltip-variant="info">
                             <TextInputLine
                                 placeholder={' '}
@@ -256,10 +256,10 @@ export default function BilibiliPage() {
                     <LineWrapper>
                         <TextInputLineWrapper
                             data-tooltip-id="title_tooltip"
-                            data-tooltip-content={data ? data.title : '视频标题'}
+                            data-tooltip-content={data ? data.title : ''}
                             data-tooltip-variant="info">
                             <TextInputLine
-                                placeholder={' '} maxLength={2000} value={data ? data.title : ''}
+                                placeholder={'待解析'} maxLength={2000} value={data ? data.title : ''}
                                 className={'peer'}
                                 id={'input_title_main'}
                                 readOnly
@@ -282,10 +282,10 @@ export default function BilibiliPage() {
                     <LineWrapper>
                         <TextInputLineWrapper
                             data-tooltip-id="desc_tooltip"
-                            data-tooltip-content={data ? data.desc : '视频描述'}
+                            data-tooltip-content={data ? data.desc : ''}
                             data-tooltip-variant="info">
                             <TextInputLine
-                                placeholder={' '} maxLength={2000} value={data ? data.desc : ''}
+                                placeholder={'待解析'} maxLength={2000} value={data ? (data.desc === '' ? '无描述' : data.desc) : ''}
                                 readOnly
                                 className={'peer'}
                                 id={'input_desc_main'}

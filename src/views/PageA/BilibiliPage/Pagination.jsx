@@ -147,10 +147,10 @@ const Pagination = ({data}) => {
                             <LineWrapper>
                                 <TextInputLineWrapper
                                     data-tooltip-id="p_title_tooltip"
-                                    data-tooltip-content={item ? item.title : '分P标题'}
+                                    data-tooltip-content={item ? item.title : ''}
                                     data-tooltip-variant="info">
                                     <TextInputLine
-                                        placeholder={'分P标题'} maxLength={2000} value={item.title || ''}
+                                        placeholder={'无分P标题'} maxLength={2000} value={item.title || ''}
                                         readOnly
                                         className={'peer'}
                                         id={'input_title_sub'}

@@ -219,7 +219,7 @@ export default function TiktokPage() {
                     <LineWrapper>
                         <TextInputLineWrapper
                             data-tooltip-id="url_tooltip"
-                            data-tooltip-content="直接粘贴Tiktok分享口令即可^_^"
+                            data-tooltip-content="直接粘贴Tiktok分享口令即可"
                             data-tooltip-variant="info">
                             <TextInputLine
                                 placeholder={' '} maxLength={2000} value={text}
@@ -260,10 +260,10 @@ export default function TiktokPage() {
                     <LineWrapper>
                         <TextInputLineWrapper
                             data-tooltip-id="title_tooltip"
-                            data-tooltip-content={data ? data.title : '视频标题'}
+                            data-tooltip-content={data ? data.title : ''}
                             data-tooltip-variant="info">
                             <TextInputLine
-                                placeholder={' '} maxLength={2000} value={data ? data.title : ''}
+                                placeholder={'待解析'} maxLength={2000} value={data ? data.title : ''}
                                 readOnly
                                 className={'peer'}
                                 id={'input_title_main'}
