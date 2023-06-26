@@ -12,7 +12,7 @@ import {regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import tw from "twin.macro";
 import {useBeforeUnload, useNavigate} from "react-router-dom";
 import {H2, InLineTitle} from "@/styles/TextStyles";
-import {TextInputLine} from "@/components/TextInputLine/Styled.twin";
+import {InputDesc, InputIcon, TextInputLine, TextInputLineWrapper} from "@/components/TextInputLine/Styled.twin";
 import {Gap} from "@/components/Gap/Styled.twin";
 import {BackButton, MButton} from "@/components/Button/Styled.twin";
 import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
@@ -140,16 +140,26 @@ export default function QRPage() {
                 </HeaderWrapper>
                 <ContentWrapper>
                     <LineWrapper>
-                        <InLineTitle tw={'after:content-[\'*\'] after:ml-0.5 after:text-red-500 mb-2'}>输入内容</InLineTitle>
+                        <InLineTitle tw={'mb-2'}>输入<FontAwesomeIcon icon={solid("keyboard")} tw={'text-blue-400 pl-1 pr-1 duration-500 ease-out'}/>内容</InLineTitle>
                     </LineWrapper>
 
                     <LineWrapper>
-                        <TextInputLine
-                            placeholder={'输入纯文本、URL etc.'} maxLength={2000} value={text}
-                            onChange={handleChange}
-                            onKeyPress={handleKeyPress}
-                            invalid={invalid}
-                        />
+                        <TextInputLineWrapper>
+                            <TextInputLine
+                                placeholder={' '} maxLength={2000} value={text}
+                                onChange={handleChange}
+                                onKeyPress={handleKeyPress}
+                                invalid={invalid}
+                                className={'peer'}
+                                id={'input_text'}
+                            />
+                            <InputDesc for={'input_text'}>输入文本或URL</InputDesc>
+                            <InputIcon for={'input_text'} onClick={() => {setText('')}}
+                                       tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}
+                            >
+                                <FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>
+                            </InputIcon>
+                        </TextInputLineWrapper>
                     </LineWrapper>
 
                     <LineWrapper tw={'mt-2'}>

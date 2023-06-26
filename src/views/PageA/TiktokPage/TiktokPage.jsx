@@ -12,7 +12,7 @@ import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import tw from "twin.macro";
 import {useBeforeUnload, useNavigate} from "react-router-dom";
 import {H2, InLineTitle} from "@/styles/TextStyles";
-import {TextInputLine} from "@/components/TextInputLine/Styled.twin";
+import {InputDesc, InputIcon, TextInputLine, TextInputLineWrapper} from "@/components/TextInputLine/Styled.twin";
 import {Gap} from "@/components/Gap/Styled.twin";
 import {BackButton, MButton} from "@/components/Button/Styled.twin";
 import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
@@ -212,36 +212,28 @@ export default function TiktokPage() {
                 <ContentWrapper>
                     <LineWrapper>
                         <InLineTitle>
-                            输入<FontAwesomeIcon icon={faTiktok} tw={"pl-1 pr-1 duration-500 ease-out"}/>分享口令
+                            输入<FontAwesomeIcon icon={faTiktok} tw={"pl-1 pr-1 duration-500 ease-out"}/>口令
                         </InLineTitle>
                     </LineWrapper>
 
                     <LineWrapper>
-                        <InLineTitle fontSize={28} lineHeight={40}
-                                     tw={'text-gray-600 font-medium -mr-2 -ml-2 text-right'}>
-                            URL
-                        </InLineTitle>
-                        <TextInputLine
-                            placeholder={'输入抖音视频URL或分享口令'} maxLength={2000} value={text}
-                            onChange={handleChange}
-                            onKeyPress={handleKeyPress}
-                            invalid={invalid}
+                        <TextInputLineWrapper
                             data-tooltip-id="url_tooltip"
                             data-tooltip-content="直接粘贴Tiktok分享口令即可^_^"
-                            data-tooltip-variant="info"
-                        />
-                        <InLineTitle
-                            fontSize={28}
-                            lineHeight={40}
-                            tw={'text-gray-600 font-light -mr-2 -ml-2 md:hover:text-blue-500 active:text-blue-500 md:active:text-blue-300 text-left'}
-                            onClick={() => {
-                                setText('');
-                            }}
-                        >
-                            <FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>
-                        </InLineTitle>
+                            data-tooltip-variant="info">
+                            <TextInputLine
+                                placeholder={' '} maxLength={2000} value={text}
+                                onChange={handleChange}
+                                onKeyPress={handleKeyPress}
+                                invalid={invalid}
+                                className={'peer'}
+                                id={'input_tiktok'}
+                            />
+                            <InputDesc for={'input_tiktok'}>输入抖音分享口令</InputDesc>
+                            <InputIcon for={'input_tiktok'} onClick={() => {setText('')}} tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}><FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/></InputIcon>
+                        </TextInputLineWrapper>
                     </LineWrapper>
-                    <Tooltip id="url_tooltip" place="top" tw={'bg-blue-400 max-w-xs md:max-w-lg'}/>
+                    <Tooltip id="url_tooltip" offset={20} openOnClick={true} place="top" tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
 
                     <LineWrapper tw={'mt-2'}>
                         <MButton disabled={loading} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleSubmit}
@@ -263,34 +255,33 @@ export default function TiktokPage() {
                         <PictureDisplay height={data ? 288 : 150} width={data ? 162 : 256} src={cover}/>
                         <PictureDisplay height={data ? 288 : 150} width={data ? 162 : 256} src={dyCover}/>
                     </LineWrapper>
-                    <Gap tw={'invisible'}/>
+                    {/*<Gap tw={'invisible'}/>*/}
+                    <div tw={'invisible'}> </div>
                     <LineWrapper>
-                        <InLineTitle fontSize={28} lineHeight={40}
-                                     tw={'text-gray-600 font-medium -mr-2 -ml-2 text-right'}>
-                            标题
-                        </InLineTitle>
-                        <TextInputLine
-                            placeholder={'视频标题'} maxLength={2000} value={data ? data.title : ''}
-                            readOnly
+                        <TextInputLineWrapper
                             data-tooltip-id="title_tooltip"
                             data-tooltip-content={data ? data.title : '视频标题'}
-                            data-tooltip-variant="info"
-                        />
-                        <InLineTitle
-                            fontSize={28}
-                            lineHeight={40}
-                            tw={'text-gray-600 font-light -mr-2 -ml-2 md:hover:text-blue-500 active:text-blue-500 md:active:text-blue-300 text-left'}
-                            onClick={() => {
+                            data-tooltip-variant="info">
+                            <TextInputLine
+                                placeholder={' '} maxLength={2000} value={data ? data.title : ''}
+                                readOnly
+                                className={'peer'}
+                                id={'input_title_main'}
+                            />
+                            <InputDesc for={'input_title_main'}>视频标题</InputDesc>
+                            <InputIcon for={'input_title_main'} onClick={() => {
                                 if (data) {
                                     clipboard.copy(data.title);
                                     notify_success('视频标题Copied !', 'title_copy');
                                 } else
                                     notify_error('视频标题Copy失败 !', 'title_copy_error');
                             }}
-                        >
-                            <FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>
-                        </InLineTitle>
-                        <Tooltip id="title_tooltip" tw={'bg-blue-400 max-w-xs md:max-w-lg'}/>
+                                       tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}
+                            >
+                                <FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>
+                            </InputIcon>
+                        </TextInputLineWrapper>
+                        <Tooltip id="title_tooltip" offset={15} tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
                     </LineWrapper>
                     <LineWrapper tw={'mt-2'}>
                         <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:mr-6'}
@@ -302,7 +293,7 @@ export default function TiktokPage() {
                                 !finished ?
                                     <>暂无解析<FontAwesomeIcon icon={solid("image")} fade tw={'ml-1'}/></>
                                     :
-                                    <>静态封面URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
+                                    <>静态封面<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
                             }
                         </MButton>
                         <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}
@@ -314,7 +305,7 @@ export default function TiktokPage() {
                                 !finished ?
                                     <>暂无解析<FontAwesomeIcon icon={solid("image")} fade tw={'ml-1'}/></>
                                     :
-                                    <>动态封面URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
+                                    <>动态封面<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
                             }
                         </MButton>
                         <a tw={'hidden'} ref={a_ref} target="_blank" rel="noopener noreferrer"/>
@@ -350,7 +341,7 @@ export default function TiktokPage() {
                                     !finished ?
                                         <>暂无解析<FontAwesomeIcon icon={solid("copy")} fade tw={'ml-1'}/></>
                                         :
-                                        <>拷贝视频URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
+                                        <>视频URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
                                 }
                             </MButton>
                             <MButton disabled={!finished || downloadState.get(1)} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}

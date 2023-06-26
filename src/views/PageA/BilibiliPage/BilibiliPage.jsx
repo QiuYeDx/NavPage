@@ -12,7 +12,7 @@ import {duotone, regular, solid} from "@fortawesome/fontawesome-svg-core/import.
 import tw from "twin.macro";
 import {useBeforeUnload, useNavigate} from "react-router-dom";
 import {H2, InLineTitle} from "@/styles/TextStyles";
-import {TextInputLine} from "@/components/TextInputLine/Styled.twin";
+import {InputDesc, InputIcon, TextInputLine, TextInputLineWrapper} from "@/components/TextInputLine/Styled.twin";
 import {Gap} from "@/components/Gap/Styled.twin";
 import {BackButton, MButton} from "@/components/Button/Styled.twin";
 import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
@@ -210,36 +210,29 @@ export default function BilibiliPage() {
                 <ContentWrapper>
                     <LineWrapper>
                         <InLineTitle>
-                            输入<FontAwesomeIcon icon={faBilibili} tw={"text-pink-400 pl-1 pr-1 duration-500 ease-out"}/>稿件链接
+                            输入<FontAwesomeIcon icon={faBilibili} tw={"text-pink-400 pl-1 pr-1 duration-500 ease-out"}/>链接
                         </InLineTitle>
                     </LineWrapper>
 
                     <LineWrapper>
-                        <InLineTitle fontSize={28} lineHeight={40}
-                                     tw={'text-gray-600 font-medium -mr-2 -ml-2 text-right'}>
-                            URL
-                        </InLineTitle>
-                        <TextInputLine
-                            placeholder={'输入bilibili视频URL'} maxLength={2000} value={text}
-                            onChange={handleChange}
-                            onKeyPress={handleKeyPress}
-                            invalid={invalid}
+                        <TextInputLineWrapper
                             data-tooltip-id="url_tooltip"
                             data-tooltip-content="直接粘贴B站分享文本即可^_^"
-                            data-tooltip-variant="info"
-                        />
-                        <InLineTitle
-                            fontSize={28}
-                            lineHeight={40}
-                            tw={'text-gray-600 font-light -mr-2 -ml-2 md:hover:text-blue-500 active:text-blue-500 md:active:text-blue-300 text-left'}
-                            onClick={() => {
-                                setText('');
-                            }}
-                        >
-                            <FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>
-                        </InLineTitle>
+                            data-tooltip-variant="info">
+                            <TextInputLine
+                                placeholder={' '}
+                                className={'peer'}
+                                id={'input_bilibili'}
+                                maxLength={2000} value={text}
+                                onChange={handleChange}
+                                onKeyPress={handleKeyPress}
+                                invalid={invalid}
+                            />
+                            <InputDesc for={'input_bilibili'}>输入bilibili视频URL</InputDesc>
+                            <InputIcon for={'input_bilibili'} onClick={() => {setText('')}} tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}><FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/></InputIcon>
+                        </TextInputLineWrapper>
                     </LineWrapper>
-                    <Tooltip id="url_tooltip" place="top" tw={'bg-blue-400 max-w-xs md:max-w-lg'}/>
+                    <Tooltip id="url_tooltip" offset={20} openOnClick={true} place="top" tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
 
                     <LineWrapper tw={'mt-2'}>
                         <MButton disabled={loading} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleSubmit}
@@ -261,60 +254,56 @@ export default function BilibiliPage() {
                     </LineWrapper>
                     <Gap tw={'invisible'}/>
                     <LineWrapper>
-                        <InLineTitle fontSize={28} lineHeight={40}
-                                     tw={'text-gray-600 font-medium -mr-2 -ml-2 text-right'}>
-                            标题
-                        </InLineTitle>
-                        <TextInputLine
-                            placeholder={'视频标题'} maxLength={2000} value={data ? data.title : ''}
-                            readOnly
+                        <TextInputLineWrapper
                             data-tooltip-id="title_tooltip"
                             data-tooltip-content={data ? data.title : '视频标题'}
-                            data-tooltip-variant="info"
-                        />
-                        <InLineTitle
-                            fontSize={28}
-                            lineHeight={40}
-                            tw={'text-gray-600 font-light -mr-2 -ml-2 md:hover:text-blue-500 active:text-blue-500 md:active:text-blue-300 text-left'}
-                            onClick={() => {
+                            data-tooltip-variant="info">
+                            <TextInputLine
+                                placeholder={' '} maxLength={2000} value={data ? data.title : ''}
+                                className={'peer'}
+                                id={'input_title_main'}
+                                readOnly
+                            />
+                            <InputDesc for={'input_title_main'}>视频标题</InputDesc>
+                            <InputIcon for={'input_title_main'} onClick={() => {
                                 if (data) {
                                     clipboard.copy(data.title);
                                     notify_success('视频标题Copied !', 'title_copy');
                                 } else
                                     notify_error('视频标题Copy失败 !', 'title_copy_error');
                             }}
-                        >
-                            <FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>
-                        </InLineTitle>
-                        <Tooltip id="title_tooltip" tw={'bg-blue-400 max-w-xs md:max-w-lg'}/>
+                                       tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}
+                            >
+                                <FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>
+                            </InputIcon>
+                        </TextInputLineWrapper>
+                        <Tooltip id="title_tooltip" offset={15} tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
                     </LineWrapper>
                     <LineWrapper>
-                        <InLineTitle fontSize={28} lineHeight={40}
-                                     tw={'text-gray-600 font-medium -mr-2 -ml-2 text-right'}>
-                            描述
-                        </InLineTitle>
-                        <TextInputLine
-                            placeholder={'视频描述'} maxLength={2000} value={data ? data.desc : ''}
-                            readOnly
+                        <TextInputLineWrapper
                             data-tooltip-id="desc_tooltip"
                             data-tooltip-content={data ? data.desc : '视频描述'}
-                            data-tooltip-variant="info"
-                        />
-                        <InLineTitle
-                            fontSize={28}
-                            lineHeight={40}
-                            tw={'text-gray-600 font-light -mr-2 -ml-2 md:hover:text-blue-500 active:text-blue-500 md:active:text-blue-300 text-left'}
-                            onClick={() => {
+                            data-tooltip-variant="info">
+                            <TextInputLine
+                                placeholder={'视频描述'} maxLength={2000} value={data ? data.desc : ''}
+                                readOnly
+                                className={'peer'}
+                                id={'input_desc_main'}
+                            />
+                            <InputDesc for={'input_desc_main'}>视频描述</InputDesc>
+                            <InputIcon for={'input_desc_main'} onClick={() => {
                                 if (data) {
                                     clipboard.copy(data.desc);
                                     notify_success('视频描述Copied !', 'description_copy');
                                 } else
                                     notify_error('视频描述Copy失败 !', 'description_copy_error');
                             }}
-                        >
-                            <FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>
-                        </InLineTitle>
-                        <Tooltip id="desc_tooltip" tw={'bg-blue-400 max-w-xs md:max-w-lg'}/>
+                                       tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}
+                            >
+                                <FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>
+                            </InputIcon>
+                        </TextInputLineWrapper>
+                        <Tooltip id="desc_tooltip" offset={15} tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
                     </LineWrapper>
                     <LineWrapper tw={'mt-2'}>
                         <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:mr-6'}
@@ -326,7 +315,7 @@ export default function BilibiliPage() {
                                 !finished ?
                                     <>暂无解析<FontAwesomeIcon icon={solid("copy")} fade tw={'ml-1'}/></>
                                     :
-                                    <>拷贝封面URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
+                                    <>封面URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
                             }
                         </MButton>
                         <MButton disabled={!finished || iosIsDownloading} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}

@@ -44,6 +44,7 @@ export const LineWrapper = styled.div`
   justify-content: space-around;
   gap: 18px;
   flex-grow: 1;
+  flex-shrink: 1;
   min-width: 60%;
   // 设定了min-width后 需要这样 以使flex项目在交叉轴方向居中
   &>*{

@@ -4,7 +4,7 @@ import {InLineTitle} from "@/styles/TextStyles";
 import {Gap} from "@/components/Gap/Styled.twin";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
-import {TextInputLine} from "@/components/TextInputLine/Styled.twin";
+import {InputDesc, InputIcon, TextInputLine, TextInputLineWrapper} from "@/components/TextInputLine/Styled.twin";
 import {notify_error, notify_loading, notify_success} from "@/hooks/toasts";
 import {BackButton, MButton, PageButton} from "@/components/Button/Styled.twin";
 import MyContext from './MyContext';
@@ -145,31 +145,30 @@ const Pagination = ({data}) => {
                                 </InLineTitle>
                             </LineWrapper>
                             <LineWrapper>
-                                <InLineTitle fontSize={28} lineHeight={40}
-                                             tw={'text-gray-600 font-medium -mr-2 -ml-2 text-right'}>
-                                    标题
-                                </InLineTitle>
-                                <TextInputLine
-                                    placeholder={'分P标题'} maxLength={2000} value={item.title || ''}
-                                    readOnly
-                                    data-tooltip-id="desc_tooltip"
+                                <TextInputLineWrapper
+                                    data-tooltip-id="p_title_tooltip"
                                     data-tooltip-content={item ? item.title : '分P标题'}
-                                    data-tooltip-variant="info"
-                                />
-                                <InLineTitle
-                                    fontSize={28} lineHeight={40}
-                                    tw={'text-gray-600 font-light -mr-2 -ml-2 md:hover:text-blue-500 active:text-blue-500 md:active:text-blue-300 text-left'}
-                                    onClick={() => {
+                                    data-tooltip-variant="info">
+                                    <TextInputLine
+                                        placeholder={'分P标题'} maxLength={2000} value={item.title || ''}
+                                        readOnly
+                                        className={'peer'}
+                                        id={'input_title_sub'}
+                                    />
+                                    <InputDesc for={'input_title_sub'}>分P视频标题</InputDesc>
+                                    <InputIcon for={'input_title_sub'} onClick={() => {
                                         if (item) {
                                             clipboard.copy(item.title);
                                             notify_success('P' + (item.index + 1) + ' 视频标题Copied !', 'sub_title_' + (item.index + 1) + '_copy');
                                         } else
                                             notify_error('P' + (item.index + 1) + ' 视频标题 Copy失败 !', 'sub_title_' + (item.index + 1) + '_copy_error');
                                     }}
-                                >
-                                    <FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>
-                                </InLineTitle>
-                                <Tooltip id="p_title_tooltip" place="bottom" tw={'bg-blue-400 max-w-xs md:max-w-lg'}/>
+                                               tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}
+                                    >
+                                        <FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>
+                                    </InputIcon>
+                                </TextInputLineWrapper>
+                                <Tooltip id="p_title_tooltip" place="bottom" tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
                             </LineWrapper>
                             <LineWrapper tw={'mt-2'}>
                                 <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:mr-6'}
@@ -181,7 +180,7 @@ const Pagination = ({data}) => {
                                         !finished ?
                                             <>暂无解析<FontAwesomeIcon icon={solid("copy")} fade tw={'ml-1'}/></>
                                             :
-                                            <>拷贝视频URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
+                                            <>视频URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
                                     }
                                 </MButton>
                                 <MButton disabled={!finished || downloadState.get(item.index) || iosIsDownloading} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}

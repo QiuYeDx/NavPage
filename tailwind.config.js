@@ -9,6 +9,10 @@ module.exports = {
             'card': '260px'
         },
         extend: {
+            zIndex: {
+                '100': '100',
+                '200': '200',
+            },
             lineHeight: {
                 '12': '3rem',
             },
