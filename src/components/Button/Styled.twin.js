@@ -10,7 +10,7 @@ export const BaseButton = styled.div`
 `
 
 export const MButton = styled.button`
-  ${tw`rounded-2xl bg-blue-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider \
+  ${tw`cursor-default rounded-2xl bg-blue-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider \
   ring-blue-200 ring-0 hover:ring-4 hover:scale-105 active:bg-blue-600 active:ring-blue-400 duration-100 ease-out \
   disabled:bg-gray-400 disabled:hover:ring-0 disabled:hover:scale-100 disabled:cursor-not-allowed\
   select-none md:cursor-pointer`};

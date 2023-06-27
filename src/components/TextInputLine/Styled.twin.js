@@ -10,7 +10,7 @@ export const TextInputLine = styled.input.attrs(props => ({
   flex-grow: 1;
   //flex-shrink: 1;
   //max-width: 420px;
-  min-width: 260px;
+  min-width: 298px;
   box-sizing: border-box;
   @media(max-width: ${WIDTH_MOBILE}px){
     //max-width: 280px;
@@ -42,7 +42,7 @@ export const InputIcon = styled.label.attrs(props => ({
 }))`
   position: absolute;
   transition: all 0.25s ease;
-  ${tw`truncate right-1.5 select-none md:cursor-pointer text-blue-400 pl-1 pr-3 bg-white \
+  ${tw`truncate right-2 select-none md:cursor-pointer text-blue-400 pl-1 pr-2 bg-white \
    peer-placeholder-shown:text-gray-400 peer-placeholder-shown:cursor-text peer-placeholder-shown:hidden top-2/4 -translate-y-2/4 text-xl`};
 `;
 
