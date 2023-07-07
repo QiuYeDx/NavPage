@@ -93,11 +93,11 @@ export default function TextInput({
         if (tween_ref.current) {
             tween_ref.current.kill(); // 先停止当前的Tween
             tween_ref.current = gsap.to(desc_ref.current, {
-                y: -22,
-                scale: 1.05,
-                duration: 0.35,
+                y: -21,
+                scale: 0.88,
+                duration: 0.3,
                 backgroundColor: 'white',
-                ease: 'power2.out',
+                ease: 'expo.out',
                 yoyo: true,
             });
         }
@@ -106,18 +106,18 @@ export default function TextInput({
         if (text === '' &&  tween_ref.current) {
             tween_ref.current.kill(); // 先停止当前的Tween
             tween_ref.current = gsap.to(desc_ref.current, {
-                y: 0, scale: 1, duration: 0.35, backgroundColor: 'rgba(255 255 255 0)', ease: 'power2.out',
+                y: 0, scale: 1, duration: 0.6, backgroundColor: 'rgba(255 255 255 0)', ease: 'expo.out',
             });
         }
     }
 
     useEffect(() => {
         tween_ref.current = gsap.to(desc_ref.current, {
-            y: -22,
-            scale: 1.05,
-            duration: 0.35,
+            y: -21,
+            scale: 0.88,
+            duration: 0.3,
             backgroundColor: 'white',
-            ease: 'power2.out',
+            ease: 'expo.out',
             paused: text === '',
             yoyo: true
         });

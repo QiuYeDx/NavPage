@@ -33,7 +33,7 @@ export const InputDesc = styled.label.attrs(props => ({
   display: inline-block;
   position: absolute;
   background-color: rgba(255, 255, 255, 0);
-  ${tw`truncate left-2/4 cursor-text select-none top-2/4 -translate-x-2/4 -translate-y-2/4 text-sm text-blue-500 pl-2 pr-2 \
+  ${tw`truncate left-2/4 cursor-text select-none top-2/4 -translate-x-2/4 -translate-y-2/4 text-base text-blue-500 pl-2 pr-2 \
    peer-focus:text-blue-500 \
    peer-placeholder-shown:text-gray-400`};
 `;
