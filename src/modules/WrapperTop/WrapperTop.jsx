@@ -35,7 +35,17 @@ export default function WrapperTop() {
                 {navs.map((item, index) => {
                     if(nav_hash[item])
                         return <>
-                            <NavItem z_index={99 - index} key={index} className={flag} onClick={() => navigate(nav_hash[item].to)}>
+                            <NavItem z_index={99 - index} key={index} className={flag} onClick={() => {
+                                if(location.pathname === nav_hash[item].to)
+                                    window.scrollTo({
+                                        top: 0,
+                                        behavior: "smooth",
+                                    });
+                                else{
+                                    navigate(nav_hash[item].to)
+                                    window.scroll(0, 0);
+                                }
+                            }}>
                                 <FadeInRight>{nav_hash[item].name || ''}</FadeInRight>
                             </NavItem>
                             {index === navs.length - 1 ? '' : <GapIcon>

@@ -24,6 +24,7 @@ import Pagination from "./Pagination";
 import {faBilibili} from "@fortawesome/free-brands-svg-icons";
 import {app_config} from "@/styles/GlobalConfig";
 import {blobToDataUrl} from "@/utils/utils";
+import TextInput from "@/components/TextInputLine/TextInput";
 
 export default function BilibiliPage() {
     const default_cover = 'images/image-blue-300.png';
@@ -215,22 +216,21 @@ export default function BilibiliPage() {
                     </LineWrapper>
 
                     <LineWrapper>
-                        <TextInputLineWrapper
-                            data-tooltip-id="url_tooltip"
-                            data-tooltip-content="直接粘贴B站分享文本即可"
-                            data-tooltip-variant="info">
-                            <TextInputLine
-                                placeholder={' '}
-                                className={'peer'}
-                                id={'input_bilibili'}
-                                maxLength={2000} value={text}
-                                onChange={handleChange}
-                                onKeyPress={handleKeyPress}
-                                invalid={invalid}
-                            />
-                            <InputDesc for={'input_bilibili'}>输入bilibili视频URL</InputDesc>
-                            <InputIcon for={'input_bilibili'} onClick={() => {setText('')}} tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}><FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/></InputIcon>
-                        </TextInputLineWrapper>
+                        <TextInput
+                            icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
+                            placeholder={' '}
+                            desc={'输入bilibili视频URL'}
+                            id={'input_bilibili'}
+                            onChange={handleChange}
+                            onKeyPress={handleKeyPress}
+                            invalid={invalid}
+                            text={text}
+                            setText={setText}
+                            iconOnClick={() => {setText && setText('')}}
+                            data_tooltip_id={"url_tooltip"}
+                            data_tooltip_content={"直接粘贴B站分享文本即可"}
+                            data_tooltip_variant={"info"}
+                        />
                     </LineWrapper>
                     <Tooltip id="url_tooltip" offset={20} openOnClick={true} place="top" tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
 
@@ -254,55 +254,45 @@ export default function BilibiliPage() {
                     </LineWrapper>
                     <Gap tw={'invisible'}/>
                     <LineWrapper>
-                        <TextInputLineWrapper
-                            data-tooltip-id="title_tooltip"
-                            data-tooltip-content={data ? data.title : ''}
-                            data-tooltip-variant="info">
-                            <TextInputLine
-                                placeholder={'待解析'} maxLength={2000} value={data ? data.title : ''}
-                                className={'peer'}
-                                id={'input_title_main'}
-                                readOnly
-                            />
-                            <InputDesc for={'input_title_main'}>视频标题</InputDesc>
-                            <InputIcon for={'input_title_main'} onClick={() => {
+                        <TextInput
+                            icon={<FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>}
+                            placeholder={'待解析'}
+                            desc={'视频标题'}
+                            id={'input_title_main'}
+                            text={data ? data.title : ''}
+                            iconOnClick={() => {
                                 if (data) {
                                     clipboard.copy(data.title);
                                     notify_success('视频标题Copied !', 'title_copy');
                                 } else
                                     notify_error('视频标题Copy失败 !', 'title_copy_error');
                             }}
-                                       tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}
-                            >
-                                <FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>
-                            </InputIcon>
-                        </TextInputLineWrapper>
+                            data_tooltip_id={"title_tooltip"}
+                            data_tooltip_content={data ? data.title : ''}
+                            data_tooltip_variant={"info"}
+                            readOnly
+                        />
                         <Tooltip id="title_tooltip" offset={15} tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
                     </LineWrapper>
                     <LineWrapper>
-                        <TextInputLineWrapper
-                            data-tooltip-id="desc_tooltip"
-                            data-tooltip-content={data ? data.desc : ''}
-                            data-tooltip-variant="info">
-                            <TextInputLine
-                                placeholder={'待解析'} maxLength={2000} value={data ? (data.desc === '' ? '无描述' : data.desc) : ''}
-                                readOnly
-                                className={'peer'}
-                                id={'input_desc_main'}
-                            />
-                            <InputDesc for={'input_desc_main'}>视频描述</InputDesc>
-                            <InputIcon for={'input_desc_main'} onClick={() => {
+                        <TextInput
+                            icon={<FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>}
+                            placeholder={'待解析'}
+                            desc={'视频描述'}
+                            id={'input_desc_main'}
+                            text={data ? (data.desc === '' ? '无描述' : data.desc) : ''}
+                            iconOnClick={() => {
                                 if (data) {
                                     clipboard.copy(data.desc);
                                     notify_success('视频描述Copied !', 'description_copy');
                                 } else
                                     notify_error('视频描述Copy失败 !', 'description_copy_error');
                             }}
-                                       tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}
-                            >
-                                <FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>
-                            </InputIcon>
-                        </TextInputLineWrapper>
+                            data_tooltip_id={"desc_tooltip"}
+                            data_tooltip_content={data ? data.desc : ''}
+                            data_tooltip_variant={"info"}
+                            readOnly
+                        />
                         <Tooltip id="desc_tooltip" offset={15} tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
                     </LineWrapper>
                     <LineWrapper tw={'mt-2'}>

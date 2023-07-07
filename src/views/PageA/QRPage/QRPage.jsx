@@ -18,6 +18,7 @@ import {BackButton, MButton} from "@/components/Button/Styled.twin";
 import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
 import axios from 'axios';
 import {app_config} from "@/styles/GlobalConfig";
+import TextInput from "@/components/TextInputLine/TextInput";
 
 export default function QRPage() {
     const navigate = useNavigate();
@@ -144,22 +145,18 @@ export default function QRPage() {
                     </LineWrapper>
 
                     <LineWrapper>
-                        <TextInputLineWrapper>
-                            <TextInputLine
-                                placeholder={' '} maxLength={2000} value={text}
-                                onChange={handleChange}
-                                onKeyPress={handleKeyPress}
-                                invalid={invalid}
-                                className={'peer'}
-                                id={'input_text'}
-                            />
-                            <InputDesc for={'input_text'}>输入文本或URL</InputDesc>
-                            <InputIcon for={'input_text'} onClick={() => {setText('')}}
-                                       tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}
-                            >
-                                <FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>
-                            </InputIcon>
-                        </TextInputLineWrapper>
+                        <TextInput
+                            icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
+                            placeholder={' '}
+                            desc={'输入文本或URL'}
+                            id={'input_text'}
+                            onChange={handleChange}
+                            onKeyPress={handleKeyPress}
+                            invalid={invalid}
+                            text={text}
+                            setText={setText}
+                            iconOnClick={() => {setText && setText('')}}
+                        />
                     </LineWrapper>
 
                     <LineWrapper tw={'mt-2'}>

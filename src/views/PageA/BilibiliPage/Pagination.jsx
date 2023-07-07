@@ -168,7 +168,7 @@ const Pagination = ({data}) => {
                                         <FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>
                                     </InputIcon>
                                 </TextInputLineWrapper>
-                                <Tooltip id="p_title_tooltip" place="bottom" tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
+                                <Tooltip id="p_title_tooltip" place="top" tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
                             </LineWrapper>
                             <LineWrapper tw={'mt-2'}>
                                 <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:mr-6'}
