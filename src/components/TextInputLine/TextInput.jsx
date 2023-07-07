@@ -1,12 +1,11 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import 'twin.macro'
 import {
     InputDesc, InputIcon,
     TextInputLine, TextInputLineWrapper
 
 } from './Styled.twin'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
+import gsap from "gsap";
 
 /**
  * **TextInput**组件用于显示带图标和描述的文本输入框。
@@ -71,12 +70,65 @@ import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
  *
  *
  */
-export default function TextInput({data_tooltip_id, text, setText, invalid, data_tooltip_content, data_tooltip_variant, desc, icon, id, onChange, onKeyPress, placeholder, iconOnClick, maxLength, ...restProps}){
+export default function TextInput({
+                                      data_tooltip_id,
+                                      text,
+                                      setText,
+                                      invalid,
+                                      data_tooltip_content,
+                                      data_tooltip_variant,
+                                      desc,
+                                      icon,
+                                      id,
+                                      onChange,
+                                      onKeyPress,
+                                      placeholder,
+                                      iconOnClick,
+                                      maxLength,
+                                      ...restProps
+                                  }) {
+    const desc_ref = useRef();
+    const tween_ref = useRef();
+    const handleFocus = () => {
+        if (tween_ref.current) {
+            tween_ref.current.kill(); // 先停止当前的Tween
+            tween_ref.current = gsap.to(desc_ref.current, {
+                y: -22,
+                scale: 1.05,
+                duration: 0.35,
+                backgroundColor: 'white',
+                ease: 'power2.out',
+                yoyo: true,
+            });
+        }
+    }
+    const handleBlur = () => {
+        if (text === '' &&  tween_ref.current) {
+            tween_ref.current.kill(); // 先停止当前的Tween
+            tween_ref.current = gsap.to(desc_ref.current, {
+                y: 0, scale: 1, duration: 0.35, backgroundColor: 'rgba(255 255 255 0)', ease: 'power2.out',
+            });
+        }
+    }
+
+    useEffect(() => {
+        tween_ref.current = gsap.to(desc_ref.current, {
+            y: -22,
+            scale: 1.05,
+            duration: 0.35,
+            backgroundColor: 'white',
+            ease: 'power2.out',
+            paused: text === '',
+            yoyo: true
+        });
+    }, [text]);
     return (
         <TextInputLineWrapper
             data-tooltip-id={data_tooltip_id || ''}
             data-tooltip-content={data_tooltip_content || ''}
             data-tooltip-variant={data_tooltip_variant || ''}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
         >
             <TextInputLine
                 placeholder={placeholder || ''}
@@ -88,8 +140,9 @@ export default function TextInput({data_tooltip_id, text, setText, invalid, data
                 invalid={invalid || ''}
                 {...restProps}
             />
-            <InputDesc for={id || ''}>{desc || ''}</InputDesc>
-            <InputIcon for={id} onClick={iconOnClick} tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}>{icon || ''}</InputIcon>
+            <InputDesc for={id || ''} ref={desc_ref}>{desc || ''}</InputDesc>
+            <InputIcon for={id} onClick={iconOnClick}
+                       tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}>{icon || ''}</InputIcon>
         </TextInputLineWrapper>
     );
 }

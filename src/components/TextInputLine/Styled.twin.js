@@ -30,13 +30,12 @@ export const TextInputLine = styled.input.attrs(props => ({
 export const InputDesc = styled.label.attrs(props => ({
     for: props.for
 }))`
+  display: inline-block;
   position: absolute;
-  @media(min-width: ${WIDTH_MOBILE}px){
-    transition: all 0.3s ease;
-  }
-  ${tw`truncate left-2/4 cursor-text select-none -top-3 -translate-x-2/4 translate-y-0 text-sm text-blue-500 bg-white pl-2 pr-2 \
-   peer-focus:-top-3 peer-focus:-translate-x-2/4 peer-focus:translate-y-0 peer-focus:text-sm peer-focus:text-blue-500 peer-focus:bg-white \
-   peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2/4 peer-placeholder-shown:-translate-x-2/4 peer-placeholder-shown:-translate-y-2/4 peer-placeholder-shown:text-base peer-placeholder-shown:bg-transparent`};
+  background-color: rgba(255, 255, 255, 0);
+  ${tw`truncate left-2/4 cursor-text select-none top-2/4 -translate-x-2/4 -translate-y-2/4 text-sm text-blue-500 pl-2 pr-2 \
+   peer-focus:text-blue-500 \
+   peer-placeholder-shown:text-gray-400`};
 `;
 
 export const InputIcon = styled.label.attrs(props => ({

@@ -16,6 +16,7 @@ import {downloadWithProgress, isIOS} from "@/utils/utils";
 import toast from "react-hot-toast";
 import tw from 'twin.macro';
 import 'twin.macro';
+import TextInput from "@/components/TextInputLine/TextInput";
 
 const pageSize = 10; // 每页显示的数据数量
 
@@ -145,29 +146,24 @@ const Pagination = ({data}) => {
                                 </InLineTitle>
                             </LineWrapper>
                             <LineWrapper>
-                                <TextInputLineWrapper
-                                    data-tooltip-id="p_title_tooltip"
-                                    data-tooltip-content={item ? item.title : ''}
-                                    data-tooltip-variant="info">
-                                    <TextInputLine
-                                        placeholder={'无分P标题'} maxLength={2000} value={item.title || ''}
-                                        readOnly
-                                        className={'peer'}
-                                        id={'input_title_sub'}
-                                    />
-                                    <InputDesc for={'input_title_sub'}>分P视频标题</InputDesc>
-                                    <InputIcon for={'input_title_sub'} onClick={() => {
+                                <TextInput
+                                    icon={<FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>}
+                                    placeholder={'无分P标题'}
+                                    desc={'分P视频标题'}
+                                    id={'input_title_sub'}
+                                    text={item.title || ''}
+                                    iconOnClick={() => {
                                         if (item) {
                                             clipboard.copy(item.title);
                                             notify_success('P' + (item.index + 1) + ' 视频标题Copied !', 'sub_title_' + (item.index + 1) + '_copy');
                                         } else
                                             notify_error('P' + (item.index + 1) + ' 视频标题 Copy失败 !', 'sub_title_' + (item.index + 1) + '_copy_error');
                                     }}
-                                               tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}
-                                    >
-                                        <FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>
-                                    </InputIcon>
-                                </TextInputLineWrapper>
+                                    data_tooltip_id={"p_title_tooltip"}
+                                    data_tooltip_content={item ? item.title : ''}
+                                    data_tooltip_variant={"info"}
+                                    readOnly
+                                />
                                 <Tooltip id="p_title_tooltip" place="top" tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
                             </LineWrapper>
                             <LineWrapper tw={'mt-2'}>
