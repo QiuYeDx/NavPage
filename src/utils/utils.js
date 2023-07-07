@@ -60,7 +60,7 @@ export function downloadWithProgress(url, loading_callback, finished_callback, i
             const chunks = [];
 
             function read() {
-                reader.read().then(({ done, value }) => {
+                reader.read().then(({done, value}) => {
                     if (done) {
                         const blob = new Blob(chunks);
                         finished_callback && finished_callback(id);
@@ -81,6 +81,7 @@ export function downloadWithProgress(url, loading_callback, finished_callback, i
                     reject(error);
                 });
             }
+
             read();
         }).catch(error => {
             reject(error);
@@ -107,4 +108,13 @@ export function blobToDataUrl(blob) {
         reader.onerror = reject;
         reader.readAsDataURL(blob);
     });
+}
+
+export function dataURLtoBlob(dataurl) {
+    let arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1], bstr = atob(arr[1]), n = bstr.length,
+        u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], {type: 'image/jpeg'});
 }

@@ -19,6 +19,7 @@ import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
 import axios from 'axios';
 import {app_config} from "@/styles/GlobalConfig";
 import TextInput from "@/components/TextInputLine/TextInput";
+import {dataURLtoBlob} from "@/utils/utils";
 
 export default function QRPage() {
     const navigate = useNavigate();
@@ -41,6 +42,28 @@ export default function QRPage() {
         a.download = "qrcode.png";
         a.click();
     };
+
+    // const handleShare = () => {
+    //     if (navigator.share) {
+    //         // 支持 Web Share API
+    //         const shareData = {
+    //             title: 'QRCode',
+    //             text: '我生成的二维码',
+    //             files: [new File([dataURLtoBlob(data)], 'QRCode.jpeg', {type: 'image/jpeg'})],
+    //         };
+    //
+    //         navigator.share(shareData)
+    //             .then(() => {
+    //                 console.log('分享成功');
+    //             })
+    //             .catch((error) => {
+    //                 console.log('分享失败', error);
+    //             });
+    //     } else {
+    //         // 不支持 Web Share API
+    //         console.log('Web Share API 不可用');
+    //     }
+    // }
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
@@ -70,8 +93,6 @@ export default function QRPage() {
         axios.get(url, {params})
             .then(response => {
                 const qrCodeBase64 = response.data.data.qrCodeBase64;
-                console.log(qrCodeBase64);
-                console.log(typeof qrCodeBase64);
                 setData(qrCodeBase64);
                 notify_success('QR码获取成功 !', 'qrcode_get_success');
             })
