@@ -10,7 +10,7 @@ export default function HoverList(props) {
     return (
         <HoverListWrapper isHidden={props.isHidden} w={props.w} onClick={props.onClick}>
             {props.list ? props.list.map((item, index) => {
-                return <li key={index + 1} id={'pageLi_' + (index + 1)}>{item}</li>;
+                return <li className={props.closeClassName || 'closeClassName'} key={index + 1} id={'pageLi_' + (index + 1)}>{item}</li>;
             }) : ''}
         </HoverListWrapper>
     );

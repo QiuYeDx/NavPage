@@ -54,7 +54,7 @@ export default function TiktokPage() {
     }
 
     const showDownloadProgress = (progress, id) => {
-        notify_loading(<span>正在下载视频: <span style={{color: 'rgb(96, 165, 250)', width: '66px', display: 'inline-block', 	textAlign: 'right'}}>{progress}%</span></span>, 'downloading_video' + id);
+        notify_loading(<span>正在下载视频: <span tw={'font-mono'} style={{color: 'rgb(96, 165, 250)', width: '66px', display: 'inline-block', 	textAlign: 'right'}}>{progress}%</span></span>, 'downloading_video' + id);
     };
 
     const finished_callback = (id) => {

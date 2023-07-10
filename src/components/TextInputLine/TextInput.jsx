@@ -97,7 +97,7 @@ export default function TextInput({
                 scale: 0.88,
                 duration: 0.3,
                 backgroundColor: 'white',
-                ease: 'expo.out',
+                ease: 'power2.out',
                 yoyo: true,
             });
         }
@@ -106,7 +106,7 @@ export default function TextInput({
         if (text === '' &&  tween_ref.current) {
             tween_ref.current.kill(); // 先停止当前的Tween
             tween_ref.current = gsap.to(desc_ref.current, {
-                y: 0, scale: 1, duration: 0.6, backgroundColor: 'rgba(255 255 255 0)', ease: 'expo.out',
+                y: 0, scale: 1, duration: 0.6, backgroundColor: 'rgba(255 255 255 0)', ease: 'power2.out',
             });
         }
     }
@@ -117,7 +117,7 @@ export default function TextInput({
             scale: 0.88,
             duration: 0.3,
             backgroundColor: 'white',
-            ease: 'expo.out',
+            ease: 'power2.out',
             paused: text === '',
             yoyo: true
         });

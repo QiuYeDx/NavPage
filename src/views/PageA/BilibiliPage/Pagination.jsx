@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 import tw from 'twin.macro';
 import 'twin.macro';
 import TextInput from "@/components/TextInputLine/TextInput";
+import PopupMenu from "@/components/PopupMenu/PopupMenu";
 
 const pageSize = 10; // 每页显示的数据数量
 
@@ -25,7 +26,6 @@ const Pagination = ({data}) => {
     const {finished, a_ref, downloadState, setDownloadState, iosIsDownloading, setIosIsDownloading} = useContext(MyContext);
     const clipboard = useClipboard();
     const [currentPage, setCurrentPage] = useState(1);
-    const [isHidden, setIsHidden] = useState(true);
     // const [downloadState, setDownloadState] = useState(new Map());
     // const [iosIsDownloading, setIosIsDownloading] = useState(false);
 
@@ -91,24 +91,20 @@ const Pagination = ({data}) => {
                 </LineWrapper>
             );
             pageNumbers.push(
-                <PageButton key={'morePage'} onClick={() => {
-                    setIsHidden(!isHidden);
-                }}>
-                    <FontAwesomeIcon icon={solid("list-ul")}/>
-                    <HoverList isHidden={isHidden}
-                               list={Array.from({length: totalPages}, (_, index) => '第 ' + (index + 1) + ' 页')}
-                               onClick={(e) => {
-                                   console.log(e.target);
-                                   console.log(e.target.id);
-                                   console.log(e.target.id.includes('pageLi_'));
-                                   if (e.target.id.includes('pageLi_')) {
-                                       setCurrentPage(parseInt(e.target.id.slice(7), 10));
-                                       setTimeout(() => {
-                                           scroll_ref.current.scrollIntoView({behavior: 'smooth'});
-                                       }, 100);
-                                   }
-                               }}/>
-                </PageButton>
+                <PopupMenu  closeClassName={'closeClassName'}
+                            button={<PageButton key={'morePage'}><FontAwesomeIcon icon={solid("list-ul")}/></PageButton>}
+                            menu={<HoverList closeClassName={'closeClassName'}
+                                             list={Array.from({length: totalPages}, (_, index) => '第 ' + (index + 1) + ' 页')}
+                                             onClick={(e) => {
+                                                 if (e.target.id.includes('pageLi_')) {
+                                                     setCurrentPage(parseInt(e.target.id.slice(7), 10));
+                                                     setTimeout(() => {
+                                                         scroll_ref.current.scrollIntoView({behavior: 'smooth'});
+                                                         }, 100);
+                                                 }
+                                             }}
+                           />}
+                />
             );
         }
         return pageNumbers;
