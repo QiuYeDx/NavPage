@@ -47,6 +47,15 @@ export const InputIcon = styled.label.attrs(props => ({
    peer-placeholder-shown:text-gray-400 peer-placeholder-shown:cursor-text peer-placeholder-shown:hidden top-2/4 -translate-y-2/4 text-xl`};
 `;
 
+export const InputIcon2 = styled.label.attrs(props => ({
+    for: props.for
+}))`
+  position: absolute;
+  transition: all 0.25s ease;
+  ${tw`truncate right-2 select-none md:cursor-pointer text-blue-300 md:hover:text-blue-400 pl-1 pr-2 bg-white \
+   peer-placeholder-shown:cursor-text hidden peer-placeholder-shown:block top-2/4 -translate-y-2/4 text-xl`};
+`;
+
 export const TextInputLineWrapper = styled.div`
   position: relative;
   margin-top: 10px;

@@ -19,25 +19,63 @@ import axios from 'axios';
 import {app_config} from "@/styles/GlobalConfig";
 import TextInput from "@/components/TextInputLine/TextInput";
 import Table from "@/components/Table/Table";
+import {Tooltip} from "react-tooltip";
+import SelectInput from "@/components/TextInputLine/SelectInput";
 
 export default function SeleniumPage() {
     const navigate = useNavigate();
     const button_ref = useRef(null);
     const button2_ref = useRef(null);
+    const button3_ref = useRef(null);
+    const [apiUrl, setApiUrl] = useState('');
     const [text, setText] = useState('');
     const [text2, setText2] = useState('');
+    const [text3, setText3] = useState('');
+    const [text4, setText4] = useState('');
+    const [text5, setText5] = useState('');
     const [loading, setLoading] = useState(false);
     const [loading2, setLoading2] = useState(false);
     const [loading3, setLoading3] = useState(false);
+    const [loading4, setLoading4] = useState(false);
     const [finished, setFinished] = useState(false);
     const [invalid, setInvalid] = useState(false);
     const [invalid2, setInvalid2] = useState(false);
+    const [invalid3, setInvalid3] = useState(false);
+    const [invalid4, setInvalid4] = useState(false);
+    const [invalid5, setInvalid5] = useState(false);
     const [data, setData] = useState(null);
+
+    const handleChange = (event) => {
+        setText(event.target.value);
+        setInvalid(false);
+    };
 
     const handleChange2 = (event) => {
         setText2(event.target.value);
         setInvalid2(false);
     };
+
+    const handleChange3 = (event) => {
+        setText3(event.target.value);
+        setInvalid3(false);
+    };
+
+    const handleChange4 = (event) => {
+        setText4(event.target.value);
+        setInvalid4(false);
+    };
+
+    const handleChange5 = (event) => {
+        setText5(event.target.value);
+        setInvalid5(false);
+    };
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            button_ref.current.click();
+            button_ref.current.focus();
+        }
+    }
 
     const handleKeyPress2 = (event) => {
         if (event.key === 'Enter') {
@@ -46,12 +84,36 @@ export default function SeleniumPage() {
         }
     }
 
+    const handleKeyPress3 = (event) => {
+        if (event.key === 'Enter') {
+            button3_ref.current.click();
+            button3_ref.current.focus();
+        }
+    }
+
     const handleSubmit = (event) => {
+        let valid_url = null;
+        if (!text) {
+            setInvalid(true);
+            notify_error('请输入服务端根地址 !', 'init_error');
+            return;
+        } else {
+            valid_url = text.match(/https?:\/\/[^\s/$.?#]*[^\s/$.$].[^\s]*/gi);
+            if (!valid_url) {
+                setInvalid(true);
+                notify_error('请输入有效的URL !', 'init_error_2');
+                return;
+            }
+        }
+
+        let new_url = text;
+        if(new_url[new_url.length - 1] === '/')
+            new_url.slice(0, -1);
+        setApiUrl(new_url);
         setLoading(true);
 
-        const url = 'http://172.22.35.12:8085/initialTable';
-        const params = {
-        };
+        const url = new_url + '/initialTable';
+        const params = {};
 
         axios.post(url, {params})
             .then(response => {
@@ -74,13 +136,13 @@ export default function SeleniumPage() {
     const handleSubmit2 = (event) => {
         if(!text2){
             setInvalid2(true);
-            notify_error('请输入测试语句 !', 'qrcode_input_error2');
+            notify_error('请输入测试语句 !', 'insert_input_error');
             return;
         }
 
         setLoading2(true);
 
-        const url = 'http://172.22.35.12:8085/insertInstruction';
+        const url = apiUrl + '/insertInstruction';
 
         axios.post(url, text2)
             .then(response => {
@@ -100,8 +162,37 @@ export default function SeleniumPage() {
             });
     };
 
+    const handleSubmit3 = (event) => {
+        if(!text3){
+            setInvalid3(true);
+            notify_error('请输入测试语句 !', 'insert_input2_error');
+            return;
+        }
+
+        setLoading3(true);
+
+        const url = apiUrl + '/insertInstruction';
+
+        axios.post(url, text3)
+            .then(response => {
+                if(response.data.code === '0'){
+                    notify_error('服务器内部错误，请练习管理员 !', 'insert_backend_error');
+                    return;
+                }
+                notify_success('插入测试语句成功 !', 'insert_success');
+                queryInstruction();
+            })
+            .catch(error => {
+                console.error('Error generating QR code:', error);
+                notify_error('插入测试语句失败，请重试 !', 'insert_error')
+            })
+            .finally(() => {
+                setLoading3(false);
+            });
+    };
+
     const queryInstruction = () => {
-        const url = 'http://172.22.35.12:8085/queryInstruction';
+        const url = apiUrl + '/queryInstruction';
         const param = {};
         axios.get(url, param)
             .then(res => {
@@ -127,7 +218,7 @@ export default function SeleniumPage() {
 
     const handleStartTest = () => {
         setLoading3(true);
-        axios.post('http://172.22.35.12:8085/executeTest', {
+        axios.post(apiUrl + '/executeTest', {
 
         }).then(res => {
             if(res.data.code === '0'){
@@ -217,52 +308,143 @@ export default function SeleniumPage() {
                     </ButtonWrapper>
                     <H2>Selenium</H2>
                 </HeaderWrapper>
-                <ContentWrapper tw={'min-h-0 h-32'}>
-                    <LineWrapper>
-                        <InLineTitle tw={''}>初始化{finished ? (data && data.length > 0 ? <FontAwesomeIcon icon={solid("database")} tw={'text-green-400 pl-1 pr-1 duration-500 ease-out'}/> : <FontAwesomeIcon icon={solid("database")} tw={'text-orange-400 pl-1 pr-1 duration-500 ease-out'}/>) : <FontAwesomeIcon icon={solid("database")} tw={'text-red-400 pl-1 pr-1 duration-500 ease-out'}/>}数据库</InLineTitle>
-                    </LineWrapper>
 
-                    <LineWrapper tw={''}>
-                        <MButton disabled={loading} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleSubmit} ref={button_ref}>
-                            {
-                                loading ?
-                                    <>执行中<FontAwesomeIcon icon={solid("gear")} spin tw={'ml-1'}/></>
-                                    :
-                                    <>初始化<FontAwesomeIcon icon={solid("gear")} fade tw={'ml-1'}/></>
-                            }
-                        </MButton>
-                    </LineWrapper>
-                </ContentWrapper>
-                    {/*<Gap/>*/}
-                <ContentWrapper>
-                    <LineWrapper>
-                        <InLineTitle tw={'mb-2'}>插入语句</InLineTitle>
-                    </LineWrapper>
-                    <LineWrapper>
-                        <TextInput
-                            icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
-                            placeholder={' '}
-                            desc={'输入测试语句'}
-                            id={'input_text2'}
-                            onChange={handleChange2}
-                            onKeyPress={handleKeyPress2}
-                            invalid={invalid2}
-                            text={text2}
-                            setText={setText2}
-                            iconOnClick={() => {setText2 && setText2('')}}
-                        />
-                    </LineWrapper>
-                    <LineWrapper tw={'mt-2'}>
-                        <MButton disabled={loading2} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleSubmit2} ref={button2_ref}>
-                            {
-                                loading2 ?
-                                    <>执行中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
-                                    :
-                                    <>插入语句<FontAwesomeIcon icon={solid("circle-plus")} fade tw={'ml-1'}/></>
-                            }
-                        </MButton>
-                    </LineWrapper>
-                </ContentWrapper>
+                <div tw={'flex flex-row flex-wrap justify-between items-center gap-x-5'}>
+                    <ContentWrapper>
+                            <LineWrapper>
+                                <InLineTitle tw={'mb-2'}>初始化{finished ? (data && data.length > 0 ? <FontAwesomeIcon icon={solid("database")} tw={'text-green-400 pl-1 pr-1 duration-500 ease-out'}/> : <FontAwesomeIcon icon={solid("database")} tw={'text-orange-400 pl-1 pr-1 duration-500 ease-out'}/>) : <FontAwesomeIcon icon={solid("database")} tw={'text-red-400 pl-1 pr-1 duration-500 ease-out'}/>}数据库</InLineTitle>
+                            </LineWrapper>
+                            <LineWrapper>
+                                <TextInput
+                                    icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
+                                    placeholder={' '}
+                                    desc={'输入服务端根地址'}
+                                    id={'input_text'}
+                                    onChange={handleChange}
+                                    onKeyPress={handleKeyPress}
+                                    invalid={invalid}
+                                    text={text}
+                                    setText={setText}
+                                    iconOnClick={() => {setText && setText('')}}
+                                    data_tooltip_id={"url_tooltip"}
+                                    data_tooltip_content={"e.g. https://api.qiuyedx.com:8085"}
+                                    data_tooltip_variant={"info"}
+                                />
+                            </LineWrapper>
+                            <Tooltip id="url_tooltip" offset={20} openOnClick={true} place="top" tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
+                            <LineWrapper tw={'mt-2'}>
+                                <MButton disabled={loading} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleSubmit} ref={button_ref}>
+                                    {
+                                        loading ?
+                                            <>执行中<FontAwesomeIcon icon={solid("gear")} spin tw={'ml-1'}/></>
+                                            :
+                                            <>初始化<FontAwesomeIcon icon={solid("gear")} fade tw={'ml-1'}/></>
+                                    }
+                                </MButton>
+                            </LineWrapper>
+                        </ContentWrapper>
+
+                    <ContentWrapper>
+                            <LineWrapper>
+                                <InLineTitle tw={'mb-2'}>批量插入指令</InLineTitle>
+                            </LineWrapper>
+                            <LineWrapper>
+                                <TextInput
+                                    icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
+                                    placeholder={' '}
+                                    desc={'输入selenium指令'}
+                                    id={'input_text2'}
+                                    onChange={handleChange2}
+                                    onKeyPress={handleKeyPress2}
+                                    invalid={invalid2}
+                                    text={text2}
+                                    setText={setText2}
+                                    iconOnClick={() => {setText2 && setText2('')}}
+                                    data_tooltip_id={"input2_tooltip"}
+                                    data_tooltip_content={"指令间用井号加空格分隔 e.g. jump http://39.99.243.8:8688/# wait /html/body/div/form/div[4]/button# input /html/body/div/form/div[1]/input tea"}
+                                    data_tooltip_variant={"info"}
+                                />
+                            </LineWrapper>
+                            <Tooltip id="input2_tooltip" offset={20} openOnClick={true} place="top" tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
+                            <LineWrapper tw={'mt-2'}>
+                                <MButton disabled={loading2} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleSubmit2} ref={button2_ref}>
+                                    {
+                                        loading2 ?
+                                            <>执行中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
+                                            :
+                                            <>插入指令<FontAwesomeIcon icon={solid("circle-plus")} fade tw={'ml-1'}/></>
+                                    }
+                                </MButton>
+                            </LineWrapper>
+                        </ContentWrapper>
+
+                    <ContentWrapper>
+                        <LineWrapper>
+                            <InLineTitle tw={'mb-2'}>编写单条指令</InLineTitle>
+                        </LineWrapper>
+
+                        <LineWrapper>
+                            <SelectInput
+                                icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
+                                placeholder={' '}
+                                desc={'选择指令类型'}
+                                id={'input_text5'}
+                                onChange={handleChange5}
+                                onKeyPress={handleKeyPress3}
+                                invalid={invalid5}
+                                text={text5}
+                                setText={setText5}
+                                iconOnClick={() => {setText5 && setText5('')}}
+                                selectList={['jump', 'wait', 'click', 'input']}
+                                closeClassName={'closeClassName'}
+                                _t={'36px'}
+                                _l={'72%'}
+                            />
+                        </LineWrapper>
+
+                        <LineWrapper>
+                            <TextInput
+                                icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
+                                placeholder={' '}
+                                desc={'输入xPath元素定位路径'}
+                                id={'input_text3'}
+                                onChange={handleChange3}
+                                onKeyPress={handleKeyPress3}
+                                invalid={invalid3}
+                                text={text3}
+                                setText={setText3}
+                                iconOnClick={() => {setText3 && setText3('')}}
+                            />
+                        </LineWrapper>
+
+                        <LineWrapper>
+                            <TextInput
+                                icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
+                                placeholder={' '}
+                                desc={'输入参数（可选）'}
+                                id={'input_text4'}
+                                onChange={handleChange4}
+                                onKeyPress={handleKeyPress3}
+                                invalid={invalid4}
+                                text={text4}
+                                setText={setText4}
+                                iconOnClick={() => {setText4 && setText4('')}}
+                            />
+                        </LineWrapper>
+
+                        <LineWrapper tw={'mt-2'}>
+                            <MButton disabled={loading4} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleSubmit3} ref={button3_ref}>
+                                {
+                                    loading4 ?
+                                        <>执行中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
+                                        :
+                                        <>插入指令<FontAwesomeIcon icon={solid("circle-plus")} fade tw={'ml-1'}/></>
+                                }
+                            </MButton>
+                        </LineWrapper>
+                    </ContentWrapper>
+                </div>
+
                 <ContentWrapper tw={'min-h-0 h-32'}>
                     <LineWrapper>
                         <InLineTitle tw={''}>开始测试</InLineTitle>
@@ -290,7 +472,6 @@ export default function SeleniumPage() {
                     : ''
                 }
                 {/*</ContentWrapper>*/}
-
             </Wrapper>
         </div>
     );

@@ -1,21 +1,22 @@
 import tw, {styled} from "twin.macro";
+import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
 
 export const Wrapper = styled.div`
   max-height: 480px;
   display: flex;
   flex-direction: column;
   position: relative;
-  top: -42px;
+  //top: -42px;
   //padding-top: 42px;
-  ${tw`bg-white overflow-auto rounded-b-3xl shadow-xl md:hover:shadow-2xl overscroll-contain duration-500`};
+  ${tw`bg-white overflow-y-auto rounded-3xl shadow-xl md:hover:shadow-2xl overscroll-contain duration-500`};
 `;
 
 export const TableWrapper = styled.table`
-  max-height: 360px;
+  //max-height: 360px;
   position: relative;
   flex-grow: 1;
   
-  ${tw`flex-wrap caption-top border-collapse table-auto bg-white rounded-3xl shadow-xl md:hover:shadow-2xl duration-500 overflow-auto`};
+  ${tw`mb-2 flex-wrap caption-top border-collapse table-auto bg-white rounded-3xl duration-500 overflow-auto`};
 `;
 
 export const Tr = styled.tr`
@@ -31,6 +32,10 @@ export const Tr = styled.tr`
     width: calc(100% - 2rem);
     z-index: 200;
     ${tw`bg-blue-50 rounded-md`};
+    @media(max-width: ${WIDTH_MOBILE}px){
+      left: 0.5rem;
+      width: calc(100% - 1rem);
+    }
   }
   // &:nth-child(even) td{
   //   ${tw`bg-blue-50`};
@@ -48,12 +53,14 @@ export const Tr = styled.tr`
 `;
 
 export const Thead = styled.thead`
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 310;
-  ${tw`bg-blue-300 text-white rounded-3xl shadow-md md:hover:shadow-lg md:hover:scale-102 duration-500 overflow-hidden`};
+  ${tw`bg-blue-300 text-white rounded-3xl shadow-md md:hover:shadow-lg duration-500 overflow-hidden`};
 `;
 
 export const Tbody = styled.tbody`
+  max-height: 480px;
   & tr{
     ${tw`md:hover:opacity-60`};
   }
@@ -61,10 +68,10 @@ export const Tbody = styled.tbody`
 
 export const Th = styled.th`
   &:first-child{
-    ${tw`pl-3 rounded-l-full`};
+    ${tw`pl-3`};
   }
   &:last-child{
-    ${tw`pr-3 rounded-r-full`};
+    ${tw`pr-3`};
   }
   ${tw`text-base md:text-xl font-bold font-sans text-center align-middle leading-10 md:leading-10`};
 `;
@@ -84,7 +91,7 @@ export const Td = styled.td`
 `;
 
 export const Caption = styled.caption`
-  position: relative;
+  position: absolute;
   z-index: 300;
   ${tw`m-2`};
 `;

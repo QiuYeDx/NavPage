@@ -4,10 +4,10 @@ export const HoverListWrapper = styled.ul`
   ${tw`shadow-2xl rounded-2xl active:shadow-2xl md:hover:shadow-2xl animate-fade_in_up.4 bg-white overscroll-none overflow-x-hidden overflow-y-auto`};
   margin: auto;
   width: ${({w}) => w || "120px"};
-  height: 335px;
+  height: ${({h}) => h || "335px"};
   position: absolute;
-  top: -350px;
-  left: -30px;
+  top: ${({_t}) => _t ? _t : "-350px"};
+  left: ${({_l}) => _l ?  _l : "-30px"};
   //display: flex; // 打开会有奇怪的bug...
   flex-direction: column;
   align-items: stretch;

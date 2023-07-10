@@ -28,13 +28,11 @@ const Table = ({rows, columns, title, data, headers}) => {
 
     return (
         <>
-            <TableWrapper>
-                <Caption><InLineTitle>{title || ''}</InLineTitle></Caption>
-                <Thead>{renderHeaderRow()}</Thead>
-            </TableWrapper>
-            <div tw={'bg-white leading-10 w-full relative -top-10 rounded-t-3xl'}>-</div>
+            {/*<div tw={'bg-white leading-10 w-full relative -top-10 rounded-t-3xl'}>-</div>*/}
+            <InLineTitle tw={'mt-2 mb-4'}>{title || ''}</InLineTitle>
             <Wrapper>
                 <TableWrapper>
+                    <Thead>{renderHeaderRow()}</Thead>
                     <Tbody>{renderRows()}</Tbody>
                     {
                         data.length === 0 ?

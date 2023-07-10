@@ -25,7 +25,7 @@ export const HeaderWrapper = styled.div`
 export const ContentWrapper = styled(CardWrapper)`
   margin: 20px 0 0 0;
   padding: 20px 12px;
-  
+  flex-grow: 1;
   background-color: white;
   
   text-align: center;
