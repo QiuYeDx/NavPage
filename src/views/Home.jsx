@@ -2,11 +2,10 @@ import React from 'react';
 import {
     WrapperMiddle , WrapperLeft,
     WrapperRight, WrapperMain
-} from './Styled.twin';
+} from "@/layout/MainWrapper";
 import {Wrapper} from "@/modules/Wrapper/Wrapper";
 import WrapperTop from "@/modules/WrapperTop/WrapperTop";
 import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
-import MainCard from "@/components/MainCard/MainCard";
 import 'twin.macro';
 import tw from "twin.macro";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

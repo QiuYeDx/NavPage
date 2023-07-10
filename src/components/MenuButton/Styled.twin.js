@@ -23,7 +23,8 @@ export const Wrapper = styled.div`
 `;
 
 export const Line = styled.div`
-    background-color: black;
+    //background-color: black;
+    ${tw`bg-blue-400`};
     width: 20px;
     height: 3px;
     transition: all 0.25s ease;

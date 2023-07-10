@@ -1,5 +1,5 @@
 import React from 'react';
-import {WrapperLeft, WrapperMain, WrapperMiddle, WrapperRight} from "@/views/PageB/Styled.twin";
+import {WrapperLeft, WrapperMain, WrapperMiddle, WrapperRight} from "@/layout/MainWrapper";
 import {Wrapper} from "@/modules/Wrapper/Wrapper";
 import WrapperTop from "@/modules/WrapperTop/WrapperTop";
 import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";

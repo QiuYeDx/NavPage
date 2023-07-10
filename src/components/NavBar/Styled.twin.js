@@ -2,10 +2,10 @@ import tw, { styled } from 'twin.macro';
 import { NavLink } from 'react-router-dom';
 
 export const NavWrapper = styled.div`
-  ${tw`truncate`}
+  ${tw`truncate text-gray-500`}
   height: 60px;
   background-color: #fff;
-  color: #444444;
+  //color: #444444;
   display: flex;
   flex-direction: row;
   flex-shrink: 0;
@@ -55,10 +55,11 @@ export const NavItem = styled(NavLink).attrs(props => ({
 
   padding: 0 4px;
   transition: all 0.35s ease;
-
-  &:hover{
-    color: rgba(0, 0, 0, 0.3);
-  }
+  
+  ${tw`md:hover:opacity-40`};
+  //&:hover{
+  //  
+  //}
 
   @media(max-width: 415px){
     ${({notMobile}) => notMobile ? "display: none;" : "" }
@@ -175,7 +176,7 @@ export const MoreListItem = styled(NavLink).attrs(props => ({
         color: isActive ? "rgba(78, 128, 238, 0.7)" : "" ,
     }),
 }))`
-  ${tw`tracking-widest font-medium cursor-default md:cursor-pointer`};
+  ${tw`tracking-widest font-medium text-gray-500 cursor-default md:cursor-pointer md:hover:opacity-40`};
   padding-left: 20%;
   width: 100%;
   height: 50px;
@@ -191,7 +192,7 @@ export const MoreListItem = styled(NavLink).attrs(props => ({
   transition: all 0.25s ease;
 
   &:hover {
-    color: rgba(0, 0, 0, 0.3);
+    //color: rgba(0, 0, 0, 0.3);
     //opacity: 0.4;
     background-color: rgba(255, 255, 255, .5);
   }

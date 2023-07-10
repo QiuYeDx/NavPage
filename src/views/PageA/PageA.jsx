@@ -1,22 +1,21 @@
 import React from 'react';
-import {WrapperLeft, WrapperMain, WrapperMiddle, WrapperRight} from "@/views/PageA/Styled.twin";
+import {WrapperLeft, WrapperMain, WrapperMiddle, WrapperRight} from "@/layout/MainWrapper";
 import {Wrapper} from "@/modules/Wrapper/Wrapper";
 import WrapperTop from "@/modules/WrapperTop/WrapperTop";
 import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
 import "twin.macro";
 import tw from "twin.macro";
-import MainCard from "@/components/MainCard/MainCard";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import {faBilibili, faTiktok} from '@fortawesome/free-brands-svg-icons'
-import {notify_error, notify_success} from "@/hooks/toasts";
+import {notify_error} from "@/hooks/toasts";
 import AppleCard from "@/components/AppleCard/AppleCard";
-import {useClipboard} from "use-clipboard-copy";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import QRPage from './QRPage/QRPage';
 import Error from "@/views/Error/Error";
 import BilibiliPage from "@/views/PageA/BilibiliPage/BilibiliPage";
 import TiktokPage from "@/views/PageA/TiktokPage/TiktokPage";
+import SeleniumPage from "@/views/PageA/SeleniumPage/SeleniumPage";
 
 export default function PageA() {
     const navigate = useNavigate();
@@ -33,7 +32,7 @@ export default function PageA() {
                 topTextA={"在线工具"}
                 topTextB={"预设调色板"}
                 subTextA={"常用色彩"}
-                tw_card={tw`md:col-span-4`}
+                // tw_card={tw`md:col-span-4`}
                 tw_content={tw`tracking-wider`}
                 tw_background={tw``}
                 tw_subbar={tw``}
@@ -116,16 +115,37 @@ export default function PageA() {
                 }}
             >
             </AppleCard>
+
+            <AppleCard
+                theme={'purple'}
+                k={0.5}
+                topTextA={"在线工具"}
+                topTextB={"Selenium"}
+                subTextA={"自动化测试"}
+                tw_card={tw`md:col-span-2`}
+                tw_content={tw`tracking-wide`}
+                tw_background={tw``}
+                tw_subbar={tw``}
+                icon={<FontAwesomeIcon icon={solid("code-compare")}
+                                       tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
+                />}
+                onClick={() => {
+                    navigate("/tools/Selenium");
+                    window.scroll(0, 0);
+                }}
+            >
+            </AppleCard>
             {components}
         </WrapperMain>
     );
 
+    const toolIds = {
+        'QRPage': <QRPage/>,
+        'bilibili': <BilibiliPage/>,
+        'tiktok': <TiktokPage/>,
+        'Selenium': <SeleniumPage/>
+    }
     const ToolView = (toolId) => {
-        const toolIds = {
-            'QRPage': <QRPage/>,
-            'bilibili': <BilibiliPage/>,
-            'tiktok': <TiktokPage/>
-        }
         if (!toolIds[toolId])
             notify_error("未找到该工具！", "error_notFindToolPage");
         return (
@@ -134,12 +154,13 @@ export default function PageA() {
             </WrapperMain>
         );
     };
-
+    const isValid = (toolId) => toolIds[toolId];
     return (
         <Wrapper>
-            <WrapperTop>
+            {isValid(params.toolId) || location.pathname === '/tools' ?
+                <WrapperTop>
 
-            </WrapperTop>
+                </WrapperTop> : ''}
             <WrapperMiddle>
                 <WrapperLeft>
 

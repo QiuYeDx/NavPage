@@ -1,9 +1,19 @@
 import React from "react";
-import tw from "twin.macro";
-import {SubAvatar} from "@/views/About/Styled.twin";
+import tw, {styled} from "twin.macro";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import MainCard from "@/components/MainCard/MainCard";
+import {AvatarWrapper} from "@/components/Avatar/Styled.twin";
+import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
+
+const SubAvatar = styled(AvatarWrapper)`
+  position: absolute;
+  flex-shrink: 0;
+  top: -50px;
+  @media(max-width: ${WIDTH_MOBILE}px) {
+    top: -40px;
+  }
+`
 
 export default function MyProfileCard(props){
     const tw_onlyMobile = tw`bg-white md:col-span-3 col-span-5 m-4 relative  md:hidden mt-16`;

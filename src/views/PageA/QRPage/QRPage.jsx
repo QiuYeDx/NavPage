@@ -190,7 +190,9 @@ export default function QRPage() {
                             }
                         </MButton>
                     </LineWrapper>
-                    <Gap/>
+                </ContentWrapper>
+                    {/*<Gap/>*/}
+                <ContentWrapper>
                     <LineWrapper>
                         <InLineTitle tw={'mb-2'}>获取结果</InLineTitle>
                     </LineWrapper>

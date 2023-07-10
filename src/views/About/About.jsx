@@ -5,11 +5,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid, regular} from "@fortawesome/fontawesome-svg-core/import.macro";
 import {
     WrapperLeft, WrapperMain, WrapperMiddle,
-    WrapperRight, SubAvatar
-} from "@/views/About/Styled.twin";
+    WrapperRight
+} from "@/layout/MainWrapper";
 import WrapperTop from "@/modules/WrapperTop/WrapperTop";
 import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
-import {P} from "@/styles/TextStyles";
 import MainCard from "@/components/MainCard/MainCard"
 import AppleCard from "@/components/AppleCard/AppleCard"
 import {Toaster} from 'react-hot-toast';
@@ -18,7 +17,6 @@ import {useClipboard} from 'use-clipboard-copy';
 import {faApple, faGithub, faTwitter, faWordpress, faGoogle, faQq} from '@fortawesome/free-brands-svg-icons'
 import MyProfileCard from "@/modules/MyProfileCard/MyProfileCard";
 import {Wrapper} from "@/modules/Wrapper/Wrapper";
-import FadeInOnViewport from "@/components/FadeInOnViewport/FadeInOnViewport";
 
 
 export default function About() {
@@ -33,7 +31,7 @@ export default function About() {
                 <WrapperLeft>
 
                 </WrapperLeft>
-                <WrapperMain>
+                <WrapperMain tw={'grid-cols-5'}>
                     {/*<MainCard*/}
                     {/*    _tw={tw`bg-blue-400 col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50 block md:hidden`}*/}
                     {/*    h={"80px"}>*/}

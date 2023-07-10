@@ -20,6 +20,7 @@ export default function WrapperTop() {
         'bilibili': {to: '/tools/bilibili', name: 'bilibili视频解析'},
         'tiktok': {to: '/tools/tiktok', name: 'tiktok视频解析'},
         'QRPage': {to: '/tools/QRPage', name: '二维码生成器'},
+        'Selenium': {to: '/tools/Selenium', name: 'Selenium'}
     };
     useEffect(() => {
         let arr = location.pathname.split("/");

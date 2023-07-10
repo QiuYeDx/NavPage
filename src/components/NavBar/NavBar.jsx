@@ -39,8 +39,8 @@ export default function NavBar(){
                     }
                 }} >
                     <Logo/>
-                    <LogoText tw={"cursor-default md:cursor-pointer select-none"}>
-                        秋夜导航站
+                    <LogoText tw={"cursor-default md:cursor-pointer select-none text-blue-400"}>
+                        秋夜<FontAwesomeIcon icon={solid("gear")} spin tw={'text-blue-300'}/>导航
                     </LogoText>
                 </LogoWrapper>
                 <NavList
