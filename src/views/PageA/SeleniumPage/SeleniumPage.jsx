@@ -27,16 +27,18 @@ export default function SeleniumPage() {
     const button_ref = useRef(null);
     const button2_ref = useRef(null);
     const button3_ref = useRef(null);
-    const [apiUrl, setApiUrl] = useState('');
-    const [text, setText] = useState('');
-    const [text2, setText2] = useState('');
-    const [text3, setText3] = useState('');
-    const [text4, setText4] = useState('');
-    const [text5, setText5] = useState('');
+    const button4_ref = useRef(null);
+    const [apiUrl, setApiUrl] = useState('');   // 有效服务端根地址
+    const [text, setText] = useState('');   // 服务端根地址
+    const [text2, setText2] = useState(''); // selenium指令
+    const [text3, setText3] = useState(''); // xPath元素定位路径
+    const [text4, setText4] = useState(''); // 可选参数
+    const [text5, setText5] = useState(''); // 指令类型
     const [loading, setLoading] = useState(false);
     const [loading2, setLoading2] = useState(false);
     const [loading3, setLoading3] = useState(false);
     const [loading4, setLoading4] = useState(false);
+    const [loading5, setLoading5] = useState(false);
     const [finished, setFinished] = useState(false);
     const [invalid, setInvalid] = useState(false);
     const [invalid2, setInvalid2] = useState(false);
@@ -72,8 +74,8 @@ export default function SeleniumPage() {
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-            button_ref.current.click();
-            button_ref.current.focus();
+            button4_ref.current.click();    // 查询状态
+            button4_ref.current.focus();
         }
     }
 
@@ -163,33 +165,89 @@ export default function SeleniumPage() {
     };
 
     const handleSubmit3 = (event) => {
-        if(!text3){
+        if(!text5){
+            setInvalid5(true);
+            notify_error('请选择指令类型 !', 'insert_input4_error');
+            return;
+        }else if(!text3){
             setInvalid3(true);
-            notify_error('请输入测试语句 !', 'insert_input2_error');
+            notify_error('请输入xPath元素定位路径 !', 'insert_input3_error');
             return;
         }
 
-        setLoading3(true);
+        setLoading4(true);
 
         const url = apiUrl + '/insertInstruction';
-
-        axios.post(url, text3)
+        const param = `${text5} ${text3} ${text4}`.trim();   // text5 text3 text4
+        axios.post(url, param)
             .then(response => {
                 if(response.data.code === '0'){
-                    notify_error('服务器内部错误，请练习管理员 !', 'insert_backend_error');
+                    notify_error('服务器内部错误，请练习管理员 !', 'insert2_backend_error');
                     return;
                 }
-                notify_success('插入测试语句成功 !', 'insert_success');
+                notify_success('插入指令成功 !', 'insert2_success');
                 queryInstruction();
             })
             .catch(error => {
-                console.error('Error generating QR code:', error);
-                notify_error('插入测试语句失败，请重试 !', 'insert_error')
+                console.error('Error:', error);
+                notify_error('插入指令失败，请重试 !', 'insert2_error');
+                setInvalid5(true);
+                setInvalid3(true);
             })
             .finally(() => {
-                setLoading3(false);
+                setLoading4(false);
             });
     };
+
+    const handleQuery = () => {
+        let valid_url = null;
+        if (!text) {
+            setInvalid(true);
+            notify_error('请输入服务端根地址 !', 'init_error');
+            return;
+        } else {
+            valid_url = text.match(/https?:\/\/[^\s/$.?#]*[^\s/$.$].[^\s]*/gi);
+            if (!valid_url) {
+                setInvalid(true);
+                notify_error('请输入有效的URL !', 'init_error_2');
+                return;
+            }
+        }
+
+        let new_url = text;
+        if(new_url[new_url.length - 1] === '/')
+            new_url.slice(0, -1);
+        setApiUrl(new_url);
+
+        setLoading5(true);
+
+        const url = new_url + '/queryInstruction';
+        const param = {};
+        axios.get(url, param)
+            .then(res => {
+                if(res.data.code === '0'){
+                    notify_error('数据库内部错误，请练习管理员 !', 'query_backend_error');
+                    return;
+                }
+                if(res.data.code === '1'){
+                    setData([]);
+                    notify_error('数据库为空，请先插入语句 !', 'query_empty');
+                    setFinished(true);
+                    return;
+                }
+                setData(res.data.data);
+                setFinished(true);
+                notify_success('查询指令序列成功 !', 'query_success');
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+                setInvalid(true);
+                notify_error('查询指令序列失败，请重试 !', 'query_error')
+            })
+            .finally(() => {
+                setLoading5(false);
+            })
+    }
 
     const queryInstruction = () => {
         const url = apiUrl + '/queryInstruction';
@@ -339,6 +397,14 @@ export default function SeleniumPage() {
                                             <>执行中<FontAwesomeIcon icon={solid("gear")} spin tw={'ml-1'}/></>
                                             :
                                             <>初始化<FontAwesomeIcon icon={solid("gear")} fade tw={'ml-1'}/></>
+                                    }
+                                </MButton>
+                                <MButton disabled={loading5} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleQuery} ref={button4_ref}>
+                                    {
+                                        loading5 ?
+                                            <>查询中<FontAwesomeIcon icon={solid("magnifying-glass")} bounce tw={'ml-1'}/></>
+                                            :
+                                            <>查询状态<FontAwesomeIcon icon={solid("magnifying-glass")} fade tw={'ml-1'}/></>
                                     }
                                 </MButton>
                             </LineWrapper>

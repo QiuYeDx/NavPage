@@ -50,6 +50,7 @@ export default function SelectInput({
                                         closeClassName,
                                         _t,
                                         _l,
+                                        _r,
                                         ...restProps
                                     }) {
     const desc_ref = useRef();
@@ -146,6 +147,7 @@ export default function SelectInput({
                     h={120}
                     _t={_t || '0'}
                     _l={_l || '0'}
+                    _r={_r || '0'}
                     closeClassName={'closeClassName'}
                     list={selectList || ['jump', 'wait', 'click', 'input']}
                     onClick={(e) => {

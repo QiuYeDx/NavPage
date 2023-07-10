@@ -7,6 +7,7 @@ export const HoverListWrapper = styled.ul`
   height: ${({h}) => h || "335px"};
   position: absolute;
   top: ${({_t}) => _t ? _t : "-350px"};
+  right: ${({_r}) => _r ?  _r : "0"};
   left: ${({_l}) => _l ?  _l : "-30px"};
   //display: flex; // 打开会有奇怪的bug...
   flex-direction: column;
