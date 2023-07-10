@@ -250,6 +250,8 @@ export default function SeleniumPage() {
     }
 
     const queryInstruction = () => {
+        if(apiUrl === '')
+            return 'Error: No apiUrl !';
         const url = apiUrl + '/queryInstruction';
         const param = {};
         axios.get(url, param)
@@ -297,13 +299,22 @@ export default function SeleniumPage() {
         sessionStorage.setItem('selenium_states', (JSON.stringify({
             text,
             text2,
+            text3,
+            text4,
+            text5,
             data,
+            apiUrl,
             loading,
             loading2,
             loading3,
+            loading4,
+            loading5,
             finished,
             invalid,
             invalid2,
+            invalid3,
+            invalid4,
+            invalid5,
         })));
     });
 
@@ -317,37 +328,65 @@ export default function SeleniumPage() {
         sessionStorage.setItem('selenium_states', (JSON.stringify({
             text,
             text2,
+            text3,
+            text4,
+            text5,
             data,
+            apiUrl,
             loading,
             loading2,
             loading3,
+            loading4,
+            loading5,
             finished,
             invalid,
             invalid2,
+            invalid3,
+            invalid4,
+            invalid5,
         })));
         // };
     }, [text,
         text2,
+        text3,
+        text4,
+        text5,
         data,
+        apiUrl,
         loading,
         loading2,
         loading3,
+        loading4,
+        loading5,
         finished,
         invalid,
-        invalid2,]);
+        invalid2,
+        invalid3,
+        invalid4,
+        invalid5]);
 
     useEffect(() => {
         if(sessionStorage.getItem('selenium_states')){
             const last_states = JSON.parse((sessionStorage.getItem('selenium_states')));
             setText(last_states.text ? last_states.text : '');
             setText2(last_states.text2 ? last_states.text2 : '');
+            setText3(last_states.text3 ? last_states.text3 : '');
+            setText4(last_states.text4 ? last_states.text4 : '');
+            setText5(last_states.text5 ? last_states.text5 : '');
             setData(last_states.data ? last_states.data : null);
+            setApiUrl(last_states.apiUrl ? last_states.apiUrl : null);
             setLoading(last_states.loading);
             setLoading2(last_states.loading2);
             setLoading3(last_states.loading3);
+            setLoading4(last_states.loading4);
+            setLoading5(last_states.loading5);
             setFinished(last_states.finished);
             setInvalid(last_states.invalid);
             setInvalid2(last_states.invalid2);
+            setInvalid3(last_states.invalid3);
+            setInvalid4(last_states.invalid4);
+            setInvalid5(last_states.invalid5);
+
         }
         queryInstruction();
     }, []); // 依赖项为空数组，表示仅在组件挂载和卸载时执行一次
