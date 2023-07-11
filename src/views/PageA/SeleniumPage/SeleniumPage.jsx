@@ -682,7 +682,7 @@ export default function SeleniumPage() {
                         <InLineTitle tw={''}>开始测试</InLineTitle>
                     </LineWrapper>
                     <LineWrapper tw={''}>
-                        <MButton disabled={loading3} h={'36px'} w={'140px'} tw={'rounded-full'}
+                        <MButton disabled={loading3 || !finished || !data || (data && data.length === 0)} h={'36px'} w={'140px'} tw={'rounded-full'}
                                  onClick={handleStartTest}>
                             {
                                 loading3 ?
