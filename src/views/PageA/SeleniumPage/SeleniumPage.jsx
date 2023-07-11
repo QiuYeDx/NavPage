@@ -363,6 +363,7 @@ export default function SeleniumPage() {
             return result;
         }, []);
         exportToExcel(ans, 'log_' + getFormattedDate());
+        notify_success('导出成功 !', 'export_success');
     }
 
     const handleCopyInstructions = () => {
@@ -381,6 +382,7 @@ export default function SeleniumPage() {
             return result;
         }, "");
         clipboard.copy(ans);
+        notify_success('指令序列Copied !', 'copy_success');
     }
 
     useBeforeUnload(() => {
