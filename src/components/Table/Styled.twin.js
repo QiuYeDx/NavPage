@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   position: relative;
   //top: -42px;
   //padding-top: 42px;
-  ${tw`bg-white overflow-y-auto rounded-3xl shadow-xl md:hover:shadow-2xl overscroll-contain duration-500`};
+  ${tw`bg-white overflow-y-auto rounded-3xl shadow-xl md:hover:shadow-2xl overscroll-none duration-500`};
 `;
 
 export const TableWrapper = styled.table`
@@ -28,7 +28,8 @@ export const Tr = styled.tr`
     content: '';
     position: absolute;
     left: 1rem;
-    height: 100%;
+    //height: 100%; // Safari表现异常 可恶(〃＞皿＜)
+    height: 2rem;
     width: calc(100% - 2rem);
     z-index: 200;
     ${tw`bg-blue-50 rounded-md`};

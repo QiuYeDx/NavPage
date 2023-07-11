@@ -219,7 +219,7 @@ export default function SeleniumPage() {
 
         let new_url = text;
         if(new_url[new_url.length - 1] === '/')
-            new_url.slice(0, -1);
+            new_url = new_url.slice(0, -1);
         setApiUrl(new_url);
 
         setLoading5(true);
@@ -251,7 +251,7 @@ export default function SeleniumPage() {
                 setLoading5(false);
             })
 
-        const url2 = apiUrl + '/queryLog';
+        const url2 = new_url + '/queryLog';
         const param2 = {};
         axios.get(url2, param2)
             .then(res => {
@@ -357,6 +357,7 @@ export default function SeleniumPage() {
             text4,
             text5,
             data,
+            log,
             apiUrl,
             loading,
             loading2,
@@ -364,6 +365,7 @@ export default function SeleniumPage() {
             loading4,
             loading5,
             finished,
+            finished2,
             invalid,
             invalid2,
             invalid3,
@@ -386,6 +388,7 @@ export default function SeleniumPage() {
             text4,
             text5,
             data,
+            log,
             apiUrl,
             loading,
             loading2,
@@ -393,6 +396,7 @@ export default function SeleniumPage() {
             loading4,
             loading5,
             finished,
+            finished2,
             invalid,
             invalid2,
             invalid3,
@@ -406,6 +410,7 @@ export default function SeleniumPage() {
         text4,
         text5,
         data,
+        log,
         apiUrl,
         loading,
         loading2,
@@ -413,6 +418,7 @@ export default function SeleniumPage() {
         loading4,
         loading5,
         finished,
+        finished2,
         invalid,
         invalid2,
         invalid3,
@@ -428,6 +434,7 @@ export default function SeleniumPage() {
             setText4(last_states.text4 ? last_states.text4 : '');
             setText5(last_states.text5 ? last_states.text5 : '');
             setData(last_states.data ? last_states.data : null);
+            setLog(last_states.log ? last_states.log : null);
             setApiUrl(last_states.apiUrl ? last_states.apiUrl : null);
             setLoading(last_states.loading);
             setLoading2(last_states.loading2);
@@ -435,12 +442,12 @@ export default function SeleniumPage() {
             setLoading4(last_states.loading4);
             setLoading5(last_states.loading5);
             setFinished(last_states.finished);
+            setFinished2(last_states.finished2);
             setInvalid(last_states.invalid);
             setInvalid2(last_states.invalid2);
             setInvalid3(last_states.invalid3);
             setInvalid4(last_states.invalid4);
             setInvalid5(last_states.invalid5);
-
         }
         queryInstruction();
         queryLog();
@@ -636,7 +643,7 @@ export default function SeleniumPage() {
                 {finished2 ?
                     <>
                         <Gap tw={'invisible'}/>
-                        <Table title={'测试日志'} data={log || []} headers={['LogID', 'Time', 'InsID', 'Type', 'State', 'Exception']}>
+                        <Table title={'测试日志'} data={log || []} headers={['ID', 'Time', 'InsID', 'Type', 'State', 'E-log']}>
 
                         </Table>
                         <Gap tw={'invisible'}/>
