@@ -40,12 +40,14 @@ export default function SeleniumPage() {
     const [loading4, setLoading4] = useState(false);
     const [loading5, setLoading5] = useState(false);
     const [finished, setFinished] = useState(false);
+    const [finished2, setFinished2] = useState(false);
     const [invalid, setInvalid] = useState(false);
     const [invalid2, setInvalid2] = useState(false);
     const [invalid3, setInvalid3] = useState(false);
     const [invalid4, setInvalid4] = useState(false);
     const [invalid5, setInvalid5] = useState(false);
     const [data, setData] = useState(null);
+    const [log, setLog] = useState(null);
 
     const handleChange = (event) => {
         setText(event.target.value);
@@ -125,6 +127,7 @@ export default function SeleniumPage() {
                 }
                 notify_success('数据库初始化成功 !', 'init_success');
                 queryInstruction();
+                queryLog();
             })
             .catch(error => {
                 console.error('Error: ', error);
@@ -247,6 +250,29 @@ export default function SeleniumPage() {
             .finally(() => {
                 setLoading5(false);
             })
+
+        const url2 = apiUrl + '/queryLog';
+        const param2 = {};
+        axios.get(url2, param2)
+            .then(res => {
+                if(res.data.code === '0'){
+                    notify_error('数据库内部错误，请练习管理员 !', 'query2_backend_error');
+                    return;
+                }
+                if(res.data.code === '1'){
+                    setLog([]);
+                    notify_error('日志为空，请先执行测试 !', 'query2_empty');
+                    setFinished2(true);
+                    return;
+                }
+                setLog(res.data.data);
+                setFinished2(true);
+                notify_success('查询日志成功 !', 'query2_success');
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+                notify_error('查询日志失败，请重试 !', 'query2_error')
+            })
     }
 
     const queryInstruction = () => {
@@ -276,6 +302,33 @@ export default function SeleniumPage() {
             })
     }
 
+    const queryLog = () => {
+        if(apiUrl === '')
+            return 'Error: No apiUrl !';
+        const url = apiUrl + '/queryLog';
+        const param = {};
+        axios.get(url, param)
+            .then(res => {
+                if(res.data.code === '0'){
+                    notify_error('数据库内部错误，请练习管理员 !', 'query2_backend_error');
+                    return;
+                }
+                if(res.data.code === '1'){
+                    setLog([]);
+                    notify_error('日志为空，请先执行测试 !', 'query2_empty');
+                    setFinished2(true);
+                    return;
+                }
+                setLog(res.data.data);
+                setFinished2(true);
+                notify_success('查询日志成功 !', 'query2_success');
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+                notify_error('查询日志失败，请重试 !', 'query2_error')
+            })
+    }
+
     const handleStartTest = () => {
         setLoading3(true);
         axios.post(apiUrl + '/executeTest', {
@@ -286,6 +339,7 @@ export default function SeleniumPage() {
                 return;
             }
             notify_success('测试完毕 !', 'test_success');
+            queryLog();
         })
             .finally(() => {
                 setLoading3(false);
@@ -389,6 +443,7 @@ export default function SeleniumPage() {
 
         }
         queryInstruction();
+        queryLog();
     }, []); // 依赖项为空数组，表示仅在组件挂载和卸载时执行一次
 
     return (
@@ -569,7 +624,7 @@ export default function SeleniumPage() {
                 {finished ?
                     <>
                         <Gap tw={'invisible'}/>
-                        <Table columns={4} rows={10} title={'指令序列'} data={data || []} headers={['ID', 'Type', 'Element', 'Param']}>
+                        <Table title={'指令序列'} data={data || []} headers={['ID', 'Type', 'Element', 'Param']}>
 
                         </Table>
                         <Gap tw={'invisible'}/>
@@ -577,6 +632,17 @@ export default function SeleniumPage() {
                     : ''
                 }
                 {/*</ContentWrapper>*/}
+
+                {finished2 ?
+                    <>
+                        <Gap tw={'invisible'}/>
+                        <Table title={'测试日志'} data={log || []} headers={['LogID', 'Time', 'InsID', 'Type', 'State', 'Exception']}>
+
+                        </Table>
+                        <Gap tw={'invisible'}/>
+                    </>
+                    : ''
+                }
             </Wrapper>
         </div>
     );

@@ -37,7 +37,7 @@ const Table = ({rows, columns, title, data, headers}) => {
                     {
                         data.length === 0 ?
                             <Tbody>
-                                <Td colSpan={4} tw={'leading-10'}>
+                                <Td colSpan={headers.length} tw={'leading-10'}>
                                     暂无数据
                                 </Td>
                             </Tbody>
