@@ -21,13 +21,18 @@ import TextInput from "@/components/TextInputLine/TextInput";
 import Table from "@/components/Table/Table";
 import {Tooltip} from "react-tooltip";
 import SelectInput from "@/components/TextInputLine/SelectInput";
+import {exportToExcel} from "@/components/Table/ExportToExcel";
+import {getFormattedDate} from "@/utils/utils";
+import {useClipboard} from "use-clipboard-copy";
 
 export default function SeleniumPage() {
+    const clipboard = useClipboard();
     const navigate = useNavigate();
     const button_ref = useRef(null);
     const button2_ref = useRef(null);
     const button3_ref = useRef(null);
     const button4_ref = useRef(null);
+    const scroll_ref = useRef(null);
     const [apiUrl, setApiUrl] = useState('');   // 有效服务端根地址
     const [text, setText] = useState('');   // 服务端根地址
     const [text2, setText2] = useState(''); // selenium指令
@@ -39,6 +44,7 @@ export default function SeleniumPage() {
     const [loading3, setLoading3] = useState(false);
     const [loading4, setLoading4] = useState(false);
     const [loading5, setLoading5] = useState(false);
+    const [loading6, setLoading6] = useState(false);
     const [finished, setFinished] = useState(false);
     const [finished2, setFinished2] = useState(false);
     const [invalid, setInvalid] = useState(false);
@@ -48,6 +54,7 @@ export default function SeleniumPage() {
     const [invalid5, setInvalid5] = useState(false);
     const [data, setData] = useState(null);
     const [log, setLog] = useState(null);
+    const headers_arr = ['ID', 'Time', 'InsID', 'Type', 'State', 'E-log'];
 
     const handleChange = (event) => {
         setText(event.target.value);
@@ -111,7 +118,7 @@ export default function SeleniumPage() {
         }
 
         let new_url = text;
-        if(new_url[new_url.length - 1] === '/')
+        if (new_url[new_url.length - 1] === '/')
             new_url.slice(0, -1);
         setApiUrl(new_url);
         setLoading(true);
@@ -121,7 +128,7 @@ export default function SeleniumPage() {
 
         axios.post(url, {params})
             .then(response => {
-                if(response.data.code === '0'){
+                if (response.data.code === '0') {
                     notify_error('服务器内部错误，请练习管理员 !', 'insert_backend_error');
                     return;
                 }
@@ -139,7 +146,7 @@ export default function SeleniumPage() {
     };
 
     const handleSubmit2 = (event) => {
-        if(!text2){
+        if (!text2) {
             setInvalid2(true);
             notify_error('请输入测试语句 !', 'insert_input_error');
             return;
@@ -151,7 +158,7 @@ export default function SeleniumPage() {
 
         axios.post(url, text2)
             .then(response => {
-                if(response.data.code === '0'){
+                if (response.data.code === '0') {
                     notify_error('服务器内部错误，请练习管理员 !', 'insert_backend_error');
                     return;
                 }
@@ -168,11 +175,11 @@ export default function SeleniumPage() {
     };
 
     const handleSubmit3 = (event) => {
-        if(!text5){
+        if (!text5) {
             setInvalid5(true);
             notify_error('请选择指令类型 !', 'insert_input4_error');
             return;
-        }else if(!text3){
+        } else if (!text3) {
             setInvalid3(true);
             notify_error('请输入xPath元素定位路径 !', 'insert_input3_error');
             return;
@@ -184,7 +191,7 @@ export default function SeleniumPage() {
         const param = `${text5} ${text3} ${text4}`.trim();   // text5 text3 text4
         axios.post(url, param)
             .then(response => {
-                if(response.data.code === '0'){
+                if (response.data.code === '0') {
                     notify_error('服务器内部错误，请练习管理员 !', 'insert2_backend_error');
                     return;
                 }
@@ -218,7 +225,7 @@ export default function SeleniumPage() {
         }
 
         let new_url = text;
-        if(new_url[new_url.length - 1] === '/')
+        if (new_url[new_url.length - 1] === '/')
             new_url = new_url.slice(0, -1);
         setApiUrl(new_url);
 
@@ -228,11 +235,11 @@ export default function SeleniumPage() {
         const param = {};
         axios.get(url, param)
             .then(res => {
-                if(res.data.code === '0'){
+                if (res.data.code === '0') {
                     notify_error('数据库内部错误，请练习管理员 !', 'query_backend_error');
                     return;
                 }
-                if(res.data.code === '1'){
+                if (res.data.code === '1') {
                     setData([]);
                     notify_error('数据库为空，请先插入语句 !', 'query_empty');
                     setFinished(true);
@@ -255,11 +262,11 @@ export default function SeleniumPage() {
         const param2 = {};
         axios.get(url2, param2)
             .then(res => {
-                if(res.data.code === '0'){
+                if (res.data.code === '0') {
                     notify_error('数据库内部错误，请练习管理员 !', 'query2_backend_error');
                     return;
                 }
-                if(res.data.code === '1'){
+                if (res.data.code === '1') {
                     setLog([]);
                     notify_error('日志为空，请先执行测试 !', 'query2_empty');
                     setFinished2(true);
@@ -276,17 +283,17 @@ export default function SeleniumPage() {
     }
 
     const queryInstruction = () => {
-        if(apiUrl === '')
+        if (apiUrl === '')
             return 'Error: No apiUrl !';
         const url = apiUrl + '/queryInstruction';
         const param = {};
         axios.get(url, param)
             .then(res => {
-                if(res.data.code === '0'){
+                if (res.data.code === '0') {
                     notify_error('数据库内部错误，请练习管理员 !', 'query_backend_error');
                     return;
                 }
-                if(res.data.code === '1'){
+                if (res.data.code === '1') {
                     setData([]);
                     notify_error('数据库为空，请先插入语句 !', 'query_empty');
                     setFinished(true);
@@ -303,17 +310,17 @@ export default function SeleniumPage() {
     }
 
     const queryLog = () => {
-        if(apiUrl === '')
+        if (apiUrl === '')
             return 'Error: No apiUrl !';
         const url = apiUrl + '/queryLog';
         const param = {};
         axios.get(url, param)
             .then(res => {
-                if(res.data.code === '0'){
+                if (res.data.code === '0') {
                     notify_error('数据库内部错误，请练习管理员 !', 'query2_backend_error');
                     return;
                 }
-                if(res.data.code === '1'){
+                if (res.data.code === '1') {
                     setLog([]);
                     notify_error('日志为空，请先执行测试 !', 'query2_empty');
                     setFinished2(true);
@@ -331,24 +338,54 @@ export default function SeleniumPage() {
 
     const handleStartTest = () => {
         setLoading3(true);
-        axios.post(apiUrl + '/executeTest', {
-
-        }).then(res => {
-            if(res.data.code === '0'){
+        axios.post(apiUrl + '/executeTest', {}).then(res => {
+            if (res.data.code === '0') {
                 notify_error('数据库内部错误，请练习管理员 !', 'query_backend_error');
                 return;
             }
             notify_success('测试完毕 !', 'test_success');
             queryLog();
+            setTimeout(() => {
+                scroll_ref.current.scrollIntoView({behavior: 'smooth'});
+            }, 100);
         })
             .finally(() => {
                 setLoading3(false);
             })
     }
 
+    const handleExportToExcel = () => {
+        let ans = log.reduce((result, sub_arr, index) => {
+            result[index] = headers_arr.reduce((res, key, i) => {
+                res[key] = sub_arr[i];
+                return res;
+            }, {});
+            return result;
+        }, []);
+        exportToExcel(ans, 'log_' + getFormattedDate());
+    }
+
+    const handleCopyInstructions = () => {
+        console.log(data);
+        let ans = data.reduce((result, arr, i) => {
+            if(i > 0)
+                result += '# ';
+            result += arr.reduce((res, value, index) => {
+                if(index > 0 && value && value !== ''){
+                    if(index > 1)
+                        res += ' ';
+                    res += value;
+                }
+                return res;
+            }, "");
+            return result;
+        }, "");
+        clipboard.copy(ans);
+    }
+
     useBeforeUnload(() => {
         // 离开页面前保存状态
-        if(!finished)
+        if (!finished)
             return;
         sessionStorage.setItem('selenium_states', (JSON.stringify({
             text,
@@ -364,6 +401,7 @@ export default function SeleniumPage() {
             loading3,
             loading4,
             loading5,
+            loading6,
             finished,
             finished2,
             invalid,
@@ -377,9 +415,9 @@ export default function SeleniumPage() {
     useEffect(() => {
         // return () => { // 总是每次更新状态后保存上一个状态的值，而不是保存最新的状态
         // 保存状态
-        if(data === null)
+        if (data === null)
             return;
-        if(!finished)
+        if (!finished)
             return;
         sessionStorage.setItem('selenium_states', (JSON.stringify({
             text,
@@ -395,6 +433,7 @@ export default function SeleniumPage() {
             loading3,
             loading4,
             loading5,
+            loading6,
             finished,
             finished2,
             invalid,
@@ -417,6 +456,7 @@ export default function SeleniumPage() {
         loading3,
         loading4,
         loading5,
+        loading6,
         finished,
         finished2,
         invalid,
@@ -426,7 +466,7 @@ export default function SeleniumPage() {
         invalid5]);
 
     useEffect(() => {
-        if(sessionStorage.getItem('selenium_states')){
+        if (sessionStorage.getItem('selenium_states')) {
             const last_states = JSON.parse((sessionStorage.getItem('selenium_states')));
             setText(last_states.text ? last_states.text : '');
             setText2(last_states.text2 ? last_states.text2 : '');
@@ -441,6 +481,7 @@ export default function SeleniumPage() {
             setLoading3(last_states.loading3);
             setLoading4(last_states.loading4);
             setLoading5(last_states.loading5);
+            setLoading6(last_states.loading6);
             setFinished(last_states.finished);
             setFinished2(last_states.finished2);
             setInvalid(last_states.invalid);
@@ -470,80 +511,95 @@ export default function SeleniumPage() {
 
                 <div tw={'flex flex-row flex-wrap justify-between items-center gap-x-5'}>
                     <ContentWrapper>
-                            <LineWrapper>
-                                <InLineTitle tw={'mb-2'}>初始化{finished ? (data && data.length > 0 ? <FontAwesomeIcon icon={solid("database")} tw={'text-green-400 pl-1 pr-1 duration-500 ease-out'}/> : <FontAwesomeIcon icon={solid("database")} tw={'text-orange-400 pl-1 pr-1 duration-500 ease-out'}/>) : <FontAwesomeIcon icon={solid("database")} tw={'text-red-400 pl-1 pr-1 duration-500 ease-out'}/>}数据库</InLineTitle>
-                            </LineWrapper>
-                            <LineWrapper>
-                                <TextInput
-                                    icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
-                                    placeholder={' '}
-                                    desc={'输入服务端根地址'}
-                                    id={'input_text'}
-                                    onChange={handleChange}
-                                    onKeyPress={handleKeyPress}
-                                    invalid={invalid}
-                                    text={text}
-                                    setText={setText}
-                                    iconOnClick={() => {setText && setText('')}}
-                                    data_tooltip_id={"url_tooltip"}
-                                    data_tooltip_content={"e.g. https://api.qiuyedx.com:8085"}
-                                    data_tooltip_variant={"info"}
-                                />
-                            </LineWrapper>
-                            <Tooltip id="url_tooltip" offset={20} openOnClick={true} place="top" tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
-                            <LineWrapper tw={'mt-2'}>
-                                <MButton disabled={loading} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleSubmit} ref={button_ref}>
-                                    {
-                                        loading ?
-                                            <>执行中<FontAwesomeIcon icon={solid("gear")} spin tw={'ml-1'}/></>
-                                            :
-                                            <>初始化<FontAwesomeIcon icon={solid("gear")} fade tw={'ml-1'}/></>
-                                    }
-                                </MButton>
-                                <MButton disabled={loading5} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleQuery} ref={button4_ref}>
-                                    {
-                                        loading5 ?
-                                            <>查询中<FontAwesomeIcon icon={solid("magnifying-glass")} bounce tw={'ml-1'}/></>
-                                            :
-                                            <>查询状态<FontAwesomeIcon icon={solid("magnifying-glass")} fade tw={'ml-1'}/></>
-                                    }
-                                </MButton>
-                            </LineWrapper>
-                        </ContentWrapper>
+                        <LineWrapper>
+                            <InLineTitle tw={'mb-2'}>初始化{finished ? (data && data.length > 0 ?
+                                    <FontAwesomeIcon icon={solid("database")}
+                                                     tw={'text-green-400 pl-1 pr-1 duration-500 ease-out'}/> :
+                                    <FontAwesomeIcon icon={solid("database")}
+                                                     tw={'text-orange-400 pl-1 pr-1 duration-500 ease-out'}/>) :
+                                <FontAwesomeIcon icon={solid("database")}
+                                                 tw={'text-red-400 pl-1 pr-1 duration-500 ease-out'}/>}数据库</InLineTitle>
+                        </LineWrapper>
+                        <LineWrapper>
+                            <TextInput
+                                icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
+                                placeholder={' '}
+                                desc={'输入服务端根地址'}
+                                id={'input_text'}
+                                onChange={handleChange}
+                                onKeyPress={handleKeyPress}
+                                invalid={invalid}
+                                text={text}
+                                setText={setText}
+                                iconOnClick={() => {
+                                    setText && setText('')
+                                }}
+                                data_tooltip_id={"url_tooltip"}
+                                data_tooltip_content={"e.g. https://api.qiuyedx.com:8085"}
+                                data_tooltip_variant={"info"}
+                            />
+                        </LineWrapper>
+                        <Tooltip id="url_tooltip" offset={20} openOnClick={true} place="top"
+                                 tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
+                        <LineWrapper tw={'mt-2'}>
+                            <MButton disabled={loading} h={'36px'} w={'140px'} tw={'rounded-full'}
+                                     onClick={handleSubmit} ref={button_ref}>
+                                {
+                                    loading ?
+                                        <>执行中<FontAwesomeIcon icon={solid("gear")} spin tw={'ml-1'}/></>
+                                        :
+                                        <>初始化<FontAwesomeIcon icon={solid("gear")} fade tw={'ml-1'}/></>
+                                }
+                            </MButton>
+                            <MButton disabled={loading5} h={'36px'} w={'140px'} tw={'rounded-full'}
+                                     onClick={handleQuery} ref={button4_ref}>
+                                {
+                                    loading5 ?
+                                        <>查询中<FontAwesomeIcon icon={solid("magnifying-glass")} bounce tw={'ml-1'}/></>
+                                        :
+                                        <>查询状态<FontAwesomeIcon icon={solid("magnifying-glass")} fade tw={'ml-1'}/></>
+                                }
+                            </MButton>
+                        </LineWrapper>
+                    </ContentWrapper>
 
                     <ContentWrapper>
-                            <LineWrapper>
-                                <InLineTitle tw={'mb-2'}>批量插入指令</InLineTitle>
-                            </LineWrapper>
-                            <LineWrapper>
-                                <TextInput
-                                    icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
-                                    placeholder={' '}
-                                    desc={'输入selenium指令'}
-                                    id={'input_text2'}
-                                    onChange={handleChange2}
-                                    onKeyPress={handleKeyPress2}
-                                    invalid={invalid2}
-                                    text={text2}
-                                    setText={setText2}
-                                    iconOnClick={() => {setText2 && setText2('')}}
-                                    data_tooltip_id={"input2_tooltip"}
-                                    data_tooltip_content={"指令间用井号加空格分隔 e.g. jump http://39.99.243.8:8688/# wait /html/body/div/form/div[4]/button# input /html/body/div/form/div[1]/input tea"}
-                                    data_tooltip_variant={"info"}
-                                />
-                            </LineWrapper>
-                            <Tooltip id="input2_tooltip" offset={20} openOnClick={true} place="top" tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
-                            <LineWrapper tw={'mt-2'}>
-                                <MButton disabled={loading2} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleSubmit2} ref={button2_ref}>
-                                    {
-                                        loading2 ?
-                                            <>执行中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
-                                            :
-                                            <>插入指令<FontAwesomeIcon icon={solid("circle-plus")} fade tw={'ml-1'}/></>
-                                    }
-                                </MButton>
-                            </LineWrapper>
-                        </ContentWrapper>
+                        <LineWrapper>
+                            <InLineTitle tw={'mb-2'}>批量插入指令</InLineTitle>
+                        </LineWrapper>
+                        <LineWrapper>
+                            <TextInput
+                                icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
+                                placeholder={' '}
+                                desc={'输入selenium指令'}
+                                id={'input_text2'}
+                                onChange={handleChange2}
+                                onKeyPress={handleKeyPress2}
+                                invalid={invalid2}
+                                text={text2}
+                                setText={setText2}
+                                iconOnClick={() => {
+                                    setText2 && setText2('')
+                                }}
+                                data_tooltip_id={"input2_tooltip"}
+                                data_tooltip_content={"指令间用井号加空格分隔 e.g. jump http://39.99.243.8:8688/# wait /html/body/div/form/div[4]/button# input /html/body/div/form/div[1]/input tea"}
+                                data_tooltip_variant={"info"}
+                            />
+                        </LineWrapper>
+                        <Tooltip id="input2_tooltip" offset={20} openOnClick={true} place="top"
+                                 tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
+                        <LineWrapper tw={'mt-2'}>
+                            <MButton disabled={loading2} h={'36px'} w={'140px'} tw={'rounded-full'}
+                                     onClick={handleSubmit2} ref={button2_ref}>
+                                {
+                                    loading2 ?
+                                        <>执行中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
+                                        :
+                                        <>插入指令<FontAwesomeIcon icon={solid("circle-plus")} fade tw={'ml-1'}/></>
+                                }
+                            </MButton>
+                        </LineWrapper>
+                    </ContentWrapper>
 
                     <ContentWrapper>
                         <LineWrapper>
@@ -561,7 +617,9 @@ export default function SeleniumPage() {
                                 invalid={invalid5}
                                 text={text5}
                                 setText={setText5}
-                                iconOnClick={() => {setText5 && setText5('')}}
+                                iconOnClick={() => {
+                                    setText5 && setText5('')
+                                }}
                                 selectList={['jump', 'wait', 'click', 'input']}
                                 closeClassName={'closeClassName'}
                                 _t={'36px'}
@@ -580,7 +638,9 @@ export default function SeleniumPage() {
                                 invalid={invalid3}
                                 text={text3}
                                 setText={setText3}
-                                iconOnClick={() => {setText3 && setText3('')}}
+                                iconOnClick={() => {
+                                    setText3 && setText3('')
+                                }}
                             />
                         </LineWrapper>
 
@@ -595,12 +655,15 @@ export default function SeleniumPage() {
                                 invalid={invalid4}
                                 text={text4}
                                 setText={setText4}
-                                iconOnClick={() => {setText4 && setText4('')}}
+                                iconOnClick={() => {
+                                    setText4 && setText4('')
+                                }}
                             />
                         </LineWrapper>
 
                         <LineWrapper tw={'mt-2'}>
-                            <MButton disabled={loading4} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleSubmit3} ref={button3_ref}>
+                            <MButton disabled={loading4} h={'36px'} w={'140px'} tw={'rounded-full'}
+                                     onClick={handleSubmit3} ref={button3_ref}>
                                 {
                                     loading4 ?
                                         <>执行中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
@@ -617,7 +680,8 @@ export default function SeleniumPage() {
                         <InLineTitle tw={''}>开始测试</InLineTitle>
                     </LineWrapper>
                     <LineWrapper tw={''}>
-                        <MButton disabled={loading3} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleStartTest}>
+                        <MButton disabled={loading3} h={'36px'} w={'140px'} tw={'rounded-full'}
+                                 onClick={handleStartTest}>
                             {
                                 loading3 ?
                                     <>测试中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
@@ -627,7 +691,7 @@ export default function SeleniumPage() {
                         </MButton>
                     </LineWrapper>
                 </ContentWrapper>
-                {/*<ContentWrapper>*/}
+
                 {finished ?
                     <>
                         <Gap tw={'invisible'}/>
@@ -635,18 +699,44 @@ export default function SeleniumPage() {
 
                         </Table>
                         <Gap tw={'invisible'}/>
+                        <ContentWrapper tw={'min-h-0 h-32'}>
+                            <LineWrapper>
+                                <InLineTitle tw={''}>复制指令</InLineTitle>
+                            </LineWrapper>
+                            <LineWrapper tw={''}>
+                                <MButton disabled={data === null || (data && data.length === 0)} h={'36px'} w={'140px'} tw={'rounded-full'}
+                                         onClick={handleCopyInstructions}>
+                                    复制指令<FontAwesomeIcon icon={solid("copy")} fade tw={'ml-1'}/>
+                                </MButton>
+                            </LineWrapper>
+                        </ContentWrapper>
                     </>
                     : ''
                 }
-                {/*</ContentWrapper>*/}
 
                 {finished2 ?
                     <>
-                        <Gap tw={'invisible'}/>
-                        <Table title={'测试日志'} data={log || []} headers={['ID', 'Time', 'InsID', 'Type', 'State', 'E-log']}>
+                        <Gap tw={'invisible'} ref={scroll_ref}/>
+                        <Table title={'测试日志'} data={log || []} headers={headers_arr}>
 
                         </Table>
                         <Gap tw={'invisible'}/>
+                        <ContentWrapper tw={'min-h-0 h-32'}>
+                            <LineWrapper>
+                                <InLineTitle tw={''}>导出日志</InLineTitle>
+                            </LineWrapper>
+                            <LineWrapper tw={''}>
+                                <MButton disabled={loading6 || log === null || (log && log.length === 0)} h={'36px'} w={'140px'} tw={'rounded-full'}
+                                         onClick={handleExportToExcel}>
+                                    {
+                                        loading6 ?
+                                            <>导出中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
+                                            :
+                                            <>下载数据<FontAwesomeIcon icon={solid("file-export")} fade tw={'ml-1'}/></>
+                                    }
+                                </MButton>
+                            </LineWrapper>
+                        </ContentWrapper>
                     </>
                     : ''
                 }
