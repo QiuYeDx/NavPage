@@ -524,7 +524,7 @@ export default function SeleniumPage() {
                         </LineWrapper>
                         <LineWrapper>
                             <TextInput
-                                icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
+                                icon={<FontAwesomeIcon icon={solid("delete-left")} />}
                                 placeholder={' '}
                                 desc={'输入服务端根地址'}
                                 id={'input_text'}
@@ -571,7 +571,7 @@ export default function SeleniumPage() {
                         </LineWrapper>
                         <LineWrapper>
                             <TextInput
-                                icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
+                                icon={<FontAwesomeIcon icon={solid("delete-left")} />}
                                 placeholder={' '}
                                 desc={'输入selenium指令'}
                                 id={'input_text2'}
@@ -610,7 +610,7 @@ export default function SeleniumPage() {
 
                         <LineWrapper>
                             <SelectInput
-                                icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
+                                icon={<FontAwesomeIcon icon={solid("delete-left")} />}
                                 placeholder={' '}
                                 desc={'选择指令类型'}
                                 id={'input_text5'}
@@ -624,16 +624,15 @@ export default function SeleniumPage() {
                                 }}
                                 selectList={['jump', 'wait', 'click', 'input']}
                                 closeClassName={'closeClassName'}
-                                _t={'36px'}
-                                _l={'72%'}
+                                animate={'tr.3'}
                             />
                         </LineWrapper>
 
                         <LineWrapper>
                             <TextInput
-                                icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
+                                icon={<FontAwesomeIcon icon={solid("delete-left")} />}
                                 placeholder={' '}
-                                desc={'输入xPath元素定位路径'}
+                                desc={'输入full xPath元素定位路径'}
                                 id={'input_text3'}
                                 onChange={handleChange3}
                                 onKeyPress={handleKeyPress3}
@@ -648,7 +647,7 @@ export default function SeleniumPage() {
 
                         <LineWrapper>
                             <TextInput
-                                icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
+                                icon={<FontAwesomeIcon icon={solid("delete-left")} />}
                                 placeholder={' '}
                                 desc={'输入参数（可选）'}
                                 id={'input_text4'}

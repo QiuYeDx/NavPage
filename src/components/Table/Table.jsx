@@ -3,6 +3,16 @@ import tw from "twin.macro";
 import {Caption, TableWrapper, Tbody, Td, Th, Thead, Tr, Wrapper} from "@/components/Table/Styled.twin";
 import {InLineTitle} from "@/styles/TextStyles";
 
+/**
+ * **Table**组件
+ * @param rows
+ * @param columns
+ * @param title
+ * @param data - 二维数组
+ * @param headers
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Table = ({rows, columns, title, data, headers}) => {
     const renderHeaderRow = () => {
         return (

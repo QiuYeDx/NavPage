@@ -92,8 +92,12 @@ const Pagination = ({data}) => {
             );
             pageNumbers.push(
                 <PopupMenu  closeClassName={'closeClassName'}
+                            animate={'b.3'}
                             button={<PageButton key={'morePage'}><FontAwesomeIcon icon={solid("list-ul")}/></PageButton>}
                             menu={<HoverList closeClassName={'closeClassName'}
+                                             _b={'18px'}
+                                             _l={'-35px'}
+                                             validText={`第 ${currentPage} 页`}
                                              list={Array.from({length: totalPages}, (_, index) => '第 ' + (index + 1) + ' 页')}
                                              onClick={(e) => {
                                                  if (e.target.id.includes('pageLi_')) {
@@ -121,7 +125,7 @@ const Pagination = ({data}) => {
                 </InLineTitle>
                 {/* 这里根据当前页码显示对应的数据 */}
                 {getDataByPage().map((item, index) => (
-                    <FadeInOnViewport>
+                    // <FadeInOnViewport key={index}>
                         <ContentWrapper key={index}>
                             <LineWrapper>
                                 <InLineTitle>
@@ -146,7 +150,7 @@ const Pagination = ({data}) => {
                                     icon={<FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>}
                                     placeholder={'无分P标题'}
                                     desc={'分P视频标题'}
-                                    id={'input_title_sub'}
+                                    id={'input_title_sub' + index}
                                     text={item.title || ''}
                                     iconOnClick={() => {
                                         if (item) {
@@ -155,12 +159,12 @@ const Pagination = ({data}) => {
                                         } else
                                             notify_error('P' + (item.index + 1) + ' 视频标题 Copy失败 !', 'sub_title_' + (item.index + 1) + '_copy_error');
                                     }}
-                                    data_tooltip_id={"p_title_tooltip"}
+                                    data_tooltip_id={"p_title_tooltip" + index}
                                     data_tooltip_content={item ? item.title : ''}
                                     data_tooltip_variant={"info"}
                                     readOnly
                                 />
-                                <Tooltip id="p_title_tooltip" place="top" tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
+                                <Tooltip id={"p_title_tooltip"+index} place="top" tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
                             </LineWrapper>
                             <LineWrapper tw={'mt-2'}>
                                 <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:mr-6'}
@@ -245,7 +249,7 @@ const Pagination = ({data}) => {
                                 </MButton>
                             </LineWrapper>
                         </ContentWrapper>
-                    </FadeInOnViewport>
+                    // </FadeInOnViewport>
                 ))}
             </div>
             {totalPages > 1 ?

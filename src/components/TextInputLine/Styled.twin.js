@@ -42,17 +42,32 @@ export const InputIcon = styled.label.attrs(props => ({
     for: props.for
 }))`
   position: absolute;
+  //top: 20px;
   transition: all 0.25s ease;
-  ${tw`truncate right-2 select-none md:cursor-pointer text-blue-400 pl-1 pr-2 bg-white \
+  height: 32px;
+  width: 32px;
+  & *{
+    margin-left: 0 !important;
+  }
+  ${tw`truncate right-1.5 p-0.5 select-none md:cursor-pointer text-blue-400 active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-400 rounded-full bg-white md:hover:bg-blue-50 md:active:bg-blue-100 align-middle \
    peer-placeholder-shown:text-gray-400 peer-placeholder-shown:cursor-text peer-placeholder-shown:hidden top-2/4 -translate-y-2/4 text-xl`};
 `;
+
+// export const InputIcon2 = styled.label.attrs(props => ({
+//     for: props.for
+// }))`
+//   position: absolute;
+//   transition: all 0.25s ease;
+//   ${tw`truncate right-2 select-none md:cursor-pointer text-blue-300 md:hover:text-blue-400 pl-1 pr-2 bg-white \
+//    peer-placeholder-shown:cursor-text hidden peer-placeholder-shown:block top-2/4 -translate-y-2/4 text-xl`};
+// `;
 
 export const InputIcon2 = styled.label.attrs(props => ({
     for: props.for
 }))`
   position: absolute;
   transition: all 0.25s ease;
-  ${tw`truncate right-2 select-none md:cursor-pointer text-blue-300 md:hover:text-blue-400 pl-1 pr-2 bg-white \
+  ${tw`truncate right-2 select-none md:cursor-pointer text-blue-300 active:text-blue-400 md:hover:text-blue-400 pl-1 pr-2 bg-white \
    peer-placeholder-shown:cursor-text hidden peer-placeholder-shown:block top-2/4 -translate-y-2/4 text-xl`};
 `;
 
@@ -63,4 +78,5 @@ export const TextInputLineWrapper = styled.div`
   flex-shrink: 1;
   flex-grow: 2;
   display: flex;
+  height: 40px;
 `;

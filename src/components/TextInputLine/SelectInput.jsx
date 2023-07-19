@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-import 'twin.macro'
+import 'twin.macro';
+import tw from 'twin.macro';
 import {
     InputDesc, InputIcon, InputIcon2,
     TextInputLine, TextInputLineWrapper
@@ -8,7 +9,7 @@ import {
 import gsap from "gsap";
 import HoverList from "@/components/HoverList/HoverList";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
+import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 
 /**
  *
@@ -20,13 +21,18 @@ import {regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
  * @param {Function} props.onChange - 输入框值变化时的回调函数
  * @param {Function} props.onKeyPress - 按下键盘按键时的回调函数
  * @param {boolean} props.invalid - 输入框是否为无效状态（例如，格式错误）
- * @param {string} props.text - 输入框的当前文本值
+ * @param {string} props.text - 输入框的当前文本值 (状态托管在父组件)
  * @param {Function} props.setText - 更新输入框文本值的回调函数
  * @param {Function} props.iconOnClick -
  * @param {number} props.maxLength - 设置输入框最大输入长度
  * @param {string} props.data_tooltip_id - 用于数据提示的元素id属性
  * @param {string} props.data_tooltip_content - 数据提示的内容
  * @param {string} props.data_tooltip_variant - 数据提示的变体样式（例如，info、warning等）
+ * @param {string} props.closeClassName - 点击触发悬浮菜单关闭的组件的类名
+ * @param {string} props.animate - 选择渐入渐出动画 可选参数't.3', 'tr.3', 'br.3'等
+ * @param {string} props._t - 悬浮菜单的top偏移量
+ * @param {string} props._l - 悬浮菜单的left偏移量
+ * @param {string} props._r - 悬浮菜单的right偏移量
  * @returns {JSX.Element} - 返回渲染的TextInput组件
  *
  *
@@ -48,6 +54,7 @@ export default function SelectInput({
                                         maxLength,
                                         selectList,
                                         closeClassName,
+                                        animate,
                                         _t,
                                         _l,
                                         _r,
@@ -58,15 +65,23 @@ export default function SelectInput({
     const text_ref = useRef('');
 
     const [isOpen, setIsOpen] = useState(false);
+    const [isHiding, setIsHiding] = useState(false);
     const menuRef = useRef(null);
+    const animates = {
+        't-in.3': tw`animate-popup_t.3`,
+        'tr-in.3': tw`animate-popup_tr.3`,
+        'b-in.3': tw`animate-popup_b.3`,
+        't-out.3': tw`animate-popout_t.3`,
+        'tr-out.3': tw`animate-popout_tr.3`,
+        'b-out.3': tw`animate-popout_b.3`,
+    }
 
     useEffect(() => {
         const handleOutsideClick = (event) => {
-            // console.log(typeof event.target.className === 'string', event.target.className === 'string' && event.target.className.split(' '));
             if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setIsOpen(false);
+                setIsHiding(true);
             } else if (menuRef.current && menuRef.current.contains(event.target) && typeof event.target.className === 'string' && event.target.className.split(' ').includes(closeClassName || 'closeClassName')) {
-                window.setTimeout(() => setIsOpen(false), 10);
+                setIsHiding(true);
             }
         };
 
@@ -78,7 +93,9 @@ export default function SelectInput({
     }, []);
 
     const handleButtonClick = () => {
-        setIsOpen(!isOpen);
+        console.log(isOpen, isHiding);
+        setIsOpen(true);
+        setIsHiding(isOpen);
     };
 
     const handleFocus = () => {
@@ -94,6 +111,7 @@ export default function SelectInput({
             });
         }
     }
+
     const handleBlur = () => {
         setTimeout(() => {
             if (text_ref.current === '' && tween_ref.current) {
@@ -103,6 +121,13 @@ export default function SelectInput({
                 });
             }
         }, 100);
+    }
+
+    const handleAnimationed = () => {
+        console.log('ani!', isOpen, isHiding);
+        if (isHiding) {
+            setIsOpen(false);
+        }
     }
 
     useEffect(() => {
@@ -115,7 +140,7 @@ export default function SelectInput({
             paused: text === '',
             yoyo: true
         });
-        if(text === '')
+        if (text === '')
             text_ref.current = '';
     }, [text]);
 
@@ -133,38 +158,39 @@ export default function SelectInput({
                 placeholder={placeholder || ''}
                 className={'peer'}
                 id={id || ''}
-                maxLength={maxLength || 2000} value={text || ''}
+                maxLength={maxLength || 2000}
+                value={text || ''}
                 onChange={onChange || ''}
                 onKeyPress={onKeyPress || ''}
                 invalid={invalid || ''}
                 readOnly
                 {...restProps}
             />
-            {
-                isOpen
-                &&
-                <HoverList
-                    h={120}
-                    _t={_t || '0'}
-                    _l={_l || '0'}
-                    _r={_r || '0'}
-                    closeClassName={'closeClassName'}
-                    list={selectList || ['jump', 'wait', 'click', 'input']}
-                    onClick={(e) => {
-                        if (e.target.id.includes('pageLi_')) {
-                            const chosenIndex = parseInt(e.target.id.slice(7), 10) - 1;
-                            setText(selectList[chosenIndex]);
-                            text_ref.current = selectList[chosenIndex];
-                        }
-                    }}
-                />
-            }
+            <HoverList
+                isHidden={!isOpen}
+                animate={animate && (isHiding ? animates[animate.split('.').join('-out.')] : animates[animate.split('.').join('-in.')])}
+                validText={text}
+                h={120}
+                _t={_t || '36px'}
+                _l={_l || 'auto'}
+                _r={_r || '10px'}
+                closeClassName={closeClassName ? closeClassName + ' closeClassName' : 'closeClassName'}
+                list={selectList || ['jump', 'wait', 'click', 'input']}
+                onAnimationEnd={handleAnimationed}
+                onClick={(e) => {
+                    if (e.target.id.includes('pageLi_')) {
+                        const chosenIndex = parseInt(e.target.id.slice(7), 10) - 1;
+                        setText(selectList[chosenIndex]);
+                        text_ref.current = selectList[chosenIndex];
+                    }
+                }}
+            />
 
             <InputDesc for={id || ''} ref={desc_ref}>{desc || ''}</InputDesc>
             <InputIcon2 for={id}
-                       tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}><FontAwesomeIcon icon={solid("ellipsis")} /></InputIcon2>
+                        tw={''}><FontAwesomeIcon icon={solid("ellipsis")} fade/></InputIcon2>
             <InputIcon for={id} onClick={iconOnClick}
-                       tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}>{icon || ''}</InputIcon>
+                       tw={''}>{icon || ''}</InputIcon>
         </TextInputLineWrapper>
     );
 }

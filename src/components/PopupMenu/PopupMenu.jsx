@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import tw from 'twin.macro';
+import React, {useState, useEffect, useRef} from 'react';
+import tw, {styled} from 'twin.macro';
 import 'twin.macro';
 
 /**
@@ -31,20 +31,28 @@ import 'twin.macro';
  * @param button
  * @param menu
  * @param closeClassName - 当点击button或menu中含该类名的标签时会关闭menu
+ * @param animate - 选择渐入渐出动画 可选参数't.3', 'tr.3', 'br.3'等
  * @returns {JSX.Element}
  * @constructor
  */
-const PopupMenu = ({ button, menu, closeClassName }) => {
+const PopupMenu = ({button, menu, closeClassName, animate}) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isHiding, setIsHiding] = useState(false);
     const menuRef = useRef(null);
-
+    const animates = {
+        't-in.3': tw`animate-popup_t.3`,
+        'tr-in.3': tw`animate-popup_tr.3`,
+        'b-in.3': tw`animate-popup_b.3`,
+        't-out.3': tw`animate-popout_t.3`,
+        'tr-out.3': tw`animate-popout_tr.3`,
+        'b-out.3': tw`animate-popout_b.3`,
+    }
     useEffect(() => {
         const handleOutsideClick = (event) => {
-            // console.log(typeof event.target.className === 'string', event.target.className === 'string' && event.target.className.split(' '));
             if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setIsOpen(false);
-            }else if(menuRef.current && menuRef.current.contains(event.target) && typeof event.target.className === 'string' && event.target.className.split(' ').includes(closeClassName || 'closeClassName')){
-                window.setTimeout(() => setIsOpen(false), 300);
+                setIsHiding(true);
+            } else if (menuRef.current && menuRef.current.contains(event.target) && typeof event.target.className === 'string' && event.target.className.split(' ').includes(closeClassName || 'closeClassName')) {
+                setIsHiding(true);
             }
         };
 
@@ -56,19 +64,35 @@ const PopupMenu = ({ button, menu, closeClassName }) => {
     }, []);
 
     const handleButtonClick = () => {
-        setIsOpen(!isOpen);
+        setIsOpen(true);
+        setIsHiding(isOpen);
     };
+
+    const handleAnimationed = () => {
+        if (isHiding) {
+            setIsOpen(false);
+        }
+    }
 
     return (
         <div ref={menuRef} tw={'relative'}>
             <div onClick={handleButtonClick}>{button}</div>
-            {isOpen && (
-                <div tw={'absolute top-2 -left-1'}>
-                    {menu}
-                </div>
-            )}
+            <AnimateWrapper onAnimationEnd={handleAnimationed}
+                            isHidden={!isOpen}
+                            animate={animate && isHiding ? animates[animate.split('.').join('-out.')] : animates[animate.split('.').join('-in.')]}>
+                {menu}
+            </AnimateWrapper>
         </div>
     );
 };
+
+const AnimateWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  ${({animate}) => animate};
+  ${({isHidden}) => isHidden ? 'display: none' : ''};
+`
 
 export default PopupMenu;

@@ -241,7 +241,7 @@ export default function BilibiliPage() {
                                  ref={scroll_ref}>
                             {
                                 loading ?
-                                    <>解析中...<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
+                                    <>解析中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
                                     :
                                     <>解析链接<FontAwesomeIcon icon={solid("hand-spock")} shake tw={'ml-1'}/></>
                             }

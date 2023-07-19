@@ -17,7 +17,7 @@ import {Gap} from "@/components/Gap/Styled.twin";
 import {BackButton, MButton} from "@/components/Button/Styled.twin";
 import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
 import axios from 'axios';
-import {app_config} from "@/styles/GlobalConfig";
+import {app_config, log_api_config} from "@/styles/GlobalConfig";
 import TextInput from "@/components/TextInputLine/TextInput";
 import {dataURLtoBlob} from "@/utils/utils";
 
@@ -95,6 +95,20 @@ export default function QRPage() {
                 const qrCodeBase64 = response.data.data.qrCodeBase64;
                 setData(qrCodeBase64);
                 notify_success('QR码获取成功 !', 'qrcode_get_success');
+                axios.put(log_api_config.url_counts, {name: 'qrcode'})
+                    .then(res => {
+                        console.log(res);
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
+                axios.get(log_api_config.url_counts, {params: {name: 'qrcode'}})
+                    .then(res => {
+                        console.log(res);
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
             })
             .catch(error => {
                 console.error('Error generating QR code:', error);

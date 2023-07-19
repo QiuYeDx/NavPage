@@ -93,7 +93,7 @@ export default function TextInput({
         if (tween_ref.current) {
             tween_ref.current.kill(); // 先停止当前的Tween
             tween_ref.current = gsap.to(desc_ref.current, {
-                y: -21,
+                y: -24,
                 scale: 0.88,
                 duration: 0.3,
                 backgroundColor: 'white',
@@ -113,7 +113,7 @@ export default function TextInput({
 
     useEffect(() => {
         tween_ref.current = gsap.to(desc_ref.current, {
-            y: -21,
+            y: -24,
             scale: 0.88,
             duration: 0.3,
             backgroundColor: 'white',
@@ -142,7 +142,7 @@ export default function TextInput({
             />
             <InputDesc for={id || ''} ref={desc_ref}>{desc || ''}</InputDesc>
             <InputIcon for={id} onClick={iconOnClick}
-                       tw={'active:text-blue-300 md:hover:text-blue-300 md:active:text-blue-500'}>{icon || ''}</InputIcon>
+                       tw={''}>{icon || ''}</InputIcon>
         </TextInputLineWrapper>
     );
 }

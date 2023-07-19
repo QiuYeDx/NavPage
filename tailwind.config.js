@@ -49,6 +49,30 @@ module.exports = {
                 'nav_expand.8': 'nav_expand .8s ease forwards',
                 'icon_expand.5': 'icon_expand .5s ease forwards',
                 'icon_expand.8': 'icon_expand .8s ease forwards',
+
+                'popup_t.3': 'popup_t .3s ease forwards',
+                'popup_t.5': 'popup_t .5s ease forwards',
+                'popup_t.8': 'popup_t .8s ease forwards',
+
+                'popup_tr.3': 'popup_tr .3s ease forwards',
+                'popup_tr.5': 'popup_tr .5s ease forwards',
+                'popup_tr.8': 'popup_tr .8s ease forwards',
+
+                'popup_b.3': 'popup_b .3s ease forwards',
+                'popup_b.5': 'popup_b .5s ease forwards',
+                'popup_b.8': 'popup_b .8s ease forwards',
+
+                'popout_t.3': 'popout_t .3s ease forwards',
+                'popout_t.5': 'popout_t .5s ease forwards',
+                'popout_t.8': 'popout_t .8s ease forwards',
+
+                'popout_tr.3': 'popout_tr .3s ease forwards',
+                'popout_tr.5': 'popout_tr .5s ease forwards',
+                'popout_tr.8': 'popout_tr .8s ease forwards',
+
+                'popout_b.3': 'popout_b .3s ease forwards',
+                'popout_b.5': 'popout_b .5s ease forwards',
+                'popout_b.8': 'popout_b .8s ease forwards',
             },
             keyframes: {
                 'fade_in': {
@@ -98,7 +122,79 @@ module.exports = {
                         transform: 'translateX(0)',
                         opacity: 1,
                     },
-                }
+                },
+                'popup_t': {
+                    '0%': {
+                        transformOrigin: 'top',
+                        opacity: 0,
+                        transform: 'scale(0.2)',
+                    },
+                    '100%': {
+                        transformOrigin: 'top',
+                        opacity: 1,
+                        transform: 'scale(1)',
+                    },
+                },
+                'popup_tr': {
+                    '0%': {
+                        transformOrigin: 'top right',
+                        opacity: 0,
+                        transform: 'scale(0.2)',
+                    },
+                    '100%': {
+                        transformOrigin: 'top right',
+                        opacity: 1,
+                        transform: 'scale(1)',
+                    },
+                },
+                'popup_b': {
+                    '0%': {
+                        transformOrigin: 'bottom',
+                        opacity: 0,
+                        transform: 'scale(0.2)',
+                    },
+                    '100%': {
+                        transformOrigin: 'bottom',
+                        opacity: 1,
+                        transform: 'scale(1)',
+                    },
+                },
+                'popout_b': {
+                    '100%': {
+                        transformOrigin: 'bottom',
+                        opacity: 0,
+                        transform: 'scale(0.2)',
+                    },
+                    '0%': {
+                        transformOrigin: 'bottom',
+                        opacity: 1,
+                        transform: 'scale(1)',
+                    },
+                },
+                'popout_tr': {
+                    '100%': {
+                        transformOrigin: 'top right',
+                        opacity: 0,
+                        transform: 'scale(0.2)',
+                    },
+                    '0%': {
+                        transformOrigin: 'top right',
+                        opacity: 1,
+                        transform: 'scale(1)',
+                    },
+                },
+                'popout_t': {
+                    '100%': {
+                        transformOrigin: 'top',
+                        opacity: 0,
+                        transform: 'scale(0.2)',
+                    },
+                    '0%': {
+                        transformOrigin: 'top',
+                        opacity: 1,
+                        transform: 'scale(1)',
+                    },
+                },
             }
         },
     },
