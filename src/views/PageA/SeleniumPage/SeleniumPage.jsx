@@ -367,7 +367,6 @@ export default function SeleniumPage() {
     }
 
     const handleCopyInstructions = () => {
-        console.log(data);
         let ans = data.reduce((result, arr, i) => {
             if(i > 0)
                 result += '# ';

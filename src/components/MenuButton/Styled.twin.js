@@ -8,7 +8,8 @@ export const Wrapper = styled.div`
   ${tw`md:hover:cursor-pointer group-active:opacity-40 md:group-active:opacity-60 md:group-hover:opacity-40`};
 
   &.active .line:nth-child(1){
-    transform: rotate(45deg) translate(4px, 4px);
+    transform: rotate(45deg) translate(4px, 4.3px);
+    width: 21px;
   }
 
   &.active .line:nth-child(2){
@@ -16,7 +17,8 @@ export const Wrapper = styled.div`
   }
   
   &.active .line:nth-child(3){
-    transform: rotate(-45deg) translate(4px, -4px);
+    transform: rotate(-45deg) translate(4px, -4.3px);
+    width: 21px;
   }
 
   ${({_tw}) => _tw };

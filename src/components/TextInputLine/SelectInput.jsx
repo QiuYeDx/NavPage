@@ -93,7 +93,6 @@ export default function SelectInput({
     }, []);
 
     const handleButtonClick = () => {
-        console.log(isOpen, isHiding);
         setIsOpen(true);
         setIsHiding(isOpen);
     };
@@ -124,7 +123,6 @@ export default function SelectInput({
     }
 
     const handleAnimationed = () => {
-        console.log('ani!', isOpen, isHiding);
         if (isHiding) {
             setIsOpen(false);
         }
