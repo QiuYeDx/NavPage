@@ -14,12 +14,13 @@ export const log_api_config = getLog_api_config('http://localhost:5050', 'nav.qi
  * @param {String} app_domain - 前端应用的域名 e.g. nav.qiuyedx.com
  */
 function getLog_api_config(API_BASE_URL, app_domain){
+    const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:5050' : API_BASE_URL;
     return {
         domain: process.env.NODE_ENV === 'development' ? 'test.domain' : app_domain,
-        API_BASE_URL,
+        API_BASE_URL: BASE_URL,
         url: {
-            counts: API_BASE_URL + '/api/counts/',
-            url_counts: API_BASE_URL + '/api/url/counts/'
+            counts: BASE_URL + '/api/counts/',
+            url_counts: BASE_URL + '/api/url/counts/'
         },
         api_key: '785d273b7996ce1b6793eed63e03c25e23733ccb5cd59ac4d281dee27d974a81',
 
