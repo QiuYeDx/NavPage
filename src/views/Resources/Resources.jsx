@@ -13,7 +13,7 @@ import {notify_error, notify_success} from "@/hooks/toasts";
 import AppleCard from "@/components/AppleCard/AppleCard";
 import {useClipboard} from "use-clipboard-copy";
 
-export default function PageB(){
+export default function Resources(){
     const clipboard = useClipboard();
     const componentCount = 9;
     const components = [];

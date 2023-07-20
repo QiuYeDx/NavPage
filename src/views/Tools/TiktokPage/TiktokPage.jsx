@@ -5,14 +5,13 @@ import {
     ContentWrapper,
     Wrapper,
     LineWrapper
-} from "@/views/PageA/TiktokPage/Styled.twin";
+} from "@/views/Tools/TiktokPage/Styled.twin";
 import {notify_error, notify_loading, notify_success} from "@/hooks/toasts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import tw from "twin.macro";
 import {useBeforeUnload, useNavigate} from "react-router-dom";
 import {H2, InLineTitle} from "@/styles/TextStyles";
-import {InputDesc, InputIcon, TextInputLine, TextInputLineWrapper} from "@/components/TextInputLine/Styled.twin";
 import {Gap} from "@/components/Gap/Styled.twin";
 import {BackButton, MButton} from "@/components/Button/Styled.twin";
 import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
@@ -23,7 +22,7 @@ import FadeInOnViewport from "@/components/FadeInOnViewport/FadeInOnViewport";
 import {faTiktok} from "@fortawesome/free-brands-svg-icons";
 import {blobToDataUrl, downloadWithProgress} from "@/utils/utils";
 import toast from "react-hot-toast";
-import {app_config} from "@/styles/GlobalConfig";
+import {app_config, log_api_config} from "@/GlobalConfig";
 import TextInput from "@/components/TextInputLine/TextInput";
 
 export default function TiktokPage() {
@@ -85,6 +84,9 @@ export default function TiktokPage() {
             });
 
             notify_success('解析成功 !', 'resolving_success');
+
+            // 更新服务请求次数
+            log_api_config.updateCount('tiktok');
 
             setTimeout(() => {
                 scroll_ref.current.scrollIntoView({behavior: 'smooth'});

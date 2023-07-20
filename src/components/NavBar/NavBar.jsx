@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     NavWrapper, LogoWrapper, NavItem, NavList, MoreWrapper,
-    Logo, LogoText, MoreList, MoreListItem, BlankWrapper, MoreListMask
+    Logo, LogoText, MoreList, MoreListItem, MoreListMask
 } from './Styled.twin'
 import 'twin.macro'
 import tw from 'twin.macro';
@@ -12,11 +12,52 @@ import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { notify_error } from "@/hooks/toasts";
 import MenuButton from "@/components/MenuButton/MenuButton";
+import axios from "axios";
+import {log_api_config} from "@/GlobalConfig";
 
 export default function NavBar(){
     const navigate = useNavigate();
     const location = useLocation();
     const [isMoreListShown, setIsMoreListShown] = useState(false);
+
+    useEffect(() => {
+        // 更新页面访问次数
+        axios.put(log_api_config.url.url_counts, {
+            domain: log_api_config.domain,
+            url: location.pathname
+        })
+            .then(res => {
+                console.log(res);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+
+        axios.get(log_api_config.url.url_counts, {
+            params: {
+                domain: log_api_config.domain,
+                url: location.pathname
+            }
+        })
+            .then(res => {
+                console.log(res);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+
+        axios.get(log_api_config.url.url_counts, {
+            params: {
+                domain: log_api_config.domain,
+            }
+        })
+            .then(res => {
+                console.log(res);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }, [location]);
 
     return (
         <div>

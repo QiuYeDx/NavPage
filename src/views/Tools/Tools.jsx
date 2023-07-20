@@ -13,11 +13,11 @@ import AppleCard from "@/components/AppleCard/AppleCard";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import QRPage from './QRPage/QRPage';
 import Error from "@/views/Error/Error";
-import BilibiliPage from "@/views/PageA/BilibiliPage/BilibiliPage";
-import TiktokPage from "@/views/PageA/TiktokPage/TiktokPage";
-import SeleniumPage from "@/views/PageA/SeleniumPage/SeleniumPage";
+import BilibiliPage from "@/views/Tools/BilibiliPage/BilibiliPage";
+import TiktokPage from "@/views/Tools/TiktokPage/TiktokPage";
+import SeleniumPage from "@/views/Tools/SeleniumPage/SeleniumPage";
 
-export default function PageA() {
+export default function Tools() {
     const navigate = useNavigate();
     const location = useLocation();
     const params = useParams();

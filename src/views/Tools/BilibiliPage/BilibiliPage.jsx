@@ -5,16 +5,15 @@ import {
     ContentWrapper,
     Wrapper,
     LineWrapper
-} from "@/views/PageA/BilibiliPage/Styled.twin";
+} from "@/views/Tools/BilibiliPage/Styled.twin";
 import {notify_error, notify_success} from "@/hooks/toasts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {duotone, regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import tw from "twin.macro";
 import {useBeforeUnload, useNavigate} from "react-router-dom";
 import {H2, InLineTitle} from "@/styles/TextStyles";
-import {InputDesc, InputIcon, TextInputLine, TextInputLineWrapper} from "@/components/TextInputLine/Styled.twin";
 import {Gap} from "@/components/Gap/Styled.twin";
-import {BackButton, MButton, PageButton} from "@/components/Button/Styled.twin";
+import {BackButton, MButton} from "@/components/Button/Styled.twin";
 import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
 import axios from 'axios';
 import {useClipboard} from "use-clipboard-copy";
@@ -22,11 +21,9 @@ import {Tooltip} from 'react-tooltip';
 import MyContext from './MyContext';
 import Pagination from "./Pagination";
 import {faBilibili} from "@fortawesome/free-brands-svg-icons";
-import {app_config} from "@/styles/GlobalConfig";
+import {app_config, log_api_config} from "@/GlobalConfig";
 import {blobToDataUrl} from "@/utils/utils";
 import TextInput from "@/components/TextInputLine/TextInput";
-import PopupMenu from "@/components/PopupMenu/PopupMenu";
-import HoverList from "@/components/HoverList/HoverList";
 
 export default function BilibiliPage() {
     const default_cover = 'images/image-blue-300.png';
@@ -82,6 +79,9 @@ export default function BilibiliPage() {
             });
 
             notify_success('解析成功 !', 'resolving_success');
+
+            // 更新服务请求次数
+            log_api_config.updateCount('bilibili');
 
             setTimeout(() => {
                 scroll_ref.current.scrollIntoView({behavior: 'smooth'});

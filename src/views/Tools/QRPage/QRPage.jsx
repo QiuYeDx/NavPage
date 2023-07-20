@@ -5,23 +5,21 @@ import {
     ContentWrapper,
     Wrapper,
     LineWrapper
-} from "@/views/PageA/QRPage/Styled.twin";
+} from "@/views/Tools/QRPage/Styled.twin";
 import {notify_error, notify_success} from "@/hooks/toasts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import tw from "twin.macro";
-import {useBeforeUnload, useNavigate} from "react-router-dom";
+import {useBeforeUnload, useLocation, useNavigate} from "react-router-dom";
 import {H2, InLineTitle} from "@/styles/TextStyles";
-import {InputDesc, InputIcon, TextInputLine, TextInputLineWrapper} from "@/components/TextInputLine/Styled.twin";
-import {Gap} from "@/components/Gap/Styled.twin";
 import {BackButton, MButton} from "@/components/Button/Styled.twin";
 import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
 import axios from 'axios';
-import {app_config, log_api_config} from "@/styles/GlobalConfig";
+import {app_config, log_api_config} from "@/GlobalConfig";
 import TextInput from "@/components/TextInputLine/TextInput";
-import {dataURLtoBlob} from "@/utils/utils";
 
 export default function QRPage() {
+    const location = useLocation();
     const navigate = useNavigate();
     const a_ref = useRef(null);
     const button_ref = useRef(null);
@@ -42,28 +40,6 @@ export default function QRPage() {
         a.download = "qrcode.png";
         a.click();
     };
-
-    // const handleShare = () => {
-    //     if (navigator.share) {
-    //         // 支持 Web Share API
-    //         const shareData = {
-    //             title: 'QRCode',
-    //             text: '我生成的二维码',
-    //             files: [new File([dataURLtoBlob(data)], 'QRCode.jpeg', {type: 'image/jpeg'})],
-    //         };
-    //
-    //         navigator.share(shareData)
-    //             .then(() => {
-    //                 console.log('分享成功');
-    //             })
-    //             .catch((error) => {
-    //                 console.log('分享失败', error);
-    //             });
-    //     } else {
-    //         // 不支持 Web Share API
-    //         console.log('Web Share API 不可用');
-    //     }
-    // }
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
@@ -95,20 +71,9 @@ export default function QRPage() {
                 const qrCodeBase64 = response.data.data.qrCodeBase64;
                 setData(qrCodeBase64);
                 notify_success('QR码获取成功 !', 'qrcode_get_success');
-                axios.put(log_api_config.url_counts, {name: 'qrcode'})
-                    .then(res => {
-                        console.log(res);
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
-                axios.get(log_api_config.url_counts, {params: {name: 'qrcode'}})
-                    .then(res => {
-                        console.log(res);
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
+
+                // 更新服务请求次数
+                log_api_config.updateCount('qrcode');
             })
             .catch(error => {
                 console.error('Error generating QR code:', error);

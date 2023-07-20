@@ -5,18 +5,16 @@ import {
     ContentWrapper,
     Wrapper,
     LineWrapper
-} from "@/views/PageA/SeleniumPage/Styled.twin";
+} from "@/views/Tools/SeleniumPage/Styled.twin";
 import {notify_error, notify_success} from "@/hooks/toasts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
+import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import tw from "twin.macro";
 import {useBeforeUnload, useNavigate} from "react-router-dom";
 import {H2, InLineTitle} from "@/styles/TextStyles";
 import {Gap} from "@/components/Gap/Styled.twin";
 import {BackButton, MButton} from "@/components/Button/Styled.twin";
-import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
 import axios from 'axios';
-import {app_config} from "@/styles/GlobalConfig";
 import TextInput from "@/components/TextInputLine/TextInput";
 import Table from "@/components/Table/Table";
 import {Tooltip} from "react-tooltip";
@@ -24,6 +22,7 @@ import SelectInput from "@/components/TextInputLine/SelectInput";
 import {exportToExcel} from "@/components/Table/ExportToExcel";
 import {getFormattedDate} from "@/utils/utils";
 import {useClipboard} from "use-clipboard-copy";
+import {log_api_config} from "@/GlobalConfig";
 
 export default function SeleniumPage() {
     const clipboard = useClipboard();
@@ -135,6 +134,9 @@ export default function SeleniumPage() {
                 notify_success('数据库初始化成功 !', 'init_success');
                 queryInstruction();
                 queryLog();
+
+                // 更新服务请求次数
+                log_api_config.updateCount('selenium');
             })
             .catch(error => {
                 console.error('Error: ', error);

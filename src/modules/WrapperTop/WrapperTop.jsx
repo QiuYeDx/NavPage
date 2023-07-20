@@ -22,11 +22,13 @@ export default function WrapperTop() {
         'QRPage': {to: '/tools/QRPage', name: '二维码生成器'},
         'Selenium': {to: '/tools/Selenium', name: 'Selenium'}
     };
+
     useEffect(() => {
         let arr = location.pathname.split("/");
         setNavs([...new Set(arr)]);
         setFlag(randomNum());
     }, [location]);
+
     return (
         <WrapperTopStyled>
             <NavWrapper>
