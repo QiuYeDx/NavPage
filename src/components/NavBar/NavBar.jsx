@@ -57,6 +57,20 @@ export default function NavBar(){
             .catch(e => {
                 console.log(e);
             });
+
+        // axios.get(log_api_config.url.logs, {
+        //     params: {
+        //         n_per_page: 10,
+        //         p_index: 1,
+        //         api_key: log_api_config.api_key
+        //     }
+        // })
+        //     .then(res => {
+        //         console.log(res);
+        //     })
+        //     .catch(e => {
+        //         console.log(e);
+        //     });
     }, [location]);
 
     return (
@@ -85,7 +99,7 @@ export default function NavBar(){
                     </LogoText>
                 </LogoWrapper>
                 <NavList
-                    tw={"cursor-default md:cursor-pointer select-none"}
+                    tw={"cursor-default select-none"}
                     onClick={() => {
                         setIsMoreListShown(false);
                 }}>

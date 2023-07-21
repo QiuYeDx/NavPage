@@ -5,8 +5,8 @@ export const app_config = {
     app_secret: 'bWF3clZ2RENRMmx3aG95dVVaU1NKQT09'
 }
 
-// 在此处设置后端API的主机和端口、前端应用部署的域名
-export const log_api_config = getLog_api_config('http://localhost:5050', 'nav.qiuyedx.com');
+// 在此处设置生产环境下的后端API的主机和端口、前端应用部署的域名
+export const log_api_config = getLog_api_config('https://api.qiuyedx.com', 'nav.qiuyedx.com');
 
 /**
  * ## `getLog_api_config()`
@@ -19,8 +19,9 @@ function getLog_api_config(API_BASE_URL, app_domain){
         domain: process.env.NODE_ENV === 'development' ? 'test.domain' : app_domain,
         API_BASE_URL: BASE_URL,
         url: {
-            counts: BASE_URL + '/api/counts/',
-            url_counts: BASE_URL + '/api/url/counts/'
+            counts: BASE_URL + '/api/counts',
+            url_counts: BASE_URL + '/api/url/counts',
+            logs: BASE_URL + '/api/logs'
         },
         api_key: '785d273b7996ce1b6793eed63e03c25e23733ccb5cd59ac4d281dee27d974a81',
 

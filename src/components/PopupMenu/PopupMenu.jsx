@@ -14,17 +14,22 @@ import 'twin.macro';
  *
  * ```
  * <PopupMenu  closeClassName={'closeClassName'}
+ *             animate={'b.3'}
  *             button={<PageButton key={'morePage'}><FontAwesomeIcon icon={solid("list-ul")}/></PageButton>}
- *             menu={<HoverList closeClassName={'closeClassName'}
- *                  list={Array.from({length: totalPages}, (_, index) => '第 ' + (index + 1) + ' 页')}
- *                      onClick={(e) => {
- *                          if (e.target.id.includes('pageLi_')) {
- *                              setCurrentPage(parseInt(e.target.id.slice(7), 10));
- *                              setTimeout(() => {
- *                                  scroll_ref.current.scrollIntoView({behavior: 'smooth'});
- *                              }, 100);
- *                          }
- *                   }}
+ *             menu={<HoverList
+ *                         closeClassName={'closeClassName'}
+ *                         _b={'18px'}
+ *                         _l={'-35px'}
+ *                         validText={`第 ${currentPage} 页`}
+ *                         list={Array.from({length: totalPages}, (_, index) => '第 ' + (index + 1) + ' 页')}
+ *                         onClick={(e) => {
+ *                             if (e.target.id.includes('pageLi_')) {
+ *                                 setCurrentPage(parseInt(e.target.id.slice(7), 10));
+ *                                 setTimeout(() => {
+ *                                     scroll_ref.current.scrollIntoView({behavior: 'smooth'});
+ *                                 }, 100);
+ *                             }
+ *                         }}
  *             />}
  * />
  * ```
