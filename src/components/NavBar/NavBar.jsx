@@ -33,31 +33,6 @@ export default function NavBar(){
                 console.log(e);
             });
 
-        axios.get(log_api_config.url.url_counts, {
-            params: {
-                domain: log_api_config.domain,
-                url: location.pathname
-            }
-        })
-            .then(res => {
-                console.log(res);
-            })
-            .catch(e => {
-                console.log(e);
-            });
-
-        axios.get(log_api_config.url.url_counts, {
-            params: {
-                domain: log_api_config.domain,
-            }
-        })
-            .then(res => {
-                console.log(res);
-            })
-            .catch(e => {
-                console.log(e);
-            });
-
         // axios.get(log_api_config.url.logs, {
         //     params: {
         //         n_per_page: 10,
