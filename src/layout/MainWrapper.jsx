@@ -22,7 +22,7 @@ export const WrapperMain = styled.div`
   display: flex;
   flex-direction: column;
   //min-width: 340px;
-  flex-grow: 5;
+  flex-grow: 6;
   z-index: 1;
   ${tw`text-gray-700 max-w-screen-xl`}
   ${({ hasBorder }) => hasBorder && tw`border-purple-500`};

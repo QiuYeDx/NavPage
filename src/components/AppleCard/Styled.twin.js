@@ -11,7 +11,7 @@ export const AppleCardWrapper = styled(CardWrapper).attrs(props => ({
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+  ${({h}) => h ? 'height: ' + h : ''};
   position: relative;
   overflow: hidden;
   ${({_tw_user}) => _tw_user};
@@ -80,7 +80,7 @@ export const Logo = styled.div`
   border-radius: 10px;
   //box-shadow: 0 0 4px rgba(0, 0, 0, 15%);
   //background-image: url(images/QiuYeDx.png);
-  background-image: url(${props => props.url || "images/QiuYeDx.png"});
+  background-image: url(${props => props.url || "images/QiuYeDx_web.png"});
   //background-size: cover;
   background-size: contain;
   background-repeat: no-repeat;

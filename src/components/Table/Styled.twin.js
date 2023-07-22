@@ -3,6 +3,7 @@ import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
 
 export const Wrapper = styled.div`
   max-height: 480px;
+  ${({h}) => h ? 'height: ' + h : ''};
   display: flex;
   flex-direction: column;
   position: relative;
@@ -14,7 +15,7 @@ export const Wrapper = styled.div`
 export const TableWrapper = styled.table`
   //max-height: 360px;
   position: relative;
-  flex-grow: 1;
+  flex-grow: 0;
   
   ${tw`mb-2 flex-wrap caption-top border-collapse table-auto bg-white rounded-3xl duration-500 overflow-auto`};
 `;
@@ -56,7 +57,7 @@ export const Tr = styled.tr`
 export const Thead = styled.thead`
   position: sticky;
   top: 0;
-  z-index: 310;
+  z-index: 610;
   ${tw`bg-blue-300 text-white rounded-3xl shadow-md md:hover:shadow-lg duration-500 overflow-hidden`};
 `;
 
@@ -64,6 +65,32 @@ export const Tbody = styled.tbody`
   max-height: 480px;
   & tr{
     ${tw`md:hover:opacity-60`};
+  }
+  &::before{
+    content: '';
+    position: absolute;
+    top: 42px;
+    left: 0;
+    height: 100%;
+    width: 16px;
+    @media(max-width: ${WIDTH_MOBILE}px){
+      width: 7.8px;
+    }
+    z-index: 600;
+    ${tw`bg-white`};
+  }
+  &::after{
+    content: '';
+    position: absolute;
+    top: 42px;
+    right: 0;
+    height: 100%;
+    width: 16px;
+    @media(max-width: ${WIDTH_MOBILE}px){
+      width: 7.8px;
+    }
+    z-index: 600;
+    ${tw`bg-white`};
   }
 `;
 
@@ -82,13 +109,16 @@ export const Td = styled.td`
   z-index: 210;
   max-width: 100px;
   white-space: nowrap;
+  ${tw`text-sm md:text-base text-gray-600 font-sans text-center align-middle leading-8 md:leading-8 overflow-auto`};
   &:first-child{
     ${tw`pl-3`};
   }
   &:last-child{
     ${tw`pr-3`};
   }
-  ${tw`text-sm md:text-base text-gray-600 font-sans text-center align-middle leading-8 md:leading-8 overflow-auto`};
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const Caption = styled.caption`

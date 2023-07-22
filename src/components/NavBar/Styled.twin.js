@@ -1,5 +1,6 @@
 import tw, { styled } from 'twin.macro';
 import { NavLink } from 'react-router-dom';
+import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
 
 export const NavWrapper = styled.div`
   ${tw`truncate text-gray-500`}
@@ -61,7 +62,7 @@ export const NavItem = styled(NavLink).attrs(props => ({
   //  
   //}
 
-  @media(max-width: 415px){
+  @media(max-width: ${WIDTH_MOBILE}px){
     ${({notMobile}) => notMobile ? "display: none;" : "" }
   }
   
@@ -105,7 +106,7 @@ export const Logo = styled.div`
   height: 44px;
   //background-color: white;
   //background-image: url("../../assets/images/QiuYeDx.png");
-  background-image: url(images/QiuYeDx.png);
+  background-image: url(images/QiuYeDx_web.png);
   background-size: cover;
 
   @media(max-width: 415px){
@@ -178,6 +179,7 @@ export const MoreListItem = styled(NavLink).attrs(props => ({
 }))`
   ${tw`tracking-widest font-medium text-gray-500 cursor-default md:cursor-pointer md:hover:opacity-40`};
   padding-left: 20%;
+  padding-right: 20%;
   width: 100%;
   height: 50px;
   line-height: 50px;
@@ -185,6 +187,9 @@ export const MoreListItem = styled(NavLink).attrs(props => ({
   margin: 0;
   flex-grow: 0;
   flex-shrink: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 
   //cursor: pointer;
   position: relative;
@@ -209,7 +214,7 @@ export const MoreListItem = styled(NavLink).attrs(props => ({
     border-bottom: 1px solid rgba(78, 128, 238, .3);
   }
 
-  @media (min-width: 415px) {
+  @media (min-width: ${WIDTH_MOBILE}px) {
     ${({onlyMobile}) => onlyMobile ? "display: none;" : ""}
     height: 60px;
     line-height: 60px;

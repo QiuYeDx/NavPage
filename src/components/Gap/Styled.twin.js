@@ -5,5 +5,5 @@ export const Gap = styled.div`
   height: 1px;
   flex-grow: 1;
   width: 90%;
-  ${tw`border border-gray-200 mt-2 mb-2 select-none`}
+  ${tw`border border-blue-50 mt-2 mb-2 rounded-full select-none`}
 `

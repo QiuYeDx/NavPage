@@ -129,3 +129,15 @@ export function getFormattedDate() {
 
     return `${year}-${month}-${day}-${hours}h${minutes}m${seconds}s`;
 }
+
+export function formatDate(inputDate) {
+    const date = new Date(inputDate); // 将输入的日期字符串转换为Date对象
+    const year = date.getFullYear(); // 获取年份
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 获取月份，并补齐两位
+    const day = String(date.getDate()).padStart(2, '0'); // 获取日期，并补齐两位
+    const hours = String(date.getHours()).padStart(2, '0'); // 获取小时，并补齐两位
+    const minutes = String(date.getMinutes()).padStart(2, '0'); // 获取分钟，并补齐两位
+    const seconds = String(date.getSeconds()).padStart(2, '0'); // 获取秒钟，并补齐两位
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}

@@ -8,6 +8,7 @@ import Resources from "./views/Resources/Resources";
 import About from "./views/About/About";
 import Error from "./views/Error/Error";
 import { Wrapper } from "./Styled.twin";
+import Dashboard from "@/views/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                   <Route path="/tools/:toolId" element={<Tools/>}/>
                   <Route path="/resources" element={<Resources/>}/>
                   <Route path="/about" element={<About/>}/>
+                  <Route path="/dashboard" element={<Dashboard/>}/>
                   <Route path="*" element={<Error/>}/>
               </Routes>
           </HashRouter>

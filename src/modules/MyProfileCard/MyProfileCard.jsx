@@ -22,7 +22,7 @@ export default function MyProfileCard(props){
     return (
         <MainCard _tw={props.onlyMobile ? tw_onlyMobile : (props.notMobile ? tw_notMobile : tw_defaults)} h={"360px"}>
             <br/>
-            <SubAvatar img={"images/QiuYeDx.png"} hasBorder h={"100px"} w={"100px"}/>
+            <SubAvatar img={"images/QiuYeDx_web.png"} hasBorder h={"100px"} w={"100px"}/>
             <br/>
             <div tw={"text-xl text-gray-700 font-sans mt-2 font-bold"}>QiuYeDx</div>
             <div tw={"flex flex-row mt-2"}>

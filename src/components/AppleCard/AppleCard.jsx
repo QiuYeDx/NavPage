@@ -15,7 +15,6 @@ import {styles} from './themes';
 import {randomNum} from "@/utils/utils";
 import PropTypes from 'prop-types';
 import {debounce, throttle} from "@/utils/throttle";
-// import {throttle} from '@/utils/throttle';
 
 /**
  * # AppleCard
@@ -42,7 +41,7 @@ import {debounce, throttle} from "@/utils/throttle";
  *
  * + k ∈ (0, 1) 负责控制背景视察效果的幅度（运动范围）
  *
- * + theme ∈ [default, black, white, green, yellow, red, pink, purple, pink, gradient_blue]
+ * + theme ∈ [default, black, white, green, yellow, red, pink, purple, gradient_blue]
  *
  * + logo_url示例: `logo_url={"images/QiuYeDx.png"}` css里需要怎么写这里就怎么写（待优化）
  *
@@ -57,31 +56,21 @@ import {debounce, throttle} from "@/utils/throttle";
  * @constructor
  */
 export default function AppleCard(props) {
-    // const navigate = useNavigate();
     let [reSize, setReSize] = useState(false);
     let [matrix_y, setMatrix_y] = useState(0);
     let card_wrapper_ref = useRef(null);
     let background_wrapper_ref = useRef(null);
     let [randomClassName] = useState(randomNum(1, 99999));
     let [offset_top, setOffset_top] = useState(0);
-    // let [scroll_top, setScroll_top] = useState(0);
     let [client_height, setClient_height] = useState(0);
     let [card_wrapper_height, setCard_wrapper_height] = useState(0);
     let [background_wrapper_height, setBackground_wrapper_height] = useState(0);
 
-
     let updateMatrix = () => {
         if (card_wrapper_ref.current && background_wrapper_ref) {
-            // console.log('updateMatrix()');
-            // let offset_top = getOffsetTop(card_wrapper_ref.current); // element的顶边到文档流顶部的距离
             let scroll_top = getScrollTop();
-            // let client_height = getClientHeight();
-            // let card_wrapper_height = card_wrapper_ref.current.clientHeight;
-            // let background_wrapper_height = background_wrapper_ref.current.clientHeight;
-
             let k = props.k ? props.k : 0.7;
             let range_height_oneSide = k * (card_wrapper_height - background_wrapper_height) / 2;
-
             let ans = -range_height_oneSide;
 
             if (scroll_top > offset_top - client_height) {
@@ -106,7 +95,6 @@ export default function AppleCard(props) {
     }
 
     const updateByReSize = () => {
-        // console.log('updateByReSize()');
         setReSize(!reSize);
     }
 
@@ -115,17 +103,12 @@ export default function AppleCard(props) {
     const style = ((props.theme && styles[props.theme]) ? styles[props.theme] : styles['default']);
     useEffect(() => {
         setOffset_top(getOffsetTop(card_wrapper_ref.current));
-        // setScroll_top(getScrollTop());
         setClient_height(getClientHeight());
         setCard_wrapper_height(card_wrapper_ref.current.clientHeight);
         setBackground_wrapper_height(background_wrapper_ref.current.clientHeight);
-        // console.log('重新渲染');
-        // setStyle((props.theme && styles[props.theme]) ? styles[props.theme] : styles['default']);
         updateMatrix();
-        // setTimeout(updateMatrix, 50);
         window.addEventListener("scroll", updateMatrix);    // 如果第三个参数设置为true reSize后则会导致异常多数量的事件被触发。。。
         window.addEventListener('resize', updateByReSizeDebounced); // 如果第三个参数设置为true reSize过程可能会很卡。。。
-        // window.addEventListener("scroll", throttle(updateMatrix, 8), true);
         return (() => {
             window.removeEventListener("scroll", updateMatrix);
             window.removeEventListener("resize", updateByReSizeDebounced);

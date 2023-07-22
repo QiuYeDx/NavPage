@@ -11,52 +11,63 @@ import WrapperTop from "@/modules/WrapperTop/WrapperTop";
 import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
 import MainCard from "@/components/MainCard/MainCard"
 import AppleCard from "@/components/AppleCard/AppleCard"
-import {Toaster} from 'react-hot-toast';
 import {notify_success} from "@/hooks/toasts";
 import {useClipboard} from 'use-clipboard-copy';
 import {faApple, faGithub, faTwitter, faWordpress, faGoogle, faQq} from '@fortawesome/free-brands-svg-icons'
 import MyProfileCard from "@/modules/MyProfileCard/MyProfileCard";
 import {Wrapper} from "@/modules/Wrapper/Wrapper";
-
+import {log_api_config} from "@/GlobalConfig";
+import axios from "axios";
 
 export default function About() {
     const clipboard = useClipboard();
+    const [likeCount, setLikeCount] = useState(0);
+
+    useEffect(() => {
+        axios.get(log_api_config.url.counts, {
+            params: {
+                name: 'like',
+                api_key: log_api_config.api_key
+            }
+        }).then((res) => {
+            setLikeCount(res.data[0].count);
+        }).catch((e) => {
+            console.log(e);
+        })
+    }, [likeCount]);
 
     return (
         <Wrapper>
             <WrapperTop>
-                <Toaster/>
+
             </WrapperTop>
             <WrapperMiddle>
                 <WrapperLeft>
 
                 </WrapperLeft>
                 <WrapperMain tw={'grid-cols-5'}>
-                    {/*<MainCard*/}
-                    {/*    _tw={tw`bg-blue-400 col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50 block md:hidden`}*/}
-                    {/*    h={"80px"}>*/}
-                    {/*    <div tw={"text-2xl text-white font-bold font-sans mt-4"}>*/}
-                    {/*        关 于*/}
-                    {/*    </div>*/}
-                    {/*</MainCard>*/}
-
                     <MyProfileCard onlyMobile/>
 
                     <AppleCard
-                        theme={'gradient_blue'}
+                        theme={'defaults'}
                         h={"360px"}
                         k={0.5}
+                        topTextA={"Like"}
+                        topTextB={"当前点赞数"}
+                        subTextA={"支持一下"}
                         tw_card={tw`md:col-span-2`}
                         tw_content={tw`tracking-wide`}
-                        icon={<FontAwesomeIcon icon={solid("share-nodes")}
+                        icon={<FontAwesomeIcon icon={solid("thumbs-up")}
                                                tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />}
                         onClick={() => {
-                            clipboard.copy("https://nav.qiuyedx.com");
-                            notify_success("秋夜导航站地址Copied !", "copy_1");
+                            // 更新点赞次数
+                            log_api_config.updateCount('like');
+                            setLikeCount(likeCount + 1);
+                            notify_success("已点赞, 感谢您的支持 !", "like_1");
                         }}
                     >
-                        Share
+                        {likeCount}
                     </AppleCard>
 
                     <MainCard
@@ -94,26 +105,24 @@ export default function About() {
                     </AppleCard>
 
                     <AppleCard
-                        theme={'black'}
                         k={0.5}
-                        topTextA={"代码"}
-                        topTextB={"我的代码仓库"}
-                        subTextA={"灵感碰撞"}
-                        hasMask
+                        topTextA={"通讯"}
+                        topTextB={"我的企鹅账号"}
+                        subTextA={"欢迎扩列"}
                         tw_card={tw`md:col-span-2`}
-                        tw_content={tw`tracking-widest md:tracking-wider text-7xl md:text-8xl`}
+                        tw_content={tw`tracking-widest`}
                         tw_background={tw``}
                         tw_subbar={tw``}
                         icon={<FontAwesomeIcon
-                            icon={faGithub}
+                            icon={faQq}
                             tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />}
                         onClick={() => {
-                            clipboard.copy("https://github.com/QiuYeDx");
-                            notify_success("我的Github地址Copied !", "copy_3");
+                            clipboard.copy("532024989");
+                            notify_success("我的QQ号码Copied !", "copy_7");
                         }}
                     >
-                        Github
+                        QQ
                     </AppleCard>
 
                     <AppleCard
@@ -192,24 +201,26 @@ export default function About() {
                     </AppleCard>
 
                     <AppleCard
+                        theme={'black'}
                         k={0.5}
-                        topTextA={"通讯"}
-                        topTextB={"我的企鹅账号"}
-                        subTextA={"欢迎扩列"}
+                        topTextA={"代码"}
+                        topTextB={"我的代码仓库"}
+                        subTextA={"灵感碰撞"}
+                        hasMask
                         tw_card={tw`md:col-span-2`}
-                        tw_content={tw`tracking-widest`}
+                        tw_content={tw`tracking-widest md:tracking-wider text-7xl md:text-8xl`}
                         tw_background={tw``}
                         tw_subbar={tw``}
                         icon={<FontAwesomeIcon
-                            icon={faQq}
+                            icon={faGithub}
                             tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />}
                         onClick={() => {
-                            clipboard.copy("532024989");
-                            notify_success("我的QQ号码Copied !", "copy_7");
+                            clipboard.copy("https://github.com/QiuYeDx");
+                            notify_success("我的Github地址Copied !", "copy_3");
                         }}
                     >
-                        QQ
+                        Github
                     </AppleCard>
 
                 </WrapperMain>

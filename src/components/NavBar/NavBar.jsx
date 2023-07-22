@@ -156,7 +156,7 @@ export default function NavBar(){
                     tw={"md:hover:text-gray-300 active:text-gray-700 cursor-default md:cursor-pointer select-none"}
                     onClick={() => setIsMoreListShown(!isMoreListShown)}
                 >
-                    <MenuButton active={isMoreListShown} rounded={true} _tw={tw`scale-110`}/>
+                    <MenuButton active={isMoreListShown} rounded={true} isRotated={true} _tw={tw`scale-110`}/>
                 </MoreWrapper>
             </NavWrapper>
             <MoreList isShown={isMoreListShown} onClick={() => setIsMoreListShown(!isMoreListShown)}>
@@ -169,12 +169,24 @@ export default function NavBar(){
                     else
                         window.scroll(0, 0);
                 }}>
-                    <FontAwesomeIcon icon={solid("circle-info")} tw={"pr-2"}/>
-                    About
+                    <span>About</span>
+                    <span tw={'my-auto text-lg'}><FontAwesomeIcon icon={solid("circle-info")} tw={"pr-2"}/></span>
+                </MoreListItem>
+                <MoreListItem to="/dashboard" onlyMobile={false} onClick={() => {
+                    if(location.pathname === '/dashboard')
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth",
+                        });
+                    else
+                        window.scroll(0, 0);
+                }}>
+                    <span>Dashboard</span>
+                    <span tw={'my-auto text-lg'}><FontAwesomeIcon icon={solid("gauge")} tw={"pr-2"}/></span>
                 </MoreListItem>
                 <MoreListItem to="https://github.com/QiuYeDx/NavPage" target="_blank">
-                    <FontAwesomeIcon icon={faGithub} tw={"pr-2"}/>
-                    Star on Github
+                    <span>Star on Github</span>
+                    <span tw={'my-auto text-lg'}><FontAwesomeIcon icon={faGithub} tw={"pr-2"}/></span>
                 </MoreListItem>
             </MoreList>
         </div>
