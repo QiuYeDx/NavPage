@@ -71,7 +71,7 @@ export const Tbody = styled.tbody`
     position: absolute;
     top: 42px;
     left: 0;
-    height: 100%;
+    height: calc(100% - 42px);
     width: 16px;
     @media(max-width: ${WIDTH_MOBILE}px){
       width: 7.8px;
@@ -84,7 +84,7 @@ export const Tbody = styled.tbody`
     position: absolute;
     top: 42px;
     right: 0;
-    height: 100%;
+    height: calc(100% - 42px);
     width: 16px;
     @media(max-width: ${WIDTH_MOBILE}px){
       width: 7.8px;
