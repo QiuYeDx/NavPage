@@ -42,8 +42,8 @@ export const NavList = styled.div`
 
 export const NavItem = styled(NavLink).attrs(props => ({
     style: ({ isActive }) => ({
-        color: isActive ? "rgb(78, 128, 238)" : "" ,
-        backgroundColor: isActive ? "rgba(230, 242, 253, 0.7)" : "",
+        color: isActive ? "rgb(59, 130, 246)" : "" ,
+        backgroundColor: isActive ? "rgba(239 246 255)" : "",
         // borderBottom: isActive ? "2px solid rgb(78, 128, 238)" : "none",
     }),
 }))`
@@ -76,7 +76,7 @@ export const NavItem = styled(NavLink).attrs(props => ({
     transition: all 0.35s ease;
     width: ${props => props.style.isActive ? '100%' : '0'};
     content: '';
-    border-bottom: 2px solid rgba(112, 163, 243, 1);
+    border-bottom: 2px solid rgba(59, 130, 246, .8);
   }
   
   &.active::before{
@@ -174,7 +174,7 @@ export const MoreList = styled.div`
 
 export const MoreListItem = styled(NavLink).attrs(props => ({
     style: ({ isActive }) => ({
-        color: isActive ? "rgba(78, 128, 238, 0.7)" : "" ,
+        color: isActive ? "rgba(59, 130, 246, 0.7)" : "" ,
     }),
 }))`
   ${tw`tracking-widest font-medium text-gray-500 cursor-default md:cursor-pointer md:hover:opacity-40`};
