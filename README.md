@@ -38,7 +38,7 @@ React、Webpack、react-router-dom、styled-components、tailwindcss 、twin.mac
 - 完成主页的初版设计
 - 完成资源页的初版设计
 - JavaScript转TypeScript
-- 改用VIte打包
+- 改用Vite打包
 - 优化项目结构
 - 增加后台操作页面，完善用户组与身份验证
 - ...

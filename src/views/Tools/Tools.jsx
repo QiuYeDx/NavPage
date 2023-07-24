@@ -23,11 +23,6 @@ export default function Tools() {
     const location = useLocation();
     const params = useParams();
     const [counts, setCounts] = useState([]);
-    const [biilibiliCount, setBilibiliCount] = useState(0);
-    const [tiktokCount, setTiktokCount] = useState(0);
-    const [qrcodeCount, setQrcodeCount] = useState(0);
-    const [seleniumCount, setSeleniumCount] = useState(0);
-
     const componentCount = 1;
     const components = [];
     for (let i = 0; i < componentCount; i++) {
