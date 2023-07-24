@@ -33,6 +33,7 @@ export default function TiktokPage() {
     const scroll_ref = useRef(null);
     const [text, setText] = useState('');
     const [data, setData] = useState(null);
+    const [count, setCount] = useState(0);   // 服务统计
     const [loading, setLoading] = useState(false);
     const [finished, setFinished] = useState(false);
     const [invalid, setInvalid] = useState(false);
@@ -86,7 +87,7 @@ export default function TiktokPage() {
             notify_success('解析成功 !', 'resolving_success');
 
             // 更新服务请求次数
-            log_api_config.updateCount('tiktok');
+            setCount((await log_api_config.awaitCountAPI('PUT', 'tiktok')).data[0].count);
 
             setTimeout(() => {
                 scroll_ref.current.scrollIntoView({behavior: 'smooth'});

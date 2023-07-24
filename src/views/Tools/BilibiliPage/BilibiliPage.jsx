@@ -11,7 +11,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {duotone, regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import tw from "twin.macro";
 import {useBeforeUnload, useNavigate} from "react-router-dom";
-import {H2, InLineTitle} from "@/styles/TextStyles";
+import {H2, H3, H4, InLineTitle} from "@/styles/TextStyles";
 import {Gap} from "@/components/Gap/Styled.twin";
 import {BackButton, MButton} from "@/components/Button/Styled.twin";
 import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
@@ -34,6 +34,7 @@ export default function BilibiliPage() {
     const [text, setText] = useState('');
     const [data, setData] = useState(null);
     const [list, setList] = useState(null);
+    const [count, setCount] = useState(0);   // 服务统计
     const [loading, setLoading] = useState(false);
     const [finished, setFinished] = useState(false);
     const [invalid, setInvalid] = useState(false);
@@ -81,7 +82,7 @@ export default function BilibiliPage() {
             notify_success('解析成功 !', 'resolving_success');
 
             // 更新服务请求次数
-            log_api_config.updateCount('bilibili');
+            setCount((await log_api_config.awaitCountAPI('PUT', 'bilibili')).data[0].count);
 
             setTimeout(() => {
                 scroll_ref.current.scrollIntoView({behavior: 'smooth'});

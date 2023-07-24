@@ -24,6 +24,7 @@ export default function QRPage() {
     const a_ref = useRef(null);
     const button_ref = useRef(null);
     const [text, setText] = useState('');
+    const [count, setCount] = useState(0);  // 服务统计
     const [data, setData] = useState('images/qrcode-solid-md.png');
     const [loading, setLoading] = useState(false);
     const [finished, setFinished] = useState(false);
@@ -73,10 +74,12 @@ export default function QRPage() {
                 notify_success('QR码获取成功 !', 'qrcode_get_success');
 
                 // 更新服务请求次数
-                log_api_config.updateCount('qrcode');
+                log_api_config.awaitCountAPI('PUT', 'qrcode').then(res => {
+                    setCount(res.data[0].count);
+                }).catch(err => console.log('Failed to put qrcode count'));
             })
             .catch(error => {
-                console.error('Error generating QR code:', error);
+                console.error('Failed to generate QR code:', error);
                 notify_error('QR码获取失败，请重试 !', 'qrcode_get_error')
             })
             .finally(() => {

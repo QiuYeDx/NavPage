@@ -15,44 +15,98 @@ export const log_api_config = getLog_api_config('https://api.qiuyedx.com', 'nav.
  */
 function getLog_api_config(API_BASE_URL, app_domain){
     const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:5050' : API_BASE_URL;
+    const DOMAIN = process.env.NODE_ENV === 'development' ? 'test.domain' : app_domain;
+    const KEY = '785d273b7996ce1b6793eed63e03c25e23733ccb5cd59ac4d281dee27d974a81';
+    const URL = {
+        counts: BASE_URL + '/api/counts',
+        url_counts: BASE_URL + '/api/url/counts',
+        logs: BASE_URL + '/api/logs'
+    };
     return {
-        domain: process.env.NODE_ENV === 'development' ? 'test.domain' : app_domain,
+        domain: DOMAIN,
         API_BASE_URL: BASE_URL,
-        url: {
-            counts: BASE_URL + '/api/counts',
-            url_counts: BASE_URL + '/api/url/counts',
-            logs: BASE_URL + '/api/logs'
-        },
-        api_key: '785d273b7996ce1b6793eed63e03c25e23733ccb5cd59ac4d281dee27d974a81',
+        url: URL,
+        api_key: KEY,
 
         /**
-         * ## `updateCount()`更新服务的请求次数
+         * ## `awaitCountAPI()`: /api/counts API 相关请求 可用GET PUT
+         * @param {String} method - 方法类型 e.g. GET, PUT, POST, DELETE ...
          * @param {String} name - 服务的名称 e.g. qrcode, bilibili, tiktok, selenium ...
          */
-        updateCount: function(name){
+        awaitCountAPI: async function(method, name){
             // 更新服务请求次数
-            axios.put(log_api_config.url.counts, {
-                name: name, api_key: log_api_config.api_key
-            })
-                .then(res => {
-                    if(process.env.NODE_ENV === 'development')
-                        console.log(res);
-                })
-                .catch(e => {
-                    if(process.env.NODE_ENV === 'development')
-                        console.log(e);
-                });
-            axios.get(log_api_config.url.counts, {
-                params: {name: name, api_key: log_api_config.api_key}
-            })
-                .then(res => {
-                    if(process.env.NODE_ENV === 'development')
-                        console.log(res);
-                })
-                .catch(e => {
-                    if(process.env.NODE_ENV === 'development')
-                        console.log(e);
-                });
+            try {
+                let res = null;
+                if(method.toLowerCase() === 'put'){
+                    res = await axios.put(URL.counts, {
+                        name: name, api_key: KEY
+                    });
+                }else if(method.toLowerCase() === 'get'){
+                    res = await axios.get(URL.counts, {
+                        params: {name: name, api_key: KEY}
+                    });
+                }
+                if(process.env.NODE_ENV === 'development')
+                    console.log(res);
+                return res;
+            } catch (err) {
+                if(process.env.NODE_ENV === 'development')
+                    console.log(err);
+                return err;
+            }
+        },
+        /**
+         * ## `awaitUrlCountAPI()`: /api/url/counts API 相关请求 可用GET PUT
+         * @param {String} method - 方法类型 e.g. GET, PUT, POST, DELETE ...
+         * @param {String} url - 网页URL e.g. '/tools/qrcode'
+         */
+        awaitUrlCountAPI: async function(method, url){
+            // 更新网页访问次数
+            try {
+                let res = null;
+                if(method.toLowerCase() === 'put'){
+                    res = await axios.put(URL.url_counts, {
+                        domain: DOMAIN, url: url,  api_key: KEY
+                    });
+                }else if(method.toLowerCase() === 'get'){
+                    res = await axios.get(URL.url_counts, {
+                        params: {domain: DOMAIN, url: url,  api_key: KEY}
+                    });
+                }
+                if(process.env.NODE_ENV === 'development')
+                    console.log(res);
+                return res;
+            } catch (err) {
+                if(process.env.NODE_ENV === 'development')
+                    console.log(err);
+                return err;
+            }
+        },
+        /**
+         * ## `awaitLogsAPI()`: /api/url/counts API 相关请求 可用GET
+         * @param {String} method - 方法类型 e.g. GET, PUT, POST, DELETE ...
+         * @param {Number} n_per_page - 每页的数量 defaults: 10
+         * @param {Number} p_index - 请求第几页的数据 [1, 2, ...] defaults: 10
+         */
+        awaitLogsAPI: async function(method, n_per_page = 10, p_index= 1){
+            // 更新网页访问次数
+            try {
+                let res = null;
+                if(method.toLowerCase() === 'put'){
+                    res = null
+                }else if(method.toLowerCase() === 'get'){
+                    res = await axios.get(URL.logs, {
+                        params: {n_per_page: n_per_page, p_index: p_index,  api_key: KEY}
+                    });
+                }
+                if(process.env.NODE_ENV === 'development')
+                    console.log(res);
+                return res;
+            } catch (err) {
+                if(process.env.NODE_ENV === 'development')
+                    console.log(err);
+                return err;
+            }
         },
     }
 }

@@ -242,7 +242,7 @@ const Pagination = ({data}) => {
                                         !finished ?
                                             <>暂无解析<FontAwesomeIcon icon={solid("film")} fade tw={'ml-1'}/></>
                                             :
-                                            (downloadState.get(item.index) ? <>下载中...<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></> : <>下载视频<FontAwesomeIcon icon={solid("download")} beat tw={'ml-1'}/></>)
+                                            (downloadState.get(item.index) ? <>下载中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></> : <>下载视频<FontAwesomeIcon icon={solid("download")} beat tw={'ml-1'}/></>)
                                     }
                                 </MButton>
                             </LineWrapper>

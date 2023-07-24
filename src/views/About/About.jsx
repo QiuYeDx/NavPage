@@ -11,7 +11,7 @@ import WrapperTop from "@/modules/WrapperTop/WrapperTop";
 import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
 import MainCard from "@/components/MainCard/MainCard"
 import AppleCard from "@/components/AppleCard/AppleCard"
-import {notify_success} from "@/hooks/toasts";
+import {notify_error, notify_success} from "@/hooks/toasts";
 import {useClipboard} from 'use-clipboard-copy';
 import {faApple, faGithub, faTwitter, faWordpress, faGoogle, faQq} from '@fortawesome/free-brands-svg-icons'
 import MyProfileCard from "@/modules/MyProfileCard/MyProfileCard";
@@ -23,18 +23,21 @@ export default function About() {
     const clipboard = useClipboard();
     const [likeCount, setLikeCount] = useState(0);
 
-    useEffect(() => {
-        axios.get(log_api_config.url.counts, {
-            params: {
-                name: 'like',
-                api_key: log_api_config.api_key
-            }
-        }).then((res) => {
+    const fetchData = async () => {
+        try {
+            const res = await log_api_config.awaitCountAPI('GET', 'like');
             setLikeCount(res.data[0].count);
-        }).catch((e) => {
-            console.log(e);
-        })
-    }, [likeCount]);
+            return 'Succeed to fetch like count';
+        } catch (err) {
+            if(process.env.NODE_ENV === 'development')
+                console.log(err);
+            return 'Failed to fetch like count';
+        }
+    }
+
+    useEffect(() => {
+        fetchData().then(r => console.log(r)).catch(e => console.log(e));
+    }, []);
 
     return (
         <Wrapper>
@@ -60,11 +63,15 @@ export default function About() {
                         icon={<FontAwesomeIcon icon={solid("thumbs-up")}
                                                tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />}
-                        onClick={() => {
+                        onClick={async () => {
                             // 更新点赞次数
-                            log_api_config.updateCount('like');
-                            setLikeCount(likeCount + 1);
-                            notify_success("已点赞, 感谢您的支持 !", "like_1");
+                            try {
+                                const res = await log_api_config.awaitCountAPI('PUT', 'like');
+                                setLikeCount(res.data[0].count);
+                                notify_success("已点赞, 感谢您的支持 !", "like_1");
+                            } catch (err) {
+                                notify_error("点赞失败, 但还是感谢您的支持 !", "like_error_1");
+                            }
                         }}
                     >
                         {likeCount}

@@ -14,10 +14,6 @@ import {log_api_config} from "@/GlobalConfig";
 import axios from "axios";
 import Table from "@/components/Table/Table";
 import {formatDate} from "@/utils/utils";
-import {Tooltip} from "react-tooltip";
-import {H2, InLineTitle} from "@/styles/TextStyles";
-import TextInput from "@/components/TextInputLine/TextInput";
-import {PageButton} from "@/components/Button/Styled.twin";
 
 export default function Dashboard() {
     const clipboard = useClipboard();
@@ -29,6 +25,8 @@ export default function Dashboard() {
                 domain: log_api_config.domain,
             }
         }).then((res) => {
+            if(process.env.NODE_ENV === 'development')
+                console.log(res);
             setVisitData(res.data);
         }).catch((e) => {
             console.log(e);
@@ -37,7 +35,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         updateVisitData();
-    }, [visitData]);
+    }, []);
 
     return (
         <Wrapper>
@@ -66,7 +64,7 @@ export default function Dashboard() {
                             notify_success("已更新当前访问量 !", "update_visit_count_1");
                         }}
                     >
-                        {visitData ? visitData[0].sum_count : '-'}
+                        {visitData ? visitData[0].sum_count : '0'}
                     </AppleCard>
 
                     <div tw={'col-span-5 md:col-span-3 m-4'}>

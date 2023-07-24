@@ -12,40 +12,27 @@ import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { notify_error } from "@/hooks/toasts";
 import MenuButton from "@/components/MenuButton/MenuButton";
-import axios from "axios";
 import {log_api_config} from "@/GlobalConfig";
 
 export default function NavBar(){
     const navigate = useNavigate();
     const location = useLocation();
     const [isMoreListShown, setIsMoreListShown] = useState(false);
-
+    
+    const fetchData = async () => {
+        try {
+            const res = await log_api_config.awaitUrlCountAPI('PUT', location.pathname);
+            return 'Succeed to put url count';
+        } catch (err) {
+            if(process.env.NODE_ENV === 'development')
+                console.log(err);
+            return 'Failed to put url count';
+        }
+    };
+    
     useEffect(() => {
         // 更新页面访问次数
-        axios.put(log_api_config.url.url_counts, {
-            domain: log_api_config.domain,
-            url: location.pathname
-        })
-            .then(res => {
-                console.log(res);
-            })
-            .catch(e => {
-                console.log(e);
-            });
-
-        // axios.get(log_api_config.url.logs, {
-        //     params: {
-        //         n_per_page: 10,
-        //         p_index: 1,
-        //         api_key: log_api_config.api_key
-        //     }
-        // })
-        //     .then(res => {
-        //         console.log(res);
-        //     })
-        //     .catch(e => {
-        //         console.log(e);
-        //     });
+        fetchData().then(r => console.log(r)).catch(e => console.log(e));
     }, [location]);
 
     return (

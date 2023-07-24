@@ -32,6 +32,7 @@ export default function SeleniumPage() {
     const button3_ref = useRef(null);
     const button4_ref = useRef(null);
     const scroll_ref = useRef(null);
+    const [count, setCount] = useState(0);   // 服务统计
     const [apiUrl, setApiUrl] = useState('');   // 有效服务端根地址
     const [text, setText] = useState('');   // 服务端根地址
     const [text2, setText2] = useState(''); // selenium指令
@@ -136,7 +137,9 @@ export default function SeleniumPage() {
                 queryLog();
 
                 // 更新服务请求次数
-                log_api_config.updateCount('selenium');
+                log_api_config.awaitCountAPI('PUT', 'selenium').then(res => {
+                    setCount(res.data[0].count);
+                }).catch(err => console.log('Failed to put selenium count'));
             })
             .catch(error => {
                 console.error('Error: ', error);
