@@ -30,7 +30,7 @@ const ScrollToTopButton = () => {
     }, []);
 
     return (
-        <div id={'ScrollToTopButton'} tw={'fixed bottom-28 right-2 md:right-12 z-40 md:bottom-12'}>
+        <div id={'ScrollToTopButton'} tw={'fixed bottom-28 right-3 md:right-12 z-40 md:bottom-12'}>
             <PageButton
                 onClick={() => {
                     window.scrollTo({
