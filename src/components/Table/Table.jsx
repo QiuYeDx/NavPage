@@ -78,17 +78,6 @@ const Table = ({title, data, headers, keys, h}) => {
                 <TableWrapper>
                     <Thead>{renderHeaderRow()}</Thead>
                     <Tbody>{renderRows()}</Tbody>
-                    {
-                        !data || data.length === 0 ?
-                            <Tbody>
-                                <Tr>
-                                    <Td colSpan={headers.length} tw={'leading-10'}>
-                                        暂无数据
-                                    </Td>
-                                </Tr>
-                            </Tbody>
-                            : ''
-                    }
                 </TableWrapper>
             </Wrapper>
         </>

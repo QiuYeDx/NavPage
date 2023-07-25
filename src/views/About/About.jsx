@@ -18,10 +18,11 @@ import MyProfileCard from "@/modules/MyProfileCard/MyProfileCard";
 import {Wrapper} from "@/modules/Wrapper/Wrapper";
 import {log_api_config} from "@/GlobalConfig";
 import axios from "axios";
+import NumberAnimation from "@/styles/NumberAnimation";
 
 export default function About() {
     const clipboard = useClipboard();
-    const [likeCount, setLikeCount] = useState(0);
+    const [likeCount, setLikeCount] = useState(null);
 
     const fetchData = async () => {
         try {
@@ -74,9 +75,8 @@ export default function About() {
                             }
                         }}
                     >
-                        {likeCount}
+                        {likeCount ? <NumberAnimation forceFresh={true} fromValue={0} toValue={likeCount} duration={1} step={1} /> : <FontAwesomeIcon icon={solid("spinner")} spin /> }
                     </AppleCard>
-
                     <MainCard
                         _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50 hidden md:block`}
                         h={"80px"}>
