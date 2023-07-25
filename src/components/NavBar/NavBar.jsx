@@ -14,6 +14,7 @@ import {notify_error} from "@/hooks/toasts";
 import MenuButton from "@/components/MenuButton/MenuButton";
 import {log_api_config} from "@/GlobalConfig";
 import SwitchButton from "@/components/Button/SwitchButton";
+import { Helmet } from 'react-helmet-async';
 
 export default function NavBar() {
     const navigate = useNavigate();
@@ -29,6 +30,28 @@ export default function NavBar() {
                 console.log(err);
             return 'Failed to put url count';
         }
+    };
+
+    const changeMode = () => {
+        const metaToRemove = document.head.querySelector('meta[name="theme-color"]');
+        if (metaToRemove) {
+            // 从文档头中移除该 meta 标签
+            document.head.removeChild(metaToRemove);
+        }
+
+        const metaTag = document.createElement('meta');
+        metaTag.name = 'theme-color';
+
+        let ele = document.getElementById('rootWrapper');
+        if (ele.classList.contains('night-mode')) {
+            metaTag.content = '#fff'; // 设置主题颜色为白色
+            ele.classList.remove('night-mode');
+        } else {
+            metaTag.content = '#000'; // 设置主题颜色为黑色
+            ele.classList.add('night-mode');
+        }
+        // 将 meta 标签添加到文档头部
+        document.head.appendChild(metaTag);
     };
 
     useEffect(() => {
@@ -115,14 +138,7 @@ export default function NavBar() {
                     </NavItem>
                 </NavList>
                 <div tw={'hidden md:block h-[60px] md:flex md:flex-col justify-center md:ml-2 xl:ml-[140px] duration-500'}>
-                    <SwitchButton hasShadow={false} onChange={() => {
-                        let ele = document.getElementById('rootWrapper');
-                        if (ele.classList.contains('night-mode')) {
-                            ele.classList.remove('night-mode');
-                        } else {
-                            ele.classList.add('night-mode');
-                        }
-                    }}/>
+                    <SwitchButton hasShadow={false} onChange={changeMode}/>
                 </div>
                 <MoreWrapper
                     className={'group'}
@@ -167,14 +183,7 @@ export default function NavBar() {
                     </div>
                     <SwitchButton
                         _tw={tw`m-2`}
-                        onChange={() => {
-                            let ele = document.getElementById('rootWrapper');
-                            if (ele.classList.contains('night-mode')) {
-                                ele.classList.remove('night-mode');
-                            } else {
-                                ele.classList.add('night-mode');
-                            }
-                        }}/>
+                        onChange={changeMode}/>
                 </div>
             </MoreList>
         </div>
