@@ -14,7 +14,6 @@ import {log_api_config} from "@/GlobalConfig";
 import axios from "axios";
 import Table from "@/components/Table/Table";
 import {formatDate} from "@/utils/utils";
-import gsap from "gsap";
 import NumberAnimation from "@/styles/NumberAnimation";
 
 export default function Dashboard() {

@@ -1,5 +1,7 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
+import {useInView} from 'react-intersection-observer';
 import gsap from 'gsap';
+import {hasSelectionSupport} from "@testing-library/user-event/dist/utils";
 
 
 /**
@@ -11,6 +13,7 @@ import gsap from 'gsap';
  * @param {Number} props.step - 步长
  * @param {String} props.ease - 缓动函数名, 参考[GSAP文档](https://greensock.com/docs/v3/Eases) e.g. `'power2.out'`, `'ease'`
  * @param {Boolean} props.freshFlag - 强制刷新触发标志位(可选)
+ * @param {Boolean} props.isViewCtrl - 是否进入视野再播放动画 defaults: true
  * @returns {JSX.Element}
  * @constructor
  *
@@ -27,8 +30,11 @@ const NumberAnimation = ({
                              duration = 2,
                              step = 1,
                              ease = 'power2.out',
-                             freshFlag = false
+                             freshFlag = false,
+                             isViewCtrl = true
                          }) => {
+    const [hasEnteredViewport, setHasEnteredViewport] = useState(false);
+    const [ref, inView] = useInView();
     const numberRef = useRef();
     const gsapRef = useRef(null);
 
@@ -40,15 +46,27 @@ const NumberAnimation = ({
             snap: {innerHTML: step},
             ease,
         });
-
+        if(isViewCtrl && !hasEnteredViewport)
+            gsapRef.current.resume();
     }, [fromValue, toValue, duration, step]);
 
     useEffect(() => {
         gsapRef.current.restart();
     }, [freshFlag]);
 
+    useEffect(() => {
+        if (inView && !hasEnteredViewport) {
+            setHasEnteredViewport(true);
+        }
+    }, [inView, hasEnteredViewport]);
+
+    useEffect(() => {
+        if(isViewCtrl && hasEnteredViewport)
+            gsapRef.current.restart();
+    }, [hasEnteredViewport]);
+
     return (
-        <div>
+        <div ref={ref}>
             <span ref={numberRef}>{fromValue}</span>
         </div>
     );
