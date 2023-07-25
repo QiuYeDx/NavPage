@@ -75,7 +75,7 @@ export default function About() {
                             }
                         }}
                     >
-                        {likeCount ? <NumberAnimation forceFresh={true} fromValue={0} toValue={likeCount} duration={1} step={1} /> : <FontAwesomeIcon icon={solid("spinner")} spin /> }
+                        {likeCount ? <NumberAnimation fromValue={0} toValue={likeCount} duration={2} step={1} /> : <FontAwesomeIcon icon={solid("spinner")} spin /> }
                     </AppleCard>
                     <MainCard
                         _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50 hidden md:block`}

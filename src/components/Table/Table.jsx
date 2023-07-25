@@ -5,7 +5,7 @@ import {InLineTitle} from "@/styles/TextStyles";
 import {Tooltip} from "react-tooltip";
 
 /**
- * **Table**组件
+ * ## `Table组件`
  * @param {Object} props - 组件的props对象
  * @param {String} props.title - 表标题
  * @param {Array<Array<String> | Object>} props.data - 表项数据

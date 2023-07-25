@@ -44,3 +44,21 @@ React、Webpack、react-router-dom、styled-components、tailwindcss 、twin.mac
 - 优化项目结构
 - 增加后台操作页面，完善用户组与身份验证
 - ...
+
+## 调试与部署
+
+### Development环境
+
+```shell
+npm run webpack:dev
+```
+
+### 打包输出dist
+
+```shell
+npm run deploy
+```
+
+### 部署至GitHub Pages
+
+详见我的博客: [将 React 应用程序部署到 GitHub.io并使用CDN加速(可强制HTTPS)](https://qiuyedx.com/?p=1868)

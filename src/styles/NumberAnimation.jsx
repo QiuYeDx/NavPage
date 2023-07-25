@@ -1,33 +1,51 @@
 import React, {useEffect, useRef} from 'react';
 import gsap from 'gsap';
 
+
+/**
+ * ## `NumberAnimation组件`: 按指定步长从`X`到`Y`的数字动画
+ * @param {Object} props - 组件的props对象
+ * @param {Number} props.fromValue - 初始值
+ * @param {Number} props.toValue - 目标值
+ * @param {Number} props.duration - 持续时间(s)
+ * @param {Number} props.step - 步长
+ * @param {String} props.ease - 缓动函数名, 参考[GSAP文档](https://greensock.com/docs/v3/Eases) e.g. `'power2.out'`, `'ease'`
+ * @param {Boolean} props.freshFlag - 强制刷新触发标志位(可选)
+ * @returns {JSX.Element}
+ * @constructor
+ *
+ * **`使用示例`**
+ *
+ * <NumberAnimation freshFlag={flag} fromValue={0} toValue={visitData[0].sum_count} duration={1} step={1} />
+ *
+ * **`每次反转freshFlag的布尔值即可强制刷新组件，执行从fromValue到toValue的动画。`**
+ *
+ */
 const NumberAnimation = ({
                              fromValue = 0,
                              toValue = 0,
                              duration = 2,
                              step = 1,
                              ease = 'power2.out',
-                             forceFresh = false
+                             freshFlag = false
                          }) => {
     const numberRef = useRef();
+    const gsapRef = useRef(null);
 
     useEffect(() => {
         const element = numberRef.current;
-
-        if (forceFresh)
-            gsap.fromTo(element, {innerHTML: fromValue}, {
-                innerHTML: toValue,
-                duration,
-                snap: {innerHTML: step},
-                ease,
-            });
-        else gsap.to(element, {
+        gsapRef.current = gsap.to(element, {
             innerHTML: toValue,
             duration,
             snap: {innerHTML: step},
             ease,
         });
+
     }, [fromValue, toValue, duration, step]);
+
+    useEffect(() => {
+        gsapRef.current.restart();
+    }, [freshFlag]);
 
     return (
         <div>
