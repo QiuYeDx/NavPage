@@ -33,7 +33,7 @@ export default function Resources(){
                 notify_success("秋夜导航站地址Copied !", "copy_1");
             }}
         >
-            Share {i + 1}
+            资源 {i + 1}
         </AppleCard>);
     }
     return (

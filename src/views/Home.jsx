@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    WrapperMiddle , WrapperLeft,
+    WrapperMiddle, WrapperLeft,
     WrapperRight, WrapperMain
 } from "@/layout/MainWrapper";
 import {Wrapper} from "@/modules/Wrapper/Wrapper";
@@ -9,34 +9,15 @@ import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
 import 'twin.macro';
 import tw from "twin.macro";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
+import {regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import AppleCard from "@/components/AppleCard/AppleCard";
 import {notify_error, notify_success} from "@/hooks/toasts";
 import {useClipboard} from "use-clipboard-copy";
+import {H1, P} from "@/styles/TextStyles";
+import {ErrorWrapper} from "@/views/Error/Styled.twin";
 
-export default function Home(){
+export default function Home() {
     const clipboard = useClipboard();
-    const componentCount = 9;
-    const components = [];
-    for (let i = 0; i < componentCount; i++) {
-        components.push(<AppleCard
-            key={i}
-            theme={'gradient_blue'}
-            h={"360px"}
-            k={0.5}
-            tw_card={tw`md:col-span-2`}
-            tw_content={tw`tracking-wide text-7xl`}
-            icon={<FontAwesomeIcon icon={solid("share-nodes")}
-                                   tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
-            />}
-            onClick={() => {
-                clipboard.copy("https://nav.qiuyedx.com");
-                notify_success("秋夜导航站地址Copied !", "copy_1");
-            }}
-        >
-            Share {i + 1}
-        </AppleCard>);
-    }
     return (
         <Wrapper>
             <WrapperTop>
@@ -47,23 +28,12 @@ export default function Home(){
 
                 </WrapperLeft>
                 <WrapperMain>
-                    {/*<MainCard _tw={tw`bg-white md:col-span-5 hidden md:block m-4`} h={"360px"}>*/}
-
-                    {/*</MainCard>*/}
-
-                    {/*<MainCard _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50`} h={"80px"}>*/}
-                    {/*    <div tw={"w-full pl-12 pr-12 text-2xl text-white font-bold font-sans mt-4"}>*/}
-                    {/*        主 页*/}
-                    {/*    </div>*/}
-                    {/*</MainCard>*/}
-
-                    {/*<MainCard _tw={tw`bg-white md:col-span-3 col-span-5 m-4`} h={"360px"} >*/}
-
-                    {/*</MainCard>*/}
-
-                    {/*<MainCard _tw={tw`bg-white md:col-span-2 col-span-5 m-4`} h={"360px"}>*/}
-                    {/*</MainCard>*/}
-                    {components}
+                    <ErrorWrapper tw={'col-span-4 h-80 flex flex-col gap-4 pt-8 mt-4 mx-4 md:mx-16 px-0'}>
+                        <FontAwesomeIcon icon={solid("truck-ramp-box")} fade size="10x" color={"rgb(255,242,241)"}/>
+                        <H1 color={"rgb(255,242,241)"}>主页建设中</H1>
+                        <P tw={'text-lg'} color={"rgb(255,242,241)"}>晚些时候再来吧 <FontAwesomeIcon
+                            icon={solid("face-sad-tear")}/></P>
+                    </ErrorWrapper>
 
                 </WrapperMain>
                 <WrapperRight>

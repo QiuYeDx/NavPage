@@ -254,7 +254,7 @@ export default function TiktokPage() {
                     {/*<Gap/>*/}
                 <ContentWrapper>
                     <LineWrapper>
-                        <InLineTitle tw={'mb-2'}>获取结果</InLineTitle>
+                        <InLineTitle tw={'mb-2'}>获取<FontAwesomeIcon icon={solid("link")} tw={"text-blue-400 pl-1 pr-1 duration-500 ease-out"}/>结果</InLineTitle>
                     </LineWrapper>
                     <LineWrapper tw={'flex-wrap'}>
                         {/* 150 * 256 => 384 * 216 => 288 * 162*/}
@@ -316,20 +316,24 @@ export default function TiktokPage() {
                     <ContentWrapper>
                         <LineWrapper>
                             <InLineTitle>
-                                视频<span tw={'text-blue-500 pl-1 pr-1'}>详情</span>
+                                视频<FontAwesomeIcon icon={solid("layer-group")} tw={"text-blue-400 pl-1 pr-1 duration-500 ease-out"}/>详情
                             </InLineTitle>
                         </LineWrapper>
                         <Gap/>
                         <LineWrapper>
-                            <InLineTitle tw={'text-2xl font-medium'}>
-                                时长 <span tw={'text-blue-500'}>{data && data.durationFormat}</span>
+                            <InLineTitle tw={'text-2xl font-medium flex flex-row justify-between min-w-[298px] max-w-[330px]'}>
+                                <span tw={'flex flex-row justify-between w-[72px]'}><span>时</span><span>长</span></span>
+                                <span tw={'text-blue-500'}>{data && data.durationFormat}</span>
                             </InLineTitle>
                         </LineWrapper>
                         <LineWrapper>
-                            <InLineTitle tw={'text-2xl font-medium'}>
-                                尺寸 <span tw={'text-blue-500'}>{data && data.width}</span>
-                                <FontAwesomeIcon icon={solid("xmark")}/>
-                                <span tw={'text-blue-500'}>{data && data.height}</span>
+                            <InLineTitle tw={'text-2xl font-medium flex flex-row justify-between min-w-[298px] max-w-[330px]'}>
+                                <span>原尺寸</span>
+                                <span>
+                                    <span tw={'text-blue-500'}>{data && data.width}</span>
+                                    <FontAwesomeIcon icon={solid("xmark")}/>
+                                    <span tw={'text-blue-500'}>{data && data.height}</span>
+                                </span>
                             </InLineTitle>
                         </LineWrapper>
                         <LineWrapper tw={'mt-2'}>

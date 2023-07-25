@@ -176,7 +176,7 @@ export default function QRPage() {
                     {/*<Gap/>*/}
                 <ContentWrapper>
                     <LineWrapper>
-                        <InLineTitle tw={'mb-2'}>获取结果</InLineTitle>
+                        <InLineTitle tw={'mb-2'}>获取<FontAwesomeIcon icon={solid("qrcode")} tw={"text-blue-400 pl-1 pr-1 duration-500 ease-out"}/>结果</InLineTitle>
                     </LineWrapper>
                     <LineWrapper>
                         <PictureDisplay src={data}/>

@@ -1,4 +1,5 @@
 import tw, { styled } from 'twin.macro'
+import {CardWrapper} from "@/components/MainCard/Styled.twin";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -19,7 +20,7 @@ export const Wrapper = styled.div`
   background: linear-gradient(-45deg, #ebf3fe, #f2eeff, #fbf6f7, #ebf3fe);
 `
 
-export const ErrorWrapper = styled.div`
+export const ErrorWrapper = styled(CardWrapper)`
   ${tw`p-10 shadow-xl rounded-3xl bg-red-400 animate-fade_in_up.4`}
   //position: relative;
   //top: -60px;

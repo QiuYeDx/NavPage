@@ -67,6 +67,7 @@ export default function BilibiliPage() {
     async function fetchData(url, params) {
         try {
             const response = await axios.get(url, {params});
+            console.log(response.data.data);
             setData(response.data.data);
             setList(response.data.data.list);
             setFinished(true);
@@ -119,7 +120,6 @@ export default function BilibiliPage() {
         setLoading(true);
 
         const url = 'https://www.mxnzp.com/api/bilibili/video';
-        // const url = 'http://127.0.0.1:8000/test_api';
         const params = {
             url: btoa(valid_url[0]),
             app_id: app_config.app_id,
@@ -252,7 +252,7 @@ export default function BilibiliPage() {
                     {/*<Gap/>*/}
                 <ContentWrapper>
                     <LineWrapper>
-                        <InLineTitle tw={'mb-2'}>获取结果</InLineTitle>
+                        <InLineTitle tw={'mb-2'}>获取<FontAwesomeIcon icon={solid("link")} tw={"text-blue-400 pl-1 pr-1 duration-500 ease-out"}/>结果</InLineTitle>
                     </LineWrapper>
                     <LineWrapper>
                         <PictureDisplay height={150} width={256} src={cover}/>
