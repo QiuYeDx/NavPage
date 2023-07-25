@@ -178,7 +178,8 @@ export default function NavBar() {
                     <span tw={'my-auto text-lg'}><FontAwesomeIcon icon={faGithub} tw={"pr-2"}/></span>
                 </MoreListItem>
                 <div tw={'absolute top-20 right-0.5 md:hidden'}>
-                    <div tw={'absolute right-2/4 bottom-2/4 h-48 bg-blue-300 w-px border border-blue-300'}>
+                    {/*开关的挂绳*/}
+                    <div tw={'absolute right-[27px] bottom-2/4 h-48 bg-blue-300 w-px border border-blue-300'}>
 
                     </div>
                     <SwitchButton
