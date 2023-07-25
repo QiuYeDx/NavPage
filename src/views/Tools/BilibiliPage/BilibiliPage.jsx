@@ -181,20 +181,20 @@ export default function BilibiliPage() {
             setIosIsDownloading(last_states.iosIsDownloading);
         }
         // 在组件挂载时启动定时器
-        const timer = setInterval(() => {
-            // 定时器任务逻辑
-            // let obj = sessionStorage.getItem('tiktok_states');
-            // if(obj && JSON.stringify(Array.from(downloadState)) !== JSON.stringify(JSON.parse(decodeURIComponent(obj)).downloadStateArray)){
-            //     console.log('update download state');
-            if(sessionStorage.getItem('bilibili_states'))
-                setDownloadState(new Map(JSON.parse(decodeURIComponent(sessionStorage.getItem('bilibili_states'))).downloadStateArray));
-            // }
-
-        }, 1000);
+        // const timer = setInterval(() => {
+        //     // 定时器任务逻辑
+        //     // let obj = sessionStorage.getItem('tiktok_states');
+        //     // if(obj && JSON.stringify(Array.from(downloadState)) !== JSON.stringify(JSON.parse(decodeURIComponent(obj)).downloadStateArray)){
+        //     //     console.log('update download state');
+        //     if(sessionStorage.getItem('bilibili_states'))
+        //         setDownloadState(new Map(JSON.parse(decodeURIComponent(sessionStorage.getItem('bilibili_states'))).downloadStateArray));
+        //     // }
+        //
+        // }, 1000);
 
         // 在组件卸载时清除定时器
         return () => {
-            clearInterval(timer);
+            // clearInterval(timer);
         };
     }, []); // 依赖项为空数组，表示仅在组件挂载和卸载时执行一次
     return (

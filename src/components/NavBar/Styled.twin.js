@@ -230,7 +230,7 @@ export const MoreListMask = styled.div.attrs(props => ({
 }))`
   position: fixed;
   top: 0;
-  height: 200%;
+  height: 100%;
   left: 0;
   right: 0;
   margin: 0;

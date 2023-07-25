@@ -98,6 +98,7 @@ const AnimateWrapper = styled.div`
   width: 50px;
   ${({animate}) => animate};
   ${({isHidden}) => isHidden ? 'display: none' : ''};
+  ${tw`z-50`};
 `
 
 export default PopupMenu;

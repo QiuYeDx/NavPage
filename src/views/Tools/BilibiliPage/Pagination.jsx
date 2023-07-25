@@ -1,4 +1,4 @@
-import React, {useContext, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {ContentWrapper, LineWrapper} from "@/views/Tools/BilibiliPage/Styled.twin";
 import {InLineTitle} from "@/styles/TextStyles";
 import {Gap} from "@/components/Gap/Styled.twin";
@@ -16,6 +16,10 @@ import tw from 'twin.macro';
 import 'twin.macro';
 import TextInput from "@/components/TextInputLine/TextInput";
 import PopupMenu from "@/components/PopupMenu/PopupMenu";
+import gsap from 'gsap';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const pageSize = 10; // 每页显示的数据数量
 
@@ -123,19 +127,34 @@ const Pagination = ({data}) => {
         }
         return pageNumbers;
     };
+
     if (currentPage > totalPages)
         setCurrentPage(1);
 
+    // list 渐入动画
+    const gsap_ref = useRef(null);
+    gsap_ref.current = gsap.fromTo(".gsap_popup_a", {
+        y: data.length > 2 ? 360 : 180,
+        opacity: 0,
+    }, {
+        scrollTrigger: ".gsap_popup_a", // once
+        y: 0,
+        opacity: 1,
+        duration: data.length > 2 ? 1.5 : 1,
+        ease: 'power2.out',
+        repeat: 0,
+    });
+
     return (
         <div>
-            <div id="dataContainer">
+            <div id="dataContainer" className={'gsap_popup_a'}>
                 <InLineTitle tw={'mt-12 relative'}>共 <span
                     tw={'text-blue-500 pl-1 pr-1 text-center'}>{data ? data.length : ' - '}</span> 个分P
-                    <div ref={scroll_ref} tw={'invisible absolute -top-20'}>锚点</div>
+                    <div ref={scroll_ref} tw={'invisible absolute -top-52'}>锚点</div>
                 </InLineTitle>
                 {/* 这里根据当前页码显示对应的数据 */}
                 {getDataByPage().map((item, index) => (
-                    <ContentWrapper key={index} tw={' mt-8'}>
+                    <ContentWrapper key={index} tw={' mt-8'} className={'gsap_popup_a'}>
                         <ContentWrapper tw={'absolute -top-5 m-0 px-6 md:px-8 py-1 left-auto right-auto min-h-0 shadow-md active:shadow-lg md:active:shadow-md md:hover:shadow-lg'}>
                             <LineWrapper>
                                 <InLineTitle tw={'text-[28px]'}>

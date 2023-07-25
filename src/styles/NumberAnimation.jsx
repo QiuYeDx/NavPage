@@ -1,8 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useInView} from 'react-intersection-observer';
 import gsap from 'gsap';
-import {hasSelectionSupport} from "@testing-library/user-event/dist/utils";
-
 
 /**
  * ## `NumberAnimation组件`: 按指定步长从`X`到`Y`的数字动画
