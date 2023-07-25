@@ -57,3 +57,8 @@ export const PageButton = styled.div`
   
   ${({active}) => active ? tw`bg-blue-400 text-white ring-blue-200 ring-4 md:hover:bg-blue-300 md:hover:text-white active:text-blue-300 active:bg-blue-500 active:ring-blue-400` : ''};
 `
+
+export const UniButton = styled(PageButton)`
+  ${({hasShadow}) => hasShadow ? tw`shadow-md active:shadow-lg md:active:shadow-md md:hover:shadow-lg` : tw`shadow-none hover:shadow-none`};
+  ${({_tw}) => _tw ? _tw : ''};
+`;

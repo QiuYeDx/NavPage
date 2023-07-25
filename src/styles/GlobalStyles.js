@@ -4,9 +4,9 @@ import { createGlobalStyle } from 'styled-components'
 import tw, { theme, GlobalStyles as BaseStyles } from 'twin.macro'
 
 const CustomStyles = createGlobalStyle`
-  //#rootWrapper, #rootWrapper + div{
-  //  filter: brightness(0.5);
-  //}
+  #rootWrapper.night-mode, #rootWrapper.night-mode + div{
+    filter: brightness(0.5);
+  }
   body {
     -webkit-tap-highlight-color: ${theme`colors.blue.200`};
     ${tw`antialiased`}

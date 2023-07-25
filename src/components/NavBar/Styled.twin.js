@@ -1,6 +1,6 @@
 import tw, { styled } from 'twin.macro';
 import { NavLink } from 'react-router-dom';
-import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
+import {WIDTH_MIDDLE, WIDTH_MOBILE} from "@/styles/GlobalConfig";
 
 export const NavWrapper = styled.div`
   ${tw`truncate text-gray-500`}
@@ -145,10 +145,7 @@ export const MoreWrapper = styled(LogoWrapper)`
   //  font-size: 26px;
   //  content: '—';
   // }
-  
-  @media(min-width: 1200px){
-    margin-left: 140px;
-  }
+  // ${tw`xl:ml-[140px]`};
 `
 
 export const MoreList = styled.div`
@@ -202,7 +199,7 @@ export const MoreListItem = styled(NavLink).attrs(props => ({
     background-color: rgba(255, 255, 255, .5);
   }
 
-  &:not(:last-child)::after {
+  &:not(:nth-last-child(-n+2))::after {
     position: absolute;
     left: 20%;
     right: 20%;

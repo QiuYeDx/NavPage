@@ -5,7 +5,7 @@ import {PageButton} from "@/components/Button/Styled.twin";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 
-const ScrollToTopButton = (props) => {
+const ScrollToTopButton = () => {
     const gsap_ref = useRef(null);
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const ScrollToTopButton = (props) => {
     }, []);
 
     return (
-        <div className={props.className} id={'ScrollToTopButton'} tw={'fixed bottom-28 right-2 md:right-12 z-40 md:bottom-12'}>
+        <div id={'ScrollToTopButton'} tw={'fixed bottom-28 right-2 md:right-12 z-40 md:bottom-12'}>
             <PageButton
                 onClick={() => {
                     window.scrollTo({
