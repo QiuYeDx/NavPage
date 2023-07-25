@@ -5,7 +5,7 @@ export const HoverListWrapper = styled.ul`
   margin: auto;
   width: ${({w}) => w || "120px"};
   height: ${({h}) => h || "initial"};
-  max-height: ${({h}) => h || "284px"};
+  max-height: ${({h}) => h || "264px"};
   position: absolute;
   top: ${({_t}) => _t ? _t : "initial"};
   bottom: ${({_b}) => _b ? _b : "initial"};

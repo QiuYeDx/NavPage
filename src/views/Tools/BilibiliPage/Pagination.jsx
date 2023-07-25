@@ -105,7 +105,7 @@ const Pagination = ({data}) => {
                            animate={'b.3'}
                            button={<PageButton key={'morePage'}><FontAwesomeIcon icon={solid("list-ul")}/></PageButton>}
                            menu={<HoverList closeClassName={'closeClassName'}
-                                            _b={'18px'}
+                                            _b={'12px'}
                                             _l={'-35px'}
                                             validText={`第 ${currentPage} 页`}
                                             list={Array.from({length: totalPages}, (_, index) => '第 ' + (index + 1) + ' 页')}
@@ -135,7 +135,6 @@ const Pagination = ({data}) => {
                 </InLineTitle>
                 {/* 这里根据当前页码显示对应的数据 */}
                 {getDataByPage().map((item, index) => (
-                    // <FadeInOnViewport key={index}>
                     <ContentWrapper key={index} tw={' mt-8'}>
                         <ContentWrapper tw={'absolute -top-5 m-0 px-6 md:px-8 py-1 left-auto right-auto min-h-0 shadow-md active:shadow-lg md:active:shadow-md md:hover:shadow-lg'}>
                             <LineWrapper>
@@ -276,7 +275,6 @@ const Pagination = ({data}) => {
                             </MButton>
                         </LineWrapper>
                     </ContentWrapper>
-                    // </FadeInOnViewport>
                 ))}
             </div>
             {totalPages > 1 ?
