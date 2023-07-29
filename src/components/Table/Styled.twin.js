@@ -96,10 +96,10 @@ export const Tbody = styled.tbody`
 
 export const Th = styled.th`
   &:first-child{
-    ${tw`pl-3`};
+    ${tw`pl-3 md:pl-4`};
   }
   &:last-child{
-    ${tw`pr-3`};
+    ${tw`pr-3 md:pr-4`};
   }
   ${tw`text-base md:text-xl font-bold font-sans text-center align-middle leading-10 md:leading-10`};
 `;
@@ -111,10 +111,10 @@ export const Td = styled.td`
   white-space: nowrap;
   ${tw`text-sm md:text-base text-gray-600 font-sans text-center align-middle leading-8 md:leading-8 overflow-auto`};
   &:first-child{
-    ${tw`pl-3`};
+    ${tw`pl-3 md:pl-4`};
   }
   &:last-child{
-    ${tw`pr-3`};
+    ${tw`pr-3 md:pr-4`};
   }
   &:nth-child(odd){
     ${tw`text-gray-500`};
