@@ -35,7 +35,7 @@ React、Webpack、react-router-dom、styled-components、tailwindcss 、twin.mac
 
 - 对接网站监控API并增加监控看板页面
 - 增加Code Paste工具
-- 增加夜间模式
+- ~~增加夜间模式(简易版)~~ √
 - 国际化
 - 完成主页的初版设计
 - 完成资源页的初版设计
