@@ -17,9 +17,9 @@ import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
 import axios from 'axios';
 import {app_config, log_api_config} from "@/GlobalConfig";
 import TextInput from "@/components/TextInputLine/TextInput";
+import Picture from "@/components/PictureDisplay/Pictrue";
 
 export default function QRPage() {
-    const location = useLocation();
     const navigate = useNavigate();
     const a_ref = useRef(null);
     const button_ref = useRef(null);
@@ -29,6 +29,8 @@ export default function QRPage() {
     const [loading, setLoading] = useState(false);
     const [finished, setFinished] = useState(false);
     const [invalid, setInvalid] = useState(false);
+    const [picLoading, setPicLoading] = useState(false);
+
     const handleChange = (event) => {
         setText(event.target.value);
         setInvalid(false);
@@ -38,7 +40,7 @@ export default function QRPage() {
             return;
         let a = a_ref.current;
         a.href = data;
-        a.download = "qrcode.png";
+        a.download = "qrcode-solid-md.png";
         a.click();
     };
 
@@ -57,6 +59,7 @@ export default function QRPage() {
         }
 
         setLoading(true);
+        setPicLoading(true);
 
         const url = 'https://www.mxnzp.com/api/qrcode/create/single';
         const params = {
@@ -84,6 +87,7 @@ export default function QRPage() {
             })
             .finally(() => {
                 setLoading(false);
+                setPicLoading(false);
                 setFinished(true);
             });
     };
@@ -179,7 +183,7 @@ export default function QRPage() {
                         <InLineTitle tw={'mb-2'}>获取<FontAwesomeIcon icon={solid("qrcode")} tw={"text-blue-400 pl-1 pr-1 duration-500 ease-out"}/>结果</InLineTitle>
                     </LineWrapper>
                     <LineWrapper>
-                        <PictureDisplay src={data}/>
+                        <Picture url={data} loadingFlag={picLoading} ph_tw={tw`text-blue-400`}/>
                     </LineWrapper>
                     <LineWrapper tw={'mt-2'}>
                         <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleDownload}>

@@ -24,9 +24,10 @@ import {faBilibili} from "@fortawesome/free-brands-svg-icons";
 import {app_config, log_api_config} from "@/GlobalConfig";
 import {blobToDataUrl} from "@/utils/utils";
 import TextInput from "@/components/TextInputLine/TextInput";
+import Picture from "@/components/PictureDisplay/Pictrue";
 
 export default function BilibiliPage() {
-    const default_cover = 'images/image-blue-300.png';
+    const default_cover = 'images/image-blue-300.svg';
     const clipboard = useClipboard();
     const navigate = useNavigate();
     const a_ref = useRef(null);
@@ -258,7 +259,7 @@ export default function BilibiliPage() {
                         <InLineTitle tw={'mb-2'}>获取<FontAwesomeIcon icon={solid("link")} tw={"text-blue-400 pl-1 pr-1 duration-500 ease-out"}/>结果</InLineTitle>
                     </LineWrapper>
                     <LineWrapper>
-                        <PictureDisplay height={150} width={256} src={cover}/>
+                        <Picture h={'150px'} w={'256px'} url={cover} ph_tw={tw`text-blue-400`} />
                     </LineWrapper>
                     <Gap tw={'invisible'}/>
                     <LineWrapper>

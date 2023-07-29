@@ -143,7 +143,7 @@ const Pagination = ({data}) => {
                 // scrollTrigger: ".gsap_popup_a", // once
                 scrollTrigger: {
                     trigger: "#rootWrapper",
-                    start: 'top+=700 center',
+                    start: `top+=${data.length > 2 ? 700 : 650} center`,
                     // markers: true,  // 调试用
                 },
                 y: 0,
@@ -158,7 +158,7 @@ const Pagination = ({data}) => {
 
     return (
         <div>
-            <div ref={scroll_ref} tw={'invisible relative'}>锚点</div>
+            <div ref={scroll_ref} tw={'invisible relative h-0.5'}>锚点</div>
             <div id="dataContainer" className={'gsap_popup_a'} tw={'relative'}>
                 <InLineTitle tw={'mt-12 relative'}>共 <span
                     tw={'text-blue-500 pl-1 pr-1 text-center'}>{data ? data.length : ' - '}</span> 个分P

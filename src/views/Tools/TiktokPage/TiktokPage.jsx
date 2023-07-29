@@ -24,9 +24,10 @@ import {blobToDataUrl, downloadWithProgress} from "@/utils/utils";
 import toast from "react-hot-toast";
 import {app_config, log_api_config} from "@/GlobalConfig";
 import TextInput from "@/components/TextInputLine/TextInput";
+import Picture from "@/components/PictureDisplay/Pictrue";
 
 export default function TiktokPage() {
-    const default_cover = 'images/image-blue-300.png';
+    const default_cover = 'images/image-blue-300.svg';
     const clipboard = useClipboard();
     const navigate = useNavigate();
     const a_ref = useRef(null);
@@ -258,8 +259,7 @@ export default function TiktokPage() {
                     </LineWrapper>
                     <LineWrapper tw={'flex-wrap'}>
                         {/* 150 * 256 => 384 * 216 => 288 * 162*/}
-                        <PictureDisplay height={data ? 288 : 150} width={data ? 162 : 256} src={cover}/>
-                        <PictureDisplay height={data ? 288 : 150} width={data ? 162 : 256} src={dyCover}/>
+                        <Picture h={data ? '288px' : '150px'} w={data ? '162px' : '256px'} url={cover} ph_tw={tw`text-blue-400`} />
                     </LineWrapper>
                     {/*<Gap tw={'invisible'}/>*/}
                     <div tw={'invisible'}> </div>

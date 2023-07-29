@@ -7,3 +7,32 @@ export const PictureDisplay = styled.img`
   object-position: center; /* 图片在容器中居中显示 */
   ${tw`animate-fade_in.8`}
 `
+
+export const PictureWrapper = styled.div`
+  ${(props) => props.height ? 'height: ' + props.height : ''};
+  ${(props) => props.width ? 'width: ' + props.width : ''};
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  ${({_tw}) => _tw ? _tw : ''};
+  & img{
+    ${(props) => props.height ? 'height: ' + props.height : ''};
+    ${(props) => props.width ? 'width: ' + props.width : ''};
+    ${tw`bg-contain`};
+    ${({img_tw}) => img_tw ? img_tw : ''};
+  }
+  & div{
+    margin: auto;
+    padding: 0;
+    height: 50%;
+    ${({ph_tw}) => ph_tw ? ph_tw : ''};
+  }
+  & div svg{
+    height: 100%;
+    margin: auto;
+    padding: 0;
+  }
+`;
