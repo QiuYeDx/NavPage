@@ -133,24 +133,35 @@ const Pagination = ({data}) => {
 
     // list 渐入动画
     const gsap_ref = useRef(null);
-    gsap_ref.current = gsap.fromTo(".gsap_popup_a", {
-        y: data.length > 2 ? 360 : 180,
-        opacity: 0,
-    }, {
-        scrollTrigger: ".gsap_popup_a", // once
-        y: 0,
-        opacity: 1,
-        duration: data.length > 2 ? 1.5 : 1,
-        ease: 'power2.out',
-        repeat: 0,
-    });
+    useEffect(() => {
+        console.log(gsap_ref);
+        if(gsap_ref && gsap_ref.current === null){
+            gsap_ref.current = gsap.fromTo(".gsap_popup_a", {
+                y: data.length > 2 ? 360 : 180,
+                opacity: 0,
+            }, {
+                // scrollTrigger: ".gsap_popup_a", // once
+                scrollTrigger: {
+                    trigger: "#rootWrapper",
+                    start: 'top+=700 center',
+                    // markers: true,  // 调试用
+                },
+                y: 0,
+                opacity: 1,
+                duration: data.length > 2 ? 1.5 : 1,
+                ease: 'power2.out',
+                repeat: 0,
+            });
+        }
+    // }, [data, currentPage]);
+    }, [data]); // 翻页不刷新动画
 
     return (
         <div>
-            <div id="dataContainer" className={'gsap_popup_a'}>
+            <div ref={scroll_ref} tw={'invisible relative'}>锚点</div>
+            <div id="dataContainer" className={'gsap_popup_a'} tw={'relative'}>
                 <InLineTitle tw={'mt-12 relative'}>共 <span
                     tw={'text-blue-500 pl-1 pr-1 text-center'}>{data ? data.length : ' - '}</span> 个分P
-                    <div ref={scroll_ref} tw={'invisible absolute -top-52'}>锚点</div>
                 </InLineTitle>
                 {/* 这里根据当前页码显示对应的数据 */}
                 {getDataByPage().map((item, index) => (

@@ -9,7 +9,6 @@ import About from "./views/About/About";
 import Error from "./views/Error/Error";
 import { Wrapper } from "./Styled.twin";
 import Dashboard from "@/views/Dashboard/Dashboard";
-import ScrollToTopButton from "@/components/Button/ScrollToTopButton";
 
 function App() {
   return (
@@ -28,7 +27,6 @@ function App() {
                   </Routes>
               </HashRouter>
           </Wrapper>
-          <ScrollToTopButton/>
       </>
   );
 }

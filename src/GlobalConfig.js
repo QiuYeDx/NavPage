@@ -46,13 +46,13 @@ function getLog_api_config(API_BASE_URL, app_domain){
                         params: {name: name, api_key: KEY}
                     });
                 }
-                if(process.env.NODE_ENV === 'development')
-                    console.log(res);
+                // if(process.env.NODE_ENV === 'development')
+                //     console.log(res);
                 return res;
             } catch (err) {
-                if(process.env.NODE_ENV === 'development')
-                    console.log(err);
-                return err;
+                // if(process.env.NODE_ENV === 'development')
+                //     console.log(err);
+                throw err;
             }
         },
         /**
@@ -73,13 +73,13 @@ function getLog_api_config(API_BASE_URL, app_domain){
                         params: {domain: DOMAIN, url: url,  api_key: KEY}
                     });
                 }
-                if(process.env.NODE_ENV === 'development')
-                    console.log(res);
+                // if(process.env.NODE_ENV === 'development')
+                //     console.log(res);
                 return res;
             } catch (err) {
-                if(process.env.NODE_ENV === 'development')
-                    console.log(err);
-                return err;
+                // if(process.env.NODE_ENV === 'development')
+                //     console.log(err);
+                throw err;
             }
         },
         /**
@@ -99,13 +99,13 @@ function getLog_api_config(API_BASE_URL, app_domain){
                         params: {n_per_page: n_per_page, p_index: p_index,  api_key: KEY}
                     });
                 }
-                if(process.env.NODE_ENV === 'development')
-                    console.log(res);
+                // if(process.env.NODE_ENV === 'development')
+                //     console.log(res);
                 return res;
             } catch (err) {
-                if(process.env.NODE_ENV === 'development')
-                    console.log(err);
-                return err;
+                // if(process.env.NODE_ENV === 'development')
+                //     console.log(err);
+                throw err;
             }
         },
     }

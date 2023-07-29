@@ -14,7 +14,7 @@ import {notify_error} from "@/hooks/toasts";
 import MenuButton from "@/components/MenuButton/MenuButton";
 import {log_api_config} from "@/GlobalConfig";
 import SwitchButton from "@/components/Button/SwitchButton";
-import { Helmet } from 'react-helmet-async';
+import ScrollToTopButton from "@/components/Button/ScrollToTopButton";
 
 export default function NavBar() {
     const navigate = useNavigate();
@@ -23,12 +23,12 @@ export default function NavBar() {
 
     const fetchData = async () => {
         try {
-            const res = await log_api_config.awaitUrlCountAPI('PUT', location.pathname);
+            await log_api_config.awaitUrlCountAPI('PUT', location.pathname);
             return 'Succeed to put url count';
         } catch (err) {
-            if (process.env.NODE_ENV === 'development')
-                console.log(err);
-            return 'Failed to put url count';
+            // if (process.env.NODE_ENV === 'development')
+            //     console.log(err);
+            throw 'Failed to put url count';
         }
     };
 
@@ -42,13 +42,13 @@ export default function NavBar() {
         const metaTag = document.createElement('meta');
         metaTag.name = 'theme-color';
 
-        let ele = document.getElementById('rootWrapper');
-        if (ele.classList.contains('night-mode')) {
+        let rootHTML = document.documentElement;
+        if (rootHTML.classList.contains('night-mode')) {
             metaTag.content = '#fff'; // 设置主题颜色为白色
-            ele.classList.remove('night-mode');
+            rootHTML.classList.remove('night-mode');
         } else {
             metaTag.content = '#000'; // 设置主题颜色为黑色
-            ele.classList.add('night-mode');
+            rootHTML.classList.add('night-mode');
         }
         // 将 meta 标签添加到文档头部
         document.head.appendChild(metaTag);
@@ -61,6 +61,7 @@ export default function NavBar() {
 
     return (
         <div>
+            <ScrollToTopButton/>
             <MoreListMask isShow={isMoreListShown} onClick={() => setIsMoreListShown(!isMoreListShown)}/>
             {/*<BlankWrapper/>*/}
             <Toaster/>

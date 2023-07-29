@@ -54,9 +54,9 @@ export default function Tools() {
             setCounts(res_arr.map(res => res.data && res.data[0] && res.data[0].count));
             return 'Succeed to fetch counts';
         } catch (err) {
-            if(process.env.NODE_ENV === 'development')
-                console.log(err);
-            return 'Failed to fetch counts';
+            // if(process.env.NODE_ENV === 'development')
+            //     console.log(err);
+            throw 'Failed to fetch counts';
         }
     };
 

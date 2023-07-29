@@ -71,6 +71,7 @@ module.exports = {
         hot: true,
         historyApiFallback: true  //缺少该配置，会出现Cannot Get的错误
     },
+    devtool: "inline-source-map",
     plugins:[
         new HtmlWebpackPlugin({
             template:path.resolve(__dirname,'public/index.html')

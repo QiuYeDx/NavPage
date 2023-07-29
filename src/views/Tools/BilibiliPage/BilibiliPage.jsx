@@ -67,7 +67,6 @@ export default function BilibiliPage() {
     async function fetchData(url, params) {
         try {
             const response = await axios.get(url, {params});
-            console.log(response.data.data);
             setData(response.data.data);
             setList(response.data.data.list);
             setFinished(true);
@@ -89,13 +88,17 @@ export default function BilibiliPage() {
                 scroll_ref.current.scrollIntoView({behavior: 'smooth'});
             }, 100);
         } catch (error) {
+            if(error.config.url === log_api_config.url.counts){
+                console.log('Failed to put counts');
+                return error;
+            }
             setList(null);
             notify_error('解析失败，请检查URL或重试 !', 'resolving_error');
             setFinished(false);
             setInvalid(true);
             setCover(default_cover);
             setData(null);
-            console.error('Error resolving video URL:', error);
+            console.error('Failed to resolve video URL:', error);
         } finally {
             setLoading(false);
         }
