@@ -3,6 +3,9 @@ import tw from "twin.macro";
 import {Caption, TableWrapper, Tbody, Td, Th, Thead, Tr, Wrapper} from "@/components/Table/Styled.twin";
 import {InLineTitle} from "@/styles/TextStyles";
 import {Tooltip} from "react-tooltip";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
+import Picture from "@/components/PictureDisplay/Pictrue";
 
 /**
  * ## `Table组件`
@@ -30,7 +33,7 @@ const Table = ({title, data, headers, keys, h}) => {
         if(!data)
             return <Tr>
                 <Td colSpan={headers.length} tw={'leading-10'}>
-                    暂无数据
+                    {/*暂无数据*/}
                 </Td>
             </Tr>;
         if (Object.prototype.toString.call(data[0]) === '[object Array]') {
@@ -61,7 +64,7 @@ const Table = ({title, data, headers, keys, h}) => {
         } else {
             return <Tr>
                 <Td colSpan={headers.length} tw={'leading-10'}>
-                    暂无数据
+                    {/*暂无数据*/}
                 </Td>
             </Tr>;
         }
@@ -79,6 +82,7 @@ const Table = ({title, data, headers, keys, h}) => {
                     <Thead>{renderHeaderRow()}</Thead>
                     <Tbody>{renderRows()}</Tbody>
                 </TableWrapper>
+                {!data && <Picture url={<FontAwesomeIcon icon={solid("spinner")} spin tw={'text-blue-300'}/>} h={'100%'} w={'100%'}/>}
             </Wrapper>
         </>
     );

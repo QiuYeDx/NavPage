@@ -90,7 +90,7 @@ export default function BilibiliPage() {
             }, 100);
         } catch (error) {
             if(error.config.url === log_api_config.url.counts){
-                console.log('Failed to put counts');
+                console.error('Failed to put counts');
                 return error;
             }
             setList(null);
@@ -259,7 +259,7 @@ export default function BilibiliPage() {
                         <InLineTitle tw={'mb-2'}>获取<FontAwesomeIcon icon={solid("link")} tw={"text-blue-400 pl-1 pr-1 duration-500 ease-out"}/>结果</InLineTitle>
                     </LineWrapper>
                     <LineWrapper>
-                        <Picture h={'150px'} w={'256px'} url={cover} ph_tw={tw`text-blue-400`} />
+                        <Picture h={'150px'} w={'256px'} url={cover} />
                     </LineWrapper>
                     <Gap tw={'invisible'}/>
                     <LineWrapper>

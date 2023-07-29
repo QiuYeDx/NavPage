@@ -30,6 +30,7 @@ import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
  * @param {string} props.data_tooltip_variant - 数据提示的变体样式（例如，info、warning等）
  * @param {string} props.closeClassName - 点击触发悬浮菜单关闭的组件的类名
  * @param {string} props.animate - 选择渐入渐出动画 可选参数't.3', 'tr.3', 'br.3'等
+ * @param {string} props.h - 悬浮菜单的最大高度
  * @param {string} props._t - 悬浮菜单的top偏移量
  * @param {string} props._l - 悬浮菜单的left偏移量
  * @param {string} props._r - 悬浮菜单的right偏移量
@@ -58,11 +59,12 @@ export default function SelectInput({
                                         _t,
                                         _l,
                                         _r,
+                                        h,
                                         ...restProps
                                     }) {
     const desc_ref = useRef();
     const tween_ref = useRef();
-    const text_ref = useRef('');
+    const text_ref = useRef(text);
 
     const [isOpen, setIsOpen] = useState(false);
     const [isHiding, setIsHiding] = useState(false);
@@ -129,17 +131,27 @@ export default function SelectInput({
     }
 
     useEffect(() => {
-        tween_ref.current = gsap.to(desc_ref.current, {
-            y: -21,
-            scale: 0.88,
-            duration: 0.3,
-            backgroundColor: 'white',
-            ease: 'power2.out',
-            paused: text === '',
-            yoyo: true
-        });
-        if (text === '')
+        if (text === '') {
             text_ref.current = '';
+            tween_ref.current && tween_ref.current.kill();
+            gsap.to(desc_ref.current, {
+                y: 0,
+                scale: 1,
+                duration: 0.3,
+                backgroundColor: 'white',
+                ease: 'power2.out',
+            });
+        } else {
+            tween_ref.current && tween_ref.current.kill();
+            tween_ref.current = gsap.to(desc_ref.current, {
+                y: -21,
+                scale: 0.88,
+                duration: 0.3,
+                backgroundColor: 'white',
+                ease: 'power2.out',
+            });
+            tween_ref.current.restart();
+        }
     }, [text]);
 
     return (
@@ -168,7 +180,7 @@ export default function SelectInput({
                 isHidden={!isOpen}
                 animate={animate && (isHiding ? animates[animate.split('.').join('-out.')] : animates[animate.split('.').join('-in.')])}
                 validText={text}
-                h={120}
+                h={h || '360px'}
                 _t={_t || '36px'}
                 _l={_l || 'auto'}
                 _r={_r || '10px'}

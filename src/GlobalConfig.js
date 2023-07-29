@@ -51,7 +51,7 @@ function getLog_api_config(API_BASE_URL, app_domain){
                 return res;
             } catch (err) {
                 // if(process.env.NODE_ENV === 'development')
-                //     console.log(err);
+                //     console.error(err);
                 throw err;
             }
         },
@@ -60,7 +60,7 @@ function getLog_api_config(API_BASE_URL, app_domain){
          * @param {String} method - 方法类型 e.g. GET, PUT, POST, DELETE ...
          * @param {String} url - 网页URL e.g. '/tools/qrcode'
          */
-        awaitUrlCountAPI: async function(method, url){
+        awaitUrlCountAPI: async function(method, url = null){
             // 更新网页访问次数
             try {
                 let res = null;
@@ -78,7 +78,7 @@ function getLog_api_config(API_BASE_URL, app_domain){
                 return res;
             } catch (err) {
                 // if(process.env.NODE_ENV === 'development')
-                //     console.log(err);
+                //     console.error(err);
                 throw err;
             }
         },
@@ -104,7 +104,7 @@ function getLog_api_config(API_BASE_URL, app_domain){
                 return res;
             } catch (err) {
                 // if(process.env.NODE_ENV === 'development')
-                //     console.log(err);
+                //     console.error(err);
                 throw err;
             }
         },

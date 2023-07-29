@@ -124,7 +124,6 @@ export default function TiktokPage() {
         setLoading(true);
 
         const url = 'https://www.mxnzp.com/api/douyin/video';
-        // const url = 'http://127.0.0.1:8000/test_api';
         const params = {
             url: btoa(valid_url[0]),
             app_id: app_config.app_id,
@@ -259,7 +258,7 @@ export default function TiktokPage() {
                     </LineWrapper>
                     <LineWrapper tw={'flex-wrap'}>
                         {/* 150 * 256 => 384 * 216 => 288 * 162*/}
-                        <Picture h={data ? '288px' : '150px'} w={data ? '162px' : '256px'} url={cover} ph_tw={tw`text-blue-400`} />
+                        <Picture h={data ? '288px' : '150px'} w={data ? '162px' : '256px'} url={cover} />
                     </LineWrapper>
                     {/*<Gap tw={'invisible'}/>*/}
                     <div tw={'invisible'}> </div>

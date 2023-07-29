@@ -7,7 +7,7 @@ import tw from 'twin.macro';
 /**
  * ## `Picture组件`: 含加载动画的Img组件
  * @param {Object} props - 组件的props对象
- * @param {String} props.url - 图片资源路径
+ * @param {String | JSX.Element} props.url - 图片资源路径 | JSX元素
  * @param {String} props.w - 宽 width (css)
  * @param {String} props.h - 高 height (css)
  * @param {Boolean} props.loadingFlag - 是否显示加载占位符
@@ -52,7 +52,7 @@ const Picture = ({
                         {placeholder}
                     </div>
                     :
-                    <img src={url} alt={''}/>
+                    (typeof url === 'string' ? <img src={url} alt={''}/> : <div>{url}</div>)
             }
         </PictureWrapper>
     );

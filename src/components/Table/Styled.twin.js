@@ -57,7 +57,7 @@ export const Tr = styled.tr`
 export const Thead = styled.thead`
   position: sticky;
   top: 0;
-  z-index: 610;
+  z-index: 410;
   ${tw`bg-blue-300 text-white rounded-3xl shadow-md md:hover:shadow-lg duration-500 overflow-hidden`};
 `;
 
@@ -76,7 +76,7 @@ export const Tbody = styled.tbody`
     @media(max-width: ${WIDTH_MOBILE}px){
       width: 7.8px;
     }
-    z-index: 600;
+    z-index: 400;
     ${tw`bg-white`};
   }
   &::after{
@@ -89,7 +89,7 @@ export const Tbody = styled.tbody`
     @media(max-width: ${WIDTH_MOBILE}px){
       width: 7.8px;
     }
-    z-index: 600;
+    z-index: 400;
     ${tw`bg-white`};
   }
 `;
@@ -115,6 +115,12 @@ export const Td = styled.td`
   }
   &:last-child{
     ${tw`pr-3`};
+  }
+  &:nth-child(odd){
+    ${tw`text-gray-500`};
+  }
+  &:nth-child(even){
+    ${tw`text-blue-300 font-semibold`};
   }
   &::-webkit-scrollbar {
     display: none;

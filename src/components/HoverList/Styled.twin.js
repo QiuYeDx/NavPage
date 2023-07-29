@@ -4,7 +4,7 @@ export const HoverListWrapper = styled.ul`
   ${tw`shadow-2xl rounded-2xl active:shadow-2xl md:hover:shadow-2xl animate-fade_in_up.4 bg-white overscroll-none overflow-x-hidden overflow-y-auto`};
   margin: auto;
   width: ${({w}) => w || "120px"};
-  height: ${({h}) => h || "initial"};
+  //height: ${({h}) => h || "initial"};
   max-height: ${({h}) => h || "264px"};
   position: absolute;
   top: ${({_t}) => _t ? _t : "initial"};
@@ -16,7 +16,7 @@ export const HoverListWrapper = styled.ul`
   align-items: stretch;
   justify-content: space-around;
   text-align: center;
-  z-index: 500;
+  z-index: 710;
   transition: all .3s ease;
   ${({_tw}) => _tw};
   ${({animate}) => animate};

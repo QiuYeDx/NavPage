@@ -79,7 +79,7 @@ export default function QRPage() {
                 // 更新服务请求次数
                 log_api_config.awaitCountAPI('PUT', 'qrcode').then(res => {
                     setCount(res.data[0].count);
-                }).catch(err => console.log('Failed to put qrcode count'));
+                }).catch(err => console.error('Failed to put qrcode count'));
             })
             .catch(error => {
                 console.error('Failed to generate QR code:', error);
@@ -183,7 +183,7 @@ export default function QRPage() {
                         <InLineTitle tw={'mb-2'}>获取<FontAwesomeIcon icon={solid("qrcode")} tw={"text-blue-400 pl-1 pr-1 duration-500 ease-out"}/>结果</InLineTitle>
                     </LineWrapper>
                     <LineWrapper>
-                        <Picture url={data} loadingFlag={picLoading} ph_tw={tw`text-blue-400`}/>
+                        <Picture url={data} loadingFlag={picLoading} />
                     </LineWrapper>
                     <LineWrapper tw={'mt-2'}>
                         <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleDownload}>
