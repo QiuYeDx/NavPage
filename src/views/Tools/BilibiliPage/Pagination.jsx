@@ -144,12 +144,12 @@ const Pagination = ({data}) => {
                 scrollTrigger: {
                     trigger: "#rootWrapper",
                     start: `top+=${data.length > 2 ? 700 : 640} center`,
-                    markers: true,  // 调试用
+                    // markers: true,  // 调试用
                 },
                 y: 0,
                 opacity: 1,
                 duration: data.length > 1 ? 1.5 : 1,
-                ease: 'power4.out',
+                ease: 'power3.out',
                 repeat: 0,
             });
         }

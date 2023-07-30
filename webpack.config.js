@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 module.exports = {
     // 入口文件
     entry: './src/index.js',
@@ -71,7 +73,7 @@ module.exports = {
         hot: true,
         historyApiFallback: true  //缺少该配置, 会出现Cannot Get的错误
     },
-    devtool: "inline-source-map",    //  部署前注释掉, 不然打包的静态文件过大, 也不需要
+    devtool: isDevelopment ? "inline-source-map" : false,
     plugins:[
         new HtmlWebpackPlugin({
             template:path.resolve(__dirname,'public/index.html')

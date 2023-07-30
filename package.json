@@ -38,7 +38,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "webpack:build": "webpack",
-    "webpack:dev": "webpack-dev-server --mode development",
+    "webpack:dev": "NODE_ENV=development webpack-dev-server --mode development",
     "predeploy": "npm run webpack:build",
     "deploy": "gh-pages -d dist"
   },
