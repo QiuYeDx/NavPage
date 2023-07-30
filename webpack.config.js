@@ -69,9 +69,9 @@ module.exports = {
         port: 3000,
         open: true,
         hot: true,
-        historyApiFallback: true  //缺少该配置，会出现Cannot Get的错误
+        historyApiFallback: true  //缺少该配置, 会出现Cannot Get的错误
     },
-    devtool: "inline-source-map",
+    devtool: "inline-source-map",    //  部署前注释掉, 不然打包的静态文件过大, 也不需要
     plugins:[
         new HtmlWebpackPlugin({
             template:path.resolve(__dirname,'public/index.html')
