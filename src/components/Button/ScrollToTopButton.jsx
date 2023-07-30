@@ -28,7 +28,7 @@ const ScrollToTopButton = () => {
             {
                 scrollTrigger: {
                     trigger: '#rootWrapper',
-                    start: 'top+=800 top',
+                    start: 'top+=600 top',
                     end: 'bottom bottom',
                     scrub: true,
                     // markers: true,   // 调试用

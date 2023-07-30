@@ -28,6 +28,7 @@ export const PictureWrapper = styled.div`
     margin: auto;
     padding: 0;
     height: 50%;
+    width: 100%;
     ${tw`text-blue-300`};
     ${({ph_tw}) => ph_tw ? ph_tw : ''};
   }

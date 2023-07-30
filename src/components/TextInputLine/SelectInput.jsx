@@ -180,7 +180,7 @@ export default function SelectInput({
                 isHidden={!isOpen}
                 animate={animate && (isHiding ? animates[animate.split('.').join('-out.')] : animates[animate.split('.').join('-in.')])}
                 validText={text}
-                h={h || '360px'}
+                h={h || '300px'}
                 _t={_t || '36px'}
                 _l={_l || 'auto'}
                 _r={_r || '10px'}

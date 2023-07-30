@@ -82,7 +82,7 @@ const Table = ({title, data, headers, keys, h}) => {
                     <Thead>{renderHeaderRow()}</Thead>
                     <Tbody>{renderRows()}</Tbody>
                 </TableWrapper>
-                {!data && <Picture url={<FontAwesomeIcon icon={solid("spinner")} spin tw={'text-blue-300'}/>} h={'100%'} w={'100%'}/>}
+                {!data && <Picture url={<FontAwesomeIcon icon={solid("spinner")} spin tw={'text-blue-300'}/>} h={'80%'} w={'100%'}/>}
             </Wrapper>
         </>
     );

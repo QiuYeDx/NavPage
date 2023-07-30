@@ -31,7 +31,7 @@ export default function BilibiliPage() {
     const clipboard = useClipboard();
     const navigate = useNavigate();
     const a_ref = useRef(null);
-    const scroll_ref = useRef(null);
+    const btn_ref = useRef(null);
     const [text, setText] = useState('');
     const [data, setData] = useState(null);
     const [list, setList] = useState(null);
@@ -49,8 +49,8 @@ export default function BilibiliPage() {
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-            scroll_ref.current.click();
-            scroll_ref.current.focus();
+            btn_ref.current.click();
+            btn_ref.current.focus();
         }
     }
 
@@ -86,8 +86,12 @@ export default function BilibiliPage() {
             setCount((await log_api_config.awaitCountAPI('PUT', 'bilibili')).data[0].count);
 
             setTimeout(() => {
-                scroll_ref.current.scrollIntoView({behavior: 'smooth'});
-            }, 100);
+                window.scroll({
+                    top: 140,
+                    left: 0,
+                    behavior: "smooth",
+                });
+            }, 200);
         } catch (error) {
             if(error.config.url === log_api_config.url.counts){
                 console.error('Failed to put counts');
@@ -243,7 +247,7 @@ export default function BilibiliPage() {
 
                     <LineWrapper tw={'mt-2'}>
                         <MButton disabled={loading} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleSubmit}
-                                 ref={scroll_ref}>
+                                 ref={btn_ref}>
                             {
                                 loading ?
                                     <>解析中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>

@@ -137,19 +137,19 @@ const Pagination = ({data}) => {
         console.log(gsap_ref);
         if(gsap_ref && gsap_ref.current === null){
             gsap_ref.current = gsap.fromTo(".gsap_popup_a", {
-                y: data.length > 2 ? 360 : 180,
+                y: data.length > 1 ? 360 : 180,
                 opacity: 0,
             }, {
                 // scrollTrigger: ".gsap_popup_a", // once
                 scrollTrigger: {
                     trigger: "#rootWrapper",
-                    start: `top+=${data.length > 2 ? 700 : 650} center`,
-                    // markers: true,  // 调试用
+                    start: `top+=${data.length > 2 ? 700 : 640} center`,
+                    markers: true,  // 调试用
                 },
                 y: 0,
                 opacity: 1,
-                duration: data.length > 2 ? 1.5 : 1,
-                ease: 'power2.out',
+                duration: data.length > 1 ? 1.5 : 1,
+                ease: 'power4.out',
                 repeat: 0,
             });
         }
