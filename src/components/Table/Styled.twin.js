@@ -1,15 +1,18 @@
 import tw, {styled} from "twin.macro";
 import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div.attrs(props => ({
+    className: 'gsap_main_fadein'
+}))`
   max-height: 480px;
   ${({h}) => h ? 'height: ' + h : ''};
   display: flex;
   flex-direction: column;
   position: relative;
+  transition: box-shadow 0.3s, background-color 0.3s;
   //top: -42px;
   //padding-top: 42px;
-  ${tw`bg-white overflow-y-auto rounded-3xl shadow-xl md:hover:shadow-2xl overscroll-none duration-500`};
+  ${tw`bg-white overflow-y-auto rounded-3xl shadow-xl md:hover:shadow-2xl overscroll-none`};
 `;
 
 export const TableWrapper = styled.table`

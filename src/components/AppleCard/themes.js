@@ -5,11 +5,11 @@ export const styles = {
     default: {
         styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
                 bg-blue-200 active:bg-blue-400 md:hover:bg-blue-400 md:active:bg-blue-200 \ // 背景色适配移动端触摸逻辑
-                duration-500 ease-out \ 
+                 ease-out \ 
                 cursor-default md:cursor-pointer select-none`,
         styleBackground: tw`text-blue-400`,
         styleContent: tw`tracking-widest text-8xl text-white font-bold \
-                    duration-500 ease-out`,
+                     ease-out`,
 
         // Text适配移动端触摸逻辑
         hoverContent: `:hover &{ \
@@ -39,11 +39,11 @@ export const styles = {
     white: {
         styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
                 bg-white active:bg-black md:hover:bg-black md:active:bg-gray-600 \ // 适配移动端触摸逻辑
-                duration-500 ease-out \
+                 ease-out \
                 cursor-default md:cursor-pointer select-none`,
         styleBackground: tw`text-black`,
         styleContent: tw`tracking-widest text-8xl text-white font-bold \
-                    duration-500 ease-out`,
+                     ease-out`,
 
         // Text适配移动端触摸逻辑
         hoverContent: `:hover &{ \
@@ -75,11 +75,11 @@ export const styles = {
     black: {
         styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
                 bg-black active:bg-white md:hover:bg-white md:active:bg-gray-200 \    // 适配移动端触摸逻辑
-                duration-500 ease-out \
+                 ease-out \
                 cursor-default md:cursor-pointer select-none`,
         styleBackground: tw`text-white`,
         styleContent: tw`tracking-widest text-8xl text-white font-bold \
-                    duration-500 ease-out`,
+                     ease-out`,
 
         // Text适配移动端触摸逻辑
         hoverContent: `:hover &{ \
@@ -109,11 +109,11 @@ export const styles = {
     green: {
         styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
                 bg-green-200 active:bg-green-400 md:hover:bg-green-400 md:active:bg-green-300 \   // 适配移动端触摸逻辑
-                duration-500 ease-out \ 
+                 ease-out \ 
                 cursor-default md:cursor-pointer select-none`,
         styleBackground: tw`text-green-400`,
         styleContent: tw`tracking-widest text-8xl text-white font-bold \
-                    duration-500 ease-out`,
+                     ease-out`,
 
         // Text适配移动端触摸逻辑
         hoverContent: `:hover &{ \
@@ -143,11 +143,11 @@ export const styles = {
     purple: {
         styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
                 bg-purple-200 active:bg-purple-400 md:hover:bg-purple-400 md:active:bg-purple-300 \    // 适配移动端触摸逻辑
-                duration-500 ease-out \ 
+                 ease-out \ 
                 cursor-default md:cursor-pointer select-none`,
         styleBackground: tw`text-purple-400`,
         styleContent: tw`tracking-widest text-8xl text-white font-bold \
-                    duration-500 ease-out`,
+                     ease-out`,
 
         // Text适配移动端触摸逻辑
         hoverContent: `:hover &{ \
@@ -177,11 +177,11 @@ export const styles = {
     pink: {
         styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
                 bg-pink-400 active:bg-pink-200 md:hover:bg-pink-300 md:active:bg-pink-200 \    // 适配移动端触摸逻辑
-                duration-500 ease-out \ 
+                 ease-out \ 
                 cursor-default md:cursor-pointer select-none`,
         styleBackground: tw`text-pink-200`,
         styleContent: tw`tracking-widest text-8xl text-white font-bold \
-                    duration-500 ease-out`,
+                     ease-out`,
 
         // Text适配移动端触摸逻辑
         hoverContent: `:hover &{ \
@@ -212,13 +212,13 @@ export const styles = {
         styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
                 bg-gradient-to-r to-sky-400 from-blue-500 \
                 before:absolute before:inset-x-0 before:inset-y-0 before:bg-gradient-to-r \
-                before:to-pink-500 before:from-indigo-500 before:opacity-0 md:hover:before:opacity-100 before:duration-500 md:before:ease-out \
+                before:to-pink-500 before:from-indigo-500 before:opacity-0 md:hover:before:opacity-100 md:before:ease-out \
                 active:before:opacity-100 md:active:before:opacity-0 \
-                duration-500 ease-out \ 
+                 ease-out \ 
                 cursor-default md:cursor-pointer select-none`,
         styleBackground: tw`text-blue-300`,
         styleContent: tw`tracking-widest text-8xl text-white font-bold \
-                    duration-500 ease-out`,
+                     ease-out`,
 
         // Text适配移动端触摸逻辑
         hoverContent: `:hover &{ \

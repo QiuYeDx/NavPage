@@ -1,7 +1,9 @@
 import tw, { styled } from 'twin.macro';
 
-export const CardWrapper = styled.div`
-  ${tw`shadow-xl rounded-3xl active:shadow-2xl md:hover:shadow-2xl animate-fade_in_up.4`}; 
+export const CardWrapper = styled.div.attrs(props => ({
+  className: 'gsap_main_fadein'
+}))`
+  ${tw`shadow-xl rounded-3xl active:shadow-2xl md:hover:shadow-2xl`};
   min-height: ${({h}) => h || "200px"};
   width: ${({w}) => w || ""};
   
@@ -10,7 +12,8 @@ export const CardWrapper = styled.div`
   align-items: center;
   text-align: center;
   z-index: 1;
-  transition: all .3s ease;
+
+  transition: box-shadow 0.3s, background-color 0.3s;
   
   ${({_tw}) => _tw };
 `

@@ -169,6 +169,7 @@ export default function AppleCard(props) {
                     }
                 </BackgroundWrapper>
                 <ContentWrapper
+                    style={{transition: 'scale 0.3s ease'}}
                     hasMask={props.hasMask}
                     _tw={style.styleContent}
                     _tw_user={props.tw_content || tw` `}

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
     NavWrapper, LogoWrapper, NavItem, NavList, MoreWrapper,
     Logo, LogoText, MoreList, MoreListItem, MoreListMask
@@ -15,6 +15,7 @@ import MenuButton from "@/components/MenuButton/MenuButton";
 import {log_api_config} from "@/GlobalConfig";
 import SwitchButton from "@/components/Button/SwitchButton";
 import ScrollToTopButton from "@/components/Button/ScrollToTopButton";
+import gsap from "gsap";
 
 export default function NavBar() {
     const navigate = useNavigate();
@@ -54,9 +55,46 @@ export default function NavBar() {
         document.head.appendChild(metaTag);
     };
 
+    const gsap_ref = useRef(null);
     useEffect(() => {
         // 更新页面访问次数
         fetchData().then(r => console.log(r)).catch(e => console.log(e));
+
+        // CardWrapper组件依次渐入
+        if(!gsap_ref.current){
+            gsap_ref.current = gsap.timeline({ repeat: 0});
+
+            // 将你的动画添加到时间轴中
+            gsap_ref.current.set(".gsap_main_fadein", {
+                y: 120,
+                opacity: 0,
+                duration: 0,
+            });
+            gsap_ref.current.to(".gsap_main_fadein", {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: 'power3.out',
+                stagger: 0.1,
+            });
+        }else{
+            gsap_ref.current.kill();
+            gsap_ref.current = gsap.timeline({ repeat: 0});
+
+            // 将你的动画添加到时间轴中
+            gsap_ref.current.set(".gsap_main_fadein", {
+                y: 120,
+                opacity: 0,
+                duration: 0,
+            });
+            gsap_ref.current.to(".gsap_main_fadein", {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: 'power3.out',
+                stagger: 0.1,
+            });
+        }
     }, [location]);
 
     return (

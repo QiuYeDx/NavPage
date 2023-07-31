@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {WrapperLeft, WrapperMain, WrapperMiddle, WrapperRight} from "@/layout/MainWrapper";
 import {Wrapper} from "@/modules/Wrapper/Wrapper";
 import WrapperTop from "@/modules/WrapperTop/WrapperTop";
@@ -12,6 +12,7 @@ import {P} from "@/styles/TextStyles";
 import {notify_error, notify_success} from "@/hooks/toasts";
 import AppleCard from "@/components/AppleCard/AppleCard";
 import {useClipboard} from "use-clipboard-copy";
+import gsap from "gsap";
 
 export default function Resources(){
     const clipboard = useClipboard();
@@ -36,6 +37,7 @@ export default function Resources(){
             资源 {i + 1}
         </AppleCard>);
     }
+
     return (
         <Wrapper>
             <WrapperTop>
