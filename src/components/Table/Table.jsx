@@ -15,10 +15,12 @@ import Picture from "@/components/PictureDisplay/Pictrue";
  * @param {Array<String>} props.headers - 表头项
  * @param {Array<String>} props.keys - 对象中选择哪些属性(按顺序)
  * @param {String} props.h - 表高度 e.g. '360px'
+ * @param {String} props.td_max_width - 表项最大宽度 e.g. `'100px'`
+ * @param {Boolean} props.isError - 是否显示数据加载失败
  * @returns {JSX.Element}
  * @constructor
  */
-const Table = ({title, data, headers, keys, h}) => {
+const Table = ({title, data, headers, keys, h, td_max_width, isError = false}) => {
     const renderHeaderRow = () => {
         return (
             <Tr>
@@ -32,7 +34,7 @@ const Table = ({title, data, headers, keys, h}) => {
     const renderRows = () => {
         if(!data)
             return <Tr>
-                <Td colSpan={headers.length} tw={'leading-10'}>
+                <Td colSpan={headers.length} max_width={td_max_width || ''} tw={'leading-10'}>
                     {/*暂无数据*/}
                 </Td>
             </Tr>;
@@ -41,6 +43,7 @@ const Table = ({title, data, headers, keys, h}) => {
                 <Tr key={rowIndex}>
                     {Array.from(data[rowIndex], (_, columnIndex) => (
                         <Td
+                            max_width={td_max_width || ''}
                             key={columnIndex}
                         >
                             {data[rowIndex][columnIndex]}
@@ -54,6 +57,7 @@ const Table = ({title, data, headers, keys, h}) => {
                 <Tr key={rowIndex}>
                     {Array.from(result[rowIndex], (_, columnIndex) => (
                         <Td
+                            max_width={td_max_width || ''}
                             key={columnIndex}
                         >
                             {result[rowIndex][columnIndex]}
@@ -63,7 +67,7 @@ const Table = ({title, data, headers, keys, h}) => {
             ));
         } else {
             return <Tr>
-                <Td colSpan={headers.length} tw={'leading-10'}>
+                <Td colSpan={headers.length} max_width={td_max_width || ''} tw={'leading-10'}>
                     {/*暂无数据*/}
                 </Td>
             </Tr>;
@@ -82,7 +86,9 @@ const Table = ({title, data, headers, keys, h}) => {
                     <Thead>{renderHeaderRow()}</Thead>
                     <Tbody>{renderRows()}</Tbody>
                 </TableWrapper>
-                {!data && <Picture url={<FontAwesomeIcon icon={solid("spinner")} spin tw={'text-blue-300'}/>} h={'80%'} w={'100%'}/>}
+                {!isError && !data && <Picture url={<FontAwesomeIcon icon={solid("spinner")} spin tw={'text-blue-300'}/>} h={'80%'} w={'100%'}/>}
+                {!isError && data && data.length === 0 && <Picture url={<FontAwesomeIcon icon={solid("eye-slash")} fade tw={'text-blue-300'}/>} h={'80%'} w={'100%'}/>}
+                {isError && <Picture errorFlag={true} h={'80%'} w={'100%'}/>}
             </Wrapper>
         </>
     );

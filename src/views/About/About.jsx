@@ -23,6 +23,7 @@ import NumberAnimation from "@/styles/NumberAnimation";
 export default function About() {
     const clipboard = useClipboard();
     const [likeCount, setLikeCount] = useState(null);
+    const [isError, setIsError] = useState(false);
 
     const fetchData = async () => {
         try {
@@ -32,6 +33,7 @@ export default function About() {
         } catch (err) {
             if(process.env.NODE_ENV === 'development')
                 console.log(err);
+            setIsError(true);
             return 'Failed to fetch like count';
         }
     }
@@ -75,7 +77,10 @@ export default function About() {
                             }
                         }}
                     >
-                        {likeCount ? <NumberAnimation fromValue={0} toValue={likeCount} duration={2} step={1} /> : <FontAwesomeIcon icon={solid("spinner")} spin /> }
+                        {likeCount ? <NumberAnimation fromValue={0} toValue={likeCount} duration={2} step={1} /> :
+                            isError ? <FontAwesomeIcon icon={solid("exclamation")} shake/> :
+                                <FontAwesomeIcon icon={solid("spinner")} spin/>
+                        }
                     </AppleCard>
                     <MainCard
                         _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50 hidden md:block`}

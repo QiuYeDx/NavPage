@@ -107,7 +107,7 @@ export const Th = styled.th`
 export const Td = styled.td`
   position: relative;
   z-index: 210;
-  max-width: 100px;
+  ${({max_width}) => max_width ? 'max-width: ' + max_width : ''};
   white-space: nowrap;
   ${tw`text-sm md:text-base text-gray-600 font-sans text-center align-middle leading-8 md:leading-8 overflow-auto`};
   &:first-child{

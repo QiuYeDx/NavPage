@@ -10,7 +10,7 @@ import gsap from 'gsap';
  * @param {Number} props.duration - 持续时间(s)
  * @param {Number} props.step - 步长
  * @param {String} props.ease - 缓动函数名, 参考[GSAP文档](https://greensock.com/docs/v3/Eases) e.g. `'power2.out'`, `'ease'`
- * @param {Boolean} props.freshFlag - 强制刷新触发标志位(可选)
+ * @param {Boolean} props.freshFlag - 强制刷新触发标志位(可选), 反转该值即可强制重新播放动画
  * @param {Boolean} props.isViewCtrl - 是否进入视野再播放动画 defaults: true
  * @returns {JSX.Element}
  * @constructor
@@ -45,10 +45,11 @@ const NumberAnimation = ({
             ease,
         });
         if(isViewCtrl && !hasEnteredViewport)
-            gsapRef.current.resume();
+            gsapRef.current.pause();
     }, [fromValue, toValue, duration, step]);
 
     useEffect(() => {
+        if(!(isViewCtrl && !hasEnteredViewport))
         gsapRef.current.restart();
     }, [freshFlag]);
 

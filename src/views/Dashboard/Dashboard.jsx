@@ -6,7 +6,7 @@ import AppleCard from "@/components/AppleCard/AppleCard";
 import tw from "twin.macro";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
-import {notify_success} from "@/hooks/toasts";
+import {notify_error, notify_success} from "@/hooks/toasts";
 import {faApple, faBilibili, faGithub, faQq, faTwitter, faWordpress} from "@fortawesome/free-brands-svg-icons";
 import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
 import React, {useEffect, useRef, useState} from "react";
@@ -20,6 +20,7 @@ import {InLineTitle} from "@/styles/TextStyles";
 import TextInput from "@/components/TextInputLine/TextInput";
 import SelectInput from "@/components/TextInputLine/SelectInput";
 import {MButton} from "@/components/Button/Styled.twin";
+import Picture from "@/components/PictureDisplay/Pictrue";
 
 export default function Dashboard() {
     const [visitData, setVisitData] = useState(null);
@@ -28,6 +29,8 @@ export default function Dashboard() {
     const [flag2, setFlag2] = useState(false);
     const [text, setText] = useState('');   //  每页显示几条日志
     const [text2, setText2] = useState('');    //  显示第几页, [1, 2, ...]
+    const [isError, setIsError] = useState(false);   //  text是否加载失败
+    const [isError2, setIsError2] = useState(false);    //  text2是否加载失败
     const [loading, setLoading] = useState(false);
     const [invalid, setInvalid] = useState(false);
     const [invalid2, setInvalid2] = useState(false);
@@ -44,6 +47,7 @@ export default function Dashboard() {
         } catch (e) {
             if (process.env.NODE_ENV === 'development')
                 console.error(e);
+            setIsError2(true);
             throw 'Failed to updateVisitData';
         }
     };
@@ -56,6 +60,7 @@ export default function Dashboard() {
         } catch (e) {
             if (process.env.NODE_ENV === 'development')
                 console.error(e);
+            setIsError(true);
             throw 'Failed to updateVisitData';
         }
     };
@@ -117,14 +122,15 @@ export default function Dashboard() {
                                                tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />}
                         onClick={() => {
-                            updateVisitData();
+                            updateVisitData().then(r => notify_success("已更新当前访问量 !", "update_visit_count_1")).catch(e => notify_error("更新当前访问量失败 !", "error_update_visit_count_1"));
                             setFlag(!flag);
-                            notify_success("已更新当前访问量 !", "update_visit_count_1");
                         }}
                     >
                         {visitData ? <NumberAnimation freshFlag={flag} fromValue={0} toValue={visitData[0].sum_count}
                                                       duration={2} step={1}/> :
-                            <FontAwesomeIcon icon={solid("spinner")} spin/>}
+                            isError ? <FontAwesomeIcon icon={solid("exclamation")} shake/> :
+                                <FontAwesomeIcon icon={solid("spinner")} spin/>
+                        }
                     </AppleCard>
 
                     <div tw={'col-span-5 md:col-span-3 m-4'}>
@@ -133,7 +139,9 @@ export default function Dashboard() {
                                    obj.ltime = formatDate(obj.ltime)
                                    return obj;
                                })}
-                               keys={['url', 'count', 'ltime']}/>
+                               keys={['url', 'count', 'ltime']}
+                               isError={isError}
+                        />
                     </div>
 
                     <AppleCard
@@ -149,13 +157,13 @@ export default function Dashboard() {
                                                tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />}
                         onClick={() => {
-                            updateLogData();
+                            updateLogData().then(r => notify_success("已更新日志总数量 !", "update_log_count_1")).catch(e => notify_error("更新日志总数量失败 !", "error_update_log_count_1"));
                             setFlag2(!flag2);
-                            notify_success("已更新日志总数量 !", "update_log_count_1");
                         }}
                     >
                         {logData && logData[0] ? <NumberAnimation freshFlag={flag2} fromValue={0} toValue={logData[0].total_count} duration={2} step={1}/> :
-                            <FontAwesomeIcon icon={solid("spinner")} spin/>}
+                            isError2 ? <FontAwesomeIcon icon={solid("exclamation")} shake/> :
+                                <FontAwesomeIcon icon={solid("spinner")} spin/>}
                     </AppleCard>
 
                     <ContentWrapper tw={'col-span-5 md:col-span-3 m-4 relative'}>
@@ -227,7 +235,9 @@ export default function Dashboard() {
                                    obj.time = formatDate(obj.time)
                                    return obj;
                                })}
-                               keys={['id', 'time', 'api', 'method', 'log']}/>
+                               keys={['id', 'time', 'api', 'method', 'log']}
+                               isError={isError2}
+                        />
                     </div>
                 </WrapperMain>
                 <WrapperRight>
