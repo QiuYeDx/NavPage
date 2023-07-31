@@ -50,6 +50,8 @@ module.exports = {
                 'icon_expand.5': 'icon_expand .5s ease forwards',
                 'icon_expand.8': 'icon_expand .8s ease forwards',
 
+                'delay.1_fade_in_up.5': 'delay_1_3_fade_in_up 1.5s ease-out forwards',
+
                 'popup_t.3': 'popup_t .3s ease forwards',
                 'popup_t.5': 'popup_t .5s ease forwards',
                 'popup_t.8': 'popup_t .8s ease forwards',
@@ -81,6 +83,20 @@ module.exports = {
                 },
                 'fade_in_up': {
                     '0%': {
+                        opacity: 0,
+                        transform: 'translateY(15px)'
+                    },
+                    '100%': {
+                        opacity: 1,
+                        transform: 'translateY(0)'
+                    },
+                },
+                'delay_1_3_fade_in_up': {
+                    '0%': {
+                        opacity: 0,
+                        transform: 'translateY(15px)'
+                    },
+                    '66.7%': {
                         opacity: 0,
                         transform: 'translateY(15px)'
                     },
