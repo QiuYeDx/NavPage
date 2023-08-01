@@ -33,34 +33,40 @@ export default function WrapperTop() {
     return (
         <WrapperTopStyled>
             <NavWrapper>
-                <NavHome onClick={() => navigate("/")}>
-                    <FontAwesomeIcon icon={solid("house")} size={'lg'}/>
-                </NavHome>
-                {navs.map((item, index) => {
-                    if(nav_hash[item])
-                        return <>
-                            <NavItem z_index={99 - index} key={index} className={flag} onClick={() => {
-                                if(location.pathname === nav_hash[item].to)
-                                    window.scrollTo({
-                                        top: 0,
-                                        behavior: "smooth",
-                                    });
-                                else{
-                                    navigate(nav_hash[item].to)
-                                    window.scroll(0, 0);
-                                }
-                            }}>
-                                <FadeInRight>{nav_hash[item].name || ''}</FadeInRight>
-                            </NavItem>
-                            {index === navs.length - 1 ? '' : <GapIcon>
-                                <FontAwesomeIcon icon={solid("angle-right")} />
-                            </GapIcon>}
-                        </>;
-                    else
-                        return '';
-                })}
-                <NavItem z_index={10} key={'endGap'}>
-                </NavItem>
+                <div tw={'relative overflow-hidden p-6 -m-6'}>
+                    <NavHome onClick={() => navigate("/")}>
+                        <FontAwesomeIcon icon={solid("house")} size={'lg'}/>
+                    </NavHome>
+                    <div className={'gsap_nav_expand'} tw={'flex flex-row justify-center flex-nowrap items-center rounded-full shadow-lg md:hover:shadow-xl active:shadow-xl md:active:shadow-md bg-white pl-[50px]'}>
+                        {navs.map((item, index) => {
+                            if (nav_hash[item])
+                                return <>
+                                    <NavItem z_index={99 - index} key={index} className={flag} onClick={() => {
+                                        if (location.pathname === nav_hash[item].to)
+                                            window.scrollTo({
+                                                top: 0,
+                                                behavior: "smooth",
+                                            });
+                                        else {
+                                            navigate(nav_hash[item].to)
+                                            window.scroll(0, 0);
+                                        }
+                                    }}>
+                                        <FadeInRight>{nav_hash[item].name || ''}</FadeInRight>
+                                    </NavItem>
+                                    {
+                                        index === navs.length - 1 ? '' : <GapIcon>
+                                            <FontAwesomeIcon icon={solid("angle-right")}/>
+                                        </GapIcon>
+                                    }
+                                </>
+                            else
+                                return '';
+                        })}
+                    </div>
+                </div>
+                {/*<NavItem z_index={10} key={'endGap'}>*/}
+                {/*</NavItem>*/}
             </NavWrapper>
         </WrapperTopStyled>
     );

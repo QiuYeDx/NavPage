@@ -134,7 +134,6 @@ const Pagination = ({data}) => {
     // list 渐入动画
     const gsap_ref = useRef(null);
     useEffect(() => {
-        console.log(gsap_ref);
         if(gsap_ref && gsap_ref.current === null){
             gsap_ref.current = gsap.fromTo(".gsap_popup_a", {
                 y: data.length > 1 ? 360 : 180,
