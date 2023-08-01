@@ -41,6 +41,9 @@ export const isURL = (str) => {
 };
 
 /**
+ * ## `流式下载函数`
+ *
+ * 可传入下载进度回调函数和下载完成回调函数
  *
  * @param url 欲下载资源的URL
  * @param {function} loading_callback - 下载进度回调函数，参数为下载进度百分比（精确到两位小数）

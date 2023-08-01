@@ -15,6 +15,14 @@ export const AppleCardWrapper = styled(CardWrapper).attrs(props => ({
   position: relative;
   overflow: hidden;
   ${({_tw_user}) => _tw_user};
+
+  &::before{
+    transition: opacity 0.3s ease;
+  }
+  
+  &:active::before{
+    transition: opacity 0.3s ease;
+  }
 `
 
 export const AnimationWrapper = styled.div`
