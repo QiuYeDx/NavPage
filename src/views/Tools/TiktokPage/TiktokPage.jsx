@@ -87,8 +87,12 @@ export default function TiktokPage() {
 
             notify_success('解析成功 !', 'resolving_success');
 
-            // 更新服务请求次数
-            setCount((await log_api_config.awaitCountAPI('PUT', 'tiktok')).data[0].count);
+            try{
+                // 更新服务请求次数
+                setCount((await log_api_config.awaitCountAPI('PUT', 'tiktok')).data[0].count);
+            } catch (e){
+                console.warn(e);
+            }
 
             setTimeout(() => {
                 scroll_ref.current.scrollIntoView({behavior: 'smooth'});

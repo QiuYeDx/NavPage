@@ -56,12 +56,12 @@ export default function Tools() {
         } catch (err) {
             // if(process.env.NODE_ENV === 'development')
             //     console.log(err);
-            throw 'Failed to fetch counts';
+            throw 'Failed to fetch counts'; // 这里不知道为什么如果抛出Error类就会显示奇怪的东西
         }
     };
 
     useEffect(() => {
-        fetchData().then(r => console.log(r)).catch(e => console.log(e));
+        fetchData().then(r => console.log(r)).catch(e => console.warn(e));
     }, []);
 
     const Overview = (

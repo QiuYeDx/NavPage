@@ -79,7 +79,7 @@ export default function QRPage() {
                 // 更新服务请求次数
                 log_api_config.awaitCountAPI('PUT', 'qrcode').then(res => {
                     setCount(res.data[0].count);
-                }).catch(err => console.error('Failed to put qrcode count'));
+                }).catch(err => console.warn('Failed to put qrcode count'));
             })
             .catch(error => {
                 console.error('Failed to generate QR code:', error);

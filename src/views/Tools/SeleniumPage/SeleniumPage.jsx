@@ -139,7 +139,7 @@ export default function SeleniumPage() {
                 // 更新服务请求次数
                 log_api_config.awaitCountAPI('PUT', 'selenium').then(res => {
                     setCount(res.data[0].count);
-                }).catch(err => console.error('Failed to put selenium count'));
+                }).catch(err => console.warn('Failed to put selenium count'));
             })
             .catch(error => {
                 console.error('Error: ', error);

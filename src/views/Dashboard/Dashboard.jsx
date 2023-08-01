@@ -43,12 +43,12 @@ export default function Dashboard() {
         try {
             const res = await log_api_config.awaitLogsAPI('GET', n_per_page, p_index);
             setLogData(res.data);
-            return 'Succeed to updateVisitData';
+            return 'Succeed to updateLogData';
         } catch (e) {
-            if (process.env.NODE_ENV === 'development')
-                console.error(e);
+            // if (process.env.NODE_ENV === 'development')
+            //     console.error(e);
             setIsError2(true);
-            throw 'Failed to updateVisitData';
+            throw new Error('Failed to updateLogData');
         }
     };
 
@@ -58,10 +58,10 @@ export default function Dashboard() {
             setVisitData(res.data);
             return 'Succeed to updateVisitData';
         } catch (e) {
-            if (process.env.NODE_ENV === 'development')
-                console.error(e);
+            // if (process.env.NODE_ENV === 'development')
+            //     console.error(e);
             setIsError(true);
-            throw 'Failed to updateVisitData';
+            throw new Error('Failed to updateVisitData');
         }
     };
 
@@ -91,8 +91,8 @@ export default function Dashboard() {
     }
 
     useEffect(() => {
-        updateVisitData().then(r => console.log(r)).catch(e => console.error(e));
-        updateLogData().then(r => console.log(r)).catch(e => console.error(e));
+        updateVisitData().then(r => console.log(r)).catch(e => console.warn(e));
+        updateLogData().then(r => console.log(r)).catch(e => console.warn(e));
     }, []);
 
     useEffect(() => {

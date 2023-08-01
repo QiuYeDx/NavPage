@@ -25,6 +25,7 @@ import {app_config, log_api_config} from "@/GlobalConfig";
 import {blobToDataUrl} from "@/utils/utils";
 import TextInput from "@/components/TextInputLine/TextInput";
 import Picture from "@/components/PictureDisplay/Pictrue";
+import {ErrorCode} from "@/utils/errors";
 
 export default function BilibiliPage() {
     const default_cover = 'images/image-blue-300.svg';
@@ -68,6 +69,9 @@ export default function BilibiliPage() {
     async function fetchData(url, params) {
         try {
             const response = await axios.get(url, {params});
+            if(response.data.code === 0){
+                throw new Error('1005');
+            }
             setData(response.data.data);
             setList(response.data.data.list);
             setFinished(true);
@@ -93,17 +97,18 @@ export default function BilibiliPage() {
                 });
             }, 200);
         } catch (error) {
-            if(error.config.url === log_api_config.url.counts){
-                console.error('Failed to put counts');
-                return error;
+            if(error.message === ErrorCode.NONE_RESULT_ERROR){
+                console.warn('None result error');
+                setList(null);
+                notify_error('解析失败，请检查URL或重试 !', 'resolving_error');
+                setFinished(false);
+                setInvalid(true);
+                setCover(default_cover);
+                setData(null);
+                console.error('Failed to resolve video URL.', error);
+            }else{
+                console.warn('Failed to put counts');
             }
-            setList(null);
-            notify_error('解析失败，请检查URL或重试 !', 'resolving_error');
-            setFinished(false);
-            setInvalid(true);
-            setCover(default_cover);
-            setData(null);
-            console.error('Failed to resolve video URL:', error);
         } finally {
             setLoading(false);
         }

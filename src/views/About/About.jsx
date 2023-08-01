@@ -31,15 +31,15 @@ export default function About() {
             setLikeCount(res.data[0].count);
             return 'Succeed to fetch like count';
         } catch (err) {
-            if(process.env.NODE_ENV === 'development')
-                console.log(err);
+            // if(process.env.NODE_ENV === 'development')
+            //     console.error(err);
             setIsError(true);
-            return 'Failed to fetch like count';
+            throw new Error('Failed to fetch like count');
         }
     }
 
     useEffect(() => {
-        fetchData().then(r => console.log(r)).catch(e => console.log(e));
+        fetchData().then(r => console.log(r)).catch(e => console.warn(e));
     }, []);
 
     return (

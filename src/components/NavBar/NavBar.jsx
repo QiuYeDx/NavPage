@@ -29,7 +29,7 @@ export default function NavBar() {
         } catch (err) {
             // if (process.env.NODE_ENV === 'development')
             //     console.log(err);
-            throw 'Failed to put url count';
+            throw new Error('Failed to put url count');
         }
     };
 
@@ -58,7 +58,7 @@ export default function NavBar() {
     const gsap_ref = useRef(null);
     useEffect(() => {
         // 更新页面访问次数
-        fetchData().then(r => console.log(r)).catch(e => console.log(e));
+        fetchData().then(r => console.log(r)).catch(e => console.warn(e));
 
         // CardWrapper组件依次渐入
         if(!gsap_ref.current){
