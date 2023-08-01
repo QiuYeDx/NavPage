@@ -18,3 +18,4 @@ export const ContentWrapper = styled(CardWrapper)`
     display: none;
   }
 `
+

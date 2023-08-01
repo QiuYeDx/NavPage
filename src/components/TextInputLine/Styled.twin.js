@@ -27,6 +27,20 @@ export const TextInputLine = styled.input.attrs(props => ({
   ${(props) => props.invalid ? tw`placeholder:text-red-400 md:ring-red-400 md:ring-2` : ''};
 `
 
+export const SearchInputLine = styled.input.attrs(props => ({
+    autoComplete: 'off'
+}))`
+  text-align: center;
+  flex-grow: 1;
+  //min-width: 298px;
+  width: 100%;
+  box-sizing: border-box;
+  ${tw`h-12 md:text-lg rounded-full caret-blue-500 placeholder:tracking-widest placeholder:text-gray-300 focus:placeholder:text-blue-300 \
+  focus:outline-none px-12 placeholder:transition-colors font-sans text-blue-400 \
+  `};
+  ${(props) => props.invalid ? tw`placeholder:text-red-400 md:ring-red-400 md:ring-2` : ''};
+`
+
 export const InputDesc = styled.label.attrs(props => ({
     for: props.for
 }))`
@@ -79,4 +93,5 @@ export const TextInputLineWrapper = styled.div`
   flex-grow: 2;
   display: flex;
   height: 40px;
+  ${({_tw}) => _tw ? _tw : ''};
 `;

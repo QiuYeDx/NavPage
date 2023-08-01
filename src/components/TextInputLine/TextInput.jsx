@@ -135,8 +135,8 @@ export default function TextInput({
                 className={'peer'}
                 id={id || ''}
                 maxLength={maxLength || 2000} value={text || ''}
-                onChange={onChange || ''}
-                onKeyPress={onKeyPress || ''}
+                onChange={onChange || (() => {})}
+                onKeyPress={onKeyPress || (() => {})}
                 invalid={invalid || ''}
                 {...restProps}
             />

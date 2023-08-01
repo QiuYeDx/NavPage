@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
 `
 
 export const ErrorWrapper = styled(CardWrapper)`
-  ${tw`p-10 shadow-xl rounded-3xl bg-red-400 animate-fade_in_up.4`}
+  ${tw`p-10 shadow-xl rounded-3xl bg-red-400`}
   //position: relative;
   //top: -60px;
   display: flex;
