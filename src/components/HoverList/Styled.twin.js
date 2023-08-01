@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 export const HoverListWrapper = styled.ul`
-  ${tw`shadow-2xl rounded-2xl active:shadow-2xl md:hover:shadow-2xl animate-fade_in_up.4 bg-white overscroll-none overflow-x-hidden overflow-y-auto`};
+  ${tw`shadow-2xl rounded-2xl active:shadow-2xl md:hover:shadow-2xl animate-fade_in_up.4 bg-white overscroll-none overflow-x-hidden overflow-y-auto border border-slate-100`};
   margin: auto;
   width: ${({w}) => w || "120px"};
   //height: ${({h}) => h || "initial"};
