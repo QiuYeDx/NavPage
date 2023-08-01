@@ -141,3 +141,7 @@ export function formatDate(inputDate) {
 
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
+
+export function removeAdjacentDuplicates(arr) {
+    return arr.filter((element, index) => index === 0 || element !== arr[index - 1]);
+}

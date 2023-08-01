@@ -25,7 +25,9 @@ export const WrapperTopStyled = styled.div`
   align-items: center;
 `
 
-export const NavWrapper = styled.div`
+export const NavWrapper = styled.div.attrs(props => ({
+  className: 'gsap_nav_expand'
+}))`
   margin: 10px auto 0 auto;
   height: 50px;
   
@@ -35,7 +37,9 @@ export const NavWrapper = styled.div`
   flex-wrap: nowrap;
   position: relative;
 
-  ${tw`rounded-full shadow-lg md:hover:shadow-xl active:shadow-xl md:active:shadow-md duration-300 bg-white`};
+  ${tw`rounded-full shadow-lg md:hover:shadow-xl active:shadow-xl md:active:shadow-md bg-white`};
+  
+  transition: box-shadow 0.3s ease;
 `;
 
 export const NavHome = styled.div`
@@ -48,11 +52,24 @@ export const NavHome = styled.div`
   
   position: relative;
   z-index: 100;
-  ${tw`rounded-full shadow-lg md:hover:shadow-xl md:hover:scale-110 active:shadow-xl md:active:shadow-lg active:scale-110 md:active:scale-100 duration-200 bg-blue-300 md:hover:bg-blue-400 active:bg-blue-400 md:active:bg-blue-300 md:cursor-pointer text-white`};
+  ${tw`rounded-full shadow-lg md:hover:shadow-xl active:shadow-xl md:active:shadow-lg bg-blue-300 md:hover:bg-blue-400 active:bg-blue-400 md:active:bg-blue-300 md:cursor-pointer text-white`};
+  
+  transition: scale 0.3s ease;
+  &:active{
+    scale: 1.1;
+  }
+  @media(min-width: ${WIDTH_MOBILE}px) {
+    &:hover{
+      scale: 1.1;
+    }
+    &:active{
+      scale: 1;
+    }
+  }
 `;
 
 export const NavItem = styled.div.attrs(props => ({
-  className: 'gsap_nav_expand'
+  className: 'gsap_navItem_expand'
 }))`
   min-width: 50px;
   height: 50px;
@@ -62,23 +79,22 @@ export const NavItem = styled.div.attrs(props => ({
   text-align: center;
   flex-shrink: 0;
   flex-grow: 0;
-  ${tw`rounded-full antialiased font-sans text-blue-400 bg-white truncate select-none md:hover:text-blue-300 active:text-blue-200 md:active:text-blue-400 md:cursor-pointer`};
+  ${tw`rounded-full antialiased font-sans text-blue-400 truncate select-none md:hover:text-blue-300 active:text-blue-200 md:active:text-blue-400 md:cursor-pointer`};
   overflow: visible;
   padding-right: 10px;
   padding-left: 10px;
   &:last-child{
     padding-right: 15px;
   }
+  transition: color 0.3s ease;
 `;
 
 export const GapIcon = styled.div.attrs(props => ({
-  className: 'gsap_icon_expand'
+  className: 'gsap_navItem_expand'
 }))`
   position: relative;
   ${tw`select-none text-blue-200`};
 `;
 
-export const FadeInRight = styled.div.attrs(props => ({
-  className: 'gsap_fade_in_right'
-}))`
+export const FadeInRight = styled.div`
 `;

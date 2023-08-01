@@ -56,7 +56,6 @@ export default function NavBar() {
     };
 
     const gsap_ref = useRef(null);
-    const gsap_ref2 = useRef(null);
     useEffect(() => {
         // 更新页面访问次数
         fetchData().then(r => console.log(r)).catch(e => console.log(e));
@@ -96,35 +95,7 @@ export default function NavBar() {
                 stagger: 0.1,
             });
         }
-
-        // 面包屑相关动画
-        if(!gsap_ref2.current){
-            gsap_ref2.current = gsap.timeline({ repeat: 0});
-            // 将动画添加到时间轴中
-            gsap_ref2.current.fromTo(".gsap_nav_expand", {
-                opacity: 0,
-                duration: 0,
-            }, {
-                opacity: 1,
-                duration: 1,
-                ease: 'power3.out',
-                // stagger: 0.1,
-            });
-        }else{
-            gsap_ref2.current.kill();
-            gsap_ref2.current = gsap.timeline({ repeat: 0});
-            // 将动画添加到时间轴中
-            gsap_ref2.current.fromTo(".gsap_nav_expand", {
-                opacity: 0,
-                duration: 0,
-            }, {
-                opacity: 1,
-                duration: 1,
-                ease: 'power3.out',
-                // stagger: 0.1,
-            });
-        }
-    }, [location]);
+    }, [location.pathname]);
 
     return (
         <div>
