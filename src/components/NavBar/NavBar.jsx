@@ -103,11 +103,9 @@ export default function NavBar() {
             // 将动画添加到时间轴中
             gsap_ref2.current.fromTo(".gsap_nav_expand", {
                 opacity: 0,
-                x: '-100%',
                 duration: 0,
             }, {
                 opacity: 1,
-                x: 0,
                 duration: 1,
                 ease: 'power3.out',
                 // stagger: 0.1,
@@ -118,11 +116,9 @@ export default function NavBar() {
             // 将动画添加到时间轴中
             gsap_ref2.current.fromTo(".gsap_nav_expand", {
                 opacity: 0,
-                x: '-100%',
                 duration: 0,
             }, {
                 opacity: 1,
-                x: 0,
                 duration: 1,
                 ease: 'power3.out',
                 // stagger: 0.1,

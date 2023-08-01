@@ -35,7 +35,7 @@ export const NavWrapper = styled.div`
   flex-wrap: nowrap;
   position: relative;
 
-  //${tw`rounded-full shadow-lg md:hover:shadow-xl active:shadow-xl md:active:shadow-md bg-white`};
+  ${tw`rounded-full shadow-lg md:hover:shadow-xl active:shadow-xl md:active:shadow-md duration-300 bg-white`};
 `;
 
 export const NavHome = styled.div`
@@ -46,12 +46,14 @@ export const NavHome = styled.div`
   flex-shrink: 0;
   flex-grow: 0;
   
-  position: absolute;
+  position: relative;
   z-index: 100;
-  ${tw`left-6 top-6 rounded-full shadow-lg md:hover:shadow-xl md:hover:scale-110 active:shadow-xl md:active:shadow-lg active:scale-110 md:active:scale-100 duration-200 bg-blue-300 md:hover:bg-blue-400 active:bg-blue-400 md:active:bg-blue-300 md:cursor-pointer text-white`};
+  ${tw`rounded-full shadow-lg md:hover:shadow-xl md:hover:scale-110 active:shadow-xl md:active:shadow-lg active:scale-110 md:active:scale-100 duration-200 bg-blue-300 md:hover:bg-blue-400 active:bg-blue-400 md:active:bg-blue-300 md:cursor-pointer text-white`};
 `;
 
-export const NavItem = styled.div`
+export const NavItem = styled.div.attrs(props => ({
+  className: 'gsap_nav_expand'
+}))`
   min-width: 50px;
   height: 50px;
   line-height: 50px;
