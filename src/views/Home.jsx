@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
     WrapperMiddle, WrapperLeft,
     WrapperRight, WrapperMain
@@ -16,17 +16,34 @@ import {useClipboard} from "use-clipboard-copy";
 import {H1, P} from "@/styles/TextStyles";
 import {ErrorWrapper} from "@/views/Error/Styled.twin";
 import {SearchInputLine} from "@/components/TextInputLine/Styled.twin";
+import PopupMenu from "@/components/PopupMenu/PopupMenu";
+import HoverList from "@/components/HoverList/HoverList";
 
 export default function Home() {
     const clipboard = useClipboard();
+    const a_ref = useRef(null);
+    const input_ref = useRef(null);
+    const search_ref = useRef(null);
     const [text, setText] = useState('');
     const [engine, setEngine] = useState('google');
     const [isFocused, setIsFocused] = useState(false);
 
-    const placeholders = {
-        'google': 'Google Search',
-        'baidu': '百度一下',
-        'bing': '必应搜索',
+    const engines = {
+        'google': {
+            name: 'Google',
+            placeholder: 'Google Search',
+            url: 'https://www.google.com/search?q=',
+        },
+        'baidu': {
+            name: '百度',
+            placeholder: '百度一下',
+            url: 'https://www.baidu.com/s?wd=',
+        },
+        'bing': {
+            name: '必应',
+            placeholder: '必应搜索',
+            url: 'https://www.bing.com/search?q=',
+        },
     }
 
     const handleChange = (event) => {
@@ -41,12 +58,20 @@ export default function Home() {
         setIsFocused(false);
     };
 
-    // const handleKeyPress = (event) => {
-    //     if (event.key === 'Enter') {
-    //         button_ref.current.click();
-    //         button_ref.current.focus();
-    //     }
-    // }
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            search_ref.current.click();
+            input_ref.current.focus();
+        }
+    }
+
+    const handleSearch = () => {
+        let toUrl = engines[engine].url + encodeURIComponent(text);
+        let a = a_ref.current;
+        a.href = toUrl;
+        a.target = '_blank';
+        a.click();
+    }
 
     return (
         <Wrapper>
@@ -59,27 +84,50 @@ export default function Home() {
                 </WrapperLeft>
                 <WrapperMain tw={'flex justify-start'}>
 
-                    <div tw={'h-32 mx-4 md:mx-16 flex flex-col justify-center items-center px-0'}
+                    <div tw={'h-20 mx-4 md:mx-16 flex flex-col grow-0 justify-center items-center px-0 z-[700]'}
                          className={'group gsap_main_fadein'}
                     >
-                        <div tw={'relative flex flex-row transition-shadow shadow-md md:hover:shadow-lg aria-pressed:shadow-lg shadow-slate-200 rounded-full bg-white max-w-3xl w-full'}
+                        <div tw={'relative flex flex-row transition-shadow shadow-md md:hover:shadow-lg aria-pressed:shadow-lg shadow-slate-200 md:hover:shadow-slate-200 aria-pressed:shadow-slate-200 rounded-full bg-white max-w-3xl w-full'}
                              aria-pressed={isFocused}
                         >
-                            <div tw={'absolute left-0 top-0 h-12 w-12 rounded-full'}>
-                                <FontAwesomeIcon icon={faGoogle}
-                                                 aria-pressed={isFocused}
-                                                 shake={isFocused}
-                                                 tw={'absolute inset-0 m-auto h-5 w-5 transition-colors text-blue-300'}/>
-                            </div>
+                            <PopupMenu
+                                closeClassName={'closeClassName'}
+                                animate={'t.3'}
+                                button={<div tw={'absolute left-0 top-0 my-1 ml-1.5 mr-2.5 h-10 w-10 rounded-full active:bg-blue-50 md:hover:bg-blue-50 md:active:bg-blue-100 md:hover:cursor-pointer transition-colors'}>
+                                    <FontAwesomeIcon icon={engine === 'google' ? faGoogle : solid("chevron-down")}
+                                                     aria-pressed={isFocused}
+                                                     shake={engine === 'google' && isFocused}
+                                                     tw={'absolute inset-0 m-auto h-5 w-5 transition-colors transition-transform text-blue-300 aria-pressed:-rotate-90'}/>
+                                </div>}
+                                menu={<HoverList
+                                    closeClassName={'closeClassName'}
+                                    _t={'50px'}
+                                    validText={engines[engine].name}
+                                    list={Object.keys(engines).map((key, index) => engines[key].name)}
+                                    onClick={(e) => {
+                                        if (e.target.id.includes('pageLi_')) {
+                                            const index = e.target.id.slice(7);
+                                            setEngine(Object.keys(engines)[index - 1]);
+                                        }
+                                        input_ref.current.focus();
+                                    }}
+                                />}
+                            />
                             <SearchInputLine
+                                ref={input_ref}
                                 value={text}
                                 onChange={handleChange}
                                 onFocus={handleFocus}
                                 onBlur={handleBlur}
-                                placeholder={placeholders[engine]}
+                                onKeyPress={handleKeyPress}
+                                placeholder={engines[engine].placeholder}
                                 tw={'grow'}
                             />
-                            <div tw={'absolute right-0 top-0 my-1 ml-2.5 mr-1.5 h-10 w-10 rounded-full active:bg-blue-50 md:hover:bg-blue-50 md:active:bg-blue-100 md:hover:cursor-pointer transition-colors'}>
+                            <a tw={'hidden'} ref={a_ref}/>
+                            <div tw={'absolute right-0 top-0 my-1 ml-2.5 mr-1.5 h-10 w-10 rounded-full active:bg-blue-50 md:hover:bg-blue-50 md:active:bg-blue-100 md:hover:cursor-pointer transition-colors'}
+                                 ref={search_ref}
+                                 onClick={handleSearch}
+                            >
                                 <FontAwesomeIcon icon={solid("magnifying-glass")}
                                                  aria-pressed={isFocused}
                                                  tw={'absolute inset-0 m-auto h-5 w-5 transition-colors text-blue-300'}/>

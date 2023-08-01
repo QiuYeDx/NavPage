@@ -30,6 +30,7 @@ React、Webpack、react-router-dom、styled-components、tailwindcss 、twin.mac
   3. 抖音视频解析
 - v1.6 新增导航面包屑组件 && 优化下载体验 && 表单组件视效优化
 - v1.7 新增Selenium自动化测试工具前端控制台
+- v1.8 对接网站监控API并增加看板页面 && 引入GSAP动画库改善动效
 
 ## 待办
 
