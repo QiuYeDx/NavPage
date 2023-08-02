@@ -170,8 +170,8 @@ export default function SelectInput({
                 id={id || ''}
                 maxLength={maxLength || 2000}
                 value={text || ''}
-                onChange={onChange || ''}
-                onKeyPress={onKeyPress || ''}
+                onChange={onChange || (() => {})}
+                onKeyPress={onKeyPress || (() => {})}
                 invalid={invalid || ''}
                 readOnly
                 {...restProps}

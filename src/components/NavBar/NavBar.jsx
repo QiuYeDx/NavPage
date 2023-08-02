@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
     NavWrapper, LogoWrapper, NavItem, NavList, MoreWrapper,
     Logo, LogoText, MoreList, MoreListItem, MoreListMask
@@ -33,7 +33,7 @@ export default function NavBar() {
         }
     };
 
-    const changeMode = () => {
+    const changeMode = useCallback(() => {
         const metaToRemove = document.head.querySelector('meta[name="theme-color"]');
         if (metaToRemove) {
             // 从文档头中移除该 meta 标签
@@ -53,7 +53,7 @@ export default function NavBar() {
         }
         // 将 meta 标签添加到文档头部
         document.head.appendChild(metaTag);
-    };
+    }, []);
 
     const gsap_ref = useRef(null);
     useEffect(() => {

@@ -84,6 +84,7 @@ export default function Home() {
                 </WrapperLeft>
                 <WrapperMain tw={'flex justify-start'}>
 
+                    {/*主搜索栏*/}
                     <div tw={'h-20 mx-4 md:mx-16 flex flex-col grow-0 justify-center items-center px-0 z-[700]'}
                          className={'group gsap_main_fadein'}
                     >

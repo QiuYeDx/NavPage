@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
     ButtonWrapper,
     HeaderWrapper,
@@ -43,17 +43,17 @@ export default function BilibiliPage() {
     const [cover, setCover] = useState(default_cover);
     const [downloadState, setDownloadState] = useState(new Map());
     const [iosIsDownloading, setIosIsDownloading] = useState(false);
-    const handleChange = (event) => {
+    const handleChange = useCallback((event) => {
         setText(event.target.value);
         setInvalid(false);
-    };
+    }, []);
 
-    const handleKeyPress = (event) => {
+    const handleKeyPress = useCallback((event) => {
         if (event.key === 'Enter') {
             btn_ref.current.click();
             btn_ref.current.focus();
         }
-    }
+    }, []);
 
     const handleDownloadPic = (event) => {
         if (!data)

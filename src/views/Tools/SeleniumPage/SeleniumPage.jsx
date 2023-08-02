@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
     ButtonWrapper,
     HeaderWrapper,
@@ -56,51 +56,51 @@ export default function SeleniumPage() {
     const [log, setLog] = useState(null);
     const headers_arr = ['ID', 'Time', 'InsID', 'Type', 'State', 'E-log'];
 
-    const handleChange = (event) => {
+    const handleChange = useCallback((event) => {
         setText(event.target.value);
         setInvalid(false);
-    };
+    }, []);
 
-    const handleChange2 = (event) => {
+    const handleChange2 = useCallback((event) => {
         setText2(event.target.value);
         setInvalid2(false);
-    };
+    }, []);
 
-    const handleChange3 = (event) => {
+    const handleChange3 = useCallback((event) => {
         setText3(event.target.value);
         setInvalid3(false);
-    };
+    }, []);
 
-    const handleChange4 = (event) => {
+    const handleChange4 = useCallback((event) => {
         setText4(event.target.value);
         setInvalid4(false);
-    };
+    }, []);
 
-    const handleChange5 = (event) => {
+    const handleChange5 = useCallback((event) => {
         setText5(event.target.value);
         setInvalid5(false);
-    };
+    }, []);
 
-    const handleKeyPress = (event) => {
+    const handleKeyPress = useCallback((event) => {
         if (event.key === 'Enter') {
             button4_ref.current.click();    // 查询状态
             button4_ref.current.focus();
         }
-    }
+    }, []);
 
-    const handleKeyPress2 = (event) => {
+    const handleKeyPress2 = useCallback((event) => {
         if (event.key === 'Enter') {
             button2_ref.current.click();
             button2_ref.current.focus();
         }
-    }
+    }, []);
 
-    const handleKeyPress3 = (event) => {
+    const handleKeyPress3 = useCallback((event) => {
         if (event.key === 'Enter') {
             button3_ref.current.click();
             button3_ref.current.focus();
         }
-    }
+    }, []);
 
     const handleSubmit = (event) => {
         let valid_url = null;

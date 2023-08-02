@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
     ButtonWrapper,
     HeaderWrapper,
@@ -42,17 +42,17 @@ export default function TiktokPage() {
     const [dyCover, setDyCover] = useState(default_cover);
     const [downloadState, setDownloadState] = useState(new Map());
 
-    const handleChange = (event) => {
+    const handleChange = useCallback((event) => {
         setText(event.target.value);
         setInvalid(false);
-    };
+    }, []);
 
-    const handleKeyPress = (event) => {
+    const handleKeyPress = useCallback((event) => {
         if (event.key === 'Enter') {
             scroll_ref.current.click();
             scroll_ref.current.focus();
         }
-    }
+    }, []);
 
     const showDownloadProgress = (progress, id) => {
         notify_loading(<span>正在下载视频: <span tw={'font-mono'} style={{color: 'rgb(96, 165, 250)', width: '66px', display: 'inline-block', 	textAlign: 'right'}}>{progress}%</span></span>, 'downloading_video' + id);

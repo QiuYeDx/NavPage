@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
     ButtonWrapper,
     HeaderWrapper,
@@ -31,10 +31,18 @@ export default function QRPage() {
     const [invalid, setInvalid] = useState(false);
     const [picLoading, setPicLoading] = useState(false);
 
-    const handleChange = (event) => {
+    const handleChange = useCallback((event) => {
         setText(event.target.value);
         setInvalid(false);
-    };
+    }, []);
+
+    const handleKeyPress = useCallback((event) => {
+        if (event.key === 'Enter') {
+            button_ref.current.click();
+            button_ref.current.focus();
+        }
+    }, []);
+
     const handleDownload = (event) => {
         if(!data)
             return;
@@ -42,13 +50,6 @@ export default function QRPage() {
         a.href = data;
         a.download = "qrcode-solid-md.png";
         a.click();
-    };
-
-    const handleKeyPress = (event) => {
-        if (event.key === 'Enter') {
-            button_ref.current.click();
-            button_ref.current.focus();
-        }
     }
 
     const handleSubmit = (event) => {
