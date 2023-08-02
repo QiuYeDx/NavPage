@@ -52,6 +52,10 @@ module.exports = {
 
                 'delay.1_fade_in_up.5': 'delay_1_3_fade_in_up 1.5s ease-out forwards',
 
+                'popup_t_Y.3': 'popup_t_Y_50 .3s ease forwards',
+                'popup_t_Y.5': 'popup_t_Y_50 .5s ease forwards',
+                'popup_t_Y.8': 'popup_t_Y_50 .8s ease forwards',
+
                 'popup_t.3': 'popup_t .3s ease forwards',
                 'popup_t.5': 'popup_t .5s ease forwards',
                 'popup_t.8': 'popup_t .8s ease forwards',
@@ -63,6 +67,10 @@ module.exports = {
                 'popup_b.3': 'popup_b .3s ease forwards',
                 'popup_b.5': 'popup_b .5s ease forwards',
                 'popup_b.8': 'popup_b .8s ease forwards',
+
+                'popout_t_Y.3': 'popout_t_Y_50 .3s ease forwards',
+                'popout_t_Y.5': 'popout_t_Y_50 .5s ease forwards',
+                'popout_t_Y.8': 'popout_t_Y_50 .8s ease forwards',
 
                 'popout_t.3': 'popout_t .3s ease forwards',
                 'popout_t.5': 'popout_t .5s ease forwards',
@@ -139,6 +147,19 @@ module.exports = {
                         opacity: 1,
                     },
                 },
+
+                'popup_t_Y_50': {
+                    '0%': {
+                        transformOrigin: 'center 50px',
+                        opacity: 0,
+                        transform: 'scaleY(0)',
+                    },
+                    '100%': {
+                        transformOrigin: 'center 50px',
+                        opacity: 1,
+                        transform: 'scaleY(1)',
+                    },
+                },
                 'popup_t': {
                     '0%': {
                         transformOrigin: 'top',
@@ -173,6 +194,19 @@ module.exports = {
                         transformOrigin: 'bottom',
                         opacity: 1,
                         transform: 'scale(1)',
+                    },
+                },
+
+                'popout_t_Y_50': {
+                    '0%': {
+                        transformOrigin: 'center 50px',
+                        opacity: 1,
+                        transform: 'scaleY(1)',
+                    },
+                    '100%': {
+                        transformOrigin: 'center 50px',
+                        opacity: 0,
+                        transform: 'scaleY(0)',
                     },
                 },
                 'popout_b': {

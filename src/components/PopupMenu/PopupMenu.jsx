@@ -7,7 +7,7 @@ import 'twin.macro';
  *
  * - 可搭配 **HoverList** 组件使用
  * - button和menu组件通过参数传递
- * - 点击button显示menu，点击其他区域关闭menu。
+ * - 点击button显示menu, 点击其他区域关闭menu; switchBaned - true: 点击button只会打开menu, 不会关闭menu (defaults: false)
  * - 当点击button或menu中含**closeClassName**指定类名的标签时会关闭menu
  *
  * - 示例：
@@ -36,18 +36,22 @@ import 'twin.macro';
  * @param button
  * @param menu
  * @param closeClassName - 当点击button或menu中含该类名的标签时会关闭menu
- * @param animate - 选择渐入渐出动画 可选参数't.3', 'tr.3', 'br.3'等
+ * @param animate - 选择渐入渐出动画 可选参数't.3', 'tr.3', 'br.3', 't_Y.3'等
+ * @param switchBaned - true: 点击button只会打开menu, 不会关闭 defaults: false
+ * @param _tw - 给Wrapper添加额外样式
  * @returns {JSX.Element}
  * @constructor
  */
-const PopupMenu = ({button, menu, closeClassName, animate}) => {
+const PopupMenu = ({button, menu, closeClassName, animate, switchBaned = false, _tw}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isHiding, setIsHiding] = useState(false);
     const menuRef = useRef(null);
     const animates = {
+        't_Y-in.3': tw`animate-popup_t_Y.3`,
         't-in.3': tw`animate-popup_t.3`,
         'tr-in.3': tw`animate-popup_tr.3`,
         'b-in.3': tw`animate-popup_b.3`,
+        't_Y-out.3': tw`animate-popout_t_Y.3`,
         't-out.3': tw`animate-popout_t.3`,
         'tr-out.3': tw`animate-popout_tr.3`,
         'b-out.3': tw`animate-popout_b.3`,
@@ -70,7 +74,10 @@ const PopupMenu = ({button, menu, closeClassName, animate}) => {
 
     const handleButtonClick = () => {
         setIsOpen(true);
-        setIsHiding(isOpen);
+        if(!switchBaned)
+            setIsHiding(isOpen)
+        else
+            setIsHiding(false);
     };
 
     const handleAnimationed = () => {
@@ -80,25 +87,30 @@ const PopupMenu = ({button, menu, closeClassName, animate}) => {
     }
 
     return (
-        <div ref={menuRef} tw={'relative'}>
-            <div onClick={handleButtonClick}>{button}</div>
+        <Wrapper ref={menuRef} tw={'relative'} _tw={_tw}>
+            <Wrapper onClick={handleButtonClick}>{button}</Wrapper>
             <AnimateWrapper onAnimationEnd={handleAnimationed}
                             isHidden={!isOpen}
                             animate={animate && isHiding ? animates[animate.split('.').join('-out.')] : animates[animate.split('.').join('-in.')]}>
                 {menu}
             </AnimateWrapper>
-        </div>
+        </Wrapper>
     );
 };
+
+const Wrapper = styled.div`
+  ${({_tw}) => _tw ? _tw : ''};
+`;
 
 const AnimateWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  width: 50px;
+  //width: 50px;
+  width: 100%;
   ${({animate}) => animate};
   ${({isHidden}) => isHidden ? 'display: none' : ''};
   ${tw`z-50`};
-`
+`;
 
 export default PopupMenu;
