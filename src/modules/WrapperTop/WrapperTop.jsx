@@ -36,7 +36,7 @@ export default function WrapperTop() {
                 width: 0,
             }, {
                 width: toWidth,
-                duration: 1,
+                duration: 1.5,
                 ease: 'circ.out',
             }),
             0
@@ -45,15 +45,15 @@ export default function WrapperTop() {
             gsap.fromTo(".gsap_navItem_expand", {
                 opacity: 0,
                 duration: 0,
-                x: -50,
+                x: -80,
             }, {
                 x: 0,
                 opacity: 1,
-                duration: 1,
-                ease: 'back.out',
+                duration: 1.2,
+                ease: 'power3.out',
                 stagger: 0.1,
             }),
-            0.3
+            0.2
         );
     }
 
