@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
     WrapperMiddle, WrapperLeft,
     WrapperRight, WrapperMain
@@ -18,6 +18,7 @@ import {ErrorWrapper} from "@/views/Error/Styled.twin";
 import {SearchInputLine} from "@/components/TextInputLine/Styled.twin";
 import PopupMenu from "@/components/PopupMenu/PopupMenu";
 import HoverList from "@/components/HoverList/HoverList";
+import {useBeforeUnload} from "react-router-dom";
 
 export default function Home() {
     const clipboard = useClipboard();
@@ -26,6 +27,7 @@ export default function Home() {
     const search_ref = useRef(null);
     const [text, setText] = useState('');
     const [engine, setEngine] = useState('google');
+    const [modified, setModified] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
 
     const engines = {
@@ -48,6 +50,7 @@ export default function Home() {
 
     const handleChange = (event) => {
         setText(event.target.value);
+        setModified(true);
     };
 
     const handleFocus = () => {
@@ -72,6 +75,33 @@ export default function Home() {
         a.target = '_blank';
         a.click();
     }
+
+    useBeforeUnload(() => {
+        // 离开页面前保存状态
+        if(!modified && !text && engine === 'google')
+            return;
+        sessionStorage.setItem('home_states', (JSON.stringify({
+            text,
+            engine,
+        })));
+    });
+
+    useEffect(() => {
+        if(!modified && !text && engine === 'google')
+            return;
+        sessionStorage.setItem('home_states', (JSON.stringify({
+            text,
+            engine,
+        })));
+    }, [text, engine]);
+
+    useEffect(() => {
+        if(sessionStorage.getItem('home_states')){
+            const last_states = JSON.parse((sessionStorage.getItem('home_states')));
+            setText(last_states.text ? last_states.text : '');
+            setEngine(last_states.engine ? last_states.engine : '');
+        }
+    }, []); // 依赖项为空数组，表示仅在组件挂载和卸载时执行一次
 
     return (
         <Wrapper>
@@ -111,6 +141,7 @@ export default function Home() {
                                             setEngine(Object.keys(engines)[index - 1]);
                                         }
                                         input_ref.current.focus();
+                                        setModified(true);
                                     }}
                                 />}
                             />
