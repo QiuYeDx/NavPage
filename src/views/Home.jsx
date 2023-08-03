@@ -20,6 +20,7 @@ import PopupMenu from "@/components/PopupMenu/PopupMenu";
 import HoverList from "@/components/HoverList/HoverList";
 import {useBeforeUnload} from "react-router-dom";
 import axios from "axios";
+import {log_api_config} from "@/GlobalConfig";
 
 export default function Home() {
     const clipboard = useClipboard();
@@ -74,6 +75,7 @@ export default function Home() {
 
     const handleSearch = () => {
         putSearchRecord(text);
+        log_api_config.awaitCountAPI('PUT', 'homeSearch').then().catch(err => console.warn('Failed to put qrcode count'));
         let toUrl = engines[engine].url + encodeURIComponent(text);
         let a = a_ref.current;
         a.href = toUrl;
@@ -83,6 +85,7 @@ export default function Home() {
 
     const doSearch = (text) => {
         putSearchRecord(text);
+        log_api_config.awaitCountAPI('PUT', 'homeSearch').then().catch(err => console.warn('Failed to put qrcode count'));
         let toUrl = engines[engine].url + encodeURIComponent(text);
         let a = a_ref.current;
         a.href = toUrl;
