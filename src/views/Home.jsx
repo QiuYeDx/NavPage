@@ -34,6 +34,7 @@ export default function Home() {
     const [isFocused, setIsFocused] = useState(false);
     const [topics, setTopics] = useState([]);
     const [showNumber, setShowNumber] = useState(4);
+    const INCREMENT = 7;
 
     const engines = {
         'google': {
@@ -103,7 +104,7 @@ export default function Home() {
     }
 
     const handleShowMore = () => {
-        setShowNumber((showNumber) => showNumber + 4);
+        setShowNumber((showNumber) => showNumber + INCREMENT);
     }
 
     const deleteAllSearchRecord = () => {
@@ -149,7 +150,7 @@ export default function Home() {
 
     const SearchMenu = () => {
         return (<div className={'closeClassName'}
-                     tw={'absolute w-full max-h-[296px] top-[54px] bg-white rounded-3xl shadow-xl \
+                     tw={'absolute w-full max-h-[188px] md:max-h-[296px] top-[54px] bg-white rounded-3xl shadow-xl \
                      flex flex-col justify-start items-center pb-2 px-8 overflow-auto select-none'}
         >
             {
@@ -212,7 +213,7 @@ export default function Home() {
                             className={'group closeClassName'}>
                             <div tw={'relative h-8 w-8 -left-0.5 shrink-0'} className={'closeClassName'}>
                                 <FontAwesomeIcon
-                                    icon={solid("magnifying-glass")}
+                                    icon={i < 3 ? solid("fire") : solid("magnifying-glass")}
                                     tw={'absolute inset-0 m-auto h-3.5 w-3.5 text-gray-500'}
                                 />
                             </div>
@@ -229,7 +230,7 @@ export default function Home() {
             }
             {
                 topics && showNumber <= topics.length && <div tw={'flex flex-row justify-center items-center'}>
-                    <div tw={'px-5 py-1.5 text-gray-400 text-sm rounded-full bg-gray-100 md:hover:bg-gray-200'}
+                    <div tw={'px-5 py-1.5 mb-1 text-gray-400 text-sm rounded-full bg-gray-100 md:hover:bg-gray-200'}
                          onClick={handleShowMore}
                     >
                         更多热点话题
