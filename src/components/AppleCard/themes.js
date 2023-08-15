@@ -211,8 +211,8 @@ export const styles = {
     gradient_blue:{
         styleAppleCard: tw`md:col-span-2 col-span-5 m-4 \
                 bg-gradient-to-r to-sky-400 from-blue-500 \
-                before:absolute before:inset-x-0 before:inset-y-0 before:bg-gradient-to-r \
-                before:to-pink-500 before:from-indigo-500 before:opacity-0 md:hover:before:opacity-100 md:before:ease-out \
+                before:absolute before:inset-x-0 before:inset-y-0 before:bg-gradient-to-tr \
+                before:from-sky-500 before:opacity-0 md:hover:before:opacity-100 md:before:ease-out \
                 active:before:opacity-100 md:active:before:opacity-0 \
                  ease-out \ 
                 cursor-default md:cursor-pointer select-none`,

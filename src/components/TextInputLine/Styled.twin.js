@@ -49,7 +49,7 @@ export const InputDesc = styled.label.attrs(props => ({
   background-color: rgba(255, 255, 255, 0);
   ${tw`truncate left-2/4 cursor-text select-none top-2/4 -translate-x-2/4 -translate-y-2/4 text-base text-blue-500 pl-2 pr-2 \
    peer-focus:text-blue-500 \
-   peer-placeholder-shown:text-gray-400`};
+   peer-placeholder-shown:text-gray-400 pointer-events-none`};
 `;
 
 export const InputIcon = styled.label.attrs(props => ({
@@ -82,7 +82,7 @@ export const InputIcon2 = styled.label.attrs(props => ({
   position: absolute;
   transition: all 0.25s ease;
   ${tw`truncate right-2 select-none md:cursor-pointer text-blue-300 active:text-blue-400 md:hover:text-blue-400 pl-1 pr-2 bg-white \
-   peer-placeholder-shown:cursor-text hidden peer-placeholder-shown:block top-2/4 -translate-y-2/4 text-xl`};
+   peer-placeholder-shown:cursor-text hidden peer-placeholder-shown:block top-2/4 -translate-y-2/4 text-xl pointer-events-none`};
 `;
 
 export const TextInputLineWrapper = styled.div`
@@ -93,5 +93,6 @@ export const TextInputLineWrapper = styled.div`
   flex-grow: 2;
   display: flex;
   height: 40px;
+  ${tw`cursor-default md:cursor-pointer`};
   ${({_tw}) => _tw ? _tw : ''};
 `;

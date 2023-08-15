@@ -26,7 +26,7 @@ export default function WrapperTop() {
         'Selenium': {to: '/tools/Selenium', name: 'Selenium'},
         'dashboard': {to: '/tools/dashboard', name: 'Dashboard'},
     };
-    
+
     function startAnimation(toWidth){
         gsap_ref.current = gsap.timeline({ repeat: 0});
         // 将动画添加到时间轴中
@@ -85,9 +85,9 @@ export default function WrapperTop() {
                 <div tw={'flex flex-row justify-center flex-nowrap items-center overflow-hidden'}>
                     {removeAdjacentDuplicates(location.pathname.split("/")).map((item, index) => {
                         if(nav_hash[item])
-                            return <>
+                            return <React.Fragment key={index}>
                                 {/*<NavItem z_index={99 - index} key={index} className={flag} onClick={() => {*/}
-                                <NavItem z_index={99 - index} key={index} onClick={() => {
+                                <NavItem z_index={99 - index} onClick={() => {
                                     if(location.pathname === nav_hash[item].to)
                                         window.scrollTo({
                                             top: 0,
@@ -103,7 +103,7 @@ export default function WrapperTop() {
                                 {index === removeAdjacentDuplicates(location.pathname.split("/")).length - 1 ? '' : <GapIcon>
                                     <FontAwesomeIcon icon={solid("angle-right")} />
                                 </GapIcon>}
-                            </>;
+                            </React.Fragment>;
                         else
                             return '';
                     })}

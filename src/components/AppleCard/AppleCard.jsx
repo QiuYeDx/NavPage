@@ -206,7 +206,7 @@ export default function AppleCard(props) {
 AppleCard.propTypes = {
     h: PropTypes.string,
     k: PropTypes.number,
-    theme: PropTypes.oneOf(['white', 'black', 'green', 'purple', 'pink', 'gradient_blue']),
+    theme: PropTypes.oneOf(['default', 'white', 'black', 'green', 'purple', 'pink', 'gradient_blue']),
     logo_url: PropTypes.string,
     goto: PropTypes.string,
     icon: PropTypes.element,

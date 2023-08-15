@@ -55,7 +55,7 @@ export default function About() {
                     <MyProfileCard onlyMobile/>
 
                     <AppleCard
-                        theme={'defaults'}
+                        theme={'default'}
                         h={"360px"}
                         k={0.5}
                         topTextA={"Like"}

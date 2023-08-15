@@ -174,13 +174,15 @@ export default function SelectInput({
                 onKeyPress={onKeyPress || (() => {})}
                 invalid={invalid || ''}
                 readOnly
+                tw={'cursor-default md:cursor-pointer'}
                 {...restProps}
             />
             <HoverList
+                _tw={tw`cursor-default`}
                 isHidden={!isOpen}
                 animate={animate && (isHiding ? animates[animate.split('.').join('-out.')] : animates[animate.split('.').join('-in.')])}
                 validText={text}
-                h={h || '300px'}
+                h={h || '302px'}
                 _t={_t || '36px'}
                 _l={_l || 'auto'}
                 _r={_r || '10px'}
