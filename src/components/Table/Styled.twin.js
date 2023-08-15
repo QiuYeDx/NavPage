@@ -12,7 +12,7 @@ export const Wrapper = styled.div.attrs(props => ({
   transition: box-shadow 0.3s, background-color 0.3s;
   //top: -42px;
   //padding-top: 42px;
-  ${tw`bg-white overflow-y-auto rounded-3xl shadow-xl md:hover:shadow-2xl overscroll-contain`};
+  ${tw`bg-white overflow-y-auto rounded-3xl shadow-xl md:hover:shadow-2xl overscroll-none`};
 `;
 
 export const TableWrapper = styled.table`

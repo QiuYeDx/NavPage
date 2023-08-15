@@ -17,7 +17,6 @@ const CustomStyles = createGlobalStyle`
     -webkit-tap-highlight-color: ${theme`colors.blue.200`};
     ${tw`antialiased`}
   }
-  
 `
 
 const GlobalStyles = () => (
