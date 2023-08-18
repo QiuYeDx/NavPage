@@ -136,23 +136,44 @@ const Pagination = ({data}) => {
     useEffect(() => {
         if(gsap_ref && gsap_ref.current === null){
             gsap_ref.current = gsap.fromTo(".gsap_popup_a", {
-                y: data.length > 1 ? 360 : 180,
+                y: data.length > 3 ? 240 : data.length > 2 ? 160 : 80,
                 opacity: 0,
             }, {
                 // scrollTrigger: ".gsap_popup_a", // once
                 scrollTrigger: {
                     trigger: "#rootWrapper",
-                    start: `top+=${data.length > 2 ? 700 : 640} center`,
+                    start: `top+=920 bottom`,
+                    end: `top+=${data.length > 4 ? 1860 : data.length > 3 ? 1760 : data.length > 2 ? 1660 : data.length === 2 ? 1460 : 1260} bottom`,
+                    scrub: true,
                     // markers: true,  // 调试用
                 },
                 y: 0,
                 opacity: 1,
                 duration: data.length > 1 ? 1.5 : 1,
-                ease: 'power3.out',
+                ease: 'power1.out',
+                repeat: 0,
+            });
+        }else if(gsap_ref){
+            gsap_ref.current.kill();
+            gsap_ref.current = gsap.fromTo(".gsap_popup_a", {
+                y: data.length > 3 ? 240 : data.length > 2 ? 160 : 80,
+                opacity: 0,
+            }, {
+                // scrollTrigger: ".gsap_popup_a", // once
+                scrollTrigger: {
+                    trigger: "#rootWrapper",
+                    start: `top+=920 bottom`,
+                    end: `top+=${data.length > 4 ? 1860 : data.length > 3 ? 1760 : data.length > 2 ? 1660 : data.length === 2 ? 1460 : 1260} bottom`,
+                    scrub: true,
+                    // markers: true,  // 调试用
+                },
+                y: 0,
+                opacity: 1,
+                duration: data.length > 1 ? 1.5 : 1,
+                ease: 'power1.out',
                 repeat: 0,
             });
         }
-    // }, [data, currentPage]);
     }, [data]); // 翻页不刷新动画
 
     return (

@@ -15,7 +15,8 @@ const CustomStyles = createGlobalStyle`
   
   body {
     -webkit-tap-highlight-color: ${theme`colors.blue.200`};
-    ${tw`antialiased`}
+    background: linear-gradient(-45deg, rgb(235, 243, 254), rgb(242, 238, 255), rgb(251, 246, 247), rgb(235, 243, 254));
+    ${tw`antialiased overscroll-none`}
   }
 `
 

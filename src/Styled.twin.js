@@ -11,6 +11,6 @@ export const Wrapper = styled.div`
   //left: 0;
   //right: 0;
   //margin: auto;
-  
+  padding-top: 60px;
   overflow: auto;
 `

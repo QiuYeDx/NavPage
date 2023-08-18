@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   align-items: center;
   flex-grow: 1;
   position: absolute;
-  top: 60px;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
   z-index: 100;
 
   background-size: cover;
-  background: linear-gradient(-45deg, #ebf3fe, #f2eeff, #fbf6f7, #ebf3fe);
+  //background: linear-gradient(-45deg, #ebf3fe, #f2eeff, #fbf6f7, #ebf3fe);
 `
 
 export const ErrorWrapper = styled(CardWrapper)`

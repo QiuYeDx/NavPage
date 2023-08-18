@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   //left: 0;
   //right: 0;
   //margin: auto;
-  padding-top: 60px;
+  //padding-top: 60px;
   
   //min-height: calc(100vh - 60px);
   min-height: 100vh;
@@ -22,7 +22,7 @@ export const Wrapper = styled.div`
   z-index: 1;
   //background-image: url(images/mora.jpg);
   //background-size: cover;
-  background: linear-gradient(-45deg, #ebf3fe, #f2eeff, #fbf6f7, #ebf3fe);
+  //background: linear-gradient(-45deg, #ebf3fe, #f2eeff, #fbf6f7, #ebf3fe);
   overflow: hidden;
   ${({hasBorder}) => hasBorder && tw`border border-purple-500`}
 `
