@@ -175,7 +175,7 @@ export default function TiktokPage() {
 
     useEffect(() => {
         if(sessionStorage.getItem('tiktok_states')){
-            const last_states = JSON.parse((sessionStorage.getItem('tiktok_states')));
+            const last_states = JSON.parse(decodeURIComponent((sessionStorage.getItem('tiktok_states'))));
             setText(last_states.text ? last_states.text : '');
             setData(last_states.data ? last_states.data : null);
             setLoading(last_states.loading);

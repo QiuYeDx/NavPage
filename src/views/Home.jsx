@@ -21,6 +21,7 @@ import HoverList from "@/components/HoverList/HoverList";
 import {useBeforeUnload} from "react-router-dom";
 import axios from "axios";
 import {log_api_config} from "@/GlobalConfig";
+import Picture from "@/components/PictureDisplay/Pictrue";
 
 export default function Home() {
     const clipboard = useClipboard();
@@ -161,8 +162,10 @@ export default function Home() {
                             <div tw={'w-full border-b border-gray-200 mt-0.5 mb-1'}/>
                         </div>
                         {
-                            // WebStorm识别不出toReversed()?
-                            searchRecords.toReversed().map((v, i) =>
+                            // WebStorm识别不出toReversed() via浏览器也无法使用
+                            // searchRecords.toReversed()
+                            [...searchRecords].reverse()
+                                .map((v, i) =>
                                 <div
                                     tw={'flex flex-row items-center my-0.5 md:hover:bg-gray-50 md:hover:cursor-pointer rounded-xl select-none'}
                                     className={'group closeClassName'}>
@@ -186,7 +189,7 @@ export default function Home() {
                         }
 
                         <div tw={'flex flex-row justify-center items-center'}>
-                            <div tw={'px-5 py-1.5 text-gray-400 text-sm rounded-full bg-gray-100 md:hover:bg-gray-200'}
+                            <div tw={'mt-1 px-5 py-1.5 text-gray-400 text-sm rounded-full bg-gray-100 md:hover:bg-gray-200'}
                                  onClick={handleDeleteAll}
                             >
                                 {
@@ -207,6 +210,9 @@ export default function Home() {
                         <div tw={'w-full text-sm text-left font-sans text-gray-400 font-bold'}>热点话题</div>
                         <div tw={'w-full border-b border-gray-200 mt-0.5 mb-1'}/>
                     </div>
+                    {
+                        topics.length === 0 ? <Picture _tw={tw`h-8 w-full`} ph_tw={tw`text-gray-300`} loadingFlag={true}/> : ''
+                    }
                     {
                         topics.slice(0, showNumber > topics.length ? topics.length : showNumber).map((v, i) => <div
                             tw={'flex flex-row items-center my-0.5 md:hover:bg-gray-50 md:hover:cursor-pointer rounded-xl select-none'}
@@ -262,12 +268,12 @@ export default function Home() {
     useEffect(() => {
         fetchTopics().then().catch();
         if (sessionStorage.getItem('home_states')) {
-            const last_states = JSON.parse((sessionStorage.getItem('home_states')));
+            const last_states = JSON.parse(decodeURIComponent((sessionStorage.getItem('home_states'))));
             setText(last_states.text ? last_states.text : '');
             setEngine(last_states.engine ? last_states.engine : '');
         }
         if (localStorage.getItem('searchRecords')) {
-            const tmp_state = JSON.parse((localStorage.getItem('searchRecords')));
+            const tmp_state = JSON.parse(decodeURIComponent((localStorage.getItem('searchRecords'))));
             setSearchRecords(tmp_state);
         }
     }, []); // 依赖项为空数组，表示仅在组件挂载和卸载时执行一次

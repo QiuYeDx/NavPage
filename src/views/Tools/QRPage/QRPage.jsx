@@ -124,7 +124,7 @@ export default function QRPage() {
 
     useEffect(() => {
         if(sessionStorage.getItem('qrcode_states')){
-            const last_states = JSON.parse((sessionStorage.getItem('qrcode_states')));
+            const last_states = JSON.parse(decodeURIComponent((sessionStorage.getItem('qrcode_states'))));
             setText(last_states.text ? last_states.text : '');
             setData(last_states.data ? last_states.data : 'images/qrcode-solid-md.png');
             setLoading(last_states.loading);

@@ -182,7 +182,7 @@ export default function BilibiliPage() {
 
     useEffect(() => {
         if(sessionStorage.getItem('bilibili_states')){
-            const last_states = JSON.parse((sessionStorage.getItem('bilibili_states')));
+            const last_states = JSON.parse(decodeURIComponent((sessionStorage.getItem('bilibili_states'))));
             setText(last_states.text ? last_states.text : '');
             setData(last_states.data ? last_states.data : null);
             setList(last_states.list ? last_states.list : null);
