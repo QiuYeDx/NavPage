@@ -120,7 +120,7 @@ export default function NavBar() {
                 }}>
                     <Logo/>
                     <LogoText tw={"cursor-default md:cursor-pointer select-none text-blue-400"}>
-                        秋夜<FontAwesomeIcon icon={solid("gear")} spin tw={'text-blue-300'}/>导航
+                        秋夜<FontAwesomeIcon icon={solid("fan")} spin spinReverse tw={'text-blue-300'}/>导航
                     </LogoText>
                 </LogoWrapper>
                 <NavList

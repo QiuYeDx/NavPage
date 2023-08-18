@@ -231,11 +231,12 @@ export const styles = {
 
         // SVG适配移动端触摸逻辑
         hoverBackground: `:hover &{ \
-        @media(min-width: ${WIDTH_MOBILE}px){color: rgba(221, 214, 254, 1);}   \
+        @media(min-width: ${WIDTH_MOBILE}px){color: rgba(221, 214, 254, 1); filter: blur(16px);}   \
         }`,
         activeBackground: `:active &{ \
+        filter: blur(16px); \
         color: rgba(221, 214, 254, 1);  \
-        @media(min-width: ${WIDTH_MOBILE}px){color: rgba(147, 197, 253, 1);}   \
+        @media(min-width: ${WIDTH_MOBILE}px){color: rgba(147, 197, 253, 1); filter: blur(16px);}   \
         }`,
         styleSubBar: tw`text-gray-700 text-xl font-sans bg-white`,
         styleTopTextA: tw`text-white text-base font-sans font-bold text-left`,

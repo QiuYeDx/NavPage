@@ -16,7 +16,7 @@ import gsap from "gsap";
 
 export default function Resources(){
     const clipboard = useClipboard();
-    const componentCount = 9;
+    const componentCount = 8;
     const components = [];
     for (let i = 0; i < componentCount; i++) {
         components.push(<AppleCard
@@ -26,7 +26,7 @@ export default function Resources(){
             k={0.5}
             tw_card={tw`md:col-span-2`}
             tw_content={tw`tracking-wide text-7xl`}
-            icon={<FontAwesomeIcon icon={solid("share-nodes")}
+            icon={<FontAwesomeIcon icon={solid("cubes")}
                                    tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
             />}
             onClick={() => {
