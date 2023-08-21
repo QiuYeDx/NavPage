@@ -30,7 +30,7 @@ const ScrollToTopButton = () => {
                     trigger: '#rootWrapper',
                     start: 'top+=600 top',
                     end: 'bottom bottom',
-                    scrub: true,
+                    scrub: 1,
                     // markers: true,   // 调试用
                 },
                 x: 0,

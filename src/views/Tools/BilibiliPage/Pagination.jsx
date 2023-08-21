@@ -144,7 +144,7 @@ const Pagination = ({data}) => {
                     trigger: "#rootWrapper",
                     start: `top+=920 bottom`,
                     end: `top+=${data.length > 4 ? 1860 : data.length > 3 ? 1760 : data.length > 2 ? 1660 : data.length === 2 ? 1460 : 1260} bottom`,
-                    scrub: true,
+                    scrub: 1.5,
                     // markers: true,  // 调试用
                 },
                 y: 0,
@@ -164,7 +164,7 @@ const Pagination = ({data}) => {
                     trigger: "#rootWrapper",
                     start: `top+=920 bottom`,
                     end: `top+=${data.length > 4 ? 1860 : data.length > 3 ? 1760 : data.length > 2 ? 1660 : data.length === 2 ? 1460 : 1260} bottom`,
-                    scrub: true,
+                    scrub: 1.5,
                     // markers: true,  // 调试用
                 },
                 y: 0,
