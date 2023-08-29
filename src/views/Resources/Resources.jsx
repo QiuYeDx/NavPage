@@ -13,8 +13,9 @@ import {notify_error, notify_success} from "@/hooks/toasts";
 import AppleCard from "@/components/AppleCard/AppleCard";
 import {useClipboard} from "use-clipboard-copy";
 import gsap from "gsap";
+import SimpleFadeTransition from "@/styles/transition/SimpleFadeTransition";
 
-export default function Resources(){
+export default function Resources() {
     const clipboard = useClipboard();
     const componentCount = 8;
     const components = [];

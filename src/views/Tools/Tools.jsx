@@ -17,12 +17,15 @@ import BilibiliPage from "@/views/Tools/BilibiliPage/BilibiliPage";
 import TiktokPage from "@/views/Tools/TiktokPage/TiktokPage";
 import SeleniumPage from "@/views/Tools/SeleniumPage/SeleniumPage";
 import {log_api_config} from "@/GlobalConfig";
+import SwitchFadeTransition from "@/styles/transition/SwitchFadeTransition";
 
 export default function Tools() {
     const navigate = useNavigate();
     const location = useLocation();
     const params = useParams();
     const [counts, setCounts] = useState([]);
+    const [canShowSubTextA, setCanShowSubTextA] = useState(false); // 是否显示工具的使用次数
+    const DELAY = 4000; // 间隔多久改变canShowSubTextA
     const componentCount = 1;
     const components = [];
     for (let i = 0; i < componentCount; i++) {
@@ -33,7 +36,6 @@ export default function Tools() {
                 topTextA={"在线工具"}
                 topTextB={"预设调色板"}
                 subTextA={"常用色彩"}
-                // tw_card={tw`md:col-span-4`}
                 tw_content={tw`tracking-wider`}
                 tw_background={tw``}
                 tw_subbar={tw``}
@@ -54,14 +56,24 @@ export default function Tools() {
             setCounts(res_arr.map(res => res.data && res.data[0] && res.data[0].count));
             return 'Succeed to fetch counts';
         } catch (err) {
-            // if(process.env.NODE_ENV === 'development')
-            //     console.log(err);
             throw 'Failed to fetch counts'; // 这里不知道为什么如果抛出Error类就会显示奇怪的东西
         }
     };
 
     useEffect(() => {
         fetchData().then(r => console.log(r)).catch(e => console.warn(e));
+
+        const interval = setInterval(() => {
+            setCanShowSubTextA(prevState => !prevState);
+        }, DELAY);
+
+        return () => clearInterval(interval); // 清除定时器
+
+        // const timer = setTimeout(() => {
+        //     setCanShowSubTextA(true);
+        // }, DELAY);
+        //
+        // return () => clearTimeout(timer); // 清除定时器
     }, []);
 
     const Overview = (
@@ -71,7 +83,13 @@ export default function Tools() {
                 k={0.5}
                 topTextA={"在线工具"}
                 topTextB={"bilibili视频解析"}
-                subTextA={(counts[0] && `已使用${counts[0]}次`) || "封面 | 视频 下载"}
+                subTextA={<SwitchFadeTransition
+                    isOn={counts[0] && canShowSubTextA}
+                    onContent={counts[0] && `已使用${counts[0]}次`}
+                    offContent={"封面 | 视频 下载"}
+                    fadeStyle={'up'}
+                    className={'fadeBiliSubTextA'}
+                />}
                 tw_card={tw`md:col-span-4`}
                 tw_content={tw`tracking-wide`}
                 tw_background={tw``}
@@ -91,7 +109,13 @@ export default function Tools() {
                 k={0.5}
                 topTextA={"在线工具"}
                 topTextB={"Tiktok视频解析"}
-                subTextA={(counts[1] && `已使用${counts[1]}次`) || "封面 | 视频 下载"}
+                subTextA={<SwitchFadeTransition
+                    isOn={counts[1] && canShowSubTextA}
+                    onContent={counts[1] && `已使用${counts[1]}次`}
+                    offContent={"封面 | 视频 下载"}
+                    fadeStyle={'up'}
+                    className={'fadeBiliSubTextA'}
+                />}
                 hasMask
                 tw_card={tw`md:col-span-2`}
                 tw_content={tw`tracking-wide`}
@@ -112,7 +136,13 @@ export default function Tools() {
                 k={0.5}
                 topTextA={"在线工具"}
                 topTextB={"二维码生成器"}
-                subTextA={(counts[2] && `已使用${counts[2]}次`) || "QR码"}
+                subTextA={<SwitchFadeTransition
+                    isOn={counts[2] && canShowSubTextA}
+                    onContent={counts[2] && `已使用${counts[2]}次`}
+                    offContent={"QR码"}
+                    fadeStyle={'up'}
+                    className={'fadeBiliSubTextA'}
+                />}
                 hasMask
                 tw_card={tw`md:col-span-2`}
                 tw_content={tw`tracking-wide`}
@@ -133,7 +163,13 @@ export default function Tools() {
                 k={0.5}
                 topTextA={"在线工具"}
                 topTextB={"Selenium"}
-                subTextA={(counts[3] && `已使用${counts[3]}次`) || "自动化测试"}
+                subTextA={<SwitchFadeTransition
+                    isOn={counts[3] && canShowSubTextA}
+                    onContent={counts[3] && `已使用${counts[3]}次`}
+                    offContent={"自动化测试"}
+                    fadeStyle={'up'}
+                    className={'fadeBiliSubTextA'}
+                />}
                 tw_card={tw`md:col-span-2`}
                 tw_content={tw`tracking-wide`}
                 tw_background={tw``}

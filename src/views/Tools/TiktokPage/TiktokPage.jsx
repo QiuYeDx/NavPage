@@ -14,7 +14,6 @@ import {useBeforeUnload, useNavigate} from "react-router-dom";
 import {H2, InLineTitle} from "@/styles/TextStyles";
 import {Gap} from "@/components/Gap/Styled.twin";
 import {BackButton, MButton} from "@/components/Button/Styled.twin";
-import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
 import axios from 'axios';
 import {useClipboard} from "use-clipboard-copy";
 import {Tooltip} from 'react-tooltip';
@@ -262,10 +261,14 @@ export default function TiktokPage() {
                     </LineWrapper>
                     <LineWrapper tw={'flex-wrap'}>
                         {/* 150 * 256 => 384 * 216 => 288 * 162*/}
-                        <Picture h={data ? '288px' : '150px'} w={data ? '162px' : '256px'} url={cover} />
+                        <Picture
+                            duration={'1.2s'}
+                            fadeStyle={'scale'}
+                            h={finished ? data ? '288px' : '100px' : '100px'}
+                            w={finished ? data ? '162px' : '171px' : '171px'}
+                            url={cover}
+                        />
                     </LineWrapper>
-                    {/*<Gap tw={'invisible'}/>*/}
-                    <div tw={'invisible'}> </div>
                     <LineWrapper>
                         <TextInput
                             icon={<FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>}

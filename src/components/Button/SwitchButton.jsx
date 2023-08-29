@@ -4,9 +4,15 @@ import gsap from 'gsap';
 import {UniButton} from "@/components/Button/Styled.twin";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
+import {CSSTransition, SwitchTransition} from 'react-transition-group';
+import {FadeContentWrapper} from "@/styles/transition/FadeStyles";
+import SwitchFadeTransition from "@/styles/transition/SwitchFadeTransition";
 
 const SwitchButton = ({defaultOn = false, onChange, hasShadow = true, _tw}) => {
     const [isOn, setIsOn] = useState(defaultOn);
+    const onRef = useRef(null);
+    const offRef = useRef(null);
+    const nodeRef = isOn ? onRef : offRef;
 
     const handleToggle = () => {
         const newState = !isOn;
@@ -24,7 +30,14 @@ const SwitchButton = ({defaultOn = false, onChange, hasShadow = true, _tw}) => {
                 onClick={handleToggle}
                 hasShadow={hasShadow}
             >
-                {isOn ? <FontAwesomeIcon icon={solid("sun")} spin tw={'text-amber-400'}/> : <FontAwesomeIcon icon={solid("moon")} />}
+                <SwitchFadeTransition
+                    isOn={isOn}
+                    fadeStyle={'scale'}
+                    duration={'0.2s'}
+                    className={'moon-sun'}
+                    onContent={<FontAwesomeIcon icon={solid("sun")} spin tw={'text-amber-400'}/>}
+                    offContent={<FontAwesomeIcon icon={solid("moon")}/>}
+                />
             </UniButton>
         </div>
     );

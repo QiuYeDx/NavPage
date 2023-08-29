@@ -14,7 +14,6 @@ import {useBeforeUnload, useNavigate} from "react-router-dom";
 import {H2, H3, H4, InLineTitle} from "@/styles/TextStyles";
 import {Gap} from "@/components/Gap/Styled.twin";
 import {BackButton, MButton} from "@/components/Button/Styled.twin";
-import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
 import axios from 'axios';
 import {useClipboard} from "use-clipboard-copy";
 import {Tooltip} from 'react-tooltip';
@@ -69,7 +68,7 @@ export default function BilibiliPage() {
     async function fetchData(url, params) {
         try {
             const response = await axios.get(url, {params});
-            if(response.data.code === 0){
+            if (response.data.code === 0) {
                 throw new Error('1005');
             }
             setData(response.data.data);
@@ -97,7 +96,7 @@ export default function BilibiliPage() {
                 });
             }, 200);
         } catch (error) {
-            if(error.message === ErrorCode.NONE_RESULT_ERROR){
+            if (error.message === ErrorCode.NONE_RESULT_ERROR) {
                 console.warn('None result error');
                 setList(null);
                 notify_error('解析失败，请检查URL或重试 !', 'resolving_error');
@@ -106,7 +105,7 @@ export default function BilibiliPage() {
                 setCover(default_cover);
                 setData(null);
                 console.error('Failed to resolve video URL.', error);
-            }else{
+            } else {
                 console.warn('Failed to put counts');
             }
         } finally {
@@ -144,7 +143,7 @@ export default function BilibiliPage() {
 
     useBeforeUnload(() => {
         // 离开页面前保存状态
-        if(data === null)
+        if (data === null)
             return;
         let downloadStateArray = Array.from(downloadState);
         sessionStorage.setItem('bilibili_states', (JSON.stringify({
@@ -162,26 +161,26 @@ export default function BilibiliPage() {
 
     useEffect(() => {
         // return () => {
-            // 保存状态
-            if(data === null)
-                return;
-            let downloadStateArray = Array.from(downloadState);
-            sessionStorage.setItem('bilibili_states', (JSON.stringify({
-                text,
-                data,
-                list,
-                loading,
-                finished,
-                invalid,
-                cover,
-                downloadStateArray,
-                iosIsDownloading
-            })));
+        // 保存状态
+        if (data === null)
+            return;
+        let downloadStateArray = Array.from(downloadState);
+        sessionStorage.setItem('bilibili_states', (JSON.stringify({
+            text,
+            data,
+            list,
+            loading,
+            finished,
+            invalid,
+            cover,
+            downloadStateArray,
+            iosIsDownloading
+        })));
         // };
     }, [text, data, list, loading, finished, invalid, cover, downloadState]);
 
     useEffect(() => {
-        if(sessionStorage.getItem('bilibili_states')){
+        if (sessionStorage.getItem('bilibili_states')) {
             const last_states = JSON.parse(decodeURIComponent((sessionStorage.getItem('bilibili_states'))));
             setText(last_states.text ? last_states.text : '');
             setData(last_states.data ? last_states.data : null);
@@ -242,13 +241,16 @@ export default function BilibiliPage() {
                             invalid={invalid}
                             text={text}
                             setText={setText}
-                            iconOnClick={() => {setText && setText('')}}
+                            iconOnClick={() => {
+                                setText && setText('')
+                            }}
                             data_tooltip_id={"url_tooltip"}
                             data_tooltip_content={"直接粘贴B站分享文本即可"}
                             data_tooltip_variant={"info"}
                         />
                     </LineWrapper>
-                    <Tooltip id="url_tooltip" offset={20} openOnClick={true} place="top" tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
+                    <Tooltip id="url_tooltip" offset={20} openOnClick={true} place="top"
+                             tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
 
                     <LineWrapper tw={'mt-2'}>
                         <MButton disabled={loading} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleSubmit}
@@ -262,15 +264,21 @@ export default function BilibiliPage() {
                         </MButton>
                     </LineWrapper>
                 </ContentWrapper>
-                    {/*<Gap/>*/}
+                {/*<Gap/>*/}
                 <ContentWrapper>
                     <LineWrapper>
-                        <InLineTitle tw={'mb-2'}>获取<FontAwesomeIcon icon={solid("link")} tw={"text-blue-400 pl-1 pr-1 duration-500 ease-out"}/>结果</InLineTitle>
+                        <InLineTitle tw={'mb-2'}>获取<FontAwesomeIcon icon={solid("link")}
+                                                                    tw={"text-blue-400 pl-1 pr-1 duration-500 ease-out"}/>结果</InLineTitle>
                     </LineWrapper>
                     <LineWrapper>
-                        <Picture h={'150px'} w={'256px'} url={cover} />
+                        <Picture
+                            duration={'1.2s'}
+                            fadeStyle={'scale'}
+                            h={finished && cover !== default_cover ? '150px' : '100px'}
+                            w={finished && cover !== default_cover ? '256px' : '171px'}
+                            url={cover}
+                        />
                     </LineWrapper>
-                    <Gap tw={'invisible'}/>
                     <LineWrapper>
                         <TextInput
                             icon={<FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>}
@@ -290,7 +298,8 @@ export default function BilibiliPage() {
                             data_tooltip_variant={"info"}
                             readOnly
                         />
-                        <Tooltip id="title_tooltip" offset={15} tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
+                        <Tooltip id="title_tooltip" offset={15}
+                                 tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
                     </LineWrapper>
                     <LineWrapper>
                         <TextInput
@@ -311,7 +320,8 @@ export default function BilibiliPage() {
                             data_tooltip_variant={"info"}
                             readOnly
                         />
-                        <Tooltip id="desc_tooltip" offset={15} tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
+                        <Tooltip id="desc_tooltip" offset={15}
+                                 tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
                     </LineWrapper>
                     <LineWrapper tw={'mt-2'}>
                         <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:mr-6'}
@@ -326,7 +336,8 @@ export default function BilibiliPage() {
                                     <>封面URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
                             }
                         </MButton>
-                        <MButton disabled={!finished || iosIsDownloading} h={'36px'} w={'140px'} tw={'rounded-full md:ml-6'}
+                        <MButton disabled={!finished || iosIsDownloading} h={'36px'} w={'140px'}
+                                 tw={'rounded-full md:ml-6'}
                                  onClick={handleDownloadPic}>
                             {
                                 !finished ?
@@ -338,7 +349,8 @@ export default function BilibiliPage() {
                         <a tw={'hidden'} ref={a_ref} target="_blank" rel="noopener noreferrer"/>
                     </LineWrapper>
                 </ContentWrapper>
-                <MyContext.Provider value={{finished, a_ref, downloadState, setDownloadState, iosIsDownloading, setIosIsDownloading}}>
+                <MyContext.Provider
+                    value={{finished, a_ref, downloadState, setDownloadState, iosIsDownloading, setIosIsDownloading}}>
                     {list ? <Pagination data={list.map((item, index) => {
                         item.index = index;
                         return item;

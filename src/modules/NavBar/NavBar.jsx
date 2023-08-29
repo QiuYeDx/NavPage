@@ -16,6 +16,7 @@ import {log_api_config} from "@/GlobalConfig";
 import SwitchButton from "@/components/Button/SwitchButton";
 import ScrollToTopButton from "@/components/Button/ScrollToTopButton";
 import gsap from "gsap";
+import Picture from "@/components/PictureDisplay/Pictrue";
 
 export default function NavBar() {
     const navigate = useNavigate();
@@ -73,9 +74,9 @@ export default function NavBar() {
             gsap_ref.current.to(".gsap_main_fadein", {
                 y: 0,
                 opacity: 1,
-                duration: 1,
+                duration: 1.2,
                 ease: 'power3.out',
-                stagger: 0.1,
+                stagger: 0.12,
             });
         }else{
             gsap_ref.current.kill();
@@ -90,9 +91,9 @@ export default function NavBar() {
             gsap_ref.current.to(".gsap_main_fadein", {
                 y: 0,
                 opacity: 1,
-                duration: 1,
+                duration: 1.2,
                 ease: 'power3.out',
-                stagger: 0.1,
+                stagger: 0.12,
             });
         }
     }, [location.pathname]);
@@ -118,7 +119,14 @@ export default function NavBar() {
                         window.scroll(0, 0);
                     }
                 }}>
-                    <Logo/>
+                    <Picture
+                        url={'images/QiuYeDx_web.png'}
+                        w={'44px'}
+                        h={'44px'}
+                        ph_tw={tw`w-[22px] h-[22px]`}
+                        duration={'1.2s'}
+                        fadeStyle={'scale'}
+                    />
                     <LogoText tw={"cursor-default md:cursor-pointer select-none text-blue-400"}>
                         秋夜<FontAwesomeIcon icon={solid("fan")} spin spinReverse tw={'text-blue-300'}/>导航
                     </LogoText>

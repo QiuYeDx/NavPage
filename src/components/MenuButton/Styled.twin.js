@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   gap: 3px;
   transition: all 0.25s ease;
-  ${tw`md:hover:cursor-pointer group-active:opacity-40 md:group-active:opacity-60 md:group-hover:opacity-40`};
+  ${tw`md:hover:cursor-pointer group-active:opacity-60 md:group-active:opacity-80 md:group-hover:opacity-60`};
 
   &.active .line:nth-child(1){
     transform: rotate(45deg) translate(4px, ${({isRotated}) => isRotated ? '4.6px' : '4.3px'});

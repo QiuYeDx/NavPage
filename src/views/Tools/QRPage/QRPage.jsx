@@ -13,7 +13,6 @@ import tw from "twin.macro";
 import {useBeforeUnload, useLocation, useNavigate} from "react-router-dom";
 import {H2, InLineTitle} from "@/styles/TextStyles";
 import {BackButton, MButton} from "@/components/Button/Styled.twin";
-import {PictureDisplay} from "@/components/PictureDisplay/Styled.twin";
 import axios from 'axios';
 import {app_config, log_api_config} from "@/GlobalConfig";
 import TextInput from "@/components/TextInputLine/TextInput";
@@ -184,7 +183,13 @@ export default function QRPage() {
                         <InLineTitle tw={'mb-2'}>获取<FontAwesomeIcon icon={solid("qrcode")} tw={"text-blue-400 pl-1 pr-1 duration-500 ease-out"}/>结果</InLineTitle>
                     </LineWrapper>
                     <LineWrapper>
-                        <Picture url={data} loadingFlag={picLoading} />
+                        <Picture
+                            duration={'1.2s'}
+                            fadeStyle={'scale'}
+                            url={data}
+                            loadingFlag={picLoading}
+                            exit={false}
+                        />
                     </LineWrapper>
                     <LineWrapper tw={'mt-2'}>
                         <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleDownload}>

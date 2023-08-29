@@ -17,6 +17,7 @@ export const PictureWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: height 0.25s ease, width 0.25s ease;
   ${({_tw}) => _tw ? _tw : ''};
   & img{
     ${(props) => props.height ? 'height: ' + props.height : ''};
@@ -24,7 +25,7 @@ export const PictureWrapper = styled.div`
     ${tw`bg-contain`};
     ${({img_tw}) => img_tw ? img_tw : ''};
   }
-  & div{
+  & div.etc{
     margin: auto;
     padding: 0;
     height: 50%;
