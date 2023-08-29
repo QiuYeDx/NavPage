@@ -148,3 +148,47 @@ export function formatDate(inputDate) {
 export function removeAdjacentDuplicates(arr) {
     return arr.filter((element, index) => index === 0 || element !== arr[index - 1]);
 }
+
+/**
+ * Encodes special characters in a search key.
+ *
+ * @param {string} key - The search key to be encoded.
+ * @returns {string} - The encoded search key.
+ *
+ * @example
+ * const encodedKey = encodeSearchKey("name=John&age=30");
+ * console.log(encodedKey);  // Output: "name%3DJohn%26age%3D30"
+ */
+export function encodeSearchKey(key) {
+    const encodeMap = {
+        '%': '%25',
+        '?': '%3F',
+        '#': '%23',
+        '&': '%26',
+        '=': '%3D'
+    };
+
+    return key.replace(/[%?#&=]/g, match => encodeMap[match]);
+}
+
+/**
+ * Decodes special characters in an encoded search key.
+ *
+ * @param {string} key - The encoded search key to be decoded.
+ * @returns {string} - The decoded search key.
+ *
+ * @example
+ * const decodedKey = decodeSearchKey("name%3DJohn%26age%3D30");
+ * console.log(decodedKey);  // Output: "name=John&age=30"
+ */
+export function decodeSearchKey(key) {
+    const decodeMap = {
+        '%25': '%',
+        '%3F': '?',
+        '%23': '#',
+        '%26': '&',
+        '%3D': '='
+    };
+
+    return key.replace(/%25|%3F|%23|%26|%3D/g, match => decodeMap[match]);
+}

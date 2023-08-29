@@ -1,11 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
 import tw from 'twin.macro';
-import gsap from 'gsap';
 import {UniButton} from "@/components/Button/Styled.twin";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
-import {CSSTransition, SwitchTransition} from 'react-transition-group';
-import {FadeContentWrapper} from "@/styles/transition/FadeStyles";
 import SwitchFadeTransition from "@/styles/transition/SwitchFadeTransition";
 
 const SwitchButton = ({defaultOn = false, onChange, hasShadow = true, _tw}) => {

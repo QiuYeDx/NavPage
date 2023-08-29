@@ -22,6 +22,7 @@ import {useBeforeUnload} from "react-router-dom";
 import axios from "axios";
 import {log_api_config} from "@/GlobalConfig";
 import Picture from "@/components/PictureDisplay/Pictrue";
+import {decodeSearchKey, encodeSearchKey} from "@/utils/utils";
 
 export default function Home() {
     const clipboard = useClipboard();
@@ -109,31 +110,31 @@ export default function Home() {
     }
 
     const deleteAllSearchRecord = () => {
-        localStorage.setItem('searchRecords', JSON.stringify([]));
+        localStorage.setItem('searchRecords', encodeURIComponent(encodeSearchKey(JSON.stringify([]))));
         setSearchRecords([]);
     }
 
     const deleteSearchRecord = (text) => {
-        let tmp_state = localStorage.getItem('searchRecords') ? JSON.parse((localStorage.getItem('searchRecords'))) : [];
+        let tmp_state = localStorage.getItem('searchRecords') ? JSON.parse(decodeSearchKey(decodeURIComponent(localStorage.getItem('searchRecords')))) : [];
         const findIndex = tmp_state.indexOf(text);
         if (findIndex > -1) {
             tmp_state.splice(findIndex, 1);
-            localStorage.setItem('searchRecords', JSON.stringify(tmp_state));
+            localStorage.setItem('searchRecords', encodeURIComponent(encodeSearchKey(JSON.stringify(tmp_state))));
             setSearchRecords(tmp_state);
         }
     }
 
     const putSearchRecord = (text) => {
-        let tmp_state = localStorage.getItem('searchRecords') ? JSON.parse((localStorage.getItem('searchRecords'))) : [];
+        let tmp_state = localStorage.getItem('searchRecords') ? JSON.parse(decodeSearchKey(decodeURIComponent((localStorage.getItem('searchRecords'))))) : [];
         const findIndex = tmp_state.indexOf(text);
         if (findIndex > -1) {
             tmp_state.splice(findIndex, 1);
             tmp_state.push(text);
-            localStorage.setItem('searchRecords', JSON.stringify(tmp_state));
+            localStorage.setItem('searchRecords', encodeURIComponent(encodeSearchKey(JSON.stringify(tmp_state))));
             setSearchRecords(tmp_state);
         } else {
             tmp_state.push(text);
-            localStorage.setItem('searchRecords', JSON.stringify(tmp_state));
+            localStorage.setItem('searchRecords', encodeURIComponent(encodeSearchKey(JSON.stringify(tmp_state))));
             setSearchRecords(tmp_state);
         }
     }
@@ -250,30 +251,30 @@ export default function Home() {
         // 离开页面前保存状态
         if (!modified && !text && engine === 'google')
             return;
-        sessionStorage.setItem('home_states', (JSON.stringify({
+        sessionStorage.setItem('home_states', encodeURIComponent(encodeSearchKey(JSON.stringify({
             text,
             engine,
-        })));
+        }))));
     });
 
     useEffect(() => {
         if (!modified && !text && engine === 'google')
             return;
-        sessionStorage.setItem('home_states', (JSON.stringify({
+        sessionStorage.setItem('home_states', encodeURIComponent(encodeSearchKey(JSON.stringify({
             text,
             engine,
-        })));
+        }))));
     }, [text, engine]);
 
     useEffect(() => {
         fetchTopics().then().catch();
         if (sessionStorage.getItem('home_states')) {
-            const last_states = JSON.parse(decodeURIComponent((sessionStorage.getItem('home_states'))));
+            const last_states = JSON.parse(decodeSearchKey(decodeURIComponent(sessionStorage.getItem('home_states'))));
             setText(last_states.text ? last_states.text : '');
             setEngine(last_states.engine ? last_states.engine : '');
         }
         if (localStorage.getItem('searchRecords')) {
-            const tmp_state = JSON.parse(decodeURIComponent((localStorage.getItem('searchRecords'))));
+            const tmp_state = JSON.parse(decodeSearchKey(decodeURIComponent(localStorage.getItem('searchRecords'))));
             setSearchRecords(tmp_state);
         }
     }, []); // 依赖项为空数组，表示仅在组件挂载和卸载时执行一次
