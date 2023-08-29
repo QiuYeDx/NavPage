@@ -11,18 +11,12 @@ import {faBilibili, faTiktok} from '@fortawesome/free-brands-svg-icons'
 import {notify_error} from "@/hooks/toasts";
 import AppleCard from "@/components/AppleCard/AppleCard";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import QRPage from './QRPage/QRPage';
-import Error from "@/views/Error/Error";
-import BilibiliPage from "@/views/Tools/BilibiliPage/BilibiliPage";
-import TiktokPage from "@/views/Tools/TiktokPage/TiktokPage";
-import SeleniumPage from "@/views/Tools/SeleniumPage/SeleniumPage";
 import {log_api_config} from "@/GlobalConfig";
 import SwitchFadeTransition from "@/styles/transition/SwitchFadeTransition";
 
 export default function Tools() {
     const navigate = useNavigate();
     const location = useLocation();
-    const params = useParams();
     const [counts, setCounts] = useState([]);
     const [canShowSubTextA, setCanShowSubTextA] = useState(false); // 是否显示工具的使用次数
     const DELAY = 4000; // 间隔多久改变canShowSubTextA
@@ -64,16 +58,12 @@ export default function Tools() {
         fetchData().then(r => console.log(r)).catch(e => console.warn(e));
 
         const interval = setInterval(() => {
-            setCanShowSubTextA(prevState => !prevState);
+            if(!(location.pathname === '/tools/bilibili')){
+                setCanShowSubTextA(prevState => !prevState);
+            }
         }, DELAY);
 
         return () => clearInterval(interval); // 清除定时器
-
-        // const timer = setTimeout(() => {
-        //     setCanShowSubTextA(true);
-        // }, DELAY);
-        //
-        // return () => clearTimeout(timer); // 清除定时器
     }, []);
 
     const Overview = (
@@ -187,34 +177,16 @@ export default function Tools() {
         </WrapperMain>
     );
 
-    const toolIds = {
-        'QRPage': <QRPage/>,
-        'bilibili': <BilibiliPage/>,
-        'tiktok': <TiktokPage/>,
-        'Selenium': <SeleniumPage/>
-    }
-    const ToolView = (toolId) => {
-        if (!toolIds[toolId])
-            notify_error("未找到该工具！", "error_notFindToolPage");
-        return (
-            <WrapperMain>
-                {toolIds[toolId] ? toolIds[toolId] : <Error/>}
-            </WrapperMain>
-        );
-    };
-    const isValid = (toolId) => toolIds[toolId];
-
     return (
         <Wrapper>
-            {isValid(params.toolId) || location.pathname === '/tools' ?
-                <WrapperTop>
+            <WrapperTop>
 
-                </WrapperTop> : ''}
+            </WrapperTop>
             <WrapperMiddle>
                 <WrapperLeft>
 
                 </WrapperLeft>
-                {location.pathname === '/tools' ? Overview : ToolView(params.toolId)}
+                {Overview}
                 <WrapperRight>
 
                 </WrapperRight>
