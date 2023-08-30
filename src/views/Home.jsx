@@ -364,13 +364,13 @@ export default function Home() {
 
                     </div>
 
-                    <SwitchButtonX onIcon={<FontAwesomeIcon icon={solid("check")} />} offIcon={<FontAwesomeIcon icon={solid("xmark")} />} isOn={isOn} onChange={(v) => setIsOn(v)}/>
+                    <SwitchButtonX duration={'300ms'} onIcon={<FontAwesomeIcon icon={solid("check")} />} offIcon={<FontAwesomeIcon icon={solid("xmark")} />} isOn={isOn} onChange={(v) => setIsOn(v)}/>
                     <Gap tw={'grow-0'}/>
-                    <SwitchButtonX isOn={isOn} onChange={(v) => setIsOn(v)}/>
+                    <SwitchButtonX duration={'300ms'} isOn={isOn} onChange={(v) => setIsOn(v)}/>
                     <Gap tw={'grow-0'}/>
-                    <SwitchButtonX disabled={true} isOn={isOn} onChange={(v) => setIsOn(v)}/>
+                    <SwitchButtonX duration={'300ms'} disabled={true} isOn={isOn} onChange={(v) => setIsOn(v)}/>
                     <Gap tw={'grow-0'}/>
-                    <SwitchButtonX loading={true} onIcon={<FontAwesomeIcon icon={solid("check")} />} offIcon={<FontAwesomeIcon icon={solid("xmark")} />} isOn={isOn} onChange={(v) => setIsOn(v)}/>
+                    <SwitchButtonX duration={'300ms'} loading={true} onIcon={<FontAwesomeIcon icon={solid("check")} />} offIcon={<FontAwesomeIcon icon={solid("xmark")} />} isOn={isOn} onChange={(v) => setIsOn(v)}/>
                     <ErrorWrapper tw={'col-span-4 h-80 flex flex-col gap-4 pt-8 mt-4 mx-4 md:mx-16 px-0'}
                                   className={'gsap_main_fadein'}
                     >

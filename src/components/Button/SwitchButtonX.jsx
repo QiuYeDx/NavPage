@@ -56,8 +56,8 @@ const SwitchButtonX = ({
             <SwitchCircle color={currentColor}>
                 <SwitchFadeTransition
                     isOn={isOn}
-                    onContent={disabled ? <FontAwesomeIcon icon={solid("ban")} fade /> : loading ? <FontAwesomeIcon icon={solid("spinner")} spin /> : onIcon}
-                    offContent={loading ? <FontAwesomeIcon icon={solid("spinner")} spin /> : offIcon}
+                    onContent={disabled ? <FontAwesomeIcon icon={solid("ban")}  /> : loading ? <FontAwesomeIcon icon={solid("spinner")} spin /> : onIcon}
+                    offContent={disabled ? <FontAwesomeIcon icon={solid("ban")}  /> : loading ? <FontAwesomeIcon icon={solid("spinner")} spin /> : offIcon}
                     duration={modifyNumericPrefix(duration, (v, p) => v / p, 2)}
                     className={'on-off'}
                     fadeStyle={fadeStyle}
