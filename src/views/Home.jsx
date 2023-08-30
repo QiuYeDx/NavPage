@@ -23,6 +23,8 @@ import axios from "axios";
 import {log_api_config} from "@/GlobalConfig";
 import Picture from "@/components/PictureDisplay/Pictrue";
 import {decodeSearchKey, encodeSearchKey} from "@/utils/utils";
+import SwitchButtonX from "@/components/Button/SwitchButtonX";
+import {Gap} from "@/components/Gap/Styled.twin";
 
 export default function Home() {
     const clipboard = useClipboard();
@@ -36,6 +38,7 @@ export default function Home() {
     const [isFocused, setIsFocused] = useState(false);
     const [topics, setTopics] = useState([]);
     const [showNumber, setShowNumber] = useState(4);
+    const [isOn, setIsOn] = useState(false);
     const INCREMENT = 7;
 
     const engines = {
@@ -361,6 +364,13 @@ export default function Home() {
 
                     </div>
 
+                    <SwitchButtonX onIcon={<FontAwesomeIcon icon={solid("check")} />} offIcon={<FontAwesomeIcon icon={solid("xmark")} />} isOn={isOn} onChange={(v) => setIsOn(v)}/>
+                    <Gap tw={'grow-0'}/>
+                    <SwitchButtonX isOn={isOn} onChange={(v) => setIsOn(v)}/>
+                    <Gap tw={'grow-0'}/>
+                    <SwitchButtonX disabled={true} isOn={isOn} onChange={(v) => setIsOn(v)}/>
+                    <Gap tw={'grow-0'}/>
+                    <SwitchButtonX loading={true} onIcon={<FontAwesomeIcon icon={solid("check")} />} offIcon={<FontAwesomeIcon icon={solid("xmark")} />} isOn={isOn} onChange={(v) => setIsOn(v)}/>
                     <ErrorWrapper tw={'col-span-4 h-80 flex flex-col gap-4 pt-8 mt-4 mx-4 md:mx-16 px-0'}
                                   className={'gsap_main_fadein'}
                     >

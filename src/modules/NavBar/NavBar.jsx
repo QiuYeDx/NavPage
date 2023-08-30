@@ -17,10 +17,13 @@ import SwitchButton from "@/components/Button/SwitchButton";
 import ScrollToTopButton from "@/components/Button/ScrollToTopButton";
 import gsap from "gsap";
 import Picture from "@/components/PictureDisplay/Pictrue";
+import {useMediaQuery} from "@/hooks/utilsHooks";
+import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
 
 export default function NavBar() {
     const navigate = useNavigate();
     const location = useLocation();
+    const isMobile = useMediaQuery(`(max-width: ${WIDTH_MOBILE}px)`);
     const [isMoreListShown, setIsMoreListShown] = useState(false);
 
     const fetchData = async () => {
@@ -119,14 +122,18 @@ export default function NavBar() {
                         window.scroll(0, 0);
                     }
                 }}>
-                    <Picture
-                        url={'images/QiuYeDx_web.png'}
-                        w={'44px'}
-                        h={'44px'}
-                        ph_tw={tw`w-[22px] h-[22px]`}
-                        duration={'1.2s'}
-                        fadeStyle={'scale'}
-                    />
+                    {
+                        !isMobile &&
+                        <Picture
+                            url={'images/QiuYeDx_web.png'}
+                            w={'44px'}
+                            h={'44px'}
+                            ph_tw={tw`w-[22px] h-[22px]`}
+                            duration={'1.2s'}
+                            fadeStyle={'scale'}
+                        />
+                    }
+
                     <LogoText tw={"cursor-default md:cursor-pointer select-none text-blue-400"}>
                         秋夜<FontAwesomeIcon icon={solid("fan")} spin spinReverse tw={'text-blue-300'}/>导航
                     </LogoText>

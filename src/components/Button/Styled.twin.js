@@ -64,3 +64,32 @@ export const UniButton = styled(PageButton)`
   ${({hasShadow}) => hasShadow ? tw`shadow-md active:shadow-lg md:active:shadow-md md:hover:shadow-lg` : tw`shadow-none hover:shadow-none`};
   ${({_tw}) => _tw ? _tw : ''};
 `;
+
+export const SwitchWrapper = styled.button`
+  width: ${({size}) => size ? size['wrapperWidth'] : '3rem'};
+  height: ${({size}) => size ? size['wrapperHeight'] : '1.5rem'};
+  padding: 0 0.15rem;
+  background-color: ${({bgColor}) => bgColor ? bgColor : 'rgb(215, 218, 226)'};
+  transition: background-color ${({duration}) => duration ? duration : '0.15s'} ${({timingFunction}) => timingFunction ? timingFunction : 'ease'}; 
+  ${tw`cursor-pointer select-none rounded-full flex items-center`};
+  
+  &:disabled{
+    cursor: not-allowed;
+    filter: grayscale(20%) brightness(0.9);
+  }
+  
+  &::before{
+    content: '';
+    flex-grow: ${({isOn}) => isOn ? '1' : '0'};
+    transition: all ${({duration}) => duration ? duration : '0.15s'} ${({timingFunction}) => timingFunction ? timingFunction : 'ease'};
+  }
+`;
+
+export const SwitchCircle = styled.div`
+  width: ${({size}) => size ? size['circleSize'] : '1.2rem'};
+  height: ${({size}) => size ? size['circleSize'] : '1.2rem'};
+  justify-content: ${({isOn}) => isOn ? 'end' : 'start'};
+  color: ${({color}) => color ? color : 'rgb(215, 218, 226)'};
+  transition: color ${({duration}) => duration ? duration : '0.15s'} ${({timingFunction}) => timingFunction ? timingFunction : 'ease'};
+  ${tw`rounded-full bg-white shadow-md flex justify-center items-center overflow-hidden`};
+`;

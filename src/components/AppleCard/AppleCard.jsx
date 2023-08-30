@@ -212,7 +212,7 @@ AppleCard.propTypes = {
     icon: PropTypes.element,
     topTextA: PropTypes.string,
     topTextB: PropTypes.string,
-    subTextA: PropTypes.string,
+    subTextA: PropTypes.node,
     hasMask: PropTypes.bool,
     hasSubBar: PropTypes.bool,
     _sub_h3: PropTypes.string,

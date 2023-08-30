@@ -192,3 +192,22 @@ export function decodeSearchKey(key) {
 
     return key.replace(/%25|%3F|%23|%26|%3D/g, match => decodeMap[match]);
 }
+
+/**
+ * 修改字符串前的数字。
+ *
+ * @param {string} str - 原始字符串，如 "0.15s"。
+ * @param {Function} operation - 运算函数，接受一个数字作为参数。
+ * @param {*} param - 运算参数。
+ * @returns {string} 修改后的字符串。
+ */
+export const modifyNumericPrefix = (str, operation, param) => {
+    const match = str.match(/^([\d.]+)(.*)$/);
+    if (match) {
+        const value = parseFloat(match[1]);
+        const suffix = match[2];
+        const newValue = operation(value, param);
+        return `${newValue}${suffix}`;
+    }
+    return null;
+};
