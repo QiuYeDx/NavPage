@@ -25,6 +25,7 @@ export default function WrapperTop() {
         'QRPage': {to: '/tools/QRPage', name: '二维码生成器'},
         'Selenium': {to: '/tools/Selenium', name: 'Selenium'},
         'dashboard': {to: '/tools/dashboard', name: 'Dashboard'},
+        'CompDisplay': {to: '/resources/CompDisplay', name: '组件展示'},
     };
 
     function startAnimation(toWidth){

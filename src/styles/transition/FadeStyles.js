@@ -17,7 +17,10 @@ import {styled} from "twin.macro";
  * </FadeContentWrapper>
  */
 export const FadeContentWrapper = styled.div`
-  ${({fadeStyle = 'opacity', duration, timingFunction, offset, className = 'fade'}) =>
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${({fadeStyle = 'opacity', duration, timingFunction, offset = '15px', className = 'fade'}) =>
           createTransitionStyles(fadeStyle, duration, timingFunction, offset, className)
   };
 `;

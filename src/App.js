@@ -10,6 +10,7 @@ import Error from "./views/Error/Error";
 import {Wrapper} from "./Styled.twin";
 import Dashboard from "@/views/Dashboard/Dashboard";
 import ToolView from "@/views/Tools/ToolView";
+import ResourceView from "@/views/Resources/ResourceView";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                         <Route path="/tools" element={<Tools/>}/>
                         <Route path="/tools/:toolId" element={<ToolView/>}/>
                         <Route path="/resources" element={<Resources/>}/>
+                        <Route path="/resources/:resourceId" element={<ResourceView/>}/>
                         <Route path="/about" element={<About/>}/>
                         <Route path="/dashboard" element={<Dashboard/>}/>
                         <Route path="*" element={<Error/>}/>

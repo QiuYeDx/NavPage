@@ -13,6 +13,7 @@ import {FadeContentWrapper} from './FadeStyles';
  * @param {'out-in' | 'in-out'} [props.mode='out-in'] - The transition mode for SwitchTransition ('out-in' or 'in-out').
  * @param {string} [props.className='fade'] - The className for CSSTransition.
  * @param {string} [props.duration='0.3s'] - The duration of the transition.
+ * @param {string} [props.offset='15px'] - The offset value, used for 'down' and 'up' styles.
  *
  * @example
  * <SwitchFadeTransition
@@ -31,7 +32,8 @@ const SwitchFadeTransition = ({
                                   fadeStyle = 'opacity',
                                   mode = 'out-in',
                                   className = 'fade',
-                                  duration = '0.3s'
+                                  duration = '0.3s',
+                                  offset = '15px'
                               }) => {
     const nodeRef = useRef(null);
 
@@ -43,7 +45,7 @@ const SwitchFadeTransition = ({
                 className={className}
                 addEndListener={(done) => nodeRef.current.addEventListener("transitionend", done, false)}
             >
-                <FadeContentWrapper ref={nodeRef} fadeStyle={fadeStyle} className={className} duration={duration}>
+                <FadeContentWrapper ref={nodeRef} fadeStyle={fadeStyle} className={className} duration={duration} offset={offset}>
                     {isOn ? onContent : offContent}
                 </FadeContentWrapper>
             </CSSTransition>

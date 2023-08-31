@@ -57,12 +57,26 @@ const Pagination = ({data}) => {
     // 根据当前页数获取对应的数据
     const getDataByPage = () => {
         if (!data) {
-            console.log('[Error] data is null.')
+            console.error('[Error] data is null.')
             return [];
         }
         const startIndex = (currentPage - 1) * pageSize;
         const endIndex = startIndex + pageSize;
         return data.slice(startIndex, endIndex);
+    };
+
+    // 根据当前页数获取对应的数据
+    const getDataLengthByPage = () => {
+        if (!data) {
+            console.error('[Error] data is null.')
+            return [];
+        }
+        const startIndex = (currentPage - 1) * pageSize;
+        let endIndex = startIndex + pageSize;
+        if(endIndex > data.length) {
+            endIndex = data.length;
+        }
+        return endIndex - startIndex;
     };
 
     // 生成页码列表
@@ -92,7 +106,7 @@ const Pagination = ({data}) => {
                                     }, 100);
                                 }}
                     >{currentPage}</PageButton>
-                    <span tw={'text-xl leading-12 text-center align-sub font-bold text-gray-500 pl-1 pr-1'}>of</span>
+                    <span tw={'text-xl leading-12 text-center align-sub font-bold text-gray-500 pl-1 pr-1 select-none'}>/</span>
                     <PageButton key={'totalPages'}
                                 onClick={() => {
                                     setCurrentPage(totalPages);
@@ -133,47 +147,48 @@ const Pagination = ({data}) => {
     // list 渐入动画
     const gsap_ref = useRef(null);
     useEffect(() => {
+        const nowNumber = getDataLengthByPage();
         if(gsap_ref && gsap_ref.current === null){
             gsap_ref.current = gsap.fromTo(".gsap_popup_a", {
-                y: data.length > 3 ? 240 : data.length > 2 ? 160 : 80,
+                y: nowNumber > 3 ? 240 : nowNumber > 2 ? 160 : 80,
                 opacity: 0,
             }, {
                 // scrollTrigger: ".gsap_popup_a", // once
                 scrollTrigger: {
                     trigger: "#rootWrapper",
                     start: `top+=920 bottom`,
-                    end: `top+=${data.length > 4 ? 1860 : data.length > 3 ? 1760 : data.length > 2 ? 1660 : data.length === 2 ? 1460 : 1260} bottom`,
+                    end: `top+=${nowNumber > 4 ? 1860 : nowNumber > 3 ? 1760 : nowNumber > 2 ? 1660 : nowNumber === 2 ? 1460 : 1260} bottom`,
                     scrub: 1.5,
                     // markers: true,  // 调试用
                 },
                 y: 0,
                 opacity: 1,
-                duration: data.length > 1 ? 1.5 : 1,
+                duration: nowNumber > 1 ? 1.5 : 1,
                 ease: 'power1.out',
                 repeat: 0,
             });
         }else if(gsap_ref){
             gsap_ref.current.kill();
             gsap_ref.current = gsap.fromTo(".gsap_popup_a", {
-                y: data.length > 3 ? 240 : data.length > 2 ? 160 : 80,
+                y: nowNumber > 3 ? 240 : nowNumber > 2 ? 160 : 80,
                 opacity: 0,
             }, {
                 // scrollTrigger: ".gsap_popup_a", // once
                 scrollTrigger: {
                     trigger: "#rootWrapper",
                     start: `top+=920 bottom`,
-                    end: `top+=${data.length > 4 ? 1860 : data.length > 3 ? 1760 : data.length > 2 ? 1660 : data.length === 2 ? 1460 : 1260} bottom`,
+                    end: `top+=${nowNumber > 4 ? 1860 : nowNumber > 3 ? 1760 : nowNumber > 2 ? 1660 : nowNumber === 2 ? 1460 : 1260} bottom`,
                     scrub: 1.5,
                     // markers: true,  // 调试用
                 },
                 y: 0,
                 opacity: 1,
-                duration: data.length > 1 ? 1.5 : 1,
+                duration: nowNumber > 1 ? 1.5 : 1,
                 ease: 'power1.out',
                 repeat: 0,
             });
         }
-    }, [data]); // 翻页不刷新动画
+    }, [currentPage, data.length]); // 翻页不刷新动画
 
     return (
         <div>

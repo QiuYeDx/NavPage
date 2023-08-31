@@ -19,10 +19,13 @@ import gsap from "gsap";
 import Picture from "@/components/PictureDisplay/Pictrue";
 import {useMediaQuery} from "@/hooks/utilsHooks";
 import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
+import SwitchButtonX from "@/components/Button/SwitchButtonX";
+import SimpleFadeTransition from "@/styles/transition/SimpleFadeTransition";
 
 export default function NavBar() {
     const navigate = useNavigate();
     const location = useLocation();
+    const [isDark, setIsDark] = useState(false);
     const isMobile = useMediaQuery(`(max-width: ${WIDTH_MOBILE}px)`);
     const [isMoreListShown, setIsMoreListShown] = useState(false);
 
@@ -133,8 +136,7 @@ export default function NavBar() {
                             fadeStyle={'scale'}
                         />
                     }
-
-                    <LogoText tw={"cursor-default md:cursor-pointer select-none text-blue-400"}>
+                    <LogoText tw={"cursor-default md:cursor-pointer select-none text-blue-400 animate-fade_in_up.5"}>
                         秋夜<FontAwesomeIcon icon={solid("fan")} spin spinReverse tw={'text-blue-300'}/>导航
                     </LogoText>
                 </LogoWrapper>
@@ -192,7 +194,22 @@ export default function NavBar() {
                     </NavItem>
                 </NavList>
                 <div tw={'hidden md:block h-[60px] md:flex md:flex-col justify-center md:ml-2 xl:ml-[140px] duration-500'}>
-                    <SwitchButton hasShadow={false} onChange={changeMode}/>
+                    {/*<SwitchButton isOn={isDark} onContent={<FontAwesomeIcon icon={solid("moon")}/>} offContent={<FontAwesomeIcon icon={solid("sun")} spin tw={'text-amber-400'}/>} offset={'20px'} fadeStyle={'slideFromBottom'} hasShadow={false} onChange={() => {*/}
+                    {/*    setIsDark(!isDark);*/}
+                    {/*    changeMode();*/}
+                    {/*}}/>*/}
+                    <SwitchButtonX
+                        size={'large'}
+                        duration={'300ms'}
+                        isOn={isDark}
+                        onColor={'blue'}
+                        offColor={'amber-300'}
+                        onIcon={<FontAwesomeIcon icon={solid("moon")}/>}
+                        offIcon={<FontAwesomeIcon icon={solid("sun")} spin tw={'text-amber-400'}/>}
+                        onChange={() => {
+                        setIsDark(!isDark);
+                        changeMode();
+                    }}/>
                 </div>
                 <MoreWrapper
                     className={'group'}
@@ -238,7 +255,15 @@ export default function NavBar() {
                     </div>
                     <SwitchButton
                         _tw={tw`m-2`}
-                        onChange={changeMode}/>
+                        isOn={isDark}
+                        onContent={<FontAwesomeIcon icon={solid("moon")}/>}
+                        offContent={<FontAwesomeIcon icon={solid("sun")} spin tw={'text-amber-400'}/>}
+                        offset={'20px'}
+                        fadeStyle={'scale'}
+                        onChange={() => {
+                            setIsDark(!isDark);
+                            changeMode();
+                        }}/>
                 </div>
             </MoreList>
         </div>

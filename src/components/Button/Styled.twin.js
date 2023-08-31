@@ -1,6 +1,6 @@
 import tw, {styled} from 'twin.macro';
 import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
-import {fadeStyles} from "@/styles/transition/FadeStyles";
+import {modifyNumericPrefix} from "@/utils/utils";
 
 export const BaseButton = styled.div`
   ${tw`rounded-2xl bg-blue-400`}
@@ -53,7 +53,7 @@ export const PageButton = styled.div`
   font-size: 20px;
   z-index: 10;
   position: relative;
-  ${tw`shadow-lg rounded-full active:shadow-md md:active:shadow-md md:hover:shadow-xl animate-fade_in_up.4 \
+  ${tw`flex justify-center items-center shadow-lg rounded-full active:shadow-md md:active:shadow-md md:hover:shadow-xl animate-fade_in_up.4 \
   bg-white font-sans font-semibold text-gray-700 md:hover:text-gray-400 active:text-gray-400 md:active:text-gray-500 text-center align-middle select-none md:cursor-pointer`};
 
   ${({active}) => active ? tw`bg-blue-400 text-white ring-blue-200 ring-4 md:hover:bg-blue-300 md:hover:text-white active:text-blue-300 active:bg-blue-500 active:ring-blue-400` : ''};
@@ -68,14 +68,14 @@ export const UniButton = styled(PageButton)`
 export const SwitchWrapper = styled.button`
   width: ${({size}) => size ? size['wrapperWidth'] : '3rem'};
   height: ${({size}) => size ? size['wrapperHeight'] : '1.5rem'};
-  padding: 0 0.15rem;
+  padding: 0 ${({size}) => size ? size['px'] : '0.15rem'};
   background-color: ${({bgColor}) => bgColor ? bgColor : 'rgb(215, 218, 226)'};
   transition: background-color ${({duration}) => duration ? duration : '0.15s'} ${({timingFunction}) => timingFunction ? timingFunction : 'ease'}; 
-  ${tw`cursor-pointer select-none rounded-full flex items-center`};
+  ${tw`md:cursor-pointer select-none rounded-full flex shrink-0 items-center`};
   
   &:disabled{
     cursor: not-allowed;
-    filter: grayscale(20%) brightness(0.9);
+    opacity: 0.6;
   }
   
   &::before{
@@ -91,5 +91,14 @@ export const SwitchCircle = styled.div`
   justify-content: ${({isOn}) => isOn ? 'end' : 'start'};
   color: ${({color}) => color ? color : 'rgb(215, 218, 226)'};
   transition: color ${({duration}) => duration ? duration : '0.15s'} ${({timingFunction}) => timingFunction ? timingFunction : 'ease'};
+  
+  & .svg-inline--fa {
+    width: 85%;
+    height: 85%;
+  }
+
+  & *{
+    max-width: ${({size}) => size ? modifyNumericPrefix(size['circleSize'], (v, p) => v - p, 2 * parseFloat(size['px'])) : modifyNumericPrefix('1.2rem', (v, p) => v - p, 0.2)};
+  }
   ${tw`rounded-full bg-white shadow-md flex justify-center items-center overflow-hidden`};
 `;

@@ -1,9 +1,8 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {WrapperLeft, WrapperMain, WrapperMiddle, WrapperRight} from "@/layout/MainWrapper";
 import {Wrapper} from "@/modules/Wrapper/Wrapper";
 import WrapperTop from "@/modules/WrapperTop/WrapperTop";
 import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
-import MainCard from "@/components/MainCard/MainCard";
 import tw from "twin.macro";
 import 'twin.macro';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -12,11 +11,11 @@ import {P} from "@/styles/TextStyles";
 import {notify_error, notify_success} from "@/hooks/toasts";
 import AppleCard from "@/components/AppleCard/AppleCard";
 import {useClipboard} from "use-clipboard-copy";
-import gsap from "gsap";
-import SimpleFadeTransition from "@/styles/transition/SimpleFadeTransition";
+import {useNavigate} from "react-router-dom";
 
 export default function Resources() {
     const clipboard = useClipboard();
+    const navigate = useNavigate();
     const componentCount = 8;
     const components = [];
     for (let i = 0; i < componentCount; i++) {
@@ -49,22 +48,24 @@ export default function Resources() {
 
                 </WrapperLeft>
                 <WrapperMain>
-                    {/*<MainCard _tw={tw`bg-white md:col-span-5 hidden md:block m-4`} h={"360px"}>*/}
 
-                    {/*</MainCard>*/}
-
-                    {/*<MainCard _tw={tw`bg-blue-400 md:hidden col-span-5 m-4 mb-10 border-8 border-blue-200 border-opacity-50`} h={"80px"}>*/}
-                    {/*    <div tw={"w-full pl-12 pr-12 text-2xl text-white font-bold font-sans mt-4"}>*/}
-                    {/*        资 源*/}
-                    {/*    </div>*/}
-                    {/*</MainCard>*/}
-
-                    {/*<MainCard _tw={tw`bg-white md:col-span-3 col-span-5 m-4`} h={"360px"} >*/}
-
-                    {/*</MainCard>*/}
-
-                    {/*<MainCard _tw={tw`bg-white md:col-span-2 col-span-5 m-4`} h={"360px"}>*/}
-                    {/*</MainCard>*/}
+                    <AppleCard
+                        key={'CompDisplay'}
+                        theme={'gradient_blue'}
+                        h={"360px"}
+                        k={0.5}
+                        tw_card={tw`md:col-span-2`}
+                        tw_content={tw`tracking-wide text-7xl`}
+                        icon={<FontAwesomeIcon icon={solid("cubes")}
+                                               tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
+                        />}
+                        onClick={() => {
+                            navigate("/resources/CompDisplay");
+                            window.scroll(0, 0);
+                        }}
+                    >
+                        组件展示
+                    </AppleCard>
 
                     {components}
                 </WrapperMain>

@@ -11,7 +11,6 @@ import tw from "twin.macro";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faApple, faGithub, faTwitter, faWordpress, faGoogle, faQq} from '@fortawesome/free-brands-svg-icons'
 import {regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
-import {notify_error, notify_success} from "@/hooks/toasts";
 import {useClipboard} from "use-clipboard-copy";
 import {H1, P} from "@/styles/TextStyles";
 import {ErrorWrapper} from "@/views/Error/Styled.twin";
@@ -23,8 +22,6 @@ import axios from "axios";
 import {log_api_config} from "@/GlobalConfig";
 import Picture from "@/components/PictureDisplay/Pictrue";
 import {decodeSearchKey, encodeSearchKey} from "@/utils/utils";
-import SwitchButtonX from "@/components/Button/SwitchButtonX";
-import {Gap} from "@/components/Gap/Styled.twin";
 
 export default function Home() {
     const clipboard = useClipboard();
@@ -38,7 +35,6 @@ export default function Home() {
     const [isFocused, setIsFocused] = useState(false);
     const [topics, setTopics] = useState([]);
     const [showNumber, setShowNumber] = useState(4);
-    const [isOn, setIsOn] = useState(false);
     const INCREMENT = 7;
 
     const engines = {
@@ -364,13 +360,6 @@ export default function Home() {
 
                     </div>
 
-                    <SwitchButtonX duration={'300ms'} onIcon={<FontAwesomeIcon icon={solid("check")} />} offIcon={<FontAwesomeIcon icon={solid("xmark")} />} isOn={isOn} onChange={(v) => setIsOn(v)}/>
-                    <Gap tw={'grow-0'}/>
-                    <SwitchButtonX duration={'300ms'} isOn={isOn} onChange={(v) => setIsOn(v)}/>
-                    <Gap tw={'grow-0'}/>
-                    <SwitchButtonX duration={'300ms'} disabled={true} isOn={isOn} onChange={(v) => setIsOn(v)}/>
-                    <Gap tw={'grow-0'}/>
-                    <SwitchButtonX duration={'300ms'} loading={true} onIcon={<FontAwesomeIcon icon={solid("check")} />} offIcon={<FontAwesomeIcon icon={solid("xmark")} />} isOn={isOn} onChange={(v) => setIsOn(v)}/>
                     <ErrorWrapper tw={'col-span-4 h-80 flex flex-col gap-4 pt-8 mt-4 mx-4 md:mx-16 px-0'}
                                   className={'gsap_main_fadein'}
                     >
