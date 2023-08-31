@@ -193,7 +193,7 @@ export default function NavBar() {
                         关于
                     </NavItem>
                 </NavList>
-                <div tw={'hidden md:block h-[60px] md:flex md:flex-col justify-center md:ml-2 xl:ml-[140px] duration-500'}>
+                <div tw={'hidden md:block h-[60px] md:flex md:flex-col justify-center md:ml-2 xl:ml-[75px] duration-500'}>
                     {/*<SwitchButton isOn={isDark} onContent={<FontAwesomeIcon icon={solid("moon")}/>} offContent={<FontAwesomeIcon icon={solid("sun")} spin tw={'text-amber-400'}/>} offset={'20px'} fadeStyle={'slideFromBottom'} hasShadow={false} onChange={() => {*/}
                     {/*    setIsDark(!isDark);*/}
                     {/*    changeMode();*/}
