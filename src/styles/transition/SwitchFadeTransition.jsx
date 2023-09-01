@@ -9,7 +9,7 @@ import {FadeContentWrapper} from './FadeStyles';
  * @param {boolean} props.isOn - Determines which content to display.
  * @param {React.ReactNode} [props.onContent=null] - Content to display when isOn is true.
  * @param {React.ReactNode} [props.offContent=null] - Content to display when isOn is false.
- * @param {'opacity' | 'down' | 'up' | 'left' | 'right' | 'slideFromBottom' | 'scale'} [props.fadeStyle='opacity'] - The type of transition style ('opacity', 'down', 'up', 'left', 'right', 'slideFromBottom', 'scale').
+ * @param {'opacity' | 'down' | 'up' | 'left' | 'right' | 'slideFromBottom' | 'slideFromLeft' | 'slideFromRight' | 'scale'} [props.fadeStyle='opacity'] - The type of transition style ('opacity', 'down', 'up', 'left', 'right', 'slideFromBottom', 'scale').
  * @param {'out-in' | 'in-out'} [props.mode='out-in'] - The transition mode for SwitchTransition ('out-in' or 'in-out').
  * @param {string} [props.className='fade'] - The className for CSSTransition.
  * @param {string} [props.duration='0.3s'] - The duration of the transition.

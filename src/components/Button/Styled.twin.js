@@ -71,7 +71,7 @@ export const SwitchWrapper = styled.button`
   padding: 0 ${({size}) => size ? size['px'] : '0.15rem'};
   background-color: ${({bgColor}) => bgColor ? bgColor : 'rgb(215, 218, 226)'};
   transition: background-color ${({duration}) => duration ? duration : '0.15s'} ${({timingFunction}) => timingFunction ? timingFunction : 'ease'}; 
-  ${tw`md:cursor-pointer select-none rounded-full flex shrink-0 items-center`};
+  ${tw`md:cursor-pointer select-none rounded-full flex shrink-0 items-center relative`};
   
   &:disabled{
     cursor: not-allowed;
@@ -86,6 +86,7 @@ export const SwitchWrapper = styled.button`
 `;
 
 export const SwitchCircle = styled.div`
+  z-index: 300;
   width: ${({size}) => size ? size['circleSize'] : '1.2rem'};
   height: ${({size}) => size ? size['circleSize'] : '1.2rem'};
   justify-content: ${({isOn}) => isOn ? 'end' : 'start'};
@@ -101,4 +102,40 @@ export const SwitchCircle = styled.div`
     max-width: ${({size}) => size ? modifyNumericPrefix(size['circleSize'], (v, p) => v - p, 2 * parseFloat(size['px'])) : modifyNumericPrefix('1.2rem', (v, p) => v - p, 0.2)};
   }
   ${tw`rounded-full bg-white shadow-md flex justify-center items-center overflow-hidden`};
+`;
+
+export const LeftBackgroundIcon = styled.div`
+  z-index: 200;
+  width: ${({size}) => size ? size['circleSize'] : '1.2rem'};
+  height: ${({size}) => size ? size['circleSize'] : '1.2rem'};
+  opacity: 0.8;
+  color: white;
+  left: ${({lx}) => lx ? lx : '2px'};
+  
+  & .svg-inline--fa {
+    width: 85%;
+    height: 85%;
+  }
+  ${tw`absolute flex justify-center items-center`};
+  & > * *{
+    max-width: ${({size}) => size ? modifyNumericPrefix(size['circleSize'], (v, p) => v - p, 2 * parseFloat(size['px'])) : modifyNumericPrefix('1.2rem', (v, p) => v - p, 0.2)};
+  }
+`;
+
+export const RightBackgroundIcon = styled.div`
+  z-index: 200;
+  width: ${({size}) => size ? size['circleSize'] : '1.2rem'};
+  height: ${({size}) => size ? size['circleSize'] : '1.2rem'};
+  opacity: 0.8;
+  color: white;
+  right: ${({rx}) => rx ? rx : '2px'};
+  
+  & .svg-inline--fa {
+    width: 85%;
+    height: 85%;
+  }
+  ${tw`absolute flex justify-center items-center`};
+  & > * *{
+    max-width: ${({size}) => size ? modifyNumericPrefix(size['circleSize'], (v, p) => v - p, 2 * parseFloat(size['px'])) : modifyNumericPrefix('1.2rem', (v, p) => v - p, 0.2)};
+  }
 `;

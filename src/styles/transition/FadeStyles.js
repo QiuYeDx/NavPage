@@ -5,7 +5,7 @@ import {styled} from "twin.macro";
  *
  * @component
  * @param {Object} props
- * @param {string} [props.fadeStyle='opacity'] - The type of transition style ('opacity', 'down', 'up').
+ * @param {'opacity' | 'down' | 'up' | 'left' | 'right' | 'slideFromBottom' | 'slideFromLeft' | 'slideFromRight' | 'scale'} [props.fadeStyle='opacity'] - The type of transition style ('opacity' | 'down' | 'up' | 'left' | 'right' | 'slideFromBottom' | 'slideFromLeft' | 'slideFromRight' | 'scale').
  * @param {string} [props.duration='0.3s'] - The duration of the transition.
  * @param {string} [props.timingFunction='ease'] - The timing function for the transition.
  * @param {string} [props.offset='15px'] - The offset value, used for 'down' and 'up' styles.
@@ -29,7 +29,7 @@ export const FadeContentWrapper = styled.div`
  * Creates a CSS transition style string based on the provided parameters.
  *
  * @function
- * @param {'opacity' | 'down' | 'up' | 'left' | 'right' | 'slideFromBottom' | 'scale'} style - The type of transition style ('opacity', 'down', 'up', 'left', 'right', 'slideFromBottom', 'scale').
+ * @param {'opacity' | 'down' | 'up' | 'left' | 'right' | 'slideFromBottom' | 'slideFromLeft' | 'slideFromRight' | 'scale'} style - The type of transition style ('opacity', 'down', 'up', 'left', 'right', 'slideFromBottom', 'scale').
  * @param {string} [duration='0.3s'] - The duration of the transition.
  * @param {string} [timingFunction='ease'] - The timing function for the transition (e.g., 'linear', 'ease-in').
  * @param {string} [offset='15px'] - The offset value, used for 'down' and 'up' styles.
@@ -154,6 +154,54 @@ export function createTransitionStyles(style, duration = '0.3s', timingFunction 
         
             &.${className}.exit-active {
                 transform: translateY(${offset});
+                opacity: 0;
+                transition: opacity ${duration} ${timingFunction}, transform ${duration} ${timingFunction};
+            }`;
+
+        case 'slideFromLeft':
+            return `
+            &.${className}.enter {
+                transform: translateX(${offset});
+                opacity: 0;
+            }
+        
+            &.${className}.enter-active {
+                transform: translateX(0);
+                opacity: 1;
+                transition: opacity ${duration} ${timingFunction}, transform ${duration} ${timingFunction};
+            }
+        
+            &.${className}.exit {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        
+            &.${className}.exit-active {
+                transform: translateX(${offset});
+                opacity: 0;
+                transition: opacity ${duration} ${timingFunction}, transform ${duration} ${timingFunction};
+            }`;
+
+        case 'slideFromRight':
+            return `
+            &.${className}.enter {
+                transform: translateX(-${offset});
+                opacity: 0;
+            }
+        
+            &.${className}.enter-active {
+                transform: translateX(0);
+                opacity: 1;
+                transition: opacity ${duration} ${timingFunction}, transform ${duration} ${timingFunction};
+            }
+        
+            &.${className}.exit {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        
+            &.${className}.exit-active {
+                transform: translateX(-${offset});
                 opacity: 0;
                 transition: opacity ${duration} ${timingFunction}, transform ${duration} ${timingFunction};
             }`;

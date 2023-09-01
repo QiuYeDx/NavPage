@@ -1,12 +1,13 @@
 import React from 'react';
 import tw from 'twin.macro';
 import 'twin.macro';
-import {SwitchCircle, SwitchWrapper} from "@/components/Button/Styled.twin";
+import {LeftBackgroundIcon, RightBackgroundIcon, SwitchCircle, SwitchWrapper} from "@/components/Button/Styled.twin";
 import {getColorConfig, getSizeConfig} from "@/components/Button/ButtonConfig";
 import SwitchFadeTransition from "@/styles/transition/SwitchFadeTransition";
 import {modifyNumericPrefix} from "@/utils/utils";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
+import SimpleFadeTransition from "@/styles/transition/SimpleFadeTransition";
 
 /**
  * SwitchButtonX - A customizable switch button component for React.
@@ -22,8 +23,10 @@ import {regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
  * @param {string} [props.offColor='gray'] - The background color when the switch is off.
  * @param {React.node} [props.onIcon=null] - The icon to display when the switch is on.
  * @param {React.node} [props.offIcon=null] - The icon to display when the switch is off.
+ * @param {React.node} [props.leftBackgroundIcon=null] - The background icon to display when the switch is on.
+ * @param {React.node} [props.rightBackgroundIcon=null] - The background icon to display when the switch is off.
  * @param {function} [props.onChange=()=>{}] - The function to call when the switch state changes.
- * @param {string} [props.fadeStyle='scale'] - The fade style for the switch transition.
+ * @param {'opacity' | 'down' | 'up' | 'left' | 'right' | 'slideFromBottom' | 'slideFromLeft' | 'slideFromRight' | 'scale'} [props.fadeStyle='scale'] - The fade style for the switch transition.
  *
  * @example
  * <SwitchButtonX isOn={true} onChange={(newState) => console.log(newState)} />
@@ -37,9 +40,12 @@ const SwitchButtonX = ({
                            duration = '0.15s',
                            onColor = 'blue',
                            offColor = 'gray',
-                           onIcon,
-                           offIcon,
-                           onChange = () => {},
+                           onIcon = null,
+                           offIcon = null,
+                           leftBackgroundIcon = null,
+                           rightBackgroundIcon = null,
+                           onChange = () => {
+                           },
                            fadeStyle = 'scale'
                        }) => {
 
@@ -59,14 +65,26 @@ const SwitchButtonX = ({
             bgColor={currentColor}
             onClick={toggleSwitch}
         >
+            <LeftBackgroundIcon size={sizeConfig} lx={sizeConfig['px']}>
+                <SimpleFadeTransition in={isOn} duration={duration} fadeStyle={'slideFromLeft'}>
+                    {leftBackgroundIcon ? leftBackgroundIcon : ''}
+                </SimpleFadeTransition>
+            </LeftBackgroundIcon>
+            <RightBackgroundIcon size={sizeConfig} rx={sizeConfig['px']}>
+                <SimpleFadeTransition in={!isOn} duration={duration} fadeStyle={'slideFromRight'}>
+                    {rightBackgroundIcon ? rightBackgroundIcon : ''}
+                </SimpleFadeTransition>
+            </RightBackgroundIcon>
             <SwitchCircle color={currentColor} size={sizeConfig}>
                 <SwitchFadeTransition
                     isOn={isOn}
-                    onContent={disabled ? <FontAwesomeIcon icon={solid("ban")}  /> : loading ? <FontAwesomeIcon icon={solid("spinner")} spin /> : onIcon}
-                    offContent={disabled ? <FontAwesomeIcon icon={solid("ban")}  /> : loading ? <FontAwesomeIcon icon={solid("spinner")} spin /> : offIcon}
+                    onContent={disabled ? <FontAwesomeIcon icon={solid("ban")}/> : loading ?
+                        <FontAwesomeIcon icon={solid("spinner")} spin/> : onIcon}
+                    offContent={disabled ? <FontAwesomeIcon icon={solid("ban")}/> : loading ?
+                        <FontAwesomeIcon icon={solid("spinner")} spin/> : offIcon}
                     duration={modifyNumericPrefix(duration, (v, p) => v / p, 2)}
                     className={'on-off'}
-                    fadeStyle={fadeStyle}
+                    fadeStyle={onIcon === offIcon || disabled || loading ? '' : fadeStyle}
                 />
             </SwitchCircle>
         </SwitchWrapper>

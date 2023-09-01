@@ -59,6 +59,161 @@ export default function CompDisplay() {
                                onChange={(v) => setIsOn(v)}/>
             </div>
 
+            {/* Line 4 */}
+            <div tw={'col-span-4 flex justify-between items-center mx-4 md:mx-16 md:px-16 h-12 overflow-x-auto w-full duration-300'}>
+                <SwitchButtonX duration={'300ms'} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle-dot")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("circle-dot")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle-dot")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("circle-dot")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} disabled={true} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle-dot")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("circle-dot")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} loading={true} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle-dot")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("circle-dot")} />}/>
+            </div>
+
+            <div tw={'col-span-4 flex justify-between items-center mx-4 md:mx-16 md:px-16 h-12 overflow-x-auto w-full duration-300'}>
+                <SwitchButtonX duration={'300ms'} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("circle")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("circle")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} disabled={true} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("circle")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} loading={true} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("circle")} />}/>
+            </div>
+
+            <div tw={'col-span-4 flex justify-between items-center mx-4 md:mx-16 md:px-16 h-12 overflow-x-auto w-full duration-300'}>
+                <SwitchButtonX duration={'300ms'} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("heart")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("heart")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("heart")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("heart")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} disabled={true} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("heart")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("heart")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} loading={true} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("heart")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("heart")} />}/>
+            </div>
+
+            <div tw={'col-span-4 flex justify-between items-center mx-4 md:mx-16 md:px-16 h-12 overflow-x-auto w-full duration-300'}>
+                <SwitchButtonX duration={'300ms'} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("moon")} />} rightBackgroundIcon={<FontAwesomeIcon icon={solid("sun")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("moon")} />} rightBackgroundIcon={<FontAwesomeIcon icon={solid("sun")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} disabled={true} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("moon")} />} rightBackgroundIcon={<FontAwesomeIcon icon={solid("sun")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} loading={true} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("moon")} />} rightBackgroundIcon={<FontAwesomeIcon icon={solid("sun")} />}/>
+            </div>
+
+            <div tw={'col-span-4 flex justify-between items-center mx-4 md:mx-16 md:px-16 h-12 overflow-x-auto w-full duration-300'}>
+                <SwitchButtonX duration={'300ms'} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle-check")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("circle-check")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle-check")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("circle-check")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} disabled={true} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle-check")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("circle-check")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} loading={true} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle-check")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("circle-check")} />}/>
+            </div>
+
+            <div tw={'col-span-4 flex justify-between items-center mx-4 md:mx-16 md:px-16 h-12 overflow-x-auto w-full duration-300'}>
+                <SwitchButtonX duration={'300ms'} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("flag")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("flag")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("flag")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("flag")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} disabled={true} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("flag")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("flag")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} loading={true} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("flag")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("flag")} />}/>
+            </div>
+
+            <div tw={'col-span-4 flex justify-between items-center mx-4 md:mx-16 md:px-16 h-12 overflow-x-auto w-full duration-300'}>
+                <SwitchButtonX duration={'300ms'} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("thumbs-up")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("thumbs-up")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("thumbs-up")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("thumbs-up")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} disabled={true} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("thumbs-up")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("thumbs-up")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} loading={true} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("thumbs-up")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("thumbs-up")} />}/>
+            </div>
+
+            <div tw={'col-span-4 flex justify-between items-center mx-4 md:mx-16 md:px-16 h-12 overflow-x-auto w-full duration-300'}>
+                <SwitchButtonX duration={'300ms'} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle-half-stroke")} />} rightBackgroundIcon={<FontAwesomeIcon icon={solid("circle-half-stroke")} rotation={180} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle-half-stroke")} />} rightBackgroundIcon={<FontAwesomeIcon icon={solid("circle-half-stroke")} rotation={180} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} disabled={true} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle-half-stroke")} />} rightBackgroundIcon={<FontAwesomeIcon icon={solid("circle-half-stroke")} rotation={180} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} loading={true} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("circle-half-stroke")} />} rightBackgroundIcon={<FontAwesomeIcon icon={solid("circle-half-stroke")} rotation={180} />}/>
+            </div>
+
+            <div tw={'col-span-4 flex justify-between items-center mx-4 md:mx-16 md:px-16 h-12 overflow-x-auto w-full duration-300'}>
+                <SwitchButtonX duration={'300ms'} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("bell")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("bell")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("bell")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("bell")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} disabled={true} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("bell")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("bell")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} loading={true} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("bell")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("bell")} />}/>
+            </div>
+
+            <div tw={'col-span-4 flex justify-between items-center mx-4 md:mx-16 md:px-16 h-12 overflow-x-auto w-full duration-300'}>
+                <SwitchButtonX duration={'300ms'} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("star")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("star")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("star")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("star")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} disabled={true} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("star")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("star")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} loading={true} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("star")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("star")} />}/>
+            </div>
+
+            <div tw={'col-span-4 flex justify-between items-center mx-4 md:mx-16 md:px-16 h-12 overflow-x-auto w-full duration-300'}>
+                <SwitchButtonX duration={'300ms'} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("face-smile")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("face-smile")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("face-smile")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("face-smile")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} disabled={true} isOn={isOn} onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("face-smile")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("face-smile")} />}/>
+                <Gap tw={'grow-0 invisible w-10 hidden'}/>
+                <SwitchButtonX duration={'300ms'} loading={true} onIcon={<FontAwesomeIcon icon={solid("check")}/>}
+                               offIcon={<FontAwesomeIcon icon={solid("xmark")}/>} isOn={isOn}
+                               onChange={(v) => setIsOn(v)} leftBackgroundIcon={<FontAwesomeIcon icon={solid("face-smile")} />} rightBackgroundIcon={<FontAwesomeIcon icon={regular("face-smile")} />}/>
+            </div>
+
             <div tw={'col-span-4 flex justify-between items-center mx-4 md:mx-16 md:px-16 h-12 overflow-x-auto w-full duration-300'}>
                 <SwitchButtonX duration={'300ms'} onColor={'pink'} offColor={'orange'}
                                onIcon={<FontAwesomeIcon icon={solid("check")}/>}

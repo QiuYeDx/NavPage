@@ -7,7 +7,7 @@ import { FadeContentWrapper } from './FadeStyles';
  * @param {Object} props
  * @param {boolean} props.in - Determines if the content should be visible.
  * @param {React.ReactNode} [props.children=null] - The content to display and animate.
- * @param {'opacity' | 'down' | 'up' | 'left' | 'right' | 'slideFromBottom' | 'scale'} [props.fadeStyle='opacity'] - The type of transition style.
+ * @param {'opacity' | 'down' | 'up' | 'left' | 'right' | 'slideFromBottom' | 'slideFromLeft' | 'slideFromRight' | 'scale'} [props.fadeStyle='opacity'] - The type of transition style.
  * @param {string} [props.className='fade'] - The className for CSSTransition.
  * @param {string} [props.duration='0.3s'] - The duration of the transition.
  * @param {string} [props.offset='15px'] - The offset value, used for 'down' and 'up' styles.
