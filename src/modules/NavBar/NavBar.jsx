@@ -125,19 +125,19 @@ export default function NavBar() {
                         window.scroll(0, 0);
                     }
                 }}>
-                    {
-                        !isMobile &&
-                        <Picture
-                            url={'images/QiuYeDx_web.png'}
-                            w={'44px'}
-                            h={'44px'}
-                            ph_tw={tw`w-[22px] h-[22px]`}
-                            duration={'1.2s'}
-                            fadeStyle={'scale'}
-                        />
-                    }
+                    {/*{*/}
+                    {/*    !isMobile &&*/}
+                    {/*    <Picture*/}
+                    {/*        url={'images/QiuYeDx_web.png'}*/}
+                    {/*        w={'44px'}*/}
+                    {/*        h={'44px'}*/}
+                    {/*        ph_tw={tw`w-[22px] h-[22px]`}*/}
+                    {/*        duration={'1.2s'}*/}
+                    {/*        fadeStyle={'scale'}*/}
+                    {/*    />*/}
+                    {/*}*/}
                     <LogoText tw={"cursor-default md:cursor-pointer select-none text-blue-400 animate-fade_in_up.5"}>
-                        秋夜<FontAwesomeIcon icon={solid("fan")} spin spinReverse tw={'text-blue-300'}/>导航
+                        秋夜{!isMobile && <FontAwesomeIcon icon={solid("paper-plane")} tw={'text-blue-300'}/>}导航
                     </LogoText>
                 </LogoWrapper>
                 <NavList
@@ -204,8 +204,8 @@ export default function NavBar() {
                         isOn={isDark}
                         onColor={'blue'}
                         offColor={'amber-300'}
-                        onIcon={<FontAwesomeIcon icon={solid("moon")}/>}
-                        offIcon={<FontAwesomeIcon icon={solid("sun")} spin tw={'text-amber-400'}/>}
+                        leftBackgroundIcon={<FontAwesomeIcon icon={solid("moon")}/>}
+                        rightBackgroundIcon={<FontAwesomeIcon icon={solid("sun")} spin />}
                         onChange={() => {
                         setIsDark(!isDark);
                         changeMode();
