@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
   //padding-top: 60px;
   
   //min-height: calc(100vh - 60px);
-  min-height: 100vh;
+  //min-height: 100vh;
 
   display: flex;
   flex-direction: column;

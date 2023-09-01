@@ -12,5 +12,6 @@ export const Wrapper = styled.div`
   //right: 0;
   //margin: auto;
   padding-top: 60px;
+  min-height: 100vh;
   overflow: auto;
 `
