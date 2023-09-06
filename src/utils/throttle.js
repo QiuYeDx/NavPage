@@ -1,3 +1,9 @@
+/**
+ * Throttles a function, limiting its execution to once every specified time interval.
+ * @param {Function} func - The function to throttle.
+ * @param {number} wait - The time interval in milliseconds.
+ * @returns {Function} - The throttled function.
+ */
 export function throttle(func, wait){
     let timer = null;
     return function(){
@@ -10,6 +16,13 @@ export function throttle(func, wait){
     }
 }
 
+/**
+ * Debounces a function, delaying its execution until after a specified time interval has elapsed since the last time it was invoked.
+ * @param {Function} func - The function to debounce.
+ * @param {number} wait - The time interval in milliseconds.
+ * @param {boolean} immediate - Whether to execute the function immediately.
+ * @returns {Function} - The debounced function.
+ */
 export function debounce(func, wait, immediate) {
     let timer;
 

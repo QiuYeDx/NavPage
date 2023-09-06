@@ -21,11 +21,13 @@ import {useMediaQuery} from "@/hooks/utilsHooks";
 import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
 import SwitchButtonX from "@/components/Button/SwitchButtonX";
 import SimpleFadeTransition from "@/styles/transition/SimpleFadeTransition";
+import {debounce, throttle} from "@/utils/throttle";
 
 export default function NavBar() {
     const navigate = useNavigate();
     const location = useLocation();
     const [isDark, setIsDark] = useState(false);
+    const selfRef = useRef(null);
     const isMobile = useMediaQuery(`(max-width: ${WIDTH_MOBILE}px)`);
     const [isMoreListShown, setIsMoreListShown] = useState(false);
 
@@ -62,14 +64,38 @@ export default function NavBar() {
         document.head.appendChild(metaTag);
     }, []);
 
+    const gsap_ref2 = useRef(null);
+    useEffect(() => {
+        let lastScrollTop = 0;
+
+        const handleScroll = throttle(() => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if(gsap_ref2.current)
+                gsap_ref2.current.kill();
+            if (scrollTop > lastScrollTop && scrollTop > 60) {
+                // 向下滚动
+                gsap_ref2.current = gsap.to(selfRef.current, {y: '-60px', duration: 0.8, ease: 'power2.out'});
+            } else {
+                // 向上滚动
+                gsap_ref2.current = gsap.to(selfRef.current, {y: '0', duration: 0.3, ease: 'power2.out'});
+            }
+            lastScrollTop = scrollTop;
+        }, 100);
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     const gsap_ref = useRef(null);
     useEffect(() => {
         // 更新页面访问次数
         fetchData().then(r => console.log(r)).catch(e => console.warn(e));
 
         // CardWrapper组件依次渐入
-        if(!gsap_ref.current){
-            gsap_ref.current = gsap.timeline({ repeat: 0});
+        if (!gsap_ref.current) {
+            gsap_ref.current = gsap.timeline({repeat: 0});
 
             // 将动画添加到时间轴中
             gsap_ref.current.set(".gsap_main_fadein", {
@@ -84,9 +110,9 @@ export default function NavBar() {
                 ease: 'power3.out',
                 stagger: 0.12,
             });
-        }else{
+        } else {
             gsap_ref.current.kill();
-            gsap_ref.current = gsap.timeline({ repeat: 0});
+            gsap_ref.current = gsap.timeline({repeat: 0});
 
             // 将动画添加到时间轴中
             gsap_ref.current.set(".gsap_main_fadein", {
@@ -111,7 +137,7 @@ export default function NavBar() {
             {/*<BlankWrapper/>*/}
             <Toaster/>
             {/*<NavWrapper hasShadow={!isMoreListShown}>*/}
-            <NavWrapper hasShadow={true}>
+            <NavWrapper hasShadow={true} ref={selfRef}>
                 <LogoWrapper onClick={() => {
                     setIsMoreListShown(false);
                     notify_error("暂未完工", "not_completed1");
@@ -193,7 +219,8 @@ export default function NavBar() {
                         关于
                     </NavItem>
                 </NavList>
-                <div tw={'hidden md:block h-[60px] md:flex md:flex-col justify-center md:ml-2 xl:ml-[75px] duration-500'}>
+                <div
+                    tw={'hidden md:block h-[60px] md:flex md:flex-col justify-center md:ml-2 xl:ml-[75px] duration-500'}>
                     {/*<SwitchButton isOn={isDark} onContent={<FontAwesomeIcon icon={solid("moon")}/>} offContent={<FontAwesomeIcon icon={solid("sun")} spin tw={'text-amber-400'}/>} offset={'20px'} fadeStyle={'slideFromBottom'} hasShadow={false} onChange={() => {*/}
                     {/*    setIsDark(!isDark);*/}
                     {/*    changeMode();*/}
@@ -205,11 +232,11 @@ export default function NavBar() {
                         onColor={'blue'}
                         offColor={'amber-300'}
                         leftBackgroundIcon={<FontAwesomeIcon icon={solid("moon")}/>}
-                        rightBackgroundIcon={<FontAwesomeIcon icon={solid("sun")} spin />}
+                        rightBackgroundIcon={<FontAwesomeIcon icon={solid("sun")} spin/>}
                         onChange={() => {
-                        setIsDark(!isDark);
-                        changeMode();
-                    }}/>
+                            setIsDark(!isDark);
+                            changeMode();
+                        }}/>
                 </div>
                 <MoreWrapper
                     className={'group'}

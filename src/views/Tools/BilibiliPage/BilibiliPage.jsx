@@ -85,16 +85,17 @@ export default function BilibiliPage() {
 
             notify_success('解析成功 !', 'resolving_success');
 
-            // 更新服务请求次数
-            setCount((await log_api_config.awaitCountAPI('PUT', 'bilibili')).data[0].count);
-
             setTimeout(() => {
                 window.scroll({
-                    top: 140,
+                    top: 425,
                     left: 0,
                     behavior: "smooth",
                 });
             }, 200);
+
+            // 更新服务请求次数
+            setCount((await log_api_config.awaitCountAPI('PUT', 'bilibili')).data[0].count);
+
         } catch (error) {
             if (error.message === ErrorCode.NONE_RESULT_ERROR) {
                 console.warn('None result error');

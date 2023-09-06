@@ -19,6 +19,7 @@ import SimpleFadeTransition from "@/styles/transition/SimpleFadeTransition";
  * @param {string} [props.size='default'] - The size of the switch. Can be 'tiny', 'small', 'large', 'huge', or 'default'.
  * @param {string} [props.timingFunction='ease'] - The timing function for the switch transition.
  * @param {string} [props.duration='0.15s'] - The duration of the switch transition.
+ * @param {string} [props.offset='25px'] - The offset value, used for 'down' and 'up' etc. styles.
  * @param {string} [props.onColor='blue'] - The background color when the switch is on.
  * @param {string} [props.offColor='gray'] - The background color when the switch is off.
  * @param {React.node} [props.onIcon=null] - The icon to display when the switch is on.
@@ -38,6 +39,7 @@ const SwitchButtonX = ({
                            size = 'default',
                            timingFunction = 'ease',
                            duration = '0.15s',
+                           offset = '25px',
                            onColor = 'blue',
                            offColor = 'gray',
                            onIcon = null,
@@ -65,13 +67,13 @@ const SwitchButtonX = ({
             bgColor={currentColor}
             onClick={toggleSwitch}
         >
-            <LeftBackgroundIcon size={sizeConfig} lx={sizeConfig['px']}>
-                <SimpleFadeTransition in={isOn} duration={duration} fadeStyle={'slideFromLeft'}>
+            <LeftBackgroundIcon size={sizeConfig} lx={modifyNumericPrefix(sizeConfig['px'], (v, p) => v * p, 2)}>
+                <SimpleFadeTransition in={isOn} duration={duration} fadeStyle={'slideFromRight'} offset={'25px'}>
                     {leftBackgroundIcon ? leftBackgroundIcon : ''}
                 </SimpleFadeTransition>
             </LeftBackgroundIcon>
-            <RightBackgroundIcon size={sizeConfig} rx={sizeConfig['px']}>
-                <SimpleFadeTransition in={!isOn} duration={duration} fadeStyle={'slideFromRight'}>
+            <RightBackgroundIcon size={sizeConfig} rx={modifyNumericPrefix(sizeConfig['px'], (v, p) => v * p, 2)}>
+                <SimpleFadeTransition in={!isOn} duration={duration} fadeStyle={'slideFromLeft'} offset={'25px'}>
                     {rightBackgroundIcon ? rightBackgroundIcon : ''}
                 </SimpleFadeTransition>
             </RightBackgroundIcon>
