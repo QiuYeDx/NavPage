@@ -3,7 +3,6 @@ import {
     ButtonWrapper,
     HeaderWrapper,
     ContentWrapper,
-    Wrapper,
     LineWrapper
 } from "@/views/Tools/SeleniumPage/Styled.twin";
 import {notify_error, notify_success} from "@/hooks/toasts";
@@ -23,6 +22,7 @@ import {exportToExcel} from "@/components/Table/ExportToExcel";
 import {getFormattedDate} from "@/utils/utils";
 import {useClipboard} from "use-clipboard-copy";
 import {log_api_config} from "@/GlobalConfig";
+import {PaddingWrapper} from "@/layout/MainWrapper";
 
 export default function SeleniumPage() {
     const clipboard = useClipboard();
@@ -373,11 +373,11 @@ export default function SeleniumPage() {
 
     const handleCopyInstructions = () => {
         let ans = data.reduce((result, arr, i) => {
-            if(i > 0)
+            if (i > 0)
                 result += '# ';
             result += arr.reduce((res, value, index) => {
-                if(index > 0 && value && value !== ''){
-                    if(index > 1)
+                if (index > 0 && value && value !== '') {
+                    if (index > 1)
                         res += ' ';
                     res += value;
                 }
@@ -501,251 +501,252 @@ export default function SeleniumPage() {
     }, []); // 依赖项为空数组，表示仅在组件挂载和卸载时执行一次
 
     return (
-        <div tw={'col-span-4'}>
-            <Wrapper>
-                <HeaderWrapper>
-                    <ButtonWrapper>
-                        <BackButton onClick={() => {
-                            navigate('/tools');
-                            window.scroll(0, 0);
-                        }}>
-                            <FontAwesomeIcon icon={solid("arrow-left")} tw={'md:pr-4 align-middle relative -top-px'}/>
-                        </BackButton>
-                    </ButtonWrapper>
-                    <H2>Selenium</H2>
-                </HeaderWrapper>
+        <PaddingWrapper tw={'col-span-4'}>
+            <HeaderWrapper>
+                <ButtonWrapper>
+                    <BackButton onClick={() => {
+                        navigate('/tools');
+                        window.scroll(0, 0);
+                    }}>
+                        <FontAwesomeIcon icon={solid("arrow-left")} tw={'md:pr-4 align-middle relative -top-px'}/>
+                    </BackButton>
+                </ButtonWrapper>
+                <H2>Selenium</H2>
+            </HeaderWrapper>
 
-                <div tw={'flex flex-row flex-wrap justify-between items-center gap-x-5'}>
-                    <ContentWrapper>
-                        <LineWrapper>
-                            <InLineTitle tw={'mb-2'}>初始化{finished ? (data && data.length > 0 ?
-                                    <FontAwesomeIcon icon={solid("database")}
-                                                     tw={'text-green-400 pl-1 pr-1 duration-500 ease-out'}/> :
-                                    <FontAwesomeIcon icon={solid("database")}
-                                                     tw={'text-orange-400 pl-1 pr-1 duration-500 ease-out'}/>) :
-                                <FontAwesomeIcon icon={solid("database")}
-                                                 tw={'text-red-400 pl-1 pr-1 duration-500 ease-out'}/>}数据库</InLineTitle>
-                        </LineWrapper>
-                        <LineWrapper>
-                            <TextInput
-                                icon={<FontAwesomeIcon icon={solid("delete-left")} />}
-                                placeholder={' '}
-                                desc={'输入服务端根地址'}
-                                id={'input_text'}
-                                onChange={handleChange}
-                                onKeyPress={handleKeyPress}
-                                invalid={invalid}
-                                text={text}
-                                setText={setText}
-                                iconOnClick={() => {
-                                    setText && setText('')
-                                }}
-                                data_tooltip_id={"url_tooltip"}
-                                data_tooltip_content={"e.g. https://api.qiuyedx.com:8085"}
-                                data_tooltip_variant={"info"}
-                            />
-                        </LineWrapper>
-                        <Tooltip id="url_tooltip" offset={20} openOnClick={true} place="top"
-                                 tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
-                        <LineWrapper tw={'mt-2'}>
-                            <MButton disabled={loading} h={'36px'} w={'140px'} tw={'rounded-full'}
-                                     onClick={handleSubmit} ref={button_ref}>
-                                {
-                                    loading ?
-                                        <>执行中<FontAwesomeIcon icon={solid("gear")} spin tw={'ml-1'}/></>
-                                        :
-                                        <>初始化<FontAwesomeIcon icon={solid("gear")} fade tw={'ml-1'}/></>
-                                }
-                            </MButton>
-                            <MButton disabled={loading5} h={'36px'} w={'140px'} tw={'rounded-full'}
-                                     onClick={handleQuery} ref={button4_ref}>
-                                {
-                                    loading5 ?
-                                        <>查询中<FontAwesomeIcon icon={solid("magnifying-glass")} bounce tw={'ml-1'}/></>
-                                        :
-                                        <>查询状态<FontAwesomeIcon icon={solid("magnifying-glass")} fade tw={'ml-1'}/></>
-                                }
-                            </MButton>
-                        </LineWrapper>
-                    </ContentWrapper>
-
-                    <ContentWrapper>
-                        <LineWrapper>
-                            <InLineTitle tw={'mb-2'}>批量插入指令</InLineTitle>
-                        </LineWrapper>
-                        <LineWrapper>
-                            <TextInput
-                                icon={<FontAwesomeIcon icon={solid("delete-left")} />}
-                                placeholder={' '}
-                                desc={'输入selenium指令'}
-                                id={'input_text2'}
-                                onChange={handleChange2}
-                                onKeyPress={handleKeyPress2}
-                                invalid={invalid2}
-                                text={text2}
-                                setText={setText2}
-                                iconOnClick={() => {
-                                    setText2 && setText2('')
-                                }}
-                                data_tooltip_id={"input2_tooltip"}
-                                data_tooltip_content={"指令间用井号加空格分隔 e.g. jump http://39.99.243.8:8688/# wait /html/body/div/form/div[4]/button# input /html/body/div/form/div[1]/input tea"}
-                                data_tooltip_variant={"info"}
-                            />
-                        </LineWrapper>
-                        <Tooltip id="input2_tooltip" offset={20} openOnClick={true} place="top"
-                                 tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
-                        <LineWrapper tw={'mt-2'}>
-                            <MButton disabled={loading2} h={'36px'} w={'140px'} tw={'rounded-full'}
-                                     onClick={handleSubmit2} ref={button2_ref}>
-                                {
-                                    loading2 ?
-                                        <>执行中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
-                                        :
-                                        <>插入指令<FontAwesomeIcon icon={solid("circle-plus")} fade tw={'ml-1'}/></>
-                                }
-                            </MButton>
-                        </LineWrapper>
-                    </ContentWrapper>
-
-                    <ContentWrapper>
-                        <LineWrapper>
-                            <InLineTitle tw={'mb-2'}>编写单条指令</InLineTitle>
-                        </LineWrapper>
-
-                        <LineWrapper>
-                            <SelectInput
-                                icon={<FontAwesomeIcon icon={solid("delete-left")} />}
-                                placeholder={' '}
-                                desc={'选择指令类型'}
-                                id={'input_text5'}
-                                onChange={handleChange5}
-                                onKeyPress={handleKeyPress3}
-                                invalid={invalid5}
-                                text={text5}
-                                setText={setText5}
-                                iconOnClick={() => {
-                                    setText5 && setText5('')
-                                }}
-                                selectList={['jump', 'wait', 'click', 'input']}
-                                closeClassName={'closeClassName'}
-                                animate={'tr.3'}
-                            />
-                        </LineWrapper>
-
-                        <LineWrapper>
-                            <TextInput
-                                icon={<FontAwesomeIcon icon={solid("delete-left")} />}
-                                placeholder={' '}
-                                desc={'输入full xPath元素定位路径'}
-                                id={'input_text3'}
-                                onChange={handleChange3}
-                                onKeyPress={handleKeyPress3}
-                                invalid={invalid3}
-                                text={text3}
-                                setText={setText3}
-                                iconOnClick={() => {
-                                    setText3 && setText3('')
-                                }}
-                            />
-                        </LineWrapper>
-
-                        <LineWrapper>
-                            <TextInput
-                                icon={<FontAwesomeIcon icon={solid("delete-left")} />}
-                                placeholder={' '}
-                                desc={'输入参数（可选）'}
-                                id={'input_text4'}
-                                onChange={handleChange4}
-                                onKeyPress={handleKeyPress3}
-                                invalid={invalid4}
-                                text={text4}
-                                setText={setText4}
-                                iconOnClick={() => {
-                                    setText4 && setText4('')
-                                }}
-                            />
-                        </LineWrapper>
-
-                        <LineWrapper tw={'mt-2'}>
-                            <MButton disabled={loading4} h={'36px'} w={'140px'} tw={'rounded-full'}
-                                     onClick={handleSubmit3} ref={button3_ref}>
-                                {
-                                    loading4 ?
-                                        <>执行中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
-                                        :
-                                        <>插入指令<FontAwesomeIcon icon={solid("circle-plus")} fade tw={'ml-1'}/></>
-                                }
-                            </MButton>
-                        </LineWrapper>
-                    </ContentWrapper>
-                </div>
-
-                <ContentWrapper tw={'min-h-0 h-32'}>
+            <div tw={'flex flex-row flex-wrap justify-between items-center gap-x-5'}>
+                <ContentWrapper>
                     <LineWrapper>
-                        <InLineTitle tw={''}>开始测试</InLineTitle>
+                        <InLineTitle tw={'mb-2'}>初始化{finished ? (data && data.length > 0 ?
+                                <FontAwesomeIcon icon={solid("database")}
+                                                 tw={'text-green-400 pl-1 pr-1 duration-500 ease-out'}/> :
+                                <FontAwesomeIcon icon={solid("database")}
+                                                 tw={'text-orange-400 pl-1 pr-1 duration-500 ease-out'}/>) :
+                            <FontAwesomeIcon icon={solid("database")}
+                                             tw={'text-red-400 pl-1 pr-1 duration-500 ease-out'}/>}数据库</InLineTitle>
                     </LineWrapper>
-                    <LineWrapper tw={''}>
-                        <MButton disabled={loading3 || !finished || !data || (data && data.length === 0)} h={'36px'} w={'140px'} tw={'rounded-full'}
-                                 onClick={handleStartTest}>
+                    <LineWrapper>
+                        <TextInput
+                            icon={<FontAwesomeIcon icon={solid("delete-left")}/>}
+                            placeholder={' '}
+                            desc={'输入服务端根地址'}
+                            id={'input_text'}
+                            onChange={handleChange}
+                            onKeyPress={handleKeyPress}
+                            invalid={invalid}
+                            text={text}
+                            setText={setText}
+                            iconOnClick={() => {
+                                setText && setText('')
+                            }}
+                            data_tooltip_id={"url_tooltip"}
+                            data_tooltip_content={"e.g. https://api.qiuyedx.com:8085"}
+                            data_tooltip_variant={"info"}
+                        />
+                    </LineWrapper>
+                    <Tooltip id="url_tooltip" offset={20} openOnClick={true} place="top"
+                             tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
+                    <LineWrapper tw={'mt-2'}>
+                        <MButton disabled={loading} h={'36px'} w={'140px'} tw={'rounded-full'}
+                                 onClick={handleSubmit} ref={button_ref}>
                             {
-                                loading3 ?
-                                    <>测试中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
+                                loading ?
+                                    <>执行中<FontAwesomeIcon icon={solid("gear")} spin tw={'ml-1'}/></>
                                     :
-                                    <>开始测试<FontAwesomeIcon icon={solid("play")} fade tw={'ml-1'}/></>
+                                    <>初始化<FontAwesomeIcon icon={solid("gear")} fade tw={'ml-1'}/></>
+                            }
+                        </MButton>
+                        <MButton disabled={loading5} h={'36px'} w={'140px'} tw={'rounded-full'}
+                                 onClick={handleQuery} ref={button4_ref}>
+                            {
+                                loading5 ?
+                                    <>查询中<FontAwesomeIcon icon={solid("magnifying-glass")} bounce tw={'ml-1'}/></>
+                                    :
+                                    <>查询状态<FontAwesomeIcon icon={solid("magnifying-glass")} fade tw={'ml-1'}/></>
                             }
                         </MButton>
                     </LineWrapper>
                 </ContentWrapper>
 
-                {finished ?
-                    <>
-                        <Gap tw={'invisible'}/>
-                        <Table title={'指令序列'} data={data || []} headers={['ID', 'Type', 'Element', 'Param']}>
+                <ContentWrapper>
+                    <LineWrapper>
+                        <InLineTitle tw={'mb-2'}>批量插入指令</InLineTitle>
+                    </LineWrapper>
+                    <LineWrapper>
+                        <TextInput
+                            icon={<FontAwesomeIcon icon={solid("delete-left")}/>}
+                            placeholder={' '}
+                            desc={'输入selenium指令'}
+                            id={'input_text2'}
+                            onChange={handleChange2}
+                            onKeyPress={handleKeyPress2}
+                            invalid={invalid2}
+                            text={text2}
+                            setText={setText2}
+                            iconOnClick={() => {
+                                setText2 && setText2('')
+                            }}
+                            data_tooltip_id={"input2_tooltip"}
+                            data_tooltip_content={"指令间用井号加空格分隔 e.g. jump http://39.99.243.8:8688/# wait /html/body/div/form/div[4]/button# input /html/body/div/form/div[1]/input tea"}
+                            data_tooltip_variant={"info"}
+                        />
+                    </LineWrapper>
+                    <Tooltip id="input2_tooltip" offset={20} openOnClick={true} place="top"
+                             tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
+                    <LineWrapper tw={'mt-2'}>
+                        <MButton disabled={loading2} h={'36px'} w={'140px'} tw={'rounded-full'}
+                                 onClick={handleSubmit2} ref={button2_ref}>
+                            {
+                                loading2 ?
+                                    <>执行中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
+                                    :
+                                    <>插入指令<FontAwesomeIcon icon={solid("circle-plus")} fade tw={'ml-1'}/></>
+                            }
+                        </MButton>
+                    </LineWrapper>
+                </ContentWrapper>
 
-                        </Table>
-                        <Gap tw={'invisible'}/>
-                        <ContentWrapper tw={'min-h-0 h-32'}>
-                            <LineWrapper>
-                                <InLineTitle tw={''}>复制指令</InLineTitle>
-                            </LineWrapper>
-                            <LineWrapper tw={''}>
-                                <MButton disabled={data === null || (data && data.length === 0)} h={'36px'} w={'140px'} tw={'rounded-full'}
-                                         onClick={handleCopyInstructions}>
-                                    复制指令<FontAwesomeIcon icon={solid("copy")} fade tw={'ml-1'}/>
-                                </MButton>
-                            </LineWrapper>
-                        </ContentWrapper>
-                    </>
-                    : ''
-                }
+                <ContentWrapper>
+                    <LineWrapper>
+                        <InLineTitle tw={'mb-2'}>编写单条指令</InLineTitle>
+                    </LineWrapper>
 
-                {finished2 ?
-                    <>
-                        <Gap tw={'invisible'} ref={scroll_ref}/>
-                        <Table title={'测试日志'} data={log || []} headers={headers_arr}>
+                    <LineWrapper>
+                        <SelectInput
+                            icon={<FontAwesomeIcon icon={solid("delete-left")}/>}
+                            placeholder={' '}
+                            desc={'选择指令类型'}
+                            id={'input_text5'}
+                            onChange={handleChange5}
+                            onKeyPress={handleKeyPress3}
+                            invalid={invalid5}
+                            text={text5}
+                            setText={setText5}
+                            iconOnClick={() => {
+                                setText5 && setText5('')
+                            }}
+                            selectList={['jump', 'wait', 'click', 'input']}
+                            closeClassName={'closeClassName'}
+                            animate={'tr.3'}
+                        />
+                    </LineWrapper>
 
-                        </Table>
-                        <Gap tw={'invisible'}/>
-                        <ContentWrapper tw={'min-h-0 h-32'}>
-                            <LineWrapper>
-                                <InLineTitle tw={''}>导出日志</InLineTitle>
-                            </LineWrapper>
-                            <LineWrapper tw={''}>
-                                <MButton disabled={loading6 || log === null || (log && log.length === 0)} h={'36px'} w={'140px'} tw={'rounded-full'}
-                                         onClick={handleExportToExcel}>
-                                    {
-                                        loading6 ?
-                                            <>导出中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
-                                            :
-                                            <>下载数据<FontAwesomeIcon icon={solid("file-export")} fade tw={'ml-1'}/></>
-                                    }
-                                </MButton>
-                            </LineWrapper>
-                        </ContentWrapper>
-                    </>
-                    : ''
-                }
-            </Wrapper>
-        </div>
+                    <LineWrapper>
+                        <TextInput
+                            icon={<FontAwesomeIcon icon={solid("delete-left")}/>}
+                            placeholder={' '}
+                            desc={'输入full xPath元素定位路径'}
+                            id={'input_text3'}
+                            onChange={handleChange3}
+                            onKeyPress={handleKeyPress3}
+                            invalid={invalid3}
+                            text={text3}
+                            setText={setText3}
+                            iconOnClick={() => {
+                                setText3 && setText3('')
+                            }}
+                        />
+                    </LineWrapper>
+
+                    <LineWrapper>
+                        <TextInput
+                            icon={<FontAwesomeIcon icon={solid("delete-left")}/>}
+                            placeholder={' '}
+                            desc={'输入参数（可选）'}
+                            id={'input_text4'}
+                            onChange={handleChange4}
+                            onKeyPress={handleKeyPress3}
+                            invalid={invalid4}
+                            text={text4}
+                            setText={setText4}
+                            iconOnClick={() => {
+                                setText4 && setText4('')
+                            }}
+                        />
+                    </LineWrapper>
+
+                    <LineWrapper tw={'mt-2'}>
+                        <MButton disabled={loading4} h={'36px'} w={'140px'} tw={'rounded-full'}
+                                 onClick={handleSubmit3} ref={button3_ref}>
+                            {
+                                loading4 ?
+                                    <>执行中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
+                                    :
+                                    <>插入指令<FontAwesomeIcon icon={solid("circle-plus")} fade tw={'ml-1'}/></>
+                            }
+                        </MButton>
+                    </LineWrapper>
+                </ContentWrapper>
+            </div>
+
+            <ContentWrapper tw={'min-h-0 h-32'}>
+                <LineWrapper>
+                    <InLineTitle tw={''}>开始测试</InLineTitle>
+                </LineWrapper>
+                <LineWrapper tw={''}>
+                    <MButton disabled={loading3 || !finished || !data || (data && data.length === 0)} h={'36px'}
+                             w={'140px'} tw={'rounded-full'}
+                             onClick={handleStartTest}>
+                        {
+                            loading3 ?
+                                <>测试中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
+                                :
+                                <>开始测试<FontAwesomeIcon icon={solid("play")} fade tw={'ml-1'}/></>
+                        }
+                    </MButton>
+                </LineWrapper>
+            </ContentWrapper>
+
+            {finished ?
+                <>
+                    <Gap tw={'invisible'}/>
+                    <Table title={'指令序列'} data={data || []} headers={['ID', 'Type', 'Element', 'Param']}>
+
+                    </Table>
+                    <Gap tw={'invisible'}/>
+                    <ContentWrapper tw={'min-h-0 h-32'}>
+                        <LineWrapper>
+                            <InLineTitle tw={''}>复制指令</InLineTitle>
+                        </LineWrapper>
+                        <LineWrapper tw={''}>
+                            <MButton disabled={data === null || (data && data.length === 0)} h={'36px'} w={'140px'}
+                                     tw={'rounded-full'}
+                                     onClick={handleCopyInstructions}>
+                                复制指令<FontAwesomeIcon icon={solid("copy")} fade tw={'ml-1'}/>
+                            </MButton>
+                        </LineWrapper>
+                    </ContentWrapper>
+                </>
+                : ''
+            }
+
+            {finished2 ?
+                <>
+                    <Gap tw={'invisible'} ref={scroll_ref}/>
+                    <Table title={'测试日志'} data={log || []} headers={headers_arr}>
+
+                    </Table>
+                    <Gap tw={'invisible'}/>
+                    <ContentWrapper tw={'min-h-0 h-32'}>
+                        <LineWrapper>
+                            <InLineTitle tw={''}>导出日志</InLineTitle>
+                        </LineWrapper>
+                        <LineWrapper tw={''}>
+                            <MButton disabled={loading6 || log === null || (log && log.length === 0)} h={'36px'}
+                                     w={'140px'} tw={'rounded-full'}
+                                     onClick={handleExportToExcel}>
+                                {
+                                    loading6 ?
+                                        <>导出中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
+                                        :
+                                        <>下载数据<FontAwesomeIcon icon={solid("file-export")} fade tw={'ml-1'}/></>
+                                }
+                            </MButton>
+                        </LineWrapper>
+                    </ContentWrapper>
+                </>
+                : ''
+            }
+        </PaddingWrapper>
     );
 }

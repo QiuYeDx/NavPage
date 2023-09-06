@@ -12,8 +12,20 @@ export const BaseButton = styled.div`
 
 export const MButton = styled.button`
   ${tw`cursor-default rounded-2xl bg-blue-400 text-white text-base font-bold font-sans text-center align-middle tracking-wider \
-  ring-blue-200 ring-0 hover:ring-4 hover:scale-105 active:bg-blue-600 active:ring-blue-400 duration-100 ease-out \
-  disabled:bg-gray-400 disabled:hover:ring-0 disabled:hover:scale-100 disabled:cursor-not-allowed\
+  ring-blue-200 ring-0 md:hover:ring-4 md:hover:scale-105 active:bg-blue-600 active:ring-blue-400 md:active:scale-100 duration-100 ease-out \
+  disabled:bg-gray-400 disabled:md:hover:ring-0 disabled:md:hover:scale-100 disabled:cursor-not-allowed\
+  select-none md:cursor-pointer`};
+  ${({_tw}) => _tw}
+  height: ${({h}) => h || "32px"};
+  line-height: ${({h}) => h || "32px"};
+  width: ${({w}) => w || "86px"};
+  ${({_tw_user}) => _tw_user};
+`
+
+export const MButtonLight = styled.button`
+  ${tw`cursor-default rounded-2xl bg-blue-50 text-blue-500 text-base font-bold font-sans text-center align-middle tracking-wider \
+  ring-blue-200 ring-0 md:hover:ring-4 md:hover:scale-105 active:bg-blue-100 md:active:ring-0 md:active:scale-100 duration-100 ease-out \
+  disabled:bg-gray-400 disabled:md:hover:ring-0 disabled:md:hover:scale-100 disabled:cursor-not-allowed\
   select-none md:cursor-pointer`};
   ${({_tw}) => _tw}
   height: ${({h}) => h || "32px"};

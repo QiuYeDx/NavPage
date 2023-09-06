@@ -3,7 +3,6 @@ import {
     ButtonWrapper,
     HeaderWrapper,
     ContentWrapper,
-    Wrapper,
     LineWrapper
 } from "@/views/Tools/BilibiliPage/Styled.twin";
 import {notify_error, notify_success} from "@/hooks/toasts";
@@ -25,6 +24,7 @@ import {blobToDataUrl} from "@/utils/utils";
 import TextInput from "@/components/TextInputLine/TextInput";
 import Picture from "@/components/PictureDisplay/Pictrue";
 import {ErrorCode} from "@/utils/errors";
+import {PaddingWrapper} from "@/layout/MainWrapper";
 
 export default function BilibiliPage() {
     const default_cover = 'images/image-blue-300.svg';
@@ -211,154 +211,152 @@ export default function BilibiliPage() {
         };
     }, []); // 依赖项为空数组，表示仅在组件挂载和卸载时执行一次
     return (
-        <div tw={'col-span-4'}>
-            <Wrapper>
-                <HeaderWrapper>
-                    <ButtonWrapper>
-                        <BackButton onClick={() => {
-                            navigate('/tools');
-                            window.scroll(0, 0);
-                        }}>
-                            <FontAwesomeIcon icon={solid("arrow-left")} tw={'md:pr-4 align-middle relative -top-px'}/>
-                        </BackButton>
-                    </ButtonWrapper>
-                    <H2>bilibili视频解析</H2>
-                </HeaderWrapper>
-                <ContentWrapper>
-                    <LineWrapper>
-                        <InLineTitle>
-                            输入<FontAwesomeIcon icon={faBilibili} tw={"text-pink-400 pl-1 pr-1 duration-500 ease-out"}/>链接
-                        </InLineTitle>
-                    </LineWrapper>
+        <PaddingWrapper tw={'col-span-4'}>
+            <HeaderWrapper>
+                <ButtonWrapper>
+                    <BackButton onClick={() => {
+                        navigate('/tools');
+                        window.scroll(0, 0);
+                    }}>
+                        <FontAwesomeIcon icon={solid("arrow-left")} tw={'md:pr-4 align-middle relative -top-px'}/>
+                    </BackButton>
+                </ButtonWrapper>
+                <H2>bilibili视频解析</H2>
+            </HeaderWrapper>
+            <ContentWrapper>
+                <LineWrapper>
+                    <InLineTitle>
+                        输入<FontAwesomeIcon icon={faBilibili} tw={"text-pink-400 pl-1 pr-1 duration-500 ease-out"}/>链接
+                    </InLineTitle>
+                </LineWrapper>
 
-                    <LineWrapper>
-                        <TextInput
-                            icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
-                            placeholder={' '}
-                            desc={'输入bilibili视频URL'}
-                            id={'input_bilibili'}
-                            onChange={handleChange}
-                            onKeyPress={handleKeyPress}
-                            invalid={invalid}
-                            text={text}
-                            setText={setText}
-                            iconOnClick={() => {
-                                setText && setText('')
-                            }}
-                            data_tooltip_id={"url_tooltip"}
-                            data_tooltip_content={"直接粘贴B站分享文本即可"}
-                            data_tooltip_variant={"info"}
-                        />
-                    </LineWrapper>
-                    <Tooltip id="url_tooltip" offset={20} openOnClick={true} place="top"
-                             tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
+                <LineWrapper>
+                    <TextInput
+                        icon={<FontAwesomeIcon icon={solid("delete-left")} tw={'ml-1'}/>}
+                        placeholder={' '}
+                        desc={'输入bilibili视频URL'}
+                        id={'input_bilibili'}
+                        onChange={handleChange}
+                        onKeyPress={handleKeyPress}
+                        invalid={invalid}
+                        text={text}
+                        setText={setText}
+                        iconOnClick={() => {
+                            setText && setText('')
+                        }}
+                        data_tooltip_id={"url_tooltip"}
+                        data_tooltip_content={"直接粘贴B站分享文本即可"}
+                        data_tooltip_variant={"info"}
+                    />
+                </LineWrapper>
+                <Tooltip id="url_tooltip" offset={20} openOnClick={true} place="top"
+                         tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'} hidden={!!text}/>
 
-                    <LineWrapper tw={'mt-2'}>
-                        <MButton disabled={loading} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleSubmit}
-                                 ref={btn_ref}>
-                            {
-                                loading ?
-                                    <>解析中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
-                                    :
-                                    <>解析链接<FontAwesomeIcon icon={solid("hand-spock")} shake tw={'ml-1'}/></>
-                            }
-                        </MButton>
-                    </LineWrapper>
-                </ContentWrapper>
-                {/*<Gap/>*/}
-                <ContentWrapper>
-                    <LineWrapper>
-                        <InLineTitle tw={'mb-2'}>获取<FontAwesomeIcon icon={solid("link")}
-                                                                    tw={"text-blue-400 pl-1 pr-1 duration-500 ease-out"}/>结果</InLineTitle>
-                    </LineWrapper>
-                    <LineWrapper>
-                        <Picture
-                            duration={'1.2s'}
-                            fadeStyle={'scale'}
-                            h={finished && cover !== default_cover ? '150px' : '100px'}
-                            w={finished && cover !== default_cover ? '256px' : '171px'}
-                            url={cover}
-                        />
-                    </LineWrapper>
-                    <LineWrapper>
-                        <TextInput
-                            icon={<FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>}
-                            placeholder={'待解析'}
-                            desc={'视频标题'}
-                            id={'input_title_main'}
-                            text={data ? data.title : ''}
-                            iconOnClick={() => {
-                                if (data) {
-                                    clipboard.copy(data.title);
-                                    notify_success('视频标题Copied !', 'title_copy');
-                                } else
-                                    notify_error('视频标题Copy失败 !', 'title_copy_error');
-                            }}
-                            data_tooltip_id={"title_tooltip"}
-                            data_tooltip_content={data ? data.title : ''}
-                            data_tooltip_variant={"info"}
-                            readOnly
-                        />
-                        <Tooltip id="title_tooltip" offset={15}
-                                 tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
-                    </LineWrapper>
-                    <LineWrapper>
-                        <TextInput
-                            icon={<FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>}
-                            placeholder={'待解析'}
-                            desc={'视频描述'}
-                            id={'input_desc_main'}
-                            text={data ? (data.desc === '' ? '无描述' : data.desc) : ''}
-                            iconOnClick={() => {
-                                if (data) {
-                                    clipboard.copy(data.desc);
-                                    notify_success('视频描述Copied !', 'description_copy');
-                                } else
-                                    notify_error('视频描述Copy失败 !', 'description_copy_error');
-                            }}
-                            data_tooltip_id={"desc_tooltip"}
-                            data_tooltip_content={data ? data.desc : ''}
-                            data_tooltip_variant={"info"}
-                            readOnly
-                        />
-                        <Tooltip id="desc_tooltip" offset={15}
-                                 tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
-                    </LineWrapper>
-                    <LineWrapper tw={'mt-2'}>
-                        <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:mr-6'}
-                                 onClick={() => {
-                                     clipboard.copy(data ? data.cover : '');
-                                     notify_success('封面URL Copied !', 'cover_url_copy');
-                                 }}>
-                            {
-                                !finished ?
-                                    <>暂无解析<FontAwesomeIcon icon={solid("copy")} fade tw={'ml-1'}/></>
-                                    :
-                                    <>封面URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
-                            }
-                        </MButton>
-                        <MButton disabled={!finished || iosIsDownloading} h={'36px'} w={'140px'}
-                                 tw={'rounded-full md:ml-6'}
-                                 onClick={handleDownloadPic}>
-                            {
-                                !finished ?
-                                    <>暂无解析<FontAwesomeIcon icon={solid("image")} fade tw={'ml-1'}/></>
-                                    :
-                                    <>下载封面<FontAwesomeIcon icon={solid("download")} beat tw={'ml-1'}/></>
-                            }
-                        </MButton>
-                        <a tw={'hidden'} ref={a_ref} target="_blank" rel="noopener noreferrer"/>
-                    </LineWrapper>
-                </ContentWrapper>
-                <MyContext.Provider
-                    value={{finished, a_ref, downloadState, setDownloadState, iosIsDownloading, setIosIsDownloading}}>
-                    {list ? <Pagination data={list.map((item, index) => {
-                        item.index = index;
-                        return item;
-                    })}/> : ''}
-                </MyContext.Provider>
+                <LineWrapper tw={'mt-2'}>
+                    <MButton disabled={loading} h={'36px'} w={'140px'} tw={'rounded-full'} onClick={handleSubmit}
+                             ref={btn_ref}>
+                        {
+                            loading ?
+                                <>解析中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
+                                :
+                                <>解析链接<FontAwesomeIcon icon={solid("hand-spock")} shake tw={'ml-1'}/></>
+                        }
+                    </MButton>
+                </LineWrapper>
+            </ContentWrapper>
+            {/*<Gap/>*/}
+            <ContentWrapper>
+                <LineWrapper>
+                    <InLineTitle tw={'mb-2'}>获取<FontAwesomeIcon icon={solid("link")}
+                                                                tw={"text-blue-400 pl-1 pr-1 duration-500 ease-out"}/>结果</InLineTitle>
+                </LineWrapper>
+                <LineWrapper>
+                    <Picture
+                        duration={'1.2s'}
+                        fadeStyle={'scale'}
+                        h={finished && cover !== default_cover ? '150px' : '100px'}
+                        w={finished && cover !== default_cover ? '256px' : '171px'}
+                        url={cover}
+                    />
+                </LineWrapper>
+                <LineWrapper>
+                    <TextInput
+                        icon={<FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>}
+                        placeholder={'待解析'}
+                        desc={'视频标题'}
+                        id={'input_title_main'}
+                        text={data ? data.title : ''}
+                        iconOnClick={() => {
+                            if (data) {
+                                clipboard.copy(data.title);
+                                notify_success('视频标题Copied !', 'title_copy');
+                            } else
+                                notify_error('视频标题Copy失败 !', 'title_copy_error');
+                        }}
+                        data_tooltip_id={"title_tooltip"}
+                        data_tooltip_content={data ? data.title : ''}
+                        data_tooltip_variant={"info"}
+                        readOnly
+                    />
+                    <Tooltip id="title_tooltip" offset={15}
+                             tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
+                </LineWrapper>
+                <LineWrapper>
+                    <TextInput
+                        icon={<FontAwesomeIcon icon={solid("copy")} tw={'ml-1'}/>}
+                        placeholder={'待解析'}
+                        desc={'视频描述'}
+                        id={'input_desc_main'}
+                        text={data ? (data.desc === '' ? '无描述' : data.desc) : ''}
+                        iconOnClick={() => {
+                            if (data) {
+                                clipboard.copy(data.desc);
+                                notify_success('视频描述Copied !', 'description_copy');
+                            } else
+                                notify_error('视频描述Copy失败 !', 'description_copy_error');
+                        }}
+                        data_tooltip_id={"desc_tooltip"}
+                        data_tooltip_content={data ? data.desc : ''}
+                        data_tooltip_variant={"info"}
+                        readOnly
+                    />
+                    <Tooltip id="desc_tooltip" offset={15}
+                             tw={'bg-blue-400 max-w-xs md:max-w-lg rounded-2xl absolute z-200'}/>
+                </LineWrapper>
+                <LineWrapper tw={'mt-2'}>
+                    <MButton disabled={!finished} h={'36px'} w={'140px'} tw={'rounded-full md:mr-6'}
+                             onClick={() => {
+                                 clipboard.copy(data ? data.cover : '');
+                                 notify_success('封面URL Copied !', 'cover_url_copy');
+                             }}>
+                        {
+                            !finished ?
+                                <>暂无解析<FontAwesomeIcon icon={solid("copy")} fade tw={'ml-1'}/></>
+                                :
+                                <>封面URL<FontAwesomeIcon icon={solid("copy")} beat tw={'ml-1'}/></>
+                        }
+                    </MButton>
+                    <MButton disabled={!finished || iosIsDownloading} h={'36px'} w={'140px'}
+                             tw={'rounded-full md:ml-6'}
+                             onClick={handleDownloadPic}>
+                        {
+                            !finished ?
+                                <>暂无解析<FontAwesomeIcon icon={solid("image")} fade tw={'ml-1'}/></>
+                                :
+                                <>下载封面<FontAwesomeIcon icon={solid("download")} beat tw={'ml-1'}/></>
+                        }
+                    </MButton>
+                    <a tw={'hidden'} ref={a_ref} target="_blank" rel="noopener noreferrer"/>
+                </LineWrapper>
+            </ContentWrapper>
+            <MyContext.Provider
+                value={{finished, a_ref, downloadState, setDownloadState, iosIsDownloading, setIosIsDownloading}}>
+                {list ? <Pagination data={list.map((item, index) => {
+                    item.index = index;
+                    return item;
+                })}/> : ''}
+            </MyContext.Provider>
 
-            </Wrapper>
-        </div>
+        </PaddingWrapper>
     );
 }

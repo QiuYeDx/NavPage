@@ -22,6 +22,8 @@ import axios from "axios";
 import {log_api_config} from "@/GlobalConfig";
 import Picture from "@/components/PictureDisplay/Pictrue";
 import {decodeSearchKey, encodeSearchKey} from "@/utils/utils";
+import XList from "@/modules/XList/XList";
+import gsap from "gsap";
 
 export default function Home() {
     const clipboard = useClipboard();
@@ -278,20 +280,73 @@ export default function Home() {
         }
     }, []); // 依赖项为空数组，表示仅在组件挂载和卸载时执行一次
 
+    const gsap_ref = useRef(null);
+    useEffect(() => {
+        // XListItem依次渐入
+        if (!gsap_ref.current) {
+            gsap_ref.current = gsap.timeline({repeat: 0});
+
+            // 将动画添加到时间轴中
+            gsap_ref.current.set(`.gsap_title`, {
+                scale: 0,
+                y: 120,
+                opacity: 0,
+                duration: 0,
+            });
+            gsap_ref.current.to(`.gsap_title`, {
+                scale: 1,
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                ease: 'power3.out',
+                stagger: 0.12,
+            });
+        } else {
+            gsap_ref.current.kill();
+            gsap_ref.current = gsap.timeline({repeat: 0});
+
+            // 将动画添加到时间轴中
+            gsap_ref.current.set(`.gsap_title`, {
+                scale: 0,
+                y: 120,
+                opacity: 0,
+                duration: 0,
+            });
+            gsap_ref.current.to(`.gsap_title`, {
+                scale: 1,
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                ease: 'power3.out',
+                stagger: 0.12,
+            });
+        }
+    }, []);
+
     return (
         <Wrapper>
-            <WrapperTop>
-
-            </WrapperTop>
             <WrapperMiddle>
                 <WrapperLeft>
 
                 </WrapperLeft>
-                <WrapperMain tw={'flex justify-start'}>
+                <WrapperMain tw={'flex justify-start overflow-hidden md:overflow-visible'}>
+
+                    <div tw={'flex flex-col px-4 items-center mt-4 mb-1 select-none'}>
+                        <div className={'gsap_title'} tw={'text-2xl font-bold text-blue-300 my-1 tracking-widest'}>
+                            欢迎使用
+                        </div>
+                        <div className={'gsap_title'} tw={'text-7xl md:text-8xl font-extrabold'}>
+                            <span tw={'bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-violet-400 tracking-widest'}>
+                                次元导航
+                            </span>
+                        </div>
+                    </div>
+
 
                     {/*主搜索栏*/}
                     <div tw={'h-20 mx-4 md:mx-16 flex flex-col grow-0 justify-center items-center px-0 z-[700]'}
-                         className={'group gsap_main_fadein'}
+                         // className={'group gsap_main_fadein'}
+                        className={'gsap_title'}
                     >
                         <div
                             tw={'relative flex flex-row transition-shadow shadow-md md:hover:shadow-lg aria-pressed:shadow-lg rounded-full bg-white max-w-3xl w-full'}
@@ -360,14 +415,36 @@ export default function Home() {
 
                     </div>
 
-                    <ErrorWrapper tw={'col-span-4 h-80 flex flex-col gap-4 pt-8 mt-4 mx-4 md:mx-16 px-0'}
-                                  className={'gsap_main_fadein'}
-                    >
-                        <FontAwesomeIcon icon={solid("truck-ramp-box")} fade size="10x" color={"rgb(255,242,241)"}/>
-                        <H1 color={"rgb(255,242,241)"}>主页建设中</H1>
-                        <P tw={'text-lg'} color={"rgb(255,242,241)"}>晚些时候再来吧 <FontAwesomeIcon
-                            icon={solid("face-sad-tear")}/></P>
-                    </ErrorWrapper>
+                    {/*<ErrorWrapper tw={'col-span-4 h-80 flex flex-col gap-4 pt-8 mt-4 mx-4 md:mx-16 px-0'}*/}
+                    {/*              className={'gsap_main_fadein'}*/}
+                    {/*>*/}
+                    {/*    <FontAwesomeIcon icon={solid("truck-ramp-box")} fade size="10x" color={"rgb(255,242,241)"}/>*/}
+                    {/*    <H1 color={"rgb(255,242,241)"}>主页建设中</H1>*/}
+                    {/*    <P tw={'text-lg'} color={"rgb(255,242,241)"}>晚些时候再来吧 <FontAwesomeIcon*/}
+                    {/*        icon={solid("face-sad-tear")}/></P>*/}
+                    {/*</ErrorWrapper>*/}
+
+                    <div tw={'grid grid-cols-4 grow-0 shrink'}>
+                        <div tw={'col-span-4 h-4'}>
+
+                        </div>
+                        <XList title={'热门工具'} gsapClass={'hot_tool'} offset={240} icon={<FontAwesomeIcon icon={solid("screwdriver-wrench")} />}/>
+
+                        <div tw={'col-span-4 h-4'}>
+
+                        </div>
+                        <XList title={'热门资源'} gsapClass={'hot_res'} offset={240} btnText={'获取'}/>
+                    </div>
+
+                    {/*<div tw={'col-span-4 h-4'}>*/}
+
+                    {/*</div>*/}
+                    {/*<XList gsapClass={'zxzy'} offset={240}/>*/}
+
+                    {/*<div tw={'col-span-4 h-4'}>*/}
+
+                    {/*</div>*/}
+                    {/*<XList title={'热门资源'} gsapClass={'rmzy'} offset={240}/>*/}
 
                 </WrapperMain>
                 <WrapperRight>

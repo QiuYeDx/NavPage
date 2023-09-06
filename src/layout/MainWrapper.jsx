@@ -1,6 +1,10 @@
 import tw, { styled } from 'twin.macro'
 import {WIDTH_MIDDLE, WIDTH_MOBILE} from "@/styles/GlobalConfig";
 
+export const PaddingWrapper = styled.div`
+  padding: 0 16px;
+`;
+
 export const WrapperMiddle = styled.div`
   color: black;
   display: flex;
@@ -11,7 +15,7 @@ export const WrapperMiddle = styled.div`
 `
 
 export const WrapperMain = styled.div`
-  padding: 0 10px 0 10px;
+  padding: 0;
   color: black;
   display: flex;
   flex-direction: column;

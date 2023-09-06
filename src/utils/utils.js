@@ -211,3 +211,20 @@ export const modifyNumericPrefix = (str, operation, param) => {
     }
     return null;
 };
+
+/**
+ * 创建N个相同的元素
+ * @param {number} n - 元素的数量
+ * @param {Function} createElement - 用于创建单个元素的函数 可接受一个参数 - 索引i
+ * @returns {Array} 包含N个相同元素的数组
+ *
+ * @example
+ * const elements = createNElements(5, (i) => (
+ *   <div style={{ height: '48px', backgroundColor: '#F3F4F6', lineHeight: '48px' }}>
+ *     Item {i + 1}
+ *   </div>
+ * ));
+ */
+export function createNElements(n, createElement) {
+    return Array.from({ length: n }).map((_, i) => createElement(i));
+}

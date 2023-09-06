@@ -1,6 +1,5 @@
 import React from 'react';
-import {WrapperLeft, WrapperMain, WrapperMiddle, WrapperRight} from "@/layout/MainWrapper";
-import {Wrapper} from "@/modules/Wrapper/Wrapper";
+import {PaddingWrapper, WrapperLeft, WrapperMain, WrapperMiddle, WrapperRight} from "@/layout/MainWrapper";
 import WrapperTop from "@/modules/WrapperTop/WrapperTop";
 import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
 import "twin.macro";
@@ -29,7 +28,7 @@ export default function ResourceView() {
     const isValid = (resourceId) => resourceIds[resourceId];
 
     return (
-        <Wrapper>
+        <PaddingWrapper>
             {isValid(params.resourceId) || location.pathname === '/resources' ?
                 <WrapperTop>
 
@@ -44,6 +43,6 @@ export default function ResourceView() {
                 </WrapperRight>
             </WrapperMiddle>
             <WrapperBottom/>
-        </Wrapper>
+        </PaddingWrapper>
     );
 }

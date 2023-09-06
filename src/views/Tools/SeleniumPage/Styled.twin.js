@@ -1,18 +1,6 @@
 import tw, { styled } from 'twin.macro'
 import {CardWrapper} from "@/components/MainCard/Styled.twin";
 
-export const Wrapper = styled.div`
-  margin: 0 auto 0 auto;
-  max-width: 1000px;
-  //grid-column: span 4 / span 4;
-  
-  display: flex;
-  flex-direction: column;
-  
-  padding: 0 5px 0 5px;
-  ${tw`mt-2 md:mt-0`};
-`
-
 export const ButtonWrapper = styled.div`
 `
 

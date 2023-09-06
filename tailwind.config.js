@@ -83,8 +83,16 @@ module.exports = {
                 'popout_b.3': 'popout_b .3s ease forwards',
                 'popout_b.5': 'popout_b .5s ease forwards',
                 'popout_b.8': 'popout_b .8s ease forwards',
+
+                'maxHeight_in_36.5': 'maxHeight_in_36 .5s ease forwards',
+                'maxHeight_in_36.10': 'maxHeight_in_36 1s ease forwards',
+                'maxHeight_in_36.15': 'maxHeight_in_36 1.5s ease forwards',
             },
             keyframes: {
+                'maxHeight_in_36': {
+                    '0%': { maxHeight: '0' },
+                    '100%': { maxHeight: '36px' },
+                },
                 'fade_in': {
                     '0%': { opacity: 0 },
                     '100%': { opacity: 1 },

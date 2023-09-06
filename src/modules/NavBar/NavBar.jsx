@@ -192,11 +192,11 @@ export default function NavBar() {
                     {/*    />*/}
                     {/*}*/}
                     <LogoText tw={"cursor-default md:cursor-pointer select-none text-blue-400 animate-fade_in_up.5"}>
-                        秋夜{!isMobile && <FontAwesomeIcon icon={solid("paper-plane")} tw={'text-blue-300'}/>}导航
+                        次元{!isMobile && <FontAwesomeIcon icon={solid("paper-plane")} tw={'text-blue-300'}/>}导航
                     </LogoText>
                 </LogoWrapper>
                 <NavList
-                    tw={"cursor-default select-none"}
+                    tw={"cursor-default select-none relative z-1"}
                     onClick={() => {
                         setIsMoreListShown(false);
                     }}>
