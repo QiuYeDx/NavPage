@@ -70,12 +70,14 @@ export default function NavBar() {
 
         const handleScroll = throttle(() => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if(gsap_ref2.current)
-                gsap_ref2.current.kill();
             if (scrollTop > lastScrollTop && scrollTop > 60) {
+                if(gsap_ref2.current)
+                    gsap_ref2.current.kill();
                 // 向下滚动
                 gsap_ref2.current = gsap.to(selfRef.current, {y: '-60px', duration: 0.8, ease: 'power2.out'});
-            } else {
+            } else if (scrollTop < lastScrollTop - 60 || scrollTop <= 60) {
+                if(gsap_ref2.current)
+                    gsap_ref2.current.kill();
                 // 向上滚动
                 gsap_ref2.current = gsap.to(selfRef.current, {y: '0', duration: 0.3, ease: 'power2.out'});
             }
