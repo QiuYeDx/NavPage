@@ -42,7 +42,7 @@ export default function NavBar() {
         }
     };
 
-    const changeMode = useCallback(() => {
+    const changeMode = useCallback((isDarkMode) => {
         const metaToRemove = document.head.querySelector('meta[name="theme-color"]');
         if (metaToRemove) {
             // 从文档头中移除该 meta 标签
@@ -53,17 +53,17 @@ export default function NavBar() {
         metaTag.name = 'theme-color';
 
         let rootHTML = document.documentElement;
-        if (rootHTML.classList.contains('night-mode')) {
-            metaTag.content = '#fff'; // 设置主题颜色为白色
-            rootHTML.classList.remove('night-mode');
-        } else {
+        if(isDarkMode){
             metaTag.content = '#000'; // 设置主题颜色为黑色
             rootHTML.classList.add('night-mode');
+        }else{
+            metaTag.content = '#fff'; // 设置主题颜色为白色
+            rootHTML.classList.remove('night-mode');
         }
-        // 将 meta 标签添加到文档头部
         document.head.appendChild(metaTag);
     }, []);
 
+    // NavBar收起动效
     const gsap_ref2 = useRef(null);
     useEffect(() => {
         let lastScrollTop = 0;
@@ -87,6 +87,33 @@ export default function NavBar() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    useEffect(() => {
+        const checkTime = () => {
+            const currentTime = new Date();
+            const currentHour = currentTime.getHours();
+
+            // 假设晚上7点到早上7点为夜间模式
+            if (currentHour >= 19 || currentHour < 7) {
+                setIsDark(true);
+                changeMode(true);
+                sessionStorage.setItem('isDark', JSON.stringify(true));
+            } else {
+                setIsDark(false);
+                changeMode(false);
+                sessionStorage.setItem('isDark', JSON.stringify(false));
+            }
+        };
+
+        if(sessionStorage.getItem('isDark')){
+            const sessionIsDark = JSON.parse(sessionStorage.getItem('isDark'));
+            setIsDark(sessionIsDark);
+            changeMode(sessionIsDark);
+        }else{
+            // 检查时间并设置夜间模式
+            checkTime();
+        }
+    }, [changeMode]);
 
     const gsap_ref = useRef(null);
     useEffect(() => {
@@ -234,8 +261,9 @@ export default function NavBar() {
                         leftBackgroundIcon={<FontAwesomeIcon icon={solid("moon")}/>}
                         rightBackgroundIcon={<FontAwesomeIcon icon={solid("sun")} spin/>}
                         onChange={() => {
+                            sessionStorage.setItem('isDark', JSON.stringify(!isDark));
                             setIsDark(!isDark);
-                            changeMode();
+                            changeMode(!isDark);
                         }}/>
                 </div>
                 <MoreWrapper
@@ -289,7 +317,7 @@ export default function NavBar() {
                         fadeStyle={'scale'}
                         onChange={() => {
                             setIsDark(!isDark);
-                            changeMode();
+                            changeMode(!isDark);
                         }}/>
                 </div>
             </MoreList>
