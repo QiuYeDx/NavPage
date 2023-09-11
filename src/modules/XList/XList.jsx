@@ -50,6 +50,7 @@ export default function XList({
                 duration: 1.2,
                 ease: 'power3.out',
                 stagger: 0.12,
+                delay: 0.8,
             });
         } else {
             gsap_ref.current.kill();
@@ -67,6 +68,7 @@ export default function XList({
                 duration: 1.2,
                 ease: 'power3.out',
                 stagger: 0.12,
+                delay: 0.8,
             });
         }
     }, []);

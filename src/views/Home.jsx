@@ -299,7 +299,8 @@ export default function Home() {
                 opacity: 1,
                 duration: 1.2,
                 ease: 'power3.out',
-                stagger: 0.12,
+                stagger: 0.2,
+                delay: 0.2,
             });
         } else {
             gsap_ref.current.kill();
@@ -319,6 +320,7 @@ export default function Home() {
                 duration: 1.2,
                 ease: 'power3.out',
                 stagger: 0.12,
+                delay: 0.2,
             });
         }
     }, []);

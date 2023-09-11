@@ -501,7 +501,7 @@ export default function SeleniumPage() {
     }, []); // 依赖项为空数组，表示仅在组件挂载和卸载时执行一次
 
     return (
-        <PaddingWrapper tw={'col-span-4'}>
+        <PaddingWrapper tw={'col-span-4 flex flex-col items-stretch'}>
             <HeaderWrapper>
                 <ButtonWrapper>
                     <BackButton onClick={() => {
@@ -605,79 +605,79 @@ export default function SeleniumPage() {
                         </MButton>
                     </LineWrapper>
                 </ContentWrapper>
-
-                <ContentWrapper>
-                    <LineWrapper>
-                        <InLineTitle tw={'mb-2'}>编写单条指令</InLineTitle>
-                    </LineWrapper>
-
-                    <LineWrapper>
-                        <SelectInput
-                            icon={<FontAwesomeIcon icon={solid("delete-left")}/>}
-                            placeholder={' '}
-                            desc={'选择指令类型'}
-                            id={'input_text5'}
-                            onChange={handleChange5}
-                            onKeyPress={handleKeyPress3}
-                            invalid={invalid5}
-                            text={text5}
-                            setText={setText5}
-                            iconOnClick={() => {
-                                setText5 && setText5('')
-                            }}
-                            selectList={['jump', 'wait', 'click', 'input']}
-                            closeClassName={'closeClassName'}
-                            animate={'tr.3'}
-                        />
-                    </LineWrapper>
-
-                    <LineWrapper>
-                        <TextInput
-                            icon={<FontAwesomeIcon icon={solid("delete-left")}/>}
-                            placeholder={' '}
-                            desc={'输入full xPath元素定位路径'}
-                            id={'input_text3'}
-                            onChange={handleChange3}
-                            onKeyPress={handleKeyPress3}
-                            invalid={invalid3}
-                            text={text3}
-                            setText={setText3}
-                            iconOnClick={() => {
-                                setText3 && setText3('')
-                            }}
-                        />
-                    </LineWrapper>
-
-                    <LineWrapper>
-                        <TextInput
-                            icon={<FontAwesomeIcon icon={solid("delete-left")}/>}
-                            placeholder={' '}
-                            desc={'输入参数（可选）'}
-                            id={'input_text4'}
-                            onChange={handleChange4}
-                            onKeyPress={handleKeyPress3}
-                            invalid={invalid4}
-                            text={text4}
-                            setText={setText4}
-                            iconOnClick={() => {
-                                setText4 && setText4('')
-                            }}
-                        />
-                    </LineWrapper>
-
-                    <LineWrapper tw={'mt-2'}>
-                        <MButton disabled={loading4} h={'36px'} w={'140px'} tw={'rounded-full'}
-                                 onClick={handleSubmit3} ref={button3_ref}>
-                            {
-                                loading4 ?
-                                    <>执行中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
-                                    :
-                                    <>插入指令<FontAwesomeIcon icon={solid("circle-plus")} fade tw={'ml-1'}/></>
-                            }
-                        </MButton>
-                    </LineWrapper>
-                </ContentWrapper>
             </div>
+
+            <ContentWrapper>
+                <LineWrapper>
+                    <InLineTitle tw={'mb-2'}>编写单条指令</InLineTitle>
+                </LineWrapper>
+
+                <LineWrapper>
+                    <SelectInput
+                        icon={<FontAwesomeIcon icon={solid("delete-left")}/>}
+                        placeholder={' '}
+                        desc={'选择指令类型'}
+                        id={'input_text5'}
+                        onChange={handleChange5}
+                        onKeyPress={handleKeyPress3}
+                        invalid={invalid5}
+                        text={text5}
+                        setText={setText5}
+                        iconOnClick={() => {
+                            setText5 && setText5('')
+                        }}
+                        selectList={['jump', 'wait', 'click', 'input']}
+                        closeClassName={'closeClassName'}
+                        animate={'tr.3'}
+                    />
+                </LineWrapper>
+
+                <LineWrapper>
+                    <TextInput
+                        icon={<FontAwesomeIcon icon={solid("delete-left")}/>}
+                        placeholder={' '}
+                        desc={'输入full xPath元素定位路径'}
+                        id={'input_text3'}
+                        onChange={handleChange3}
+                        onKeyPress={handleKeyPress3}
+                        invalid={invalid3}
+                        text={text3}
+                        setText={setText3}
+                        iconOnClick={() => {
+                            setText3 && setText3('')
+                        }}
+                    />
+                </LineWrapper>
+
+                <LineWrapper>
+                    <TextInput
+                        icon={<FontAwesomeIcon icon={solid("delete-left")}/>}
+                        placeholder={' '}
+                        desc={'输入参数（可选）'}
+                        id={'input_text4'}
+                        onChange={handleChange4}
+                        onKeyPress={handleKeyPress3}
+                        invalid={invalid4}
+                        text={text4}
+                        setText={setText4}
+                        iconOnClick={() => {
+                            setText4 && setText4('')
+                        }}
+                    />
+                </LineWrapper>
+
+                <LineWrapper tw={'mt-2'}>
+                    <MButton disabled={loading4} h={'36px'} w={'140px'} tw={'rounded-full'}
+                             onClick={handleSubmit3} ref={button3_ref}>
+                        {
+                            loading4 ?
+                                <>执行中<FontAwesomeIcon icon={solid("spinner")} spin tw={'ml-1'}/></>
+                                :
+                                <>插入指令<FontAwesomeIcon icon={solid("circle-plus")} fade tw={'ml-1'}/></>
+                        }
+                    </MButton>
+                </LineWrapper>
+            </ContentWrapper>
 
             <ContentWrapper tw={'min-h-0 h-32'}>
                 <LineWrapper>
