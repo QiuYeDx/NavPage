@@ -170,7 +170,7 @@ export default function Home() {
                                 .map((v, i) =>
                                 <div
                                     tw={'flex flex-row items-center my-0.5 md:hover:bg-gray-50 md:hover:cursor-pointer rounded-xl select-none'}
-                                    className={'group closeClassName'}>
+                                    className={'group closeClassName'} key={`record-${i}`}>
                                     <div tw={'relative h-8 w-8 -left-0.5 shrink-0'} className={'closeClassName'}>
                                         <FontAwesomeIcon icon={regular("clock")}
                                                          tw={'absolute inset-0 m-auto h-3.5 w-3.5 text-gray-500'}/>
@@ -218,7 +218,7 @@ export default function Home() {
                     {
                         topics.slice(0, showNumber > topics.length ? topics.length : showNumber).map((v, i) => <div
                             tw={'flex flex-row items-center my-0.5 md:hover:bg-gray-50 md:hover:cursor-pointer rounded-xl select-none'}
-                            className={'group closeClassName'}>
+                            className={'group closeClassName'} key={`topics-${i}`}>
                             <div tw={'relative h-8 w-8 -left-0.5 shrink-0'} className={'closeClassName'}>
                                 <FontAwesomeIcon
                                     icon={i < 3 ? solid("fire") : solid("magnifying-glass")}
@@ -325,6 +325,51 @@ export default function Home() {
         }
     }, []);
 
+    const gsap_ref2 = useRef(null);
+    useEffect(() => {
+        // title's letter 浮动动画
+        if (!gsap_ref2.current) {
+            gsap_ref2.current = gsap.timeline({repeat: -1});
+
+            // 将动画添加到时间轴中
+            gsap_ref2.current.set(`.gsap_letter`, {
+                // y: 0,
+                rotate: 0,
+                duration: 0,
+            });
+            gsap_ref2.current.to(`.gsap_letter`, {
+                // y: -15,
+                rotate: -20,
+                duration: 0.5,
+                ease: 'back.inOut',
+                stagger: 0.15,
+                delay: 1.4,
+                yoyo: true,
+                repeat: 1,
+            });
+        } else {
+            gsap_ref2.current.kill();
+            gsap_ref2.current = gsap.timeline({repeat: -1});
+
+            // 将动画添加到时间轴中
+            gsap_ref2.current.set(`.gsap_letter`, {
+                // y: 0,
+                rotate: 0,
+                duration: 0,
+            });
+            gsap_ref2.current.to(`.gsap_letter`, {
+                // y: -15,
+                rotate: -20,
+                duration: 0.5,
+                ease: 'back.inOut',
+                stagger: 0.15,
+                delay: 1.4,
+                yoyo: true,
+                repeat: 1,
+            });
+        }
+    }, []);
+
     return (
         <Wrapper>
             <WrapperMiddle>
@@ -337,13 +382,15 @@ export default function Home() {
                         <div className={'gsap_title'} tw={'text-2xl font-bold text-blue-300 my-1 tracking-widest'}>
                             欢迎使用
                         </div>
-                        <div className={'gsap_title'} tw={'text-7xl md:text-8xl font-extrabold'}>
-                            <span tw={'bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-violet-400 tracking-widest'}>
-                                次元导航
-                            </span>
+                        <div className={'gsap_title'} tw={'text-7xl md:text-8xl font-extrabold mt-1 drop-shadow-md'}>
+                            <div tw={'flex tracking-widest'}>
+                                <div tw={'bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-pink-400'} key={'t1'} className={'gsap_letter'}>次</div>
+                                <div tw={'bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-violet-400'} key={'t2'} className={'gsap_letter'}>元</div>
+                                <div tw={'bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-blue-400'} key={'t3'} className={'gsap_letter'}>导</div>
+                                <div tw={'bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-500'} key={'t4'} className={'gsap_letter'}>航</div>
+                            </div>
                         </div>
                     </div>
-
 
                     {/*主搜索栏*/}
                     <div tw={'h-20 mx-4 md:mx-16 flex flex-col grow-0 justify-center items-center px-0 z-[700]'}
@@ -417,15 +464,6 @@ export default function Home() {
 
                     </div>
 
-                    {/*<ErrorWrapper tw={'col-span-4 h-80 flex flex-col gap-4 pt-8 mt-4 mx-4 md:mx-16 px-0'}*/}
-                    {/*              className={'gsap_main_fadein'}*/}
-                    {/*>*/}
-                    {/*    <FontAwesomeIcon icon={solid("truck-ramp-box")} fade size="10x" color={"rgb(255,242,241)"}/>*/}
-                    {/*    <H1 color={"rgb(255,242,241)"}>主页建设中</H1>*/}
-                    {/*    <P tw={'text-lg'} color={"rgb(255,242,241)"}>晚些时候再来吧 <FontAwesomeIcon*/}
-                    {/*        icon={solid("face-sad-tear")}/></P>*/}
-                    {/*</ErrorWrapper>*/}
-
                     <div tw={'grid grid-cols-4 grow-0 shrink'}>
                         <div tw={'col-span-4 h-4'}>
 
@@ -437,16 +475,6 @@ export default function Home() {
                         </div>
                         <XList title={'热门资源'} gsapClass={'hot_res'} offset={240} btnText={'获取'}/>
                     </div>
-
-                    {/*<div tw={'col-span-4 h-4'}>*/}
-
-                    {/*</div>*/}
-                    {/*<XList gsapClass={'zxzy'} offset={240}/>*/}
-
-                    {/*<div tw={'col-span-4 h-4'}>*/}
-
-                    {/*</div>*/}
-                    {/*<XList title={'热门资源'} gsapClass={'rmzy'} offset={240}/>*/}
 
                 </WrapperMain>
                 <WrapperRight>

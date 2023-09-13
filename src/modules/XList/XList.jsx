@@ -7,6 +7,7 @@ import Picture from "@/components/PictureDisplay/Pictrue";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {MButton, MButtonLight} from "@/components/Button/Styled.twin";
+import {ScrollWrapper} from "@/modules/XList/Styled.twin";
 
 /**
  * XList Component
@@ -87,12 +88,12 @@ export default function XList({
             </div>
 
             <div tw={'relative col-span-4 h-[300px] w-full'}>
-                <div
+                <ScrollWrapper
                     tw={'h-full w-full overflow-x-auto flex gap-2 md:gap-10 snap-x snap-mandatory scroll-px-3 scroll-smooth px-3 -my-2 py-2'}>
-                    {createNElements(8, () =>
-                        <div tw={'h-full w-[330px] shrink-0 flex flex-col gap-1 justify-evenly snap-start snap-always'}>
+                    {createNElements(8, (k) =>
+                        <div key={`xlist-col-${k}`} tw={'h-full w-[330px] shrink-0 flex flex-col gap-1 justify-evenly snap-start snap-always'}>
                             {createNElements(3, (i) =>
-                                <div className={gsapClass}
+                                <div key={`xlist-col-${k}-item-${i}`} className={gsapClass}
                                      tw={'h-[72px] shadow-lg rounded-xl bg-white mx-1 flex justify-start px-2 items-center'}>
                                     <Picture errorFlag={true} fadeStyle={'scale'} h={'52px'} w={'52px'} alt={icon}/>
                                     <div tw={'flex flex-col justify-center text-left'}>
@@ -121,8 +122,7 @@ export default function XList({
                     <div tw={'hidden md:block absolute -top-2 -left-9 h-[290px] w-12 bg-gradient-to-r backdrop-blur'}>
 
                     </div>
-
-                </div>
+                </ScrollWrapper>
             </div>
 
         </>
