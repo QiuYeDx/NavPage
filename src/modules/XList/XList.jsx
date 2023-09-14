@@ -1,13 +1,15 @@
 import {createNElements} from "@/utils/utils";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef} from "react";
 import tw from 'twin.macro';
 import 'twin.macro';
 import gsap from "gsap";
 import Picture from "@/components/PictureDisplay/Pictrue";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {MButton, MButtonLight} from "@/components/Button/Styled.twin";
+import {MButtonLight} from "@/components/Button/Styled.twin";
 import {ScrollWrapper} from "@/modules/XList/Styled.twin";
+import useHorizontalScroll from "@/hooks/useScroll";
+import DiscreteProgress from "@/modules/XList/DiscreteProgress";
 
 /**
  * XList Component
@@ -32,7 +34,10 @@ export default function XList({
                                   icon = <FontAwesomeIcon icon={solid("layer-group")} />,
                                   btnText = '打开',
                               }) {
-
+    const MD_COL_WIDTH = 370;
+    const COL_WIDTH = 338;
+    const scrollRef = useRef(null);
+    const { clientWidth, scrollWidth, scrollPercentage, scrollLeft, fetchCurrentScrollDetails } = useHorizontalScroll(scrollRef, true);
     const gsap_ref = useRef(null);
     useEffect(() => {
         // XListItem依次渐入
@@ -87,8 +92,9 @@ export default function XList({
                 </div>
             </div>
 
-            <div tw={'relative col-span-4 h-[300px] w-full'}>
-                <ScrollWrapper
+            <div tw={'relative col-span-4 h-[300px] w-full pb-2'}>
+                {/* 滚动一列 向左移动 370px */}
+                <ScrollWrapper ref={scrollRef}
                     tw={'h-full w-full overflow-x-auto flex gap-2 md:gap-10 snap-x snap-mandatory scroll-px-3 scroll-smooth px-3 -my-2 py-2'}>
                     {createNElements(8, (k) =>
                         <div key={`xlist-col-${k}`} tw={'h-full w-[330px] shrink-0 flex flex-col gap-1 justify-evenly snap-start snap-always'}>
@@ -123,8 +129,11 @@ export default function XList({
 
                     </div>
                 </ScrollWrapper>
+                <div tw={'absolute left-2/4 -translate-x-2/4 translate-y-2'}>
+                    <DiscreteProgress clientWidth={clientWidth} scrollWidth={scrollWidth} scrollLeft={scrollLeft} scrollPercentage={scrollPercentage} numberOfSteps={Math.floor(scrollWidth / COL_WIDTH) - Math.floor(clientWidth / COL_WIDTH)} distancePerStep={COL_WIDTH} scrollRef={scrollRef}/>
+                </div>
+                {/*<div>{[clientWidth, scrollWidth, scrollPercentage, scrollLeft].join(' / ')}</div>*/}
             </div>
-
         </>
     );
 }

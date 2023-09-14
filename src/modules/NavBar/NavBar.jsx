@@ -169,7 +169,7 @@ export default function NavBar() {
             <NavWrapper hasShadow={true} ref={selfRef}>
                 <LogoWrapper onClick={() => {
                     setIsMoreListShown(false);
-                    notify_error("暂未完工", "not_completed1");
+                    // notify_error("暂未完工", "not_completed1");
                     if (location.pathname === '/')
                         window.scrollTo({
                             top: 0,
@@ -201,7 +201,7 @@ export default function NavBar() {
                         setIsMoreListShown(false);
                     }}>
                     <NavItem to="/" onClick={() => {
-                        notify_error("暂未完工", "not_completed2");
+                        // notify_error("暂未完工", "not_completed2");
                         if (location.pathname === '/')
                             window.scrollTo({
                                 top: 0,
@@ -225,7 +225,7 @@ export default function NavBar() {
                         工具
                     </NavItem>
                     <NavItem to="/resources" onClick={() => {
-                        notify_error("暂未完工", "not_completed4");
+                        // notify_error("暂未完工", "not_completed4");
                         if (location.pathname === '/resources')
                             window.scrollTo({
                                 top: 0,
