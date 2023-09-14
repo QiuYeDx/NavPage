@@ -1,5 +1,5 @@
 import {createNElements} from "@/utils/utils";
-import React, {useEffect, useRef} from "react";
+import React, {useLayoutEffect, useRef} from "react";
 import tw from 'twin.macro';
 import 'twin.macro';
 import gsap from "gsap";
@@ -10,6 +10,8 @@ import {MButtonLight} from "@/components/Button/Styled.twin";
 import {ScrollWrapper} from "@/modules/XList/Styled.twin";
 import useHorizontalScroll from "@/hooks/useScroll";
 import DiscreteProgress from "@/modules/XList/DiscreteProgress";
+import {useMediaQuery} from "@/hooks/utilsHooks";
+import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
 
 /**
  * XList Component
@@ -34,12 +36,13 @@ export default function XList({
                                   icon = <FontAwesomeIcon icon={solid("layer-group")} />,
                                   btnText = '打开',
                               }) {
+    const isMobile = useMediaQuery(`(max-width: ${WIDTH_MOBILE}px)`);
     const MD_COL_WIDTH = 370;
     const COL_WIDTH = 338;
     const scrollRef = useRef(null);
     const { clientWidth, scrollWidth, scrollPercentage, scrollLeft, fetchCurrentScrollDetails } = useHorizontalScroll(scrollRef, true);
     const gsap_ref = useRef(null);
-    useEffect(() => {
+    useLayoutEffect(() => {
         // XListItem依次渐入
         if (!gsap_ref.current) {
             gsap_ref.current = gsap.timeline({repeat: 0});
@@ -110,7 +113,7 @@ export default function XList({
 
                                     </div>
                                     <MButtonLight
-                                        tw={'mr-2'}
+                                        tw={'mr-2 md:hover:bg-blue-100 md:active:text-blue-600 md:active:bg-blue-200'}
                                         h={'28px'}
                                         w={'68px'}
                                         onClick={() => {
@@ -130,7 +133,7 @@ export default function XList({
                     </div>
                 </ScrollWrapper>
                 <div tw={'absolute left-2/4 -translate-x-2/4 translate-y-2'}>
-                    <DiscreteProgress clientWidth={clientWidth} scrollWidth={scrollWidth} scrollLeft={scrollLeft} scrollPercentage={scrollPercentage} numberOfSteps={Math.floor(scrollWidth / COL_WIDTH) - Math.floor(clientWidth / COL_WIDTH)} distancePerStep={COL_WIDTH} scrollRef={scrollRef}/>
+                    <DiscreteProgress clientWidth={clientWidth} scrollWidth={scrollWidth} scrollLeft={scrollLeft} scrollPercentage={scrollPercentage} numberOfSteps={Math.floor(scrollWidth / (isMobile ? COL_WIDTH : MD_COL_WIDTH)) - Math.floor(clientWidth / (isMobile ? COL_WIDTH : MD_COL_WIDTH))} distancePerStep={(isMobile ? COL_WIDTH : MD_COL_WIDTH)} scrollRef={scrollRef}/>
                 </div>
                 {/*<div>{[clientWidth, scrollWidth, scrollPercentage, scrollLeft].join(' / ')}</div>*/}
             </div>

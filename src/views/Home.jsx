@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {
     WrapperMiddle, WrapperLeft,
     WrapperRight, WrapperMain
@@ -281,7 +281,7 @@ export default function Home() {
     }, []); // 依赖项为空数组，表示仅在组件挂载和卸载时执行一次
 
     const gsap_ref = useRef(null);
-    useEffect(() => {
+    useLayoutEffect(() => {
         // XListItem依次渐入
         if (!gsap_ref.current) {
             gsap_ref.current = gsap.timeline({repeat: 0});
@@ -326,7 +326,7 @@ export default function Home() {
     }, []);
 
     const gsap_ref2 = useRef(null);
-    useEffect(() => {
+    useLayoutEffect(() => {
         // title's letter 浮动动画
         if (!gsap_ref2.current) {
             gsap_ref2.current = gsap.timeline({repeat: -1});
