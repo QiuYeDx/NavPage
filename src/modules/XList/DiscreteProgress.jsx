@@ -34,7 +34,7 @@
 //
 // export default DiscreteProgress;
 
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import tw, { styled } from 'twin.macro'
 import gsap from "gsap";
 import {randomNum} from "@/utils/utils";
@@ -56,7 +56,10 @@ import {randomNum} from "@/utils/utils";
  */
 const DiscreteProgress = ({ clientWidth, scrollWidth, scrollLeft, numberOfSteps = 5, distancePerStep = 100, gsapClass = null, scrollRef }) => {
     const activeStep = Math.min(numberOfSteps, Math.floor(scrollLeft / distancePerStep) + 1);
+    console.info(numberOfSteps, Math.floor(scrollLeft / distancePerStep) + 1);
     const random_num = randomNum(0, 999);
+    const [DELAY, setDELAY] = useState(1.8);
+    const notFirst = useRef(false);
     const [defaultGsapClass] = useState(`gsap_discrete_progress_${random_num}`);
 
     const gsap_ref = useRef(null);
@@ -78,7 +81,10 @@ const DiscreteProgress = ({ clientWidth, scrollWidth, scrollLeft, numberOfSteps 
                     duration: 1.2,
                     ease: 'power3.out',
                     stagger: 0.12,
-                    delay: 1.8,
+                    delay: DELAY,
+                    callback: () => {
+                        notFirst.current = true;
+                    },
                 });
             } else {
                 gsap_ref.current.kill();
@@ -96,11 +102,19 @@ const DiscreteProgress = ({ clientWidth, scrollWidth, scrollLeft, numberOfSteps 
                     duration: 1.2,
                     ease: 'power3.out',
                     stagger: 0.12,
-                    delay: 1.8,
+                    delay: DELAY,
+                    callback: () => {
+                        notFirst.current = true;
+                    },
                 });
             }
         }, 100);
-    }, []);
+    }, [numberOfSteps]);
+
+    useLayoutEffect(() => {
+        if(notFirst.current)
+            setDELAY(0);
+    }, [numberOfSteps]);
 
     return (
         <div tw="flex space-x-2 opacity-70 md:hover:opacity-100 active:opacity-100 duration-300">

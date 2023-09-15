@@ -174,6 +174,7 @@
 // export default useHorizontalScroll;
 
 import { useState, useEffect, useCallback } from 'react';
+import {throttle} from "@/utils/throttle";
 
 /**
  * Hook to get the horizontal scroll details of an element.
@@ -223,10 +224,10 @@ function useHorizontalScroll(ref, onlyOnMount = false) {
             }
         };
 
-        const handleResize = () => {
+        const handleResize = throttle(() => {
             updateDimensions();
             updateScrollState();
-        };
+        }, 150);
 
         ref.current.addEventListener('scroll', handleScroll);
         window.addEventListener('resize', handleResize);
