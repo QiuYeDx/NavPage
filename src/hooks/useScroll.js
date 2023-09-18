@@ -173,7 +173,7 @@
 //
 // export default useHorizontalScroll;
 
-import { useState, useEffect, useCallback } from 'react';
+import {useState, useEffect, useCallback, useLayoutEffect} from 'react';
 import {throttle} from "@/utils/throttle";
 
 /**
@@ -212,7 +212,7 @@ function useHorizontalScroll(ref, onlyOnMount = false) {
         }
     }, [ref]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (onlyOnMount) {
             updateDimensions();
         }

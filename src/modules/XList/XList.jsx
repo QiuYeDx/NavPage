@@ -1,5 +1,5 @@
 import {createNElements} from "@/utils/utils";
-import React, {useLayoutEffect, useRef} from "react";
+import React, {useEffect, useLayoutEffect, useRef} from "react";
 import tw from 'twin.macro';
 import 'twin.macro';
 import gsap from "gsap";
@@ -40,8 +40,13 @@ export default function XList({
     const MD_COL_WIDTH = 370;
     const COL_WIDTH = 338;
     const scrollRef = useRef(null);
-    const { clientWidth, scrollWidth, scrollPercentage, scrollLeft, fetchCurrentScrollDetails } = useHorizontalScroll(scrollRef, true);
+    const { clientWidth, scrollWidth, scrollPercentage, scrollLeft } = useHorizontalScroll(scrollRef, true);
     const gsap_ref = useRef(null);
+
+    useEffect(() => {
+        console.info('isMobile, clientWidth, scrollWidth, scrollPercentage, scrollLeft: ', isMobile, clientWidth, scrollWidth, scrollPercentage, scrollLeft);
+    }, [isMobile, clientWidth, scrollWidth, scrollPercentage, scrollLeft]);
+
     useLayoutEffect(() => {
         // XListItem依次渐入
         if (!gsap_ref.current) {
@@ -133,7 +138,7 @@ export default function XList({
                     </div>
                 </ScrollWrapper>
                 <div tw={'absolute left-2/4 -translate-x-2/4 translate-y-2'}>
-                    <DiscreteProgress clientWidth={clientWidth} scrollWidth={scrollWidth} scrollLeft={scrollLeft} scrollPercentage={scrollPercentage} numberOfSteps={Math.floor(scrollWidth / (isMobile ? COL_WIDTH : MD_COL_WIDTH)) - Math.floor(clientWidth / (isMobile ? COL_WIDTH : MD_COL_WIDTH))} distancePerStep={(isMobile ? COL_WIDTH : MD_COL_WIDTH)} scrollRef={scrollRef}/>
+                    <DiscreteProgress clientWidth={clientWidth} scrollWidth={scrollWidth} scrollLeft={scrollLeft} scrollPercentage={scrollPercentage} numberOfSteps={Math.floor((scrollWidth - clientWidth) / (isMobile ? COL_WIDTH : MD_COL_WIDTH)) + 1} distancePerStep={(isMobile ? COL_WIDTH : MD_COL_WIDTH)} scrollRef={scrollRef}/>
                 </div>
                 {/*<div>{[clientWidth, scrollWidth, scrollPercentage, scrollLeft].join(' / ')}</div>*/}
             </div>
