@@ -56,7 +56,7 @@ import {randomNum} from "@/utils/utils";
  */
 const DiscreteProgress = ({ clientWidth, scrollWidth, scrollLeft, numberOfSteps = 5, distancePerStep = 100, gsapClass = null, scrollRef }) => {
     const activeStep = Math.min(numberOfSteps, Math.floor((scrollLeft + 170) / distancePerStep) + 1);
-    console.info(numberOfSteps, Math.floor(scrollLeft / distancePerStep) + 1);
+    // console.info(numberOfSteps, Math.floor(scrollLeft / distancePerStep) + 1);
     const random_num = randomNum(0, 999);
     const [DELAY, setDELAY] = useState(1.8);
     const notFirst = useRef(false);

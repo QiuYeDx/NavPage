@@ -43,10 +43,6 @@ export default function XList({
     const { clientWidth, scrollWidth, scrollPercentage, scrollLeft } = useHorizontalScroll(scrollRef, true);
     const gsap_ref = useRef(null);
 
-    useEffect(() => {
-        console.info('isMobile, clientWidth, scrollWidth, scrollPercentage, scrollLeft: ', isMobile, clientWidth, scrollWidth, scrollPercentage, scrollLeft);
-    }, [isMobile, clientWidth, scrollWidth, scrollPercentage, scrollLeft]);
-
     useLayoutEffect(() => {
         // XListItem依次渐入
         if (!gsap_ref.current) {
