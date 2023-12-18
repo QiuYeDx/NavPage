@@ -10,7 +10,7 @@ const CustomStyles = createGlobalStyle`
   
   html.night-mode{
     filter: brightness(0.5);
-    transition: filter 0.41s ease;
+    transition: filter 1.2s ease;
   }
   
   body {

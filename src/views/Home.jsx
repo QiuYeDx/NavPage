@@ -21,7 +21,7 @@ import {useBeforeUnload} from "react-router-dom";
 import axios from "axios";
 import {log_api_config} from "@/GlobalConfig";
 import Picture from "@/components/PictureDisplay/Pictrue";
-import {decodeSearchKey, encodeSearchKey, isIOS} from "@/utils/utils";
+import {decodeSearchKey, encodeSearchKey, isIOS, isSafari} from "@/utils/utils";
 import XList from "@/modules/XList/XList";
 import gsap from "gsap";
 
@@ -382,7 +382,7 @@ export default function Home() {
                         <div className={'gsap_title'} tw={'text-2xl font-bold text-blue-300 my-1 tracking-widest'}>
                             欢迎使用
                         </div>
-                        <div aria-checked={!isIOS()} className={'gsap_title'} tw={'text-7xl md:text-8xl font-extrabold mt-1 aria-checked:drop-shadow-md'}>
+                        <div aria-checked={!isSafari()} className={'gsap_title'} tw={'text-7xl md:text-8xl font-extrabold mt-1 aria-checked:drop-shadow-md'}>
                             <div tw={'flex tracking-widest'}>
                                 <div tw={'bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-pink-400'} key={'t1'} className={'gsap_letter'}>次</div>
                                 <div tw={'bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-violet-400'} key={'t2'} className={'gsap_letter'}>元</div>

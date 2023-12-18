@@ -68,6 +68,7 @@ export default function BilibiliPage() {
     async function fetchData(url, params) {
         try {
             const response = await axios.get(url, {params});
+
             if (response.data.code === 0) {
                 throw new Error('1005');
             }
@@ -95,6 +96,8 @@ export default function BilibiliPage() {
 
             // 更新服务请求次数
             setCount((await log_api_config.awaitCountAPI('PUT', 'bilibili')).data[0].count);
+
+            return response;
 
         } catch (error) {
             if (error.message === ErrorCode.NONE_RESULT_ERROR) {
@@ -138,8 +141,18 @@ export default function BilibiliPage() {
             app_id: app_config.app_id,
             app_secret: app_config.app_secret,
         };
-        fetchData(url, params).then(r => r).catch(e => e);
+        fetchDataByCount(url, params, 6);
+    };
 
+    const fetchDataByCount = (url, params, count) => {
+        fetchData(url, params).then((res) => {
+            if (count === 0) return;
+            if (res.data.code === 10085) {
+                setTimeout(() => {
+                    fetchDataByCount(url, params, count - 1);
+                }, 800);
+            }
+        }).catch(e => e);
     };
 
     useBeforeUnload(() => {
@@ -268,7 +281,7 @@ export default function BilibiliPage() {
             <ContentWrapper>
                 <LineWrapper>
                     <InLineTitle tw={'mb-2'}>获取<FontAwesomeIcon icon={solid("link")}
-                                                                tw={"text-blue-400 pl-1 pr-1 duration-500 ease-out"}/>结果</InLineTitle>
+                                                                  tw={"text-blue-400 pl-1 pr-1 duration-500 ease-out"}/>结果</InLineTitle>
                 </LineWrapper>
                 <LineWrapper>
                     <Picture

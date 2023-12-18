@@ -90,6 +90,10 @@ export function downloadWithProgress(url, loading_callback, finished_callback, i
     });
 }
 
+export function isSafari() {
+    return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+}
+
 export function isIOS() {
     const userAgent = window.navigator.userAgent.toLowerCase();
     return /iphone|ipad|ipod/.test(userAgent);
