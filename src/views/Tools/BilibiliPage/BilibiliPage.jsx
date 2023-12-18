@@ -71,6 +71,8 @@ export default function BilibiliPage() {
 
             if (response.data.code === 0) {
                 throw new Error('1005');
+            } else if (response.data.code === 10085) {
+                return response;
             }
             setData(response.data.data);
             setList(response.data.data.list);
@@ -96,8 +98,6 @@ export default function BilibiliPage() {
 
             // 更新服务请求次数
             setCount((await log_api_config.awaitCountAPI('PUT', 'bilibili')).data[0].count);
-
-            return response;
 
         } catch (error) {
             if (error.message === ErrorCode.NONE_RESULT_ERROR) {
@@ -141,7 +141,7 @@ export default function BilibiliPage() {
             app_id: app_config.app_id,
             app_secret: app_config.app_secret,
         };
-        fetchDataByCount(url, params, 6);
+        fetchDataByCount(url, params, 10);
     };
 
     const fetchDataByCount = (url, params, count) => {
