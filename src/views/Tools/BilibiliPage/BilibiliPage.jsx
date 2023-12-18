@@ -99,7 +99,6 @@ export default function BilibiliPage() {
             // 更新服务请求次数
             setCount((await log_api_config.awaitCountAPI('PUT', 'bilibili')).data[0].count);
             setLoading(false);
-
         } catch (error) {
             if (error.message === ErrorCode.NONE_RESULT_ERROR) {
                 console.warn('None result error');
@@ -147,8 +146,7 @@ export default function BilibiliPage() {
     const fetchDataByCount = (url, params, count) => {
         fetchData(url, params).then((res) => {
             if (count === 0) return;
-            console.info('>>>', res);
-            if (res.data.code === 10085 || res.code === 10085) {
+            if (res.data.code === 10085) {
                 setTimeout(() => {
                     fetchDataByCount(url, params, count - 1);
                 }, 800);
