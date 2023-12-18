@@ -98,6 +98,7 @@ export default function BilibiliPage() {
 
             // 更新服务请求次数
             setCount((await log_api_config.awaitCountAPI('PUT', 'bilibili')).data[0].count);
+            setLoading(false);
 
         } catch (error) {
             if (error.message === ErrorCode.NONE_RESULT_ERROR) {
@@ -112,7 +113,6 @@ export default function BilibiliPage() {
             } else {
                 console.warn('Failed to put counts');
             }
-        } finally {
             setLoading(false);
         }
     }
