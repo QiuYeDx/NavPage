@@ -147,7 +147,8 @@ export default function BilibiliPage() {
     const fetchDataByCount = (url, params, count) => {
         fetchData(url, params).then((res) => {
             if (count === 0) return;
-            if (res.data.code === 10085) {
+            console.info('>>>', res);
+            if (res.data.code === 10085 || res.code === 10085) {
                 setTimeout(() => {
                     fetchDataByCount(url, params, count - 1);
                 }, 800);
