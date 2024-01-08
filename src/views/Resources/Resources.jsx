@@ -52,21 +52,21 @@ export default function Resources() {
                 <WrapperMain>
 
                     <AppleCard
-                        key={'CompDisplay'}
+                        key={'ModelDisplay'}
                         theme={'gradient_blue'}
                         h={"360px"}
                         k={0.5}
                         tw_card={tw`col-span-4`}
                         tw_content={tw`tracking-wide text-7xl`}
-                        icon={<FontAwesomeIcon icon={solid("cubes")}
+                        icon={<FontAwesomeIcon icon={solid("street-view")}
                                                tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
                         />}
                         onClick={() => {
-                            navigate("/resources/CompDisplay");
+                            navigate("/ModelDisplay");
                             window.scroll(0, 0);
                         }}
                     >
-                        组件展示
+                        虚拟手办
                     </AppleCard>
 
                     <div tw={'col-span-4 h-4'}>
