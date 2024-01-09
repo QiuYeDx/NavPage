@@ -34,7 +34,6 @@ function useHorizontalScroll(ref, onlyOnMount = false) {
         if (ref.current) {
             const { scrollLeft, clientWidth, scrollWidth } = ref.current;
             const scrollPercentage = (scrollLeft / (scrollWidth - clientWidth)) * 100;
-            console.info('>>> update scrollLeft: ', scrollLeft);
             setScrollState({ scrollPercentage, scrollLeft });
         }
     }, [ref]);
