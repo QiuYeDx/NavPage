@@ -48,6 +48,8 @@ export const BackButton = styled.div`
   bg-white font-sans font-semibold text-gray-700 md:hover:text-gray-400 active:text-gray-400 md:active:text-gray-500 text-center align-middle select-none md:cursor-pointer \
   md:w-48`};
 
+  ${({scaleIn}) => scaleIn ? tw`animate-scale_fade_in.4` : ''};
+
   @media (min-width: ${WIDTH_MOBILE}px) {
     &::${({content_direction}) => content_direction ? content_direction : 'after'} {
       content: "${({content}) => content ? content : '返 回'}";
@@ -68,6 +70,8 @@ export const PageButton = styled.div`
   ${tw`flex justify-center items-center shadow-lg rounded-full active:shadow-md md:active:shadow-md md:hover:shadow-xl animate-fade_in_up.4 \
   bg-white font-sans font-semibold text-gray-700 md:hover:text-gray-400 active:text-gray-400 md:active:text-gray-500 text-center align-middle select-none md:cursor-pointer`};
 
+  ${({scaleIn}) => scaleIn ? tw`animate-scale_fade_in.4` : ''};
+  
   ${({active}) => active ? tw`bg-blue-400 text-white ring-blue-200 ring-4 md:hover:bg-blue-300 md:hover:text-white active:text-blue-300 active:bg-blue-500 active:ring-blue-400` : ''};
 `
 

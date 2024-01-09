@@ -33,6 +33,9 @@ module.exports = {
                 '2xl': '480px',
             },
             animation: {
+                'scale_fade_in.3': 'scale_fade_in .3s ease forwards',
+                'scale_fade_in.4': 'scale_fade_in .4s ease forwards',
+                'scale_fade_in.5': 'scale_fade_in .5s ease forwards',
                 'fade_in.8': 'fade_in .8s ease forwards',
                 'fade_in_up.1': 'fade_in_up .1s ease-out forwards',
                 'fade_in_up.2': 'fade_in_up .2s ease-out forwards',
@@ -92,6 +95,16 @@ module.exports = {
                 'maxHeight_in_36': {
                     '0%': { maxHeight: '0' },
                     '100%': { maxHeight: '36px' },
+                },
+                'scale_fade_in': {
+                    '0%': {
+                        scale: 0,
+                        opacity: 0,
+                    },
+                    '100%': {
+                        scale: 1,
+                        opacity: 1,
+                    },
                 },
                 'fade_in': {
                     '0%': { opacity: 0 },

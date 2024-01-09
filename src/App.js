@@ -12,11 +12,13 @@ import Dashboard from "@/views/Dashboard/Dashboard";
 import ToolView from "@/views/Tools/ToolView";
 import ResourceView from "@/views/Resources/ResourceView";
 import ModelDisplay from "@/views/Resources/ModelDisplay/ModelDisplay";
+import {useWindowSize} from "react-use";
 
 function App() {
+    const {width, height} = useWindowSize();
     return (
         <>
-            <Wrapper id={'rootWrapper'}>
+            <Wrapper style={{ width, minHeight: height}} id={'rootWrapper'}>
                 <HashRouter>
                     <NavBar/>
                     <Routes>

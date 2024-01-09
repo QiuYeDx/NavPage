@@ -232,3 +232,8 @@ export const modifyNumericPrefix = (str, operation, param) => {
 export function createNElements(n, createElement) {
     return Array.from({ length: n }).map((_, i) => createElement(i));
 }
+
+export function isiPhone() {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    return /iphone/.test(userAgent) && !/ipad/.test(userAgent);
+}
