@@ -174,7 +174,7 @@
 // export default useHorizontalScroll;
 
 import {useState, useEffect, useCallback, useLayoutEffect} from 'react';
-import {throttle} from "@/utils/throttle";
+import {useWindowSize} from "react-use";
 
 /**
  * Hook to get the horizontal scroll details of an element.
@@ -188,6 +188,7 @@ import {throttle} from "@/utils/throttle";
  * const { clientWidth, scrollWidth, scrollPercentage, scrollLeft, fetchCurrentScrollDetails } = useHorizontalScroll(ref, true);
  */
 function useHorizontalScroll(ref, onlyOnMount = false) {
+    const {width} = useWindowSize();
     const [dimensions, setDimensions] = useState({
         clientWidth: 0,
         scrollWidth: 0,
@@ -224,20 +225,18 @@ function useHorizontalScroll(ref, onlyOnMount = false) {
             }
         };
 
-        const handleResize = throttle(() => {
-            updateDimensions();
-            updateScrollState();
-        }, 150);
-
         ref.current.addEventListener('scroll', handleScroll);
-        window.addEventListener('resize', handleResize);
 
         // Cleanup on unmount
         return (ref) => {
             ref && ref.current && ref.current.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('resize', handleResize);
         };
     }, [onlyOnMount, updateScrollState, updateDimensions]);
+
+    useEffect(() => {
+        updateDimensions();
+        updateScrollState();
+    }, [width]);
 
     const fetchCurrentScrollDetails = useCallback(() => {
         updateDimensions();
