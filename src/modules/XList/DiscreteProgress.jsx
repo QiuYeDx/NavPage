@@ -56,9 +56,10 @@ import {randomNum} from "@/utils/utils";
  */
 const DiscreteProgress = ({ clientWidth, scrollWidth, scrollLeft, numberOfSteps = 5, distancePerStep = 100, gsapClass = null, scrollRef }) => {
     const activeStep = Math.min(numberOfSteps, Math.floor((scrollLeft + 170) / distancePerStep) + 1);
+    console.info('>>> activeStep: ', activeStep, numberOfSteps, scrollLeft);
     // console.info(numberOfSteps, Math.floor(scrollLeft / distancePerStep) + 1);
     const random_num = randomNum(0, 999);
-    const [DELAY, setDELAY] = useState(1.8);
+    const [DELAY, setDELAY] = useState(0.8);
     const notFirst = useRef(false);
     const [defaultGsapClass] = useState(`gsap_discrete_progress_${random_num}`);
 
@@ -121,6 +122,7 @@ const DiscreteProgress = ({ clientWidth, scrollWidth, scrollLeft, numberOfSteps 
             {Array.from({ length: numberOfSteps }).map((_, index) => (
                 <DiscreteProgressPoint
                     className={gsapClass || defaultGsapClass}
+                    style={{ transform: index === activeStep - 1 ? 'scale(1.1, 1.1)' : 'scale(0.9, 0.9)'}}
                     aria-checked={index < activeStep}
                     key={index}
                     tw="w-3 h-3 rounded-full bg-blue-100 aria-checked:bg-blue-400 opacity-0 md:cursor-pointer"
