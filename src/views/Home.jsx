@@ -168,31 +168,33 @@ export default function Home() {
                             // searchRecords.toReversed()
                             [...searchRecords].reverse()
                                 .map((v, i) =>
-                                <div
-                                    tw={'flex flex-row items-center my-0.5 md:hover:bg-gray-50 md:hover:cursor-pointer rounded-xl select-none'}
-                                    className={'group closeClassName'} key={`record-${i}`}>
-                                    <div tw={'relative h-8 w-8 -left-0.5 shrink-0'} className={'closeClassName'}>
-                                        <FontAwesomeIcon icon={regular("clock")}
-                                                         tw={'absolute inset-0 m-auto h-3.5 w-3.5 text-gray-500'}/>
+                                    <div
+                                        tw={'flex flex-row items-center my-0.5 md:hover:bg-gray-50 md:hover:cursor-pointer rounded-xl select-none'}
+                                        className={'group closeClassName'} key={`record-${i}`}>
+                                        <div tw={'relative h-8 w-8 -left-0.5 shrink-0'} className={'closeClassName'}>
+                                            <FontAwesomeIcon icon={regular("clock")}
+                                                             tw={'absolute inset-0 m-auto h-3.5 w-3.5 text-gray-500'}/>
+                                        </div>
+                                        <div tw={'grow text-left align-middle text-gray-600 truncate'}
+                                             className={'closeClassName'} onClick={() => {
+                                            setText(v);
+                                            doSearch(v);
+                                        }}>
+                                            {v}
+                                        </div>
+                                        <div tw={'relative h-8 w-8 -right-0.5 shrink-0'}
+                                             onClick={() => deleteSearchRecord(v)}>
+                                            <FontAwesomeIcon icon={solid("xmark")}
+                                                             tw={'absolute inset-0 m-auto h-3.5 w-3.5 p-1 text-gray-300 md:hover:bg-gray-200 md:hover:text-gray-400 rounded-full'}/>
+                                        </div>
                                     </div>
-                                    <div tw={'grow text-left align-middle text-gray-600 truncate'}
-                                         className={'closeClassName'} onClick={() => {
-                                        setText(v);
-                                        doSearch(v);
-                                    }}>
-                                        {v}
-                                    </div>
-                                    <div tw={'relative h-8 w-8 -right-0.5 shrink-0'} onClick={() => deleteSearchRecord(v)}>
-                                        <FontAwesomeIcon icon={solid("xmark")}
-                                                         tw={'absolute inset-0 m-auto h-3.5 w-3.5 p-1 text-gray-300 md:hover:bg-gray-200 md:hover:text-gray-400 rounded-full'}/>
-                                    </div>
-                                </div>
-                            )
+                                )
                         }
 
                         <div tw={'flex flex-row justify-center items-center'}>
-                            <div tw={'mt-1 px-5 py-1.5 text-gray-400 text-sm rounded-full bg-gray-100 md:hover:bg-gray-200'}
-                                 onClick={handleDeleteAll}
+                            <div
+                                tw={'mt-1 px-5 py-1.5 text-gray-400 text-sm rounded-full bg-gray-100 md:hover:bg-gray-200'}
+                                onClick={handleDeleteAll}
                             >
                                 {
                                     searchRecords.length === 0 ? '暂无历史记录' : '删除所有记录'
@@ -213,7 +215,8 @@ export default function Home() {
                         <div tw={'w-full border-b border-gray-200 mt-0.5 mb-1'}/>
                     </div>
                     {
-                        topics.length === 0 ? <Picture _tw={tw`h-8 w-full`} ph_tw={tw`text-gray-300`} loadingFlag={true}/> : ''
+                        topics.length === 0 ?
+                            <Picture _tw={tw`h-8 w-full`} ph_tw={tw`text-gray-300`} loadingFlag={true}/> : ''
                     }
                     {
                         topics.slice(0, showNumber > topics.length ? topics.length : showNumber).map((v, i) => <div
@@ -331,41 +334,71 @@ export default function Home() {
         if (!gsap_ref2.current) {
             gsap_ref2.current = gsap.timeline({repeat: -1});
 
-            // 将动画添加到时间轴中
+            // 设置初始属性
             gsap_ref2.current.set(`.gsap_letter`, {
-                // y: 0,
+                y: 0,
+                x: 0,
                 rotate: 0,
-                duration: 0,
+                scale: 1,
+                duration: 0
             });
+
+            // 添加正向动画
             gsap_ref2.current.to(`.gsap_letter`, {
-                // y: -15,
-                rotate: -20,
-                duration: 0.5,
-                ease: 'back.inOut',
-                stagger: 0.15,
-                delay: 1.4,
-                yoyo: true,
-                repeat: 1,
+                y: -25,
+                x: -5,
+                rotate: 25,
+                scale: 0.9,
+                duration: 1,
+                ease: 'back.out(4)', // 正向使用bounce.out
+                stagger: 0.2,
+                delay: 1.4
+            });
+
+            // 添加逆向动画
+            gsap_ref2.current.to(`.gsap_letter`, {
+                y: 0,
+                x: 0,
+                rotate: 0,
+                scale: 1,
+                duration: 1,
+                ease: 'back.out(4)', // 逆向使用bounce.out
+                stagger: -0.2,
             });
         } else {
             gsap_ref2.current.kill();
             gsap_ref2.current = gsap.timeline({repeat: -1});
 
-            // 将动画添加到时间轴中
+            // 设置初始属性
             gsap_ref2.current.set(`.gsap_letter`, {
-                // y: 0,
+                y: 0,
+                x: 0,
                 rotate: 0,
-                duration: 0,
+                scale: 1,
+                duration: 0
             });
+
+            // 添加正向动画
             gsap_ref2.current.to(`.gsap_letter`, {
-                // y: -15,
-                rotate: -20,
-                duration: 0.5,
-                ease: 'back.inOut',
-                stagger: 0.15,
-                delay: 1.4,
-                yoyo: true,
-                repeat: 1,
+                y: -25,
+                x: -5,
+                rotate: 25,
+                scale: 0.9,
+                duration: 1,
+                ease: 'back.out(4)', // 正向使用bounce.out
+                stagger: 0.2,
+                delay: 1.4
+            });
+
+            // 添加逆向动画
+            gsap_ref2.current.to(`.gsap_letter`, {
+                y: 0,
+                x: 0,
+                rotate: 0,
+                scale: 1,
+                duration: 1,
+                ease: 'back.out(4)', // 逆向使用bounce.out
+                stagger: -0.2,
             });
         }
     }, []);
@@ -382,20 +415,33 @@ export default function Home() {
                         <div className={'gsap_title'} tw={'text-2xl font-bold text-blue-300 my-1 tracking-widest'}>
                             欢迎使用
                         </div>
-                        <div aria-checked={!isSafari()} className={'gsap_title'} tw={'text-7xl md:text-8xl font-extrabold mt-1 aria-checked:drop-shadow-md'}>
+                        <div aria-checked={!isSafari()} className={'gsap_title'}
+                             tw={'text-7xl md:text-8xl font-extrabold mt-1 aria-checked:drop-shadow-md'}>
                             <div tw={'flex tracking-widest'}>
-                                <div tw={'bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-pink-400'} key={'t1'} className={'gsap_letter'}>次</div>
-                                <div tw={'bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-violet-400'} key={'t2'} className={'gsap_letter'}>元</div>
-                                <div tw={'bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-blue-400'} key={'t3'} className={'gsap_letter'}>导</div>
-                                <div tw={'bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-500'} key={'t4'} className={'gsap_letter'}>航</div>
+                                <div
+                                    tw={'bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-pink-400 origin-[33%_200%]'}
+                                    key={'t1'} className={'gsap_letter'}>次
+                                </div>
+                                <div
+                                    tw={'bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-violet-400 origin-[33%_200%]'}
+                                    key={'t2'} className={'gsap_letter'}>元
+                                </div>
+                                <div
+                                    tw={'bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-blue-400 origin-[33%_200%]'}
+                                    key={'t3'} className={'gsap_letter'}>导
+                                </div>
+                                <div
+                                    tw={'bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-500 origin-[33%_200%]'}
+                                    key={'t4'} className={'gsap_letter'}>航
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     {/*主搜索栏*/}
                     <div tw={'h-20 mx-4 md:mx-16 flex flex-col grow-0 justify-center items-center px-0 z-[700]'}
-                         // className={'group gsap_main_fadein'}
-                        className={'gsap_title'}
+                        // className={'group gsap_main_fadein'}
+                         className={'gsap_title'}
                     >
                         <div
                             tw={'relative flex flex-row transition-shadow shadow-md md:hover:shadow-lg aria-pressed:shadow-lg rounded-full bg-white max-w-3xl w-full'}
@@ -468,7 +514,8 @@ export default function Home() {
                         <div tw={'col-span-4 h-4'}>
 
                         </div>
-                        <XList title={'热门工具'} gsapClass={'hot_tool'} offset={240} icon={<FontAwesomeIcon icon={solid("screwdriver-wrench")} />}/>
+                        <XList title={'热门工具'} gsapClass={'hot_tool'} offset={240}
+                               icon={<FontAwesomeIcon icon={solid("screwdriver-wrench")}/>}/>
 
                         <div tw={'col-span-4 h-4'}>
 

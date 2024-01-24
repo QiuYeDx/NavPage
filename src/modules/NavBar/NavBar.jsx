@@ -70,7 +70,7 @@ export default function NavBar() {
 
         const handleScroll = throttle(() => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > 60) {
+            if (scrollTop > lastScrollTop && scrollTop > 60 && !isMoreListShown ) {
                 if(gsap_ref2.current)
                     gsap_ref2.current.kill();
                 // 向下滚动
@@ -88,7 +88,7 @@ export default function NavBar() {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [isMoreListShown]);
 
     useEffect(() => {
         const checkTime = () => {
