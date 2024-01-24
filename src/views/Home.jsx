@@ -349,9 +349,9 @@ export default function Home() {
                 x: -5,
                 rotate: 25,
                 scale: 0.9,
-                duration: 1,
+                duration: 0.75,
                 ease: 'back.out(4)', // 正向使用bounce.out
-                stagger: 0.2,
+                stagger: 0.15,
                 delay: 1.4
             });
 
@@ -361,9 +361,9 @@ export default function Home() {
                 x: 0,
                 rotate: 0,
                 scale: 1,
-                duration: 1,
+                duration: 0.75,
                 ease: 'back.out(4)', // 逆向使用bounce.out
-                stagger: -0.2,
+                stagger: -0.15,
             });
         } else {
             gsap_ref2.current.kill();
@@ -384,9 +384,9 @@ export default function Home() {
                 x: -5,
                 rotate: 25,
                 scale: 0.9,
-                duration: 1,
+                duration: 0.75,
                 ease: 'back.out(4)', // 正向使用bounce.out
-                stagger: 0.2,
+                stagger: 0.15,
                 delay: 1.4
             });
 
@@ -396,9 +396,9 @@ export default function Home() {
                 x: 0,
                 rotate: 0,
                 scale: 1,
-                duration: 1,
+                duration: 0.75,
                 ease: 'back.out(4)', // 逆向使用bounce.out
-                stagger: -0.2,
+                stagger: -0.15,
             });
         }
     }, []);

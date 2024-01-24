@@ -16,7 +16,7 @@ export const H2 = styled.div`
     font-size: 40px;
     line-height: 50px;
   }
-  ${tw`text-gray-900 font-sans align-middle font-bold animate-fade_in_up.4`}
+  ${tw`text-gray-700 font-sans align-middle font-bold animate-fade_in_up.4`}
   ${({hasShadow}) => hasShadow && "text-shadow: 1px 1px 4px rgba(0, 0, 0, 15%);"}
   
   color: ${({color}) => color || ""};

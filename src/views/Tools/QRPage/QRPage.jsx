@@ -17,6 +17,7 @@ import {app_config, log_api_config} from "@/GlobalConfig";
 import TextInput from "@/components/TextInputLine/TextInput";
 import Picture from "@/components/PictureDisplay/Pictrue";
 import {PaddingWrapper} from "@/layout/MainWrapper";
+import SwitchFadeTransition from "@/styles/transition/SwitchFadeTransition";
 
 export default function QRPage() {
     const navigate = useNavigate();
@@ -29,6 +30,27 @@ export default function QRPage() {
     const [finished, setFinished] = useState(false);
     const [invalid, setInvalid] = useState(false);
     const [picLoading, setPicLoading] = useState(false);
+    const [canShowSubTextA, setCanShowSubTextA] = useState(false); // 是否显示工具的使用次数
+    const DELAY = 4000; // 间隔多久改变canShowSubTextA
+    const initData = async () => {
+        const list = ['qrcode'];
+        try {
+            const res_arr = await Promise.all(list.map(v => log_api_config.awaitCountAPI('GET', v)));
+            setCount(res_arr.map(res => res.data && res.data[0] && res.data[0].count)[0]);
+            return 'Succeed to fetch count';
+        } catch (err) {
+            throw 'Failed to fetch count'; // 这里不知道为什么如果抛出Error类就会显示奇怪的东西
+        }
+    };
+    useEffect(() => {
+        initData().then(r => console.log(r)).catch(e => console.warn(e));
+
+        const interval = setInterval(() => {
+            setCanShowSubTextA(prevState => !prevState);
+        }, DELAY);
+
+        return () => clearInterval(interval); // 清除定时器
+    }, []);
 
     const handleChange = useCallback((event) => {
         setText(event.target.value);
@@ -143,12 +165,23 @@ export default function QRPage() {
                         <FontAwesomeIcon icon={solid("arrow-left")} tw={'md:pr-4 align-middle relative -top-px'}/>
                     </BackButton>
                 </ButtonWrapper>
-                <H2>二维码生成器</H2>
+                <div tw={'flex flex-col text-right relative'}>
+                    <H2 tw={'text-3xl'}>二维码生成器</H2>
+                    <div tw={'animate-fade_in_up.4 text-gray-400 absolute -bottom-3 right-1'}>
+                        <SwitchFadeTransition
+                            isOn={count && canShowSubTextA}
+                            onContent={count && `已使用${count}次`}
+                            offContent={"在线生成QR码"}
+                            fadeStyle={'down'}
+                            className={'fadeBiliSubTextA'}
+                        />
+                    </div>
+                </div>
             </HeaderWrapper>
             <ContentWrapper>
                 <LineWrapper>
                     <InLineTitle tw={'mb-2'}>输入<FontAwesomeIcon icon={solid("keyboard")}
-                                                                tw={'text-blue-400 pl-1 pr-1 duration-500 ease-out'}/>内容</InLineTitle>
+                                                                  tw={'text-blue-400 pl-1 pr-1 duration-500 ease-out'}/>内容</InLineTitle>
                 </LineWrapper>
 
                 <LineWrapper>
