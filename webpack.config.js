@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
@@ -77,6 +78,12 @@ module.exports = {
     plugins:[
         new HtmlWebpackPlugin({
             template:path.resolve(__dirname,'public/index.html')
+        }),
+        new BundleAnalyzerPlugin({
+            analyzerMode: 'static', // 生成静态报告文件
+            reportFilename: 'bundle-report.html', // 报告文件名
+            openAnalyzer: false, // 生成报告后不自动打开浏览器
+            // 部署后通过 https://nav.qiuyedx.com/bundle-report.html 查看报告
         })
     ]
 };
