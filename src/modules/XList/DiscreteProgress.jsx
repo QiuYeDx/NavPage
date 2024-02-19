@@ -118,7 +118,7 @@ const DiscreteProgress = ({ clientWidth, scrollWidth, scrollLeft, numberOfSteps 
     }, [numberOfSteps]);
 
     return (
-        <div tw="flex space-x-2 opacity-70 md:hover:opacity-100 active:opacity-100 duration-300">
+        <div style={numberOfSteps && numberOfSteps > 1 ? {} : {display: 'none'}} tw="flex space-x-2 opacity-70 md:hover:opacity-100 active:opacity-100 duration-300">
             {Array.from({ length: numberOfSteps }).map((_, index) => (
                 <DiscreteProgressPoint
                     className={gsapClass || defaultGsapClass}

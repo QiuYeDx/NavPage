@@ -9,7 +9,16 @@ import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
 import 'twin.macro';
 import tw from "twin.macro";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faApple, faGithub, faTwitter, faWordpress, faGoogle, faQq} from '@fortawesome/free-brands-svg-icons'
+import {
+    faApple,
+    faGithub,
+    faTwitter,
+    faWordpress,
+    faGoogle,
+    faQq,
+    faNpm,
+    faDocker
+} from '@fortawesome/free-brands-svg-icons'
 import {regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import {useClipboard} from "use-clipboard-copy";
 import {H1, P} from "@/styles/TextStyles";
@@ -38,6 +47,85 @@ export default function Home() {
     const [topics, setTopics] = useState([]);
     const [showNumber, setShowNumber] = useState(4);
     const INCREMENT = 7;
+
+    const hotTools = [
+        {
+            icon: <FontAwesomeIcon icon={solid("code")} />,
+            itemTitle: "VS Code",
+            itemDesc: "强大的代码编辑器",
+            btnText: "下载",
+            btnClick: 'https://code.visualstudio.com/'
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGithub} />,
+            itemTitle: "GitHub",
+            itemDesc: "代码托管平台",
+            btnText: "访问",
+            btnClick: 'https://github.com'
+        },
+        {
+            icon: <FontAwesomeIcon icon={solid("database")} />,
+            itemTitle: "MongoDB",
+            itemDesc: "灵活的NoSQL数据库",
+            btnText: "了解更多",
+            btnClick: 'https://www.mongodb.com/'
+        },
+        {
+            icon: <FontAwesomeIcon icon={faNpm} />,
+            itemTitle: "NPM",
+            itemDesc: "JavaScript包管理器",
+            btnText: "获取",
+            btnClick: 'https://www.npmjs.com/'
+        },
+        {
+            icon: <FontAwesomeIcon icon={solid("cloud")} />,
+            itemTitle: "AWS",
+            itemDesc: "云计算服务",
+            btnText: "了解更多",
+            btnClick: 'https://aws.amazon.com/'
+        },
+        {
+            icon: <FontAwesomeIcon icon={faDocker} />,
+            itemTitle: "Docker",
+            itemDesc: "应用容器化工具",
+            btnText: "获取",
+            btnClick: 'https://www.docker.com/'
+        }
+    ];
+
+    // const hotTools = [
+    //     {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "工具A", itemDesc: "很好用的工具~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+    //     {icon: 'images/twitter.png', itemTitle: "工具B", itemDesc: "用一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+    // ];
+
+    const hotResources = [
+        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+    ];
 
     const engines = {
         'google': {
@@ -515,12 +603,16 @@ export default function Home() {
 
                         </div>
                         <XList title={'热门工具'} gsapClass={'hot_tool'} offset={240}
-                               icon={<FontAwesomeIcon icon={solid("screwdriver-wrench")}/>}/>
+                               dataSource={hotTools}
+                               icon={<FontAwesomeIcon icon={solid("screwdriver-wrench")}/>}
+                        />
 
                         <div tw={'col-span-4 h-4'}>
 
                         </div>
-                        <XList title={'热门资源'} gsapClass={'hot_res'} offset={240} btnText={'获取'}/>
+                        <XList title={'热门资源'} gsapClass={'hot_res'} offset={240}
+                               dataSource={hotResources}
+                        />
                     </div>
 
                 </WrapperMain>
