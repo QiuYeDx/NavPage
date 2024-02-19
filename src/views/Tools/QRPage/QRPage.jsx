@@ -70,7 +70,20 @@ export default function QRPage() {
             return;
         let a = a_ref.current;
         a.href = data;
-        a.download = "qrcode-solid-md.png";
+
+        // 创建一个新的Date对象获取当前时间
+        const now = new Date();
+        // 格式化时间为 "年-月-日_时-分-秒" 的格式
+        const formattedTime = now.getFullYear() + "-" +
+            ("0" + (now.getMonth() + 1)).slice(-2) + "-" +
+            ("0" + now.getDate()).slice(-2) + "_" +
+            ("0" + now.getHours()).slice(-2) + "-" +
+            ("0" + now.getMinutes()).slice(-2) + "-" +
+            ("0" + now.getSeconds()).slice(-2);
+        // 使用格式化的时间创建下载文件名
+        const filename = `qrcode-${formattedTime}.png`;
+        // 将文件名赋值给a元素的download属性
+        a.download = filename;
         a.click();
     }
 
