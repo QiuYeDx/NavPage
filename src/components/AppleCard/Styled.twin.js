@@ -2,6 +2,7 @@ import tw, { styled } from 'twin.macro';
 import {
     CardWrapper
 } from '../MainCard/Styled.twin'
+import {ASSETS_URL_QiuYeDx} from "@/utils/assets";
 
 export const AppleCardWrapper = styled(CardWrapper).attrs(props => ({
   tw: props._tw
@@ -87,8 +88,7 @@ export const Logo = styled.div`
   //background-color: white;
   border-radius: 10px;
   //box-shadow: 0 0 4px rgba(0, 0, 0, 15%);
-  //background-image: url(images/QiuYeDx.png);
-  background-image: url(${props => props.url || "images/QiuYeDx_web.png"});
+  background-image: url(${props => props.url || ASSETS_URL_QiuYeDx});
   //background-size: cover;
   background-size: contain;
   background-repeat: no-repeat;

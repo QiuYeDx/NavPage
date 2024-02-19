@@ -18,6 +18,7 @@ import TextInput from "@/components/TextInputLine/TextInput";
 import Picture from "@/components/PictureDisplay/Pictrue";
 import {PaddingWrapper} from "@/layout/MainWrapper";
 import SwitchFadeTransition from "@/styles/transition/SwitchFadeTransition";
+import {ASSETS_URL_Qrcode} from "@/utils/assets";
 
 export default function QRPage() {
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function QRPage() {
     const button_ref = useRef(null);
     const [text, setText] = useState('');
     const [count, setCount] = useState(0);  // 服务统计
-    const [data, setData] = useState('images/qrcode-solid-md.png');
+    const [data, setData] = useState(ASSETS_URL_Qrcode);
     const [loading, setLoading] = useState(false);
     const [finished, setFinished] = useState(false);
     const [invalid, setInvalid] = useState(false);
@@ -147,7 +148,7 @@ export default function QRPage() {
         if (sessionStorage.getItem('qrcode_states')) {
             const last_states = JSON.parse(decodeURIComponent((sessionStorage.getItem('qrcode_states'))));
             setText(last_states.text ? last_states.text : '');
-            setData(last_states.data ? last_states.data : 'images/qrcode-solid-md.png');
+            setData(last_states.data ? last_states.data : ASSETS_URL_Qrcode);
             setLoading(last_states.loading);
             setFinished(last_states.finished);
             setInvalid(last_states.invalid);

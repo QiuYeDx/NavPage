@@ -33,6 +33,7 @@ import Picture from "@/components/PictureDisplay/Pictrue";
 import {decodeSearchKey, encodeSearchKey, isIOS, isSafari} from "@/utils/utils";
 import XList from "@/modules/XList/XList";
 import gsap from "gsap";
+import {ASSETS_URL_Twitter} from "@/utils/assets";
 
 export default function Home() {
     const clipboard = useClipboard();
@@ -95,36 +96,36 @@ export default function Home() {
 
     // const hotTools = [
     //     {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "工具A", itemDesc: "很好用的工具~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-    //     {icon: 'images/twitter.png', itemTitle: "工具B", itemDesc: "用一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+    //     {icon: ASSETS_URL_Twitter, itemTitle: "工具B", itemDesc: "用一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
     // ];
 
     const hotResources = [
         {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
         {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
         {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
         {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
         {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
         {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
         {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
         {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
         {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
         {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
         {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
         {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
         {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: 'images/twitter.png', itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
     ];
 
     const engines = {

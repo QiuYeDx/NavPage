@@ -6,6 +6,7 @@ import MainCard from "@/components/MainCard/MainCard";
 import {AvatarWrapper} from "@/components/Avatar/Styled.twin";
 import {WIDTH_MOBILE} from "@/styles/GlobalConfig";
 import gsap from "gsap";
+import {ASSETS_URL_QiuYeDxWeb} from "@/utils/assets";
 
 const SubAvatar = styled(AvatarWrapper)`
   position: absolute;
@@ -44,7 +45,7 @@ export default function MyProfileCard(props){
     return (
         <MainCard _tw={props.onlyMobile ? tw_onlyMobile : (props.notMobile ? tw_notMobile : tw_defaults)} h={"360px"}>
             <br/>
-            <SubAvatar img={"images/QiuYeDx_web.png"} hasBorder h={"100px"} w={"100px"} tw={'animate-delay.1_fade_in_up.5'}/>
+            <SubAvatar img={ASSETS_URL_QiuYeDxWeb} hasBorder h={"100px"} w={"100px"} tw={'animate-delay.1_fade_in_up.5'}/>
             <br/>
             <div tw={"text-xl text-gray-700 font-sans mt-2 font-bold"}>QiuYeDx</div>
             <div tw={"flex flex-row mt-2"}>

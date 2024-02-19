@@ -19,6 +19,7 @@ import {Wrapper} from "@/modules/Wrapper/Wrapper";
 import {log_api_config} from "@/GlobalConfig";
 import axios from "axios";
 import NumberAnimation from "@/styles/NumberAnimation";
+import {ASSETS_URL_Alist, ASSETS_URL_Twitter} from "@/utils/assets";
 
 export default function About() {
     const clipboard = useClipboard();
@@ -103,7 +104,7 @@ export default function About() {
                         tw_subbar={tw``}
                         _sub_h3={'QiuYeDx'}
                         _sub_h4={'秋夜殿下的推特空间'}
-                        logo_url={'images/twitter.png'}
+                        logo_url={ASSETS_URL_Twitter}
                         icon={<FontAwesomeIcon
                             icon={faTwitter}
                             tw={"w-48 h-48 scale-110 group-active:scale-95 md:group-hover:scale-95 duration-500 ease-out"}
@@ -198,7 +199,7 @@ export default function About() {
                         tw_subbar={tw``}
                         _sub_h3={'次元空间'}
                         _sub_h4={'秋夜殿下的网络存储'}
-                        logo_url={'images/Alist_M.jpeg'}
+                        logo_url={ASSETS_URL_Alist}
                         icon={
                             <FontAwesomeIcon
                                 icon={solid("server")}

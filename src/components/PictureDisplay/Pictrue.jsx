@@ -4,12 +4,13 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import tw from 'twin.macro';
 import SimpleFadeTransition from "@/styles/transition/SimpleFadeTransition";
+import {ASSETS_URL_Image} from "@/utils/assets";
 
 /**
  * ## `Picture组件`: 含加载动画的Img组件
  *
  * @param {Object} props - 组件的props对象
- * @param {String | JSX.Element} [props.url='images/image-blue-300.svg'] - 图片资源路径或JSX元素
+ * @param {String | JSX.Element} [props.url='https://qiuyedx-oss.oss-cn-beijing.aliyuncs.com/nav/image-blue-300.svg'] - 图片资源路径或JSX元素
  * @param {String} [props.w='150px'] - 图片宽度（CSS单位）
  * @param {String} [props.h='150px'] - 图片高度（CSS单位）
  * @param {Boolean} [props.loadingFlag=false] - 是否强制显示加载占位符
@@ -29,7 +30,7 @@ import SimpleFadeTransition from "@/styles/transition/SimpleFadeTransition";
  * @constructor
  */
 const Picture = ({
-                     url = 'images/image-blue-300.svg',
+                     url = ASSETS_URL_Image,
                      w = '150px',
                      h = '150px',
                      loadingFlag = false,

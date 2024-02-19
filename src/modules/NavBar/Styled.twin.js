@@ -90,16 +90,16 @@ export const LogoWrapper = styled.div`
   ${tw`cursor-default md:cursor-pointer`};
 `
 
-export const Logo = styled.div`
-  width: 44px;
-  height: 44px;
-  background-image: url(images/QiuYeDx_web.png);
-  background-size: cover;
-
-  @media(max-width: 415px){
-    display: none;
-  }
-`
+// export const Logo = styled.div`
+//   width: 44px;
+//   height: 44px;
+//   background-image: url(images/QiuYeDx_web.png);
+//   background-size: cover;
+//
+//   @media(max-width: 415px){
+//     display: none;
+//   }
+// `
 
 export const LogoText = styled.div`
   ${tw`font-sans font-bold tracking-wide`}

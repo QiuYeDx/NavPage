@@ -26,9 +26,10 @@ import Picture from "@/components/PictureDisplay/Pictrue";
 import {ErrorCode} from "@/utils/errors";
 import {PaddingWrapper} from "@/layout/MainWrapper";
 import SwitchFadeTransition from "@/styles/transition/SwitchFadeTransition";
+import {ASSETS_URL_Image} from "@/utils/assets";
 
 export default function BilibiliPage() {
-    const default_cover = 'images/image-blue-300.svg';
+    const default_cover = ASSETS_URL_Image;
     const clipboard = useClipboard();
     const navigate = useNavigate();
     const a_ref = useRef(null);

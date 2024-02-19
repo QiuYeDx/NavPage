@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
     NavWrapper, LogoWrapper, NavItem, NavList, MoreWrapper,
-    Logo, LogoText, MoreList, MoreListItem, MoreListMask
+    LogoText, MoreList, MoreListItem, MoreListMask
 } from './Styled.twin'
 import 'twin.macro'
 import tw from 'twin.macro';
