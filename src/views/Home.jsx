@@ -33,7 +33,13 @@ import Picture from "@/components/PictureDisplay/Pictrue";
 import {decodeSearchKey, encodeSearchKey, isIOS, isSafari} from "@/utils/utils";
 import XList from "@/modules/XList/XList";
 import gsap from "gsap";
-import {ASSETS_URL_Twitter} from "@/utils/assets";
+import {
+    ASSETS_URL_AList,
+    ASSETS_URL_ChatGPT,
+    ASSETS_URL_PicGo,
+    ASSETS_URL_Twitter,
+    ASSETS_URL_VSCode
+} from "@/utils/assets";
 
 export default function Home() {
     const clipboard = useClipboard();
@@ -51,47 +57,82 @@ export default function Home() {
 
     const hotTools = [
         {
-            icon: <FontAwesomeIcon icon={solid("code")} />,
-            itemTitle: "VS Code",
-            itemDesc: "强大的代码编辑器",
-            btnText: "下载",
-            btnClick: 'https://code.visualstudio.com/'
+            icon: ASSETS_URL_ChatGPT,
+            itemTitle: "ChatGPT",
+            itemDesc: "全球领先的AI聊天机器人",
+            btnText: "打开",
+            btnClick: 'https://chat.openai.com/'
         },
         {
-            icon: <FontAwesomeIcon icon={faGithub} />,
-            itemTitle: "GitHub",
-            itemDesc: "代码托管平台",
-            btnText: "访问",
-            btnClick: 'https://github.com'
-        },
-        {
-            icon: <FontAwesomeIcon icon={solid("database")} />,
-            itemTitle: "MongoDB",
-            itemDesc: "灵活的NoSQL数据库",
+            icon: ASSETS_URL_PicGo,
+            itemTitle: "PicGo",
+            itemDesc: "图片上传+管理新体验",
             btnText: "了解更多",
-            btnClick: 'https://www.mongodb.com/'
+            btnClick: 'https://webnav.codefe.top/'
+        },
+        {
+            icon: ASSETS_URL_AList,
+            itemTitle: "AList",
+            itemDesc: "多存储文件列表程序",
+            btnText: "了解更多",
+            btnClick: 'https://alist.nn.ci/zh/'
+        },
+        {
+            icon: ASSETS_URL_VSCode,
+            itemTitle: "VS Code for Web",
+            itemDesc: "代码编辑器VS Code网页版",
+            btnText: "打开",
+            btnClick: 'https://code.visualstudio.com/'
         },
         {
             icon: <FontAwesomeIcon icon={faNpm} />,
             itemTitle: "NPM",
             itemDesc: "JavaScript包管理器",
-            btnText: "获取",
+            btnText: "打开",
             btnClick: 'https://www.npmjs.com/'
         },
         {
             icon: <FontAwesomeIcon icon={solid("cloud")} />,
-            itemTitle: "AWS",
-            itemDesc: "云计算服务",
+            itemTitle: "阿里云",
+            itemDesc: "国内领先的云计算服务",
             btnText: "了解更多",
-            btnClick: 'https://aws.amazon.com/'
+            btnClick: 'https://www.aliyun.com/'
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGithub} />,
+            itemTitle: "GitHub",
+            itemDesc: "代码托管平台",
+            btnText: "打开",
+            btnClick: 'https://github.com'
+        },
+        {
+            icon: <FontAwesomeIcon icon={solid("database")} />,
+            itemTitle: "MySQL",
+            itemDesc: "流行的关系型数据库",
+            btnText: "了解更多",
+            btnClick: 'https://www.mysql.com/'
         },
         {
             icon: <FontAwesomeIcon icon={faDocker} />,
             itemTitle: "Docker",
             itemDesc: "应用容器化工具",
-            btnText: "获取",
+            btnText: "打开",
             btnClick: 'https://www.docker.com/'
-        }
+        },
+        {
+            icon: <FontAwesomeIcon icon={solid("code")} />,
+            itemTitle: "Code Image",
+            itemDesc: "为你的代码生成漂亮的图片",
+            btnText: "打开",
+            btnClick: 'https://ray.so/'
+        },
+        {
+            icon: <FontAwesomeIcon icon={solid("code")} />,
+            itemTitle: "Can I Use",
+            itemDesc: "快速查询浏览器兼容性",
+            btnText: "打开",
+            btnClick: "https://caniuse.com/"
+        },
     ];
 
     // const hotTools = [
