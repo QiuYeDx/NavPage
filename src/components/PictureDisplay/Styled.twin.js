@@ -35,8 +35,8 @@ export const PictureWrapper = styled.div`
     
     &.full-height {
       margin: 0;
-      height: initial;
-      width: initial;
+      //height: initial;
+      //width: initial;
       max-height: 65%;
       max-width: 50%;
       scale: 1.25;
