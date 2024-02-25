@@ -32,6 +32,15 @@ export const PictureWrapper = styled.div`
     width: 100%;
     ${tw`text-blue-300`};
     ${({ph_tw}) => ph_tw ? ph_tw : ''};
+    
+    &.full-height {
+      margin: 0;
+      height: initial;
+      width: initial;
+      max-height: 65%;
+      max-width: 50%;
+      scale: 1.25;
+    }
   }
   & div svg{
     height: 100%;

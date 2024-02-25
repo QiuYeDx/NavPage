@@ -117,11 +117,11 @@ export default function XList({
                                             // item.icon 是字符串，作为图片 URL 处理
                                             <Picture img_tw={tw`w-10 h-10`} fadeStyle={'scale'} h={'52px'} w={'52px'} url={item.icon} /> :
                                             // item.icon 是 React 元素，使用 alt 属性
-                                            <Picture errorFlag={true} fadeStyle={'scale'} h={'52px'} w={'52px'} alt={item.icon || icon} />
+                                            <Picture errorFlag={true} fadeStyle={'scale'} h={'52px'} w={'52px'} alt={item.icon || icon} altFullHeight={true} />
                                     }
                                     <div tw={'flex flex-col gap-1 justify-center text-left pl-1'}>
                                         <span tw={'leading-4'}>{item.itemTitle}</span>
-                                        <span tw={'leading-4 text-gray-400 text-sm truncate inline-block max-w-[170px]'}>{item.itemDesc}</span>
+                                        <span tw={'leading-4 text-gray-400 text-sm truncate inline-block leading-[1.15rem] max-w-[170px]'}>{item.itemDesc}</span>
                                     </div>
                                     <div tw={'grow'}></div>
                                     <MButtonLight tw={'mr-2 md:hover:bg-blue-100 md:active:text-blue-600 md:active:bg-blue-200'}

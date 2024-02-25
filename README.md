@@ -1,7 +1,7 @@
 ![](http://ForTheBadge.com/images/badges/built-with-love.svg)
-# 秋夜导航
+# 次元导航
 
-秋夜导航，“以优雅的前端应用为目标”。
+次元导航，“以优雅的前端应用为目标”。
 
 **绝赞更新中——**
 

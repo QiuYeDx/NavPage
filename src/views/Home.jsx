@@ -4,25 +4,18 @@ import {
     WrapperRight, WrapperMain
 } from "@/layout/MainWrapper";
 import {Wrapper} from "@/modules/Wrapper/Wrapper";
-import WrapperTop from "@/modules/WrapperTop/WrapperTop";
 import WrapperBottom from "@/modules/WrapperBottom/WrapperBottom";
 import 'twin.macro';
 import tw from "twin.macro";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
-    faApple,
     faGithub,
-    faTwitter,
-    faWordpress,
     faGoogle,
-    faQq,
-    faNpm,
-    faDocker
+    faDocker,
+    faFontAwesome
 } from '@fortawesome/free-brands-svg-icons'
 import {regular, solid} from "@fortawesome/fontawesome-svg-core/import.macro";
 import {useClipboard} from "use-clipboard-copy";
-import {H1, P} from "@/styles/TextStyles";
-import {ErrorWrapper} from "@/views/Error/Styled.twin";
 import {SearchInputLine} from "@/components/TextInputLine/Styled.twin";
 import PopupMenu from "@/components/PopupMenu/PopupMenu";
 import HoverList from "@/components/HoverList/HoverList";
@@ -30,7 +23,7 @@ import {useBeforeUnload} from "react-router-dom";
 import axios from "axios";
 import {log_api_config} from "@/GlobalConfig";
 import Picture from "@/components/PictureDisplay/Pictrue";
-import {decodeSearchKey, encodeSearchKey, isIOS, isSafari} from "@/utils/utils";
+import {decodeSearchKey, encodeSearchKey, isSafari} from "@/utils/utils";
 import XList from "@/modules/XList/XList";
 import gsap from "gsap";
 import {
@@ -68,7 +61,7 @@ export default function Home() {
             itemTitle: "PicGo",
             itemDesc: "图片上传+管理新体验",
             btnText: "了解更多",
-            btnClick: 'https://webnav.codefe.top/'
+            btnClick: 'https://picgo.github.io/PicGo-Doc/zh/guide/'
         },
         {
             icon: ASSETS_URL_AList,
@@ -80,23 +73,9 @@ export default function Home() {
         {
             icon: ASSETS_URL_VSCode,
             itemTitle: "VS Code for Web",
-            itemDesc: "代码编辑器VS Code网页版",
+            itemDesc: "VS Code 网页版",
             btnText: "打开",
-            btnClick: 'https://code.visualstudio.com/'
-        },
-        {
-            icon: <FontAwesomeIcon icon={faNpm} />,
-            itemTitle: "NPM",
-            itemDesc: "JavaScript包管理器",
-            btnText: "打开",
-            btnClick: 'https://www.npmjs.com/'
-        },
-        {
-            icon: <FontAwesomeIcon icon={solid("cloud")} />,
-            itemTitle: "阿里云",
-            itemDesc: "国内领先的云计算服务",
-            btnText: "了解更多",
-            btnClick: 'https://www.aliyun.com/'
+            btnClick: 'https://vscode.dev/'
         },
         {
             icon: <FontAwesomeIcon icon={faGithub} />,
@@ -106,33 +85,75 @@ export default function Home() {
             btnClick: 'https://github.com'
         },
         {
-            icon: <FontAwesomeIcon icon={solid("database")} />,
-            itemTitle: "MySQL",
-            itemDesc: "流行的关系型数据库",
-            btnText: "了解更多",
-            btnClick: 'https://www.mysql.com/'
-        },
-        {
-            icon: <FontAwesomeIcon icon={faDocker} />,
-            itemTitle: "Docker",
-            itemDesc: "应用容器化工具",
+            icon: <FontAwesomeIcon icon={faFontAwesome} />,
+            itemTitle: "Font Awesome",
+            itemDesc: "优质图标库和工具包",
             btnText: "打开",
-            btnClick: 'https://www.docker.com/'
+            btnClick: 'https://fontawesome.com/'
+        },
+        // {
+        //     icon: <FontAwesomeIcon icon={solid("cloud")} />,
+        //     itemTitle: "阿里云",
+        //     itemDesc: "国内领先的云计算服务",
+        //     btnText: "了解更多",
+        //     btnClick: 'https://www.aliyun.com/'
+        // },
+        // {
+        //     icon: <FontAwesomeIcon icon={solid("database")} />,
+        //     itemTitle: "MySQL",
+        //     itemDesc: "流行的关系型数据库",
+        //     btnText: "了解更多",
+        //     btnClick: 'https://www.mysql.com/'
+        // },
+        // {
+        //     icon: <FontAwesomeIcon icon={faDocker} />,
+        //     itemTitle: "Docker",
+        //     itemDesc: "应用容器化工具",
+        //     btnText: "打开",
+        //     btnClick: 'https://www.docker.com/'
+        // },
+        {
+            icon: <FontAwesomeIcon icon={solid("compass-drafting")} />,
+            itemTitle: "UI Tips",
+            itemDesc: "学习设计更好的 UI&UX",
+            btnText: "打开",
+            btnClick: "https://www.uidesign.tips/"
         },
         {
-            icon: <FontAwesomeIcon icon={solid("code")} />,
+            icon: <FontAwesomeIcon icon={solid("compass-drafting")} />,
+            itemTitle: "UI Notes",
+            itemDesc: "获取 UI 设计灵感",
+            btnText: "打开",
+            btnClick: "https://uinotes.com/"
+        },
+        {
+            icon: <FontAwesomeIcon icon={solid("icons")} />,
+            itemTitle: "Fav Farm",
+            itemDesc: "获取 emoji svg URL",
+            btnText: "打开",
+            btnClick: "https://fav.farm/"
+        },
+        {
+            icon: <FontAwesomeIcon icon={solid("laptop-code")} />,
             itemTitle: "Code Image",
             itemDesc: "为你的代码生成漂亮的图片",
             btnText: "打开",
             btnClick: 'https://ray.so/'
         },
         {
-            icon: <FontAwesomeIcon icon={solid("code")} />,
+            icon: <FontAwesomeIcon icon={solid("laptop-code")} />,
             itemTitle: "Can I Use",
             itemDesc: "快速查询浏览器兼容性",
             btnText: "打开",
             btnClick: "https://caniuse.com/"
         },
+        {
+            icon: <FontAwesomeIcon icon={solid("compass")} />,
+            itemTitle: "Web Nav",
+            itemDesc: "基于 Next.js 的导航页",
+            btnText: "打开",
+            btnClick: "https://webnav.codefe.top/"
+        }
     ];
 
     // const hotTools = [
@@ -140,34 +161,12 @@ export default function Home() {
     //     {icon: ASSETS_URL_Twitter, itemTitle: "工具B", itemDesc: "用一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
     // ];
 
-    const hotResources = [
-        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-        {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
-    ];
+    // const hotResources = [
+        // {icon: <FontAwesomeIcon icon={solid("layer-group")}/>, itemTitle: "资源A", itemDesc: "很好的资源~", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+        // {icon: ASSETS_URL_Twitter, itemTitle: "资源B", itemDesc: "看一下试试?", btnText: "获取", btnClick: 'https://qiuyedx.com'},
+    // ];
+
+    const hotResources = Array.from({ length: 21 }).map(i => ({icon: <FontAwesomeIcon icon={solid("spinner")} spin={true} />, itemTitle: "即将推出", itemDesc: "敬请期待...", btnText: "获取", btnClick: () => {}}));
 
     const engines = {
         'google': {
@@ -460,77 +459,32 @@ export default function Home() {
 
     const gsap_ref2 = useRef(null);
     useLayoutEffect(() => {
-        // title's letter 浮动动画
-        if (!gsap_ref2.current) {
-            gsap_ref2.current = gsap.timeline({repeat: -1});
+        // 创建一个新的 GSAP timeline，重复无限次
+        gsap_ref2.current = gsap.timeline({repeat: -1, repeatDelay: 3});
 
-            // 设置初始属性
-            gsap_ref2.current.set(`.gsap_letter`, {
-                y: 0,
-                x: 0,
-                rotate: 0,
-                scale: 1,
-                duration: 0
-            });
+        const elements = document.querySelectorAll('.gsap_letter');
 
-            // 添加正向动画
-            gsap_ref2.current.to(`.gsap_letter`, {
-                y: -25,
-                x: -5,
-                rotate: 25,
-                scale: 0.9,
-                duration: 0.75,
-                ease: 'back.out(4)', // 正向使用bounce.out
-                stagger: 0.15,
-                delay: 1.4
-            });
+        elements.forEach((element) => {
+            const tl = gsap.timeline({repeat: 0}) // 创建每个元素的timeline，不重复，但是整体timeline会无限重复
+                .to(element, {
+                    y: -15,
+                    opacity: 0.5,
+                    duration: 0.5,
+                    ease: 'back.out(4)', // 修改ease，之前的'ease.out(4)'是不正确的格式
+                })
+                .to(element, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.5,
+                    ease: 'back.out(4)', // 保持相同的ease效果
+                    delay: -0.2,
+                });
 
-            // 添加逆向动画
-            gsap_ref2.current.to(`.gsap_letter`, {
-                y: 0,
-                x: 0,
-                rotate: 0,
-                scale: 1,
-                duration: 0.75,
-                ease: 'back.out(4)', // 逆向使用bounce.out
-                stagger: -0.15,
-            });
-        } else {
-            gsap_ref2.current.kill();
-            gsap_ref2.current = gsap.timeline({repeat: -1});
-
-            // 设置初始属性
-            gsap_ref2.current.set(`.gsap_letter`, {
-                y: 0,
-                x: 0,
-                rotate: 0,
-                scale: 1,
-                duration: 0
-            });
-
-            // 添加正向动画
-            gsap_ref2.current.to(`.gsap_letter`, {
-                y: -25,
-                x: -5,
-                rotate: 25,
-                scale: 0.9,
-                duration: 0.75,
-                ease: 'back.out(4)', // 正向使用bounce.out
-                stagger: 0.15,
-                delay: 1.4
-            });
-
-            // 添加逆向动画
-            gsap_ref2.current.to(`.gsap_letter`, {
-                y: 0,
-                x: 0,
-                rotate: 0,
-                scale: 1,
-                duration: 0.75,
-                ease: 'back.out(4)', // 逆向使用bounce.out
-                stagger: -0.15,
-            });
-        }
+            // 将每个元素的timeline添加到主timeline中
+            gsap_ref2.current.add(tl, '-=0.72'); // 用负偏移时间来使动画更紧凑地连接
+            // 减慢整个动画的播放速率
+            gsap_ref2.current.timeScale(0.8);
+        });
     }, []);
 
     return (
@@ -547,21 +501,21 @@ export default function Home() {
                         </div>
                         <div aria-checked={!isSafari()} className={'gsap_title'}
                              tw={'text-7xl md:text-8xl font-extrabold mt-1 aria-checked:drop-shadow-md'}>
-                            <div tw={'flex tracking-widest'}>
+                            <div tw={'flex tracking-widest leading-[104px]'}>
                                 <div
-                                    tw={'bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-pink-400 origin-[33%_200%]'}
+                                    tw={'bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-pink-400'}
                                     key={'t1'} className={'gsap_letter'}>次
                                 </div>
                                 <div
-                                    tw={'bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-violet-400 origin-[33%_200%]'}
+                                    tw={'bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-violet-400'}
                                     key={'t2'} className={'gsap_letter'}>元
                                 </div>
                                 <div
-                                    tw={'bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-blue-400 origin-[33%_200%]'}
+                                    tw={'bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-blue-400'}
                                     key={'t3'} className={'gsap_letter'}>导
                                 </div>
                                 <div
-                                    tw={'bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-500 origin-[33%_200%]'}
+                                    tw={'bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-500'}
                                     key={'t4'} className={'gsap_letter'}>航
                                 </div>
                             </div>
@@ -644,7 +598,7 @@ export default function Home() {
                         <div tw={'col-span-4 h-4'}>
 
                         </div>
-                        <XList title={'热门工具'} gsapClass={'hot_tool'} offset={240}
+                        <XList title={'站长推荐'} gsapClass={'hot_tool'} offset={240}
                                dataSource={hotTools}
                                icon={<FontAwesomeIcon icon={solid("screwdriver-wrench")}/>}
                         />

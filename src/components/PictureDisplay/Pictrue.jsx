@@ -25,6 +25,7 @@ import {ASSETS_URL_Image} from "@/utils/assets";
  * @param {String} [props.offset='80px'] - 过渡动画的偏移量
  * @param {String} [props.className='fadePicture'] - 用于CSSTransition的类名
  * @param {Boolean} [props.exit=true] - 是否应用退出动画
+ * @param {Boolean} [props.altFullHeight] - 是否使 alt 图标高度为 100%(默认 false, 为 50%)
  *
  * @returns {JSX.Element}
  * @constructor
@@ -44,7 +45,8 @@ const Picture = ({
                      duration = '0s',
                      offset = '15px',
                      className = 'fadePicture',
-                     exit = true
+                     exit = true,
+                     altFullHeight = false
                  }) => {
     const [picLoading, setPicLoading] = useState(true);
     const [isError, setIsError] = useState(false);
@@ -73,7 +75,7 @@ const Picture = ({
         <PictureWrapper height={h} width={w} _tw={_tw} img_tw={img_tw} ph_tw={ph_tw}>
             {
                 isError || errorFlag ?
-                    <div className={'etc'}>
+                    <div className={`etc${altFullHeight ? ' full-height' : ''}`}>
                         {alt}
                     </div>
                     :
