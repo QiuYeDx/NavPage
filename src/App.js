@@ -32,10 +32,10 @@ const Loading = () => (
 ;
 
 function App() {
-    const {width, height} = useWindowSize();
+    const {height} = useWindowSize();
     return (
         <>
-            <Wrapper style={{width, minHeight: height}} id={'rootWrapper'}>
+            <Wrapper style={{minHeight: height}} id={'rootWrapper'}>
                 <HashRouter>
                     <NavBar/>
                     <Suspense fallback={<Loading/>}>
